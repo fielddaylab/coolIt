@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:JobScreenView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flash="flash.filters.*"
+	horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:Panel id="jobPanel" title="{jobModel.selectedJob.name}" styleName="jobPanel"
+				titleStyleName="largeWhiteTitle" width="100%" height="100%">
+		<mx:ApplicationControlBar width="100%" cornerRadius="0.0">
+			<mx:Button id="chooseAnotherJob" label="&lt;- Switch Jobs" />
+		</mx:ApplicationControlBar>
+		
+		<!-- main job details here -->
+		<mx:HBox width="100%" height="100%" styleName="jobBox">
+			
+			<mx:Box width="100%" height="100%" backgroundColor="0x000000" backgroundAlpha="0.25"
+					verticalAlign="middle" horizontalAlign="center">
+				<mx:Label text="Main image here" fontWeight="bold" />
+			</mx:Box>
+			
+		</mx:HBox>
+		
+		
+	</mx:Panel>
+	
+</view:JobScreenView>
