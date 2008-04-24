@@ -5,6 +5,7 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryName = "LS Subversion";
 		};
 		scmType = "";
 	};
@@ -25,7 +26,7 @@
 	2B4EF0B90A6D37A600A6532F /* myApp.html */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {792, 771}}";
-			sepNavSelRange = "{687, 0}";
+			sepNavSelRange = "{353, 0}";
 			sepNavVisRange = "{0, 814}";
 		};
 	};
@@ -538,22 +539,22 @@
 		vrLen = 811;
 		vrLoc = 0;
 	};
-	2B6718F70DC1098A004B8F9E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2B4EF0B90A6D37A600A6532F /* myApp.html */;
-		name = "myApp.html: 27";
-		rLen = 0;
-		rLoc = 643;
-		rType = 0;
-		vrLen = 813;
-		vrLoc = 0;
-	};
 	2B6718FC0DC109C4004B8F9E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 2B4EF0B90A6D37A600A6532F /* myApp.html */;
 		name = "myApp.html: 28";
 		rLen = 0;
 		rLoc = 687;
+		rType = 0;
+		vrLen = 814;
+		vrLoc = 0;
+	};
+	2B6719070DC10BBF004B8F9E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2B4EF0B90A6D37A600A6532F /* myApp.html */;
+		name = "myApp.html: 14";
+		rLen = 0;
+		rLoc = 353;
 		rType = 0;
 		vrLen = 814;
 		vrLoc = 0;
@@ -617,8 +618,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 230754685;
-			PBXWorkspaceStateSaveDate = 230754685;
+			PBXPerProjectTemplateStateSaveDate = 230755077;
+			PBXWorkspaceStateSaveDate = 230755077;
 		};
 		perUserProjectItems = {
 			2B6715760DBFC7B0004B8F9E /* PBXTextBookmark */ = 2B6715760DBFC7B0004B8F9E /* PBXTextBookmark */;
@@ -660,8 +661,8 @@
 			2B6718DB0DC1091D004B8F9E /* PBXTextBookmark */ = 2B6718DB0DC1091D004B8F9E /* PBXTextBookmark */;
 			2B6718DC0DC1091D004B8F9E /* PBXTextBookmark */ = 2B6718DC0DC1091D004B8F9E /* PBXTextBookmark */;
 			2B6718DF0DC1091D004B8F9E /* PBXTextBookmark */ = 2B6718DF0DC1091D004B8F9E /* PBXTextBookmark */;
-			2B6718F70DC1098A004B8F9E /* PBXTextBookmark */ = 2B6718F70DC1098A004B8F9E /* PBXTextBookmark */;
 			2B6718FC0DC109C4004B8F9E /* PBXTextBookmark */ = 2B6718FC0DC109C4004B8F9E /* PBXTextBookmark */;
+			2B6719070DC10BBF004B8F9E /* PBXTextBookmark */ = 2B6719070DC10BBF004B8F9E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 2B1F91740DBFC6C4009C51FA /* Source Control */;
 		userBuildSettings = {
