@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?> 
 <coolit:ApplicationClass xmlns:coolit="*" xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml" 
-	horizontalAlign="center" verticalAlign="middle" layout="vertical">
+	horizontalAlign="center" verticalAlign="middle" layout="vertical" currentState="{model.stateModel.currentState}">
 	
 	<!-- styles -->
 	<mx:Style source="../skin/style.css"/>
 	
-	<view:JobChooser id="jobChooser" width="600" height="400" model="{model}" />
+	<coolit:states>
+		
+		<mx:State name="jobPicker" basedOn="">
+            <mx:AddChild relativeTo="{this}" position="firstChild" creationPolicy="all">
+				<view:JobChooser id="jobPickerView" width="600" height="400" model="{model}" />
+            </mx:AddChild>
+        </mx:State>
+		
+		<mx:State name="jobScreen" basedOn="">
+            <mx:AddChild relativeTo="{this}" position="firstChild" creationPolicy="all">
+				<view:JobScreen id="jobScreenScreen" width="700" height="500" model="{model}" jobModel="{model.jobModel}" />
+            </mx:AddChild>
+        </mx:State>
+		
+    </coolit:states>
+	
 </coolit:ApplicationClass>

@@ -14,12 +14,16 @@ package edu.wisc.doit.ls.coolit.command {
 	 */
 	public class ChooseJobCommand implements ICommand, IResponder {
 		
+		private var model:CoolItModelLocator;
+		
 		public function ChooseJobCommand() {}
 		
 		public function execute(event:CairngormEvent):void {
 			var chooseJobEvent:ChooseJobEvent = event as ChooseJobEvent;
 			
-			
+			model = chooseJobEvent.modelLocator;
+			var stateModel:StateModel = model.stateModel;
+			stateModel.currentState = StateModel.JOB_SCREEN;
 			//var delegate:HelloWorldDelegate = new HelloWorldDelegate(this);
 			//delegate.sendThroughHelloWorld(helloWorldEvent.messageContent);
 		}

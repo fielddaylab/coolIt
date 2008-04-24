@@ -23,6 +23,25 @@ Panel {
 	vertical-gap: 15px;
 }
 
+.jobBox {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.jobPanel {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-gap: 5px;
+	border-thickness-bottom: 0px;
+	border-thickness-left: 0px;
+	border-thickness-right: 0px;
+	border-thickness-top: 0px;
+}
+
 .blueBox {
 	background-color: #556D8F;
 	border-style: "solid";
@@ -44,6 +63,12 @@ Panel {
 .whiteTitle {
 	color: #FFFFFF;
 	font-weight: bold;
+}
+
+.largeWhiteTitle {
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 14;
 }
 
 .h1 {

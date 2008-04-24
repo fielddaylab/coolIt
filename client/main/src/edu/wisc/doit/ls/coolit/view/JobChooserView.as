@@ -66,7 +66,10 @@ package edu.wisc.doit.ls.coolit.view {
 		 * @param	event_p	MouseEvent
 		 */
 		private function onStartJobClick(event_p:MouseEvent):void {						
-			
+			var chooseJob:ChooseJobEvent = new ChooseJobEvent();
+			chooseJob.modelLocator = model;
+			chooseJob.job = model.jobModel.selectedJob;
+			CairngormEventDispatcher.getInstance().dispatchEvent(chooseJob);
 		}
 	}
 }

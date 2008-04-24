@@ -11,6 +11,7 @@ package edu.wisc.doit.ls.coolit.model {
 		private static var modelLocator:CoolItModelLocator;
 		
 		public var jobModel:JobModel;
+		public var stateModel:StateModel;
 		
 		public static function getInstance():CoolItModelLocator {
 			if(modelLocator == null) {
@@ -25,6 +26,7 @@ package edu.wisc.doit.ls.coolit.model {
 				throw new Error( "Only one CoolItModelLocator instance should be instantiated" );	
 			}
 			
+			stateModel = new StateModel();
 		}
 		
 	}
