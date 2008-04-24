@@ -1,0 +1,59 @@
+global { 
+	color: #385072;
+	theme-color: haloSilver;
+}
+
+Application {
+	background-color: #FFFFFF;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+Panel {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #E2E2E2;
+	header-colors: #415D85, #5E7EAB;
+	border-alpha: 1.0;
+	titleStyleName: "whiteTitle";
+	vertical-gap: 15px;
+}
+
+.blueBox {
+	background-color: #556D8F;
+	border-style: "solid";
+	border-color: #FFFFFF;
+	color: #FFFFFF;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 5px;
+	horizontal-align: "center";
+	vertical-align: "middle";
+}
+
+.invisibleTextAreaBorders {
+	border-style: "none";
+	background-alpha: 0.0;
+}
+
+.whiteTitle {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.h1 {
+	font-size: 14;
+	font-weight: "bold";
+}
+
+.noPadding {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}

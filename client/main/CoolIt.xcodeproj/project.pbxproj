@@ -1,0 +1,285 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXFileReference section */
+		2B4EF0B70A6D37A600A6532F /* build.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = build.xml; sourceTree = "<group>"; };
+		2B4EF0B90A6D37A600A6532F /* myApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myApp.html; sourceTree = "<group>"; };
+		2B4EF0BA0A6D37A600A6532F /* swfobject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = swfobject.js; sourceTree = "<group>"; };
+		2B4EF0BC0A6D37A600A6532F /* Main.mxml */ = {isa = PBXFileReference; explicitFileType = sourcecode.mxml; fileEncoding = 4; path = Main.mxml; sourceTree = "<group>"; };
+		2B6715830DBFC943004B8F9E /* CoolItDelegate.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolItDelegate.as; sourceTree = "<group>"; };
+		2B6715850DBFC943004B8F9E /* ChooseJobCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ChooseJobCommand.as; sourceTree = "<group>"; };
+		2B6715870DBFC943004B8F9E /* CoolItController.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolItController.as; sourceTree = "<group>"; };
+		2B6715890DBFC943004B8F9E /* ChooseJobEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ChooseJobEvent.as; sourceTree = "<group>"; };
+		2B67158C0DBFC943004B8F9E /* CoolItModelLocator.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolItModelLocator.as; sourceTree = "<group>"; };
+		2B67158E0DBFC943004B8F9E /* JobChooser.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = JobChooser.mxml; sourceTree = "<group>"; };
+		2B67158F0DBFC943004B8F9E /* JobChooserView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobChooserView.as; sourceTree = "<group>"; };
+		2B6715910DBFC943004B8F9E /* JobVO.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobVO.as; sourceTree = "<group>"; };
+		2B6715FD0DBFD71F004B8F9E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		2B67163F0DC0BD8C004B8F9E /* AssetEmbedLocator.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = AssetEmbedLocator.as; sourceTree = "<group>"; };
+		2B6716C60DC0CA16004B8F9E /* Services.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = Services.mxml; sourceTree = "<group>"; };
+		2B6716E40DC0CCFE004B8F9E /* GetJobListEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetJobListEvent.as; sourceTree = "<group>"; };
+		2B6716E50DC0CD52004B8F9E /* GetJobListCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetJobListCommand.as; sourceTree = "<group>"; };
+		2B6717020DC0CFFA004B8F9E /* CommonBase.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CommonBase.as; sourceTree = "<group>"; };
+		2B67176D0DC0DBA8004B8F9E /* get_problems_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_problems_doc.xml; sourceTree = "<group>"; };
+		2B6717A20DC0DF73004B8F9E /* JobModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobModel.as; sourceTree = "<group>"; };
+		2BAC79350B04CC3600207774 /* ApplicationClass.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ApplicationClass.as; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2B4EF0B80A6D37A600A6532F /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				2B4EF0B90A6D37A600A6532F /* myApp.html */,
+				2B4EF0BA0A6D37A600A6532F /* swfobject.js */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		2B4EF0BB0A6D37A600A6532F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715810DBFC943004B8F9E /* coolit */,
+				2B4EF0BC0A6D37A600A6532F /* Main.mxml */,
+				2BAC79350B04CC3600207774 /* ApplicationClass.as */,
+				2B67163F0DC0BD8C004B8F9E /* AssetEmbedLocator.as */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2B6715810DBFC943004B8F9E /* coolit */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715820DBFC943004B8F9E /* business */,
+				2B6715840DBFC943004B8F9E /* command */,
+				2B6715860DBFC943004B8F9E /* control */,
+				2B6715880DBFC943004B8F9E /* event */,
+				2B67158A0DBFC943004B8F9E /* model */,
+				2B67158D0DBFC943004B8F9E /* view */,
+				2B6715900DBFC943004B8F9E /* vo */,
+				2B6717020DC0CFFA004B8F9E /* CommonBase.as */,
+			);
+			name = coolit;
+			path = edu/wisc/doit/ls/coolit;
+			sourceTree = "<group>";
+		};
+		2B6715820DBFC943004B8F9E /* business */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715830DBFC943004B8F9E /* CoolItDelegate.as */,
+				2B6716C60DC0CA16004B8F9E /* Services.mxml */,
+			);
+			path = business;
+			sourceTree = "<group>";
+		};
+		2B6715840DBFC943004B8F9E /* command */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715850DBFC943004B8F9E /* ChooseJobCommand.as */,
+				2B6716E50DC0CD52004B8F9E /* GetJobListCommand.as */,
+			);
+			path = command;
+			sourceTree = "<group>";
+		};
+		2B6715860DBFC943004B8F9E /* control */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715870DBFC943004B8F9E /* CoolItController.as */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		2B6715880DBFC943004B8F9E /* event */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715890DBFC943004B8F9E /* ChooseJobEvent.as */,
+				2B6716E40DC0CCFE004B8F9E /* GetJobListEvent.as */,
+			);
+			path = event;
+			sourceTree = "<group>";
+		};
+		2B67158A0DBFC943004B8F9E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2B67158C0DBFC943004B8F9E /* CoolItModelLocator.as */,
+				2B6717A20DC0DF73004B8F9E /* JobModel.as */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		2B67158D0DBFC943004B8F9E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2B67158E0DBFC943004B8F9E /* JobChooser.mxml */,
+				2B67158F0DBFC943004B8F9E /* JobChooserView.as */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2B6715900DBFC943004B8F9E /* vo */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715910DBFC943004B8F9E /* JobVO.as */,
+			);
+			path = vo;
+			sourceTree = "<group>";
+		};
+		2B6715FC0DBFD71F004B8F9E /* skin */ = {
+			isa = PBXGroup;
+			children = (
+				2B6715FD0DBFD71F004B8F9E /* style.css */,
+			);
+			path = skin;
+			sourceTree = "<group>";
+		};
+		2B67176C0DC0DB98004B8F9E /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				2B67176D0DC0DBA8004B8F9E /* get_problems_doc.xml */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		88230FFA05D9926E00FE8D22 = {
+			isa = PBXGroup;
+			children = (
+				2B4EF0B70A6D37A600A6532F /* build.xml */,
+				2B67176C0DC0DB98004B8F9E /* docs */,
+				2B6715FC0DBFD71F004B8F9E /* skin */,
+				2B4EF0B80A6D37A600A6532F /* lib */,
+				2B4EF0BB0A6D37A600A6532F /* src */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		2B4EF09C0A6D36A200A6532F /* RadBuild */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "radBuildAndRun -emacs $(ACTION)";
+			buildConfigurationList = 2B4EF09D0A6D36A200A6532F /* Build configuration list for PBXLegacyTarget "RadBuild" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/ant;
+			buildWorkingDirectory = ./;
+			dependencies = (
+			);
+			name = RadBuild;
+			passBuildSettingsInEnvironment = 1;
+			productName = CoolIt;
+		};
+		8823100505D9929B00FE8D22 /* FullBuild */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-emacs $(ACTION)";
+			buildConfigurationList = 0A828E5908BBAA310037578C /* Build configuration list for PBXLegacyTarget "FullBuild" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/ant;
+			buildWorkingDirectory = ./;
+			dependencies = (
+			);
+			name = FullBuild;
+			passBuildSettingsInEnvironment = 1;
+			productName = CoolIt;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		88230FFE05D9926E00FE8D22 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 0A828E5D08BBAA310037578C /* Build configuration list for PBXProject "CoolIt" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 88230FFA05D9926E00FE8D22;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8823100505D9929B00FE8D22 /* FullBuild */,
+				2B4EF09C0A6D36A200A6532F /* RadBuild */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		0A828E5A08BBAA310037578C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				PRODUCT_NAME = CoolIt;
+			};
+			name = Debug;
+		};
+		0A828E5B08BBAA310037578C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				PRODUCT_NAME = CoolIt;
+			};
+			name = Release;
+		};
+		0A828E5E08BBAA310037578C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0A828E5F08BBAA310037578C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		2B4EF09E0A6D36A200A6532F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				PRODUCT_NAME = CoolIt;
+			};
+			name = Debug;
+		};
+		2B4EF09F0A6D36A200A6532F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				PRODUCT_NAME = CoolIt;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A828E5908BBAA310037578C /* Build configuration list for PBXLegacyTarget "FullBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A828E5A08BBAA310037578C /* Debug */,
+				0A828E5B08BBAA310037578C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A828E5D08BBAA310037578C /* Build configuration list for PBXProject "CoolIt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A828E5E08BBAA310037578C /* Debug */,
+				0A828E5F08BBAA310037578C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B4EF09D0A6D36A200A6532F /* Build configuration list for PBXLegacyTarget "RadBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B4EF09E0A6D36A200A6532F /* Debug */,
+				2B4EF09F0A6D36A200A6532F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88230FFE05D9926E00FE8D22 /* Project object */;
+}

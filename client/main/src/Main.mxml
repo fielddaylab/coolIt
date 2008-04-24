@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<coolit:ApplicationClass xmlns:coolit="*" xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml" 
+	horizontalAlign="center" verticalAlign="middle" layout="vertical">
+	
+	<!-- styles -->
+	<mx:Style source="../skin/style.css"/>
+	
+	<view:JobChooser id="jobChooser" width="600" height="400" model="{model}" />
+</coolit:ApplicationClass>

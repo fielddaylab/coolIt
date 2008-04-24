@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<cairngorm:ServiceLocator
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
+	
+	<mx:WebService id="cryoService" wsdl="http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx?WSDL" 
+		useProxy="false" showBusyCursor="true">
+		<mx:operation concurrency="multiple" name="GetCoolers"/>
+		<mx:operation concurrency="multiple" name="GetMaterials"/>
+		<mx:operation concurrency="multiple" name="Simulate"/>
+		<mx:operation concurrency="multiple" name="GetProblems"/>
+	</mx:WebService>
+		
+</cairngorm:ServiceLocator>
+
