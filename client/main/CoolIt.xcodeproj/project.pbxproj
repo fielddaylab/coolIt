@@ -27,6 +27,9 @@
 		2B6717020DC0CFFA004B8F9E /* CommonBase.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CommonBase.as; sourceTree = "<group>"; };
 		2B67176D0DC0DBA8004B8F9E /* get_problems_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_problems_doc.xml; sourceTree = "<group>"; };
 		2B6717A20DC0DF73004B8F9E /* JobModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobModel.as; sourceTree = "<group>"; };
+		2B6719170DC110A9004B8F9E /* StateModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = StateModel.as; sourceTree = "<group>"; };
+		2B6719310DC119CD004B8F9E /* JobScreen.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = JobScreen.mxml; sourceTree = "<group>"; };
+		2B6719320DC11A99004B8F9E /* JobScreenView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobScreenView.as; sourceTree = "<group>"; };
 		2BAC79350B04CC3600207774 /* ApplicationClass.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ApplicationClass.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +110,7 @@
 			children = (
 				2B67158C0DBFC943004B8F9E /* CoolItModelLocator.as */,
 				2B6717A20DC0DF73004B8F9E /* JobModel.as */,
+				2B6719170DC110A9004B8F9E /* StateModel.as */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -116,6 +120,8 @@
 			children = (
 				2B67158E0DBFC943004B8F9E /* JobChooser.mxml */,
 				2B67158F0DBFC943004B8F9E /* JobChooserView.as */,
+				2B6719310DC119CD004B8F9E /* JobScreen.mxml */,
+				2B6719320DC11A99004B8F9E /* JobScreenView.as */,
 			);
 			path = view;
 			sourceTree = "<group>";
