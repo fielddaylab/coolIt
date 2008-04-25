@@ -3,18 +3,14 @@ package edu.wisc.doit.ls.coolit.vo {
 	
 	public class JobVO implements IValueObject {
 		
-		private var core:Object;
+		private var core:XML;
 				
-		public function JobVO(core_p:Object) {
+		public function JobVO(core_p:XML) {
 			super();
-			if(!core_p) {
-				core = new Object();
-			} else {
-				core = core_p;
-			}
+			core = core_p;
 		}
 		
-		public function get name():String { return core.Name; };
+		public function get name():String { return core.@Name; };
 		public function set name(name_p:String):void { /* nada */ };
 		
 		public function get description():String { return core.Description; };

@@ -31,12 +31,23 @@ package edu.wisc.doit.ls.coolit.command {
 		}
 		
 		public function result(event_p:Object):void {		
-			model.jobModel = new JobModel(event_p.result);
+			var serializedXML:String;
+			var responseData:Object;
+			var cleanedString:String;
+			var cleanedXML:XML;
 			
-			//log.fatal("{0} event_p.result.GetProblemsResponse: " + event_p.result.GetProblemsResponse, getQualifiedClassName(this) + ".result");
+			if(event_p.result is XMLList) {
+				responseData = event_p.result as XMLList;
+			} else {
+				responseData = event_p.result as XML;
+			}
 			
-			//log.fatal("{0} event_p.result.GetProblemsResponse: " + event_p.result.GetProblemsResponse, getQualifiedClassName(this) + ".result");
-			//log.fatal("{0} event_p.result.GetProblemsResult: " + event_p.result.GetProblemsResult, getQualifiedClassName(this) + ".result");
+			serializedXML = responseData.toXMLString();
+			
+			cleanedString = model.removeNamespaces(serializedXML);
+			cleanedXML = new XML(cleanedString);
+			//log.fatal("{0} - !!!!! cleanedXML.GetProblemsResult: " + cleanedXML.GetProblemsResult, getQualifiedClassName(this) + ".fault");
+			model.jobModel = new JobModel(cleanedXML);
 		}
 		
 		public function fault(event_p:Object):void {

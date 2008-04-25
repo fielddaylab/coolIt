@@ -19,16 +19,12 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var selectedJob:JobVO;
 		
-		private var core:ArrayCollection;
+		private var core:XML;
 		private var jobList:ArrayCollection;
 		
-		public function JobModel(core_p:ArrayCollection) {
+		public function JobModel(core_p:XML) {
 			super();
-			if(!core_p) {
-				core = new ArrayCollection();
-			} else {
-				core = core_p;
-			}
+			core = core_p;
 		}
 		
 		public function get jobs():ArrayCollection {
@@ -44,12 +40,10 @@ package edu.wisc.doit.ls.coolit.model {
 			//do nada
 		}
 		
-		private function convertToJobVOs(list_p:ArrayCollection):ArrayCollection {
+		private function convertToJobVOs(core_p:XML):ArrayCollection {
 			var voList:ArrayCollection = new ArrayCollection();
-			var ogLen:Number = list_p.length;
-			for(var i:Number = 0; i<ogLen; i++) {
-				var currentJob:Object = list_p.getItemAt(i) as Object;
-				var newJob:JobVO = new JobVO(currentJob);
+			for each (var job:XML in core_p.GetProblemsResult.Problem) {
+				var newJob:JobVO = new JobVO(job);
 				voList.addItem(newJob);
 			}
 			
