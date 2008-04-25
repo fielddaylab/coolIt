@@ -65,5 +65,13 @@ package edu.wisc.doit.ls.coolit.view {
 			CairngormEventDispatcher.getInstance().dispatchEvent(chooseJob);
 			*/
 		}
+		
+		public function setArrowIcon(index_p:Number, match_p:Number):Class {
+			if(index_p == match_p) {
+				return AssetEmbedLocator.openArrow;
+			} else {
+				return AssetEmbedLocator.closedArrow;
+			}
+		}
 	}
 }
