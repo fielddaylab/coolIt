@@ -57,7 +57,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onJobListChange(event_p:Event):void {
-			model.jobModel.selectedJob = jobList.selectedItem as JobVO;
+			model.jobModel.selected = jobList.selectedItem as JobVO;
 		}
 		
 		/*
@@ -68,7 +68,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onStartJobClick(event_p:MouseEvent):void {						
 			var chooseJob:ChooseJobEvent = new ChooseJobEvent();
 			chooseJob.modelLocator = model;
-			chooseJob.job = model.jobModel.selectedJob;
+			chooseJob.job = model.jobModel.selected;
 			CairngormEventDispatcher.getInstance().dispatchEvent(chooseJob);
 		}
 	}
