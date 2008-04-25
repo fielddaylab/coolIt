@@ -14,7 +14,7 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function set temp(temp_p:Number):void { /* nada */ };
 		
 		public function get data():Number { return parseFloat(core.data); };
-		public function set data(data_p:Number):void { /* nada */ };
+		public function set data(data_p:Number):void { core.data = data_p.toString(); };
 		
 		public function toString():String {
 			return "(" + temp + "," + data + ")";

@@ -73,7 +73,7 @@
 				
 				<mx:Box id="coolerPicker" label="Coolers" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}">
-						<mx:List width="100%" height="100%" dataProvider="{coolerModel.coolers}" />
+						<view:CoolerPicker width="100%" height="100%" model="{coolerModel.coolers}" />
 				</mx:Box>
 				
 				<mx:Box id="strutPicker" label="Struts" styleName="jobBox" width="100%" height="100%"

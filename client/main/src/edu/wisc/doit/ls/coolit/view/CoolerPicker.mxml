@@ -21,18 +21,15 @@
 		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSetting" selected="true" />
 	</mx:HBox>
 	
-	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
-		<!-- data table -->
-		<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
-			<mx:DataGrid width="100%" height="100%"
-					draggableColumns="false" resizableColumns="false" dataProvider="{coolerList.selectedItem.cpm}" >
-				<mx:columns>
-					<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
-					<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
-				</mx:columns>
-			</mx:DataGrid>
-		</mx:Box>
-		
-	</mx:TabNavigator>
+	<!-- data table -->
+	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
+		<mx:DataGrid width="100%" height="100%"
+				draggableColumns="false" resizableColumns="false" dataProvider="{coolerList.selectedItem.cpm}" >
+			<mx:columns>
+				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
+				<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</mx:Box>
 	
 </view:CoolerPickerView>
