@@ -30,23 +30,8 @@ package edu.wisc.doit.ls.coolit.command {
 			delegate.getProblems();
 		}
 		
-		public function result(event_p:Object):void {		
-			var serializedXML:String;
-			var responseData:Object;
-			var cleanedString:String;
-			var cleanedXML:XML;
-			
-			if(event_p.result is XMLList) {
-				responseData = event_p.result as XMLList;
-			} else {
-				responseData = event_p.result as XML;
-			}
-			
-			serializedXML = responseData.toXMLString();
-			
-			cleanedString = model.removeNamespaces(serializedXML);
-			cleanedXML = new XML(cleanedString);
-			//log.fatal("{0} - !!!!! cleanedXML.GetProblemsResult: " + cleanedXML.GetProblemsResult, getQualifiedClassName(this) + ".fault");
+		public function result(event_p:Object):void {
+			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.jobModel = new JobModel(cleanedXML);
 		}
 		
