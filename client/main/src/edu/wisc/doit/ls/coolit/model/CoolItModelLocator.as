@@ -11,6 +11,8 @@ package edu.wisc.doit.ls.coolit.model {
 		private static var modelLocator:CoolItModelLocator;
 		
 		public var jobModel:JobModel;
+		public var coolerModel:CoolerModel;
+		public var materialModel:MaterialModel;
 		public var stateModel:StateModel;
 		
 		public static function getInstance():CoolItModelLocator {
@@ -29,12 +31,25 @@ package edu.wisc.doit.ls.coolit.model {
 			stateModel = new StateModel();
 		}
 		
-		public function removeNamespaces(data_p:String):String {
+		public function removeNamespaces(data_p:*):XML {
+			var serializedXML:String;
+			var responseData:Object;
+			var cleanedString:String;
+			var cleanedXML:XML;
 			var namespaceRegExp:RegExp = new RegExp("xmlns[^\"]*\"[^\"]*\"", "gi");
 			
-			var updatedData:String = data_p.replace(namespaceRegExp, "");
+			if(data_p is XMLList) {
+				responseData = data_p as XMLList;
+			} else {
+				responseData = data_p as XML;
+			}
 			
-			return updatedData;
+			serializedXML = responseData.toXMLString();
+			
+			cleanedString = serializedXML.replace(namespaceRegExp, "");
+			cleanedXML = new XML(cleanedString);
+			
+			return cleanedXML;
 		}
 		
 	}
