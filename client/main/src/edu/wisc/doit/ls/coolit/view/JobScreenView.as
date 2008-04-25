@@ -27,6 +27,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
+		[Bindable] public var coolerModel:CoolerModel;
+		[Bindable] public var materialModel:MaterialModel;
 		
 		private var log:ILogger;
 		
@@ -68,7 +70,7 @@ package edu.wisc.doit.ls.coolit.view {
 			/*
 			var chooseJob:ChooseJobEvent = new ChooseJobEvent();
 			chooseJob.modelLocator = model;
-			chooseJob.job = model.jobModel.selectedJob;
+			chooseJob.job = model.jobModel.selected;
 			CairngormEventDispatcher.getInstance().dispatchEvent(chooseJob);
 			*/
 		}

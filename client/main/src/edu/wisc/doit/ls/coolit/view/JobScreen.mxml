@@ -8,7 +8,7 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true" alignSymbol="left"/>
 	
-	<mx:Panel id="jobPanel" title="{jobModel.selectedJob.name}" styleName="jobPanel"
+	<mx:Panel id="jobPanel" title="{jobModel.selected.name}" styleName="jobPanel"
 				titleStyleName="largeWhiteTitle" width="100%" height="100%">
 		<mx:ApplicationControlBar width="100%" cornerRadius="0.0">
 			<mx:Button id="chooseAnotherJob" label="Switch Jobs" />
@@ -39,7 +39,7 @@
 						</mx:FormItem>
 						
 						<mx:FormItem styleName="h2" label="Incentive:">
-							<mx:Label id="incentiveLabel" fontWeight="none" text="{usdFormatter.format(jobModel.selectedJob.pay)}"/>
+							<mx:Label id="incentiveLabel" fontWeight="none" text="{usdFormatter.format(jobModel.selected.pay)}"/>
 						</mx:FormItem>
 					</mx:Form>
 					
@@ -68,14 +68,18 @@
 				<mx:Box id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 0)}">
 						<mx:TextArea id="jobDescription" width="100%" height="100%" 
-							styleName="invisibleTextAreaBorders" editable="false" text="{jobModel.selectedJob.description}" />
+							styleName="invisibleTextAreaBorders" editable="false" text="{jobModel.selected.description}" />
 				</mx:Box>
 				
 				<mx:Box id="coolerPicker" label="Coolers" styleName="jobBox" width="100%" height="100%"
-						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}" />
+						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}">
+						<mx:List width="100%" height="100%" dataProvider="{coolerModel.coolers}" />
+				</mx:Box>
 				
 				<mx:Box id="strutPicker" label="Struts" styleName="jobBox" width="100%" height="100%"
-						icon="{setArrowIcon(pickerAccordion.selectedIndex, 2)}" />
+						icon="{setArrowIcon(pickerAccordion.selectedIndex, 2)}">
+						<mx:List width="100%" height="100%" dataProvider="{materialModel.materials}" />
+				</mx:Box>
 			</mx:Accordion>
 			
 		</mx:HBox>
