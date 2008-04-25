@@ -16,6 +16,10 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(ChooseJobEvent.EVENT_CHOOSE_JOB, ChooseJobCommand);
 			addCommand(GetJobListEvent.EVENT_GET_JOB_LIST, GetJobListCommand);
 			addCommand(ViewJobListEvent.EVENT_VIEW_JOB_LIST, ViewJobListCommand);
+			addCommand(GetCoolerListEvent.EVENT_GET_COOLER_LIST, GetCoolerListCommand);
+			
+			addCommand(GetMaterialListEvent.EVENT_GET_MATERIAL_LIST, GetMaterialListCommand);
+			
 		}	
 	}
 	
