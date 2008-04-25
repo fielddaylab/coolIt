@@ -16,8 +16,8 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get description():String { return core.Description; };
 		public function set description(description_p:String):void { /* nada */ };
 		
-		public function get money():Number { return parseFloat(core.MonetaryIncentive); };
-		public function set money(money_p:Number):void { /* nada */ };
+		public function get pay():Number { return parseFloat(core.MonetaryIncentive); };
+		public function set pay(pay_p:Number):void { /* nada */ };
 		
 		public function get heatLeak():Number { return parseFloat(core.HeatLeak); };
 		public function set heatLeak(heat_p:Number):void { /* nada */ };
