@@ -29,5 +29,13 @@ package edu.wisc.doit.ls.coolit.model {
 			stateModel = new StateModel();
 		}
 		
+		public function removeNamespaces(data_p:String):String {
+			var namespaceRegExp:RegExp = new RegExp("xmlns[^\"]*\"[^\"]*\"", "gi");
+			
+			var updatedData:String = data_p.replace(namespaceRegExp, "");
+			
+			return updatedData;
+		}
+		
 	}
 }
