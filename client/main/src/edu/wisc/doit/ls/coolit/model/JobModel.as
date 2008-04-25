@@ -17,7 +17,7 @@ package edu.wisc.doit.ls.coolit.model {
 	 */
     [Bindable] public class JobModel extends CommonBase {
 		
-		public var selectedJob:JobVO;
+		public var selected:JobVO;
 		
 		private var core:XML;
 		private var jobList:ArrayCollection;
@@ -30,7 +30,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public function get jobs():ArrayCollection {
 			if(!jobList) {
 				jobList = convertToJobVOs(core);
-				selectedJob = jobList.getItemAt(0) as JobVO;
+				selected = jobList.getItemAt(0) as JobVO;
 			}
 			
 			return jobList;
