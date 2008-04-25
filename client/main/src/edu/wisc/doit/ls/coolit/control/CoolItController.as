@@ -15,6 +15,7 @@ package edu.wisc.doit.ls.coolit.control {
 		public function initialiseCommands():void {
 			addCommand(ChooseJobEvent.EVENT_CHOOSE_JOB, ChooseJobCommand);
 			addCommand(GetJobListEvent.EVENT_GET_JOB_LIST, GetJobListCommand);
+			addCommand(ViewJobListEvent.EVENT_VIEW_JOB_LIST, ViewJobListCommand);
 		}	
 	}
 	
