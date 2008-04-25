@@ -35,6 +35,22 @@ package edu.wisc.doit.ls.coolit.business {
 			token.addResponder(responder);
 		}
 		
+		/**
+		 * Gets a list of coolers
+		 */
+		public function getCoolers():void {
+			var token:AsyncToken = service.GetCoolers();
+			token.addResponder(responder);
+		}
+		
+		/**
+		 * Gets a list of materials
+		 */
+		public function getMaterials():void {
+			var token:AsyncToken = service.GetMaterials();
+			token.addResponder(responder);
+		}
+		
 	}
 	
 }
