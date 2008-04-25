@@ -9,6 +9,8 @@ package edu.wisc.doit.ls.coolit.command {
 	import edu.wisc.doit.ls.coolit.business.*;
 	import edu.wisc.doit.ls.coolit.vo.*;
 	
+	import com.adobe.cairngorm.control.CairngormEventDispatcher;
+	
 	/**
 	 * 
 	 */
@@ -24,6 +26,12 @@ package edu.wisc.doit.ls.coolit.command {
 			model = chooseJobEvent.modelLocator;
 			var stateModel:StateModel = model.stateModel;
 			stateModel.currentState = StateModel.JOB_SCREEN;
+			
+			//check coolers and materials
+			if(!model.coolerModel) {
+				dispatchGetCoolerListEvent();
+				dispatchGetMaterialListEvent();
+			}
 			//var delegate:HelloWorldDelegate = new HelloWorldDelegate(this);
 			//delegate.sendThroughHelloWorld(helloWorldEvent.messageContent);
 		}
@@ -39,6 +47,18 @@ package edu.wisc.doit.ls.coolit.command {
 		
 		public function fault(event:Object):void {
 			//log failure here
+		}
+		
+		private function dispatchGetCoolerListEvent():void {
+			var getCoolers:GetCoolerListEvent = new GetCoolerListEvent();
+			getCoolers.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getCoolers);
+		}
+		
+		private function dispatchGetMaterialListEvent():void {
+			var getMaterials:GetMaterialListEvent = new GetMaterialListEvent();
+			getMaterials.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getMaterials);
 		}
 		
 	}
