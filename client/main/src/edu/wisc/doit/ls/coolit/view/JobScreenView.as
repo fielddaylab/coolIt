@@ -23,6 +23,7 @@ package edu.wisc.doit.ls.coolit.view {
 	public class JobScreenView extends VBox {		
 		
 		//MXML components
+		public var chooseAnotherJob:Button;
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
@@ -49,7 +50,13 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
-			
+			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
+		}
+		
+		private function onJobListClick(event_p:MouseEvent):void {
+			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
+			viewJobList.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(viewJobList);
 		}
 		
 		/*
