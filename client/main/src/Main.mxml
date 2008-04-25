@@ -15,7 +15,10 @@
 		
 		<mx:State name="jobScreen" basedOn="">
             <mx:AddChild relativeTo="{this}" position="firstChild" creationPolicy="all">
-				<view:JobScreen id="jobScreenScreen" width="800" height="600" model="{model}" jobModel="{model.jobModel}" />
+				<view:JobScreen id="jobScreenScreen" width="800" height="600" model="{model}" 
+						jobModel="{model.jobModel}"
+						coolerModel="{model.coolerModel}"
+						materialModel="{model.materialModel}" />
             </mx:AddChild>
         </mx:State>
 		
