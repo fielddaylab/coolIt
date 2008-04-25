@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMaterial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.wisc.edu/doit/ls/coolit/">
+  <Material>
+    <Name>Aluminum 1100</Name>
+    <price>9845</price>
+    <priceUnit>M ** 3</priceUnit>
+    <currencyUnit>US Dollars</currencyUnit>
+    <yieldStrength>-1</yieldStrength>
+    <MP>
+      <DataPoint>
+        <temp>4</temp>
+        <data>54.1055807017959</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>5</temp>
+        <data>67.3604817467126</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>6</temp>
+        <data>83.2582572558338</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>7</temp>
+        <data>98.7490163877111</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>8</temp>
+        <data>113.472444562049</data>
+      </DataPoint>
+    </MP>
+  </Material>
+</ArrayOfMaterial>

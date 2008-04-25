@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCooler xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.wisc.edu/doit/ls/coolit/">
+  <Cooler>
+    <Name>Small</Name>
+    <price>500</price>
+    <priceUnit>each</priceUnit>
+    <currencyUnit>US Dollars</currencyUnit>
+    <CPM>
+      <DataPoint>
+        <temp>50</temp>
+        <data>0</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>300</temp>
+        <data>50</data>
+      </DataPoint>
+    </CPM>
+  </Cooler>
+  <Cooler>
+    <Name>Medium</Name>
+    <price>1000</price>
+    <priceUnit>each</priceUnit>
+    <currencyUnit>US Dollars</currencyUnit>
+    <CPM>
+      <DataPoint>
+        <temp>25</temp>
+        <data>0</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>300</temp>
+        <data>100</data>
+      </DataPoint>
+    </CPM>
+  </Cooler>
+  <Cooler>
+    <Name>Large</Name>
+    <price>5000</price>
+    <priceUnit>each</priceUnit>
+    <currencyUnit>US Dollars</currencyUnit>
+    <CPM>
+      <DataPoint>
+        <temp>10</temp>
+        <data>0</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>300</temp>
+        <data>500</data>
+      </DataPoint>
+    </CPM>
+  </Cooler>
+  <Cooler>
+    <Name>Huge</Name>
+    <price>10000</price>
+    <priceUnit>each</priceUnit>
+    <currencyUnit>US Dollars</currencyUnit>
+    <CPM>
+      <DataPoint>
+        <temp>5</temp>
+        <data>0</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>300</temp>
+        <data>5000</data>
+      </DataPoint>
+    </CPM>
+  </Cooler>
+</ArrayOfCooler>
