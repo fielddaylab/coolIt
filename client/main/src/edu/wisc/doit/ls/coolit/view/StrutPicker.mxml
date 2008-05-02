@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:StrutPickerView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flash="flash.filters.*"
+	horizontalAlign="center" verticalAlign="top">
+	
+	<mx:ComboBox id="strutList" dataProvider="{model}" width="200" />
+	
+	<mx:HBox width="100%" styleName="noPadding">
+		<mx:Label text="Length (M):" fontWeight="bold" />
+		<mx:Label text="{lengthM.value}" />
+	</mx:HBox>
+	<mx:HSlider id="lengthM" minimum="0.01" maximum="0.89" value="0.89" width="100%"
+            allowTrackClick="true" 
+			snapInterval="0.01"
+            liveDragging="true"/>
+	
+	<mx:HBox width="100%" styleName="noPadding">
+		<mx:Label text="Cross Section (M**2):" fontWeight="bold" />
+		<mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/>
+	</mx:HBox>
+	<mx:HSlider id="crossSection" minimum="0.001" maximum="0.1" value="0.1" width="100%"
+			dataTipPrecision="3"
+            allowTrackClick="true" 
+			snapInterval="0.001"
+            liveDragging="true"
+			change="{crossSectionDisplay.text = crossSection.value.toString()}" />
+	<mx:Spacer height="5" />
+	
+	<mx:HBox width="100%" styleName="noPadding" fontSize="9">
+		<mx:Label text="Stress Limit (MN):" fontWeight="bold" />
+		<mx:Label text="--"/>
+		<mx:Label text="Price ($):" fontWeight="bold" />
+		<mx:Label text="--"/>
+	</mx:HBox>
+	
+	<mx:HBox styleName="noPadding">
+		<mx:Label text="Cost/M**3 ($):" fontWeight="bold" />
+		<mx:Label text="--"/>
+	</mx:HBox>
+	
+	<mx:HBox styleName="noPadding">
+		<mx:Label text="Yield Strength (MPa):" fontWeight="bold" />
+		<mx:Label text="--"/>
+	</mx:HBox>
+	<!-- 
+	<mx:HBox width="100%" styleName="noPadding">
+		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
+		<mx:Label text="{coolerPowerFactor.value}" />
+	</mx:HBox>
+	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="1" width="100%"
+            allowTrackClick="true" 
+			snapInterval="0.01"
+            liveDragging="true"/>
+	<mx:Spacer height="10" />
+	
+	<mx:HBox width="100%">
+		<mx:RadioButton id="inputPower" label="Input Power" fontSize="9" groupName="powerSetting" />
+		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSetting" selected="true" />
+	</mx:HBox> -->
+	
+	<!-- data table
+	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
+		<mx:DataGrid width="100%" height="100%"
+				draggableColumns="false" resizableColumns="false" dataProvider="{coolerList.selectedItem.cpm}" >
+			<mx:columns>
+				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
+				<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</mx:Box> -->
+	
+</view:StrutPickerView>
