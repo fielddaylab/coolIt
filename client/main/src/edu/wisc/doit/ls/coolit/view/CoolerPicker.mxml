@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view:CoolerPickerView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:flash="flash.filters.*"
-	horizontalAlign="left" verticalAlign="middle">
+	horizontalAlign="left" verticalAlign="top">
 	
 	<mx:ComboBox id="coolerList" dataProvider="{model}" />
 	
