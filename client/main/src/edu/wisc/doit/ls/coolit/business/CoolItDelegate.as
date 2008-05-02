@@ -51,6 +51,17 @@ package edu.wisc.doit.ls.coolit.business {
 			token.addResponder(responder);
 		}
 		
+		/**
+		 * Sets cooler
+		 *
+		 * @param	name_p			Name of the cooler
+		 * @param	powerFactor_p	
+		 */
+		public function setCooler(name_p:String, powerFactor_p:Number):void {
+			var token:AsyncToken = service.SetCooler(name_p, powerFactor_p);
+			token.addResponder(responder);
+		}
+		
 	}
 	
 }
