@@ -18,6 +18,7 @@ package edu.wisc.doit.ls.coolit.model {
     [Bindable] public class MaterialModel extends CommonBase {
 		
 		public var selected:MaterialVO;
+		public var currentData:ArrayCollection;
 		
 		private var core:XML;
 		private var materialList:ArrayCollection;
@@ -25,6 +26,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public function MaterialModel(core_p:XML) {
 			super();
 			core = core_p;
+			currentData = new ArrayCollection();
 		}
 		
 		public function get materials():ArrayCollection {
