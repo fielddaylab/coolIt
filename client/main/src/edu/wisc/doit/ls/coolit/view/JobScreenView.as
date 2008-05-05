@@ -29,8 +29,11 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var jobModel:JobModel;
 		[Bindable] public var coolerModel:CoolerModel;
 		[Bindable] public var materialModel:MaterialModel;
+		[Bindable] public var stateModel:StateModel;
 		
 		private var log:ILogger;
+		
+		private var _currentApplicationState:String;
 		
 		/*
 		 * Constructor
@@ -75,12 +78,31 @@ package edu.wisc.doit.ls.coolit.view {
 			*/
 		}
 		
+		[Bindable] public function get currentApplicationState():String {
+			return _currentApplicationState;
+		}
+		public function set currentApplicationState(state_p:String):void {
+			if(state_p == StateModel.JOB_SCREEN) {
+				//get input power data
+				//dispatchEventGetInputPowerData();
+			}
+			_currentApplicationState = state_p;
+		}
+		
 		public function setArrowIcon(index_p:Number, match_p:Number):Class {
 			if(index_p == match_p) {
 				return AssetEmbedLocator.openArrow;
 			} else {
 				return AssetEmbedLocator.closedArrow;
 			}
+		}
+		
+		private function dispatchEventGetInputPowerData():void {
+			var getInputPowerData:GetInputPowerDataEvent = new GetInputPowerDataEvent();
+			getInputPowerData.modelLocator = model;
+			getInputPowerData.coolerName = "Small";
+			getInputPowerData.powerFactor = 0.62;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getInputPowerData);
 		}
 	}
 }
