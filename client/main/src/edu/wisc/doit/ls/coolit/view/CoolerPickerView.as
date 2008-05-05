@@ -25,8 +25,12 @@ package edu.wisc.doit.ls.coolit.view {
 	public class CoolerPickerView extends VBox {		
 		
 		//MXML components
+		[Bindable] public var inputPower:RadioButton;
+		[Bindable] public var outputPower:RadioButton;
+		[Bindable] public var coolerList:ComboBox;
+		[Bindable] public var coolerPowerFactor:HSlider;
 		
-		
+		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var model:ArrayCollection;
 		[Bindable] public var coolerData:ArrayCollection;
 		
@@ -45,6 +49,15 @@ package edu.wisc.doit.ls.coolit.view {
 			addEventListener(FlexEvent.CREATION_COMPLETE, onComplete);
 		}
 		
+		public function dispatchSetCooler():void {
+			//send out a set cooler event with currently selected cooler
+			var setCoolerEvent:SetCoolerEvent = new SetCoolerEvent();
+			setCoolerEvent.modelLocator = modelLocator;
+			setCoolerEvent.cooler = coolerList.selectedItem as CoolerVO;
+			setCoolerEvent.powerFactor = coolerPowerFactor.value;
+			CairngormEventDispatcher.getInstance().dispatchEvent(setCoolerEvent);
+		}
+		
 		/*
 		 * Catches event once interface has been initialized
 		 *
@@ -53,6 +66,11 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
+			coolerList.addEventListener(Event.CHANGE, onCoolerChange);
+		}
+		
+		private function onCoolerChange(event_p:Event):void {
+			dispatchSetCooler();
 		}
 	}
 }

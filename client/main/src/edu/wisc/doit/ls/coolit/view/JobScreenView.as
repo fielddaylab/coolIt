@@ -24,6 +24,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		//MXML components
 		public var chooseAnotherJob:Button;
+		public var coolerPicker:CoolerPicker;
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
@@ -34,6 +35,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private var log:ILogger;
 		
 		private var _currentApplicationState:String;
+		
+		private var hasInit:Boolean = false;
 		
 		/*
 		 * Constructor
@@ -56,6 +59,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
+			hasInit = true;
+			coolerPicker.dispatchSetCooler();
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
@@ -85,6 +90,9 @@ package edu.wisc.doit.ls.coolit.view {
 			if(state_p == StateModel.JOB_SCREEN) {
 				//get input power data
 				//dispatchEventGetInputPowerData();
+				if(hasInit) {
+					coolerPicker.dispatchSetCooler();
+				}
 			}
 			_currentApplicationState = state_p;
 		}
@@ -97,12 +105,5 @@ package edu.wisc.doit.ls.coolit.view {
 			}
 		}
 		
-		private function dispatchEventGetInputPowerData():void {
-			var getInputPowerData:GetInputPowerDataEvent = new GetInputPowerDataEvent();
-			getInputPowerData.modelLocator = model;
-			getInputPowerData.coolerName = "Small";
-			getInputPowerData.powerFactor = 0.62;
-			CairngormEventDispatcher.getInstance().dispatchEvent(getInputPowerData);
-		}
 	}
 }

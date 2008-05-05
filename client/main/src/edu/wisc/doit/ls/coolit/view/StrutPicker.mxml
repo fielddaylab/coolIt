@@ -45,31 +45,16 @@
 		</mx:FormItem>
 	</mx:Form>
 	
-	<!-- 
-	<mx:HBox width="100%" styleName="noPadding">
-		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
-		<mx:Label text="{coolerPowerFactor.value}" />
-	</mx:HBox>
-	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="1" width="100%"
-            allowTrackClick="true" 
-			snapInterval="0.01"
-            liveDragging="true"/>
-	<mx:Spacer height="10" />
-	
-	<mx:HBox width="100%">
-		<mx:RadioButton id="inputPower" label="Input Power" fontSize="9" groupName="powerSetting" />
-		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSetting" selected="true" />
-	</mx:HBox> -->
-	
-	<!-- data table
+	<!-- material data -->
+	<!-- data table -->
 	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
 		<mx:DataGrid width="100%" height="100%"
-				draggableColumns="false" resizableColumns="false" dataProvider="{coolerList.selectedItem.cpm}" >
+				draggableColumns="false" resizableColumns="false" dataProvider="{materialData}" >
 			<mx:columns>
 				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
-				<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
+				<mx:DataGridColumn dataField="data" headerText="Thermal Cond."/>
 			</mx:columns>
 		</mx:DataGrid>
-	</mx:Box> -->
+	</mx:Box>
 	
 </view:StrutPickerView>

@@ -71,15 +71,16 @@
 							styleName="invisibleTextAreaBorders" editable="false" text="{jobModel.selected.description}" />
 				</mx:Box>
 				
-				<mx:Box id="coolerPicker" label="Coolers" styleName="jobBox" width="100%" height="100%"
+				<mx:Box label="Coolers" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}">
-						<view:CoolerPicker width="100%" height="100%" model="{coolerModel.coolers}" 
-											coolerData="{coolerModel.currentData}" />
+						<view:CoolerPicker id="coolerPicker" width="100%" height="100%" model="{coolerModel.coolers}" 
+											coolerData="{coolerModel.currentData}" modelLocator="{model}" />
 				</mx:Box>
 				
 				<mx:Box id="strutPicker" label="Struts" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 2)}">
-						<view:StrutPicker width="100%" height="100%" model="{materialModel.materials}" />
+						<view:StrutPicker width="100%" height="100%" model="{materialModel.materials}"
+											materialData="{materialModel.currentData}" />
 				</mx:Box>
 			</mx:Accordion>
 			
