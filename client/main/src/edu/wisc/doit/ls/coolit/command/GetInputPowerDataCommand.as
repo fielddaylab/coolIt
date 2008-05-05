@@ -57,24 +57,6 @@ package edu.wisc.doit.ls.coolit.command {
 				coolerModel.currentData.addItem(newDataPoint);
 			}
 			//DUMMY END
-			
-			//result should be number
-			//var cleanedXML:XML = model.removeNamespaces(event_p.result);
-			//log.fatal("{0} - cleanedXML.InputPowerResult: " + cleanedXML.InputPowerResult, getQualifiedClassName(this) + ".result");
-			//InputPowerResponse
-			//InputPowerResult
-			
-			/*
-			var powerResult:Number = parseFloat(event_p.result);
-			//add this number to current data on cooler model
-			var currentData:ArrayCollection = coolerModel.currentData;
-			var currentLen:Number = currentData.length;
-			//add a new data point object
-			var newDataPoint:DataPointVO = new DataPointVO(new XML());
-			newDataPoint.temp = currentLen-1;
-			newDataPoint.data = powerResult;
-			*/
-			//currentData.addItem(newDataPoint);
 		}
 		
 		public function fault(event_p:Object):void {
