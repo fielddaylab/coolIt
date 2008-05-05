@@ -4,6 +4,7 @@
 	horizontalAlign="center" verticalAlign="top">
 	
 	<mx:ComboBox id="strutList" dataProvider="{model}" width="200" />
+	<mx:Spacer height="5" />
 	
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Length (M):" fontWeight="bold" />
@@ -23,25 +24,27 @@
             allowTrackClick="true" 
 			snapInterval="0.001"
             liveDragging="true"
-			change="{crossSectionDisplay.text = crossSection.value.toString()}" />
-	<mx:Spacer height="5" />
+			mouseMove="{crossSectionDisplay.text = crossSection.value.toString()}"
+			mouseUp="{crossSectionDisplay.text = crossSection.value.toString()}" />
 	
-	<mx:HBox width="100%" styleName="noPadding" fontSize="9">
-		<mx:Label text="Stress Limit (MN):" fontWeight="bold" />
-		<mx:Label text="--"/>
-		<mx:Label text="Price ($):" fontWeight="bold" />
-		<mx:Label text="--"/>
-	</mx:HBox>
+	<mx:Form fontSize="10" width="100%">
+		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
+			<mx:Label id="stressLimit" fontWeight="none" text="--"/>
+		</mx:FormItem>
+		
+		<mx:FormItem fontWeight="bold" label="Price ($):">
+			<mx:Label id="priceField" fontWeight="none" text="--"/>
+		</mx:FormItem>
+		
+		<mx:FormItem fontWeight="bold" label="Cost/M**3 ($):">
+			<mx:Label id="cost" fontWeight="none" text="--"/>
+		</mx:FormItem>
+		
+		<mx:FormItem fontWeight="bold" label="Yield Strength (MPa):">
+			<mx:Label id="yieldStrength" fontWeight="none" text="--"/>
+		</mx:FormItem>
+	</mx:Form>
 	
-	<mx:HBox styleName="noPadding">
-		<mx:Label text="Cost/M**3 ($):" fontWeight="bold" />
-		<mx:Label text="--"/>
-	</mx:HBox>
-	
-	<mx:HBox styleName="noPadding">
-		<mx:Label text="Yield Strength (MPa):" fontWeight="bold" />
-		<mx:Label text="--"/>
-	</mx:HBox>
 	<!-- 
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
