@@ -24,7 +24,7 @@
 	<!-- data table -->
 	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
 		<mx:DataGrid width="100%" height="100%"
-				draggableColumns="false" resizableColumns="false" dataProvider="{coolerList.selectedItem.cpm}" >
+				draggableColumns="false" resizableColumns="false" dataProvider="{coolerData}" >
 			<mx:columns>
 				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
 				<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>

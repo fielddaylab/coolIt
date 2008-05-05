@@ -27,8 +27,8 @@ package edu.wisc.doit.ls.coolit.view {
 		//MXML components
 		
 		
-		[Bindable]
-		public var model:ArrayCollection;
+		[Bindable] public var model:ArrayCollection;
+		[Bindable] public var coolerData:ArrayCollection;
 		
 		private var log:ILogger;
 		
