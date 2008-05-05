@@ -18,6 +18,7 @@ package edu.wisc.doit.ls.coolit.model {
     [Bindable] public class CoolerModel extends CommonBase {
 		
 		public var selected:CoolerVO;
+		public var currentData:ArrayCollection;
 		
 		private var core:XML;
 		private var coolerList:ArrayCollection;
@@ -25,6 +26,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public function CoolerModel(core_p:XML) {
 			super();
 			core = core_p;
+			currentData = new ArrayCollection();
 		}
 		
 		public function get coolers():ArrayCollection {
