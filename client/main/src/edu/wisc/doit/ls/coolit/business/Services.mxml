@@ -10,6 +10,7 @@
 		<mx:operation concurrency="multiple" name="GetMaterials" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="Simulate" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="GetProblems" resultFormat="e4x"/>
+		<mx:operation concurrency="multiple" name="InputPower" resultFormat="e4x"/>
 	</mx:WebService>
 		
 </cairngorm:ServiceLocator>

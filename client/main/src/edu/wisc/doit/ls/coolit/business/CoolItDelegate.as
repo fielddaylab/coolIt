@@ -62,6 +62,18 @@ package edu.wisc.doit.ls.coolit.business {
 			token.addResponder(responder);
 		}
 		
+		/**
+		 * Gets input power data
+		 *
+		 * @param	name_p			Name of the cooler
+		 * @param	powerFactor_p	
+		 * @param	temp_p
+		 */
+		public function getInputPowerData(name_p:String, powerFactor_p:Number, temp_p:Number):void {
+			var token:AsyncToken = service.InputPower(name_p, temp_p, powerFactor_p);
+			token.addResponder(responder);
+		}
+		
 	}
 	
 }
