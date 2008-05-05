@@ -17,10 +17,11 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(GetJobListEvent.EVENT_GET_JOB_LIST, GetJobListCommand);
 			addCommand(ViewJobListEvent.EVENT_VIEW_JOB_LIST, ViewJobListCommand);
 			addCommand(GetCoolerListEvent.EVENT_GET_COOLER_LIST, GetCoolerListCommand);
-			
+			addCommand(SetCoolerEvent.EVENT_SET_COOLER, SetCoolerCommand);
 			addCommand(GetMaterialListEvent.EVENT_GET_MATERIAL_LIST, GetMaterialListCommand);
 			
 			addCommand(GetInputPowerDataEvent.EVENT_GET_INPUT_POWER, GetInputPowerDataCommand);
+			addCommand(GetOutputPowerDataEvent.EVENT_GET_OUTPUT_POWER, GetOutputPowerDataCommand);
 		}	
 	}
 	
