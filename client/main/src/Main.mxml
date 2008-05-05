@@ -18,7 +18,9 @@
 				<view:JobScreen id="jobScreenScreen" width="800" height="600" model="{model}" 
 						jobModel="{model.jobModel}"
 						coolerModel="{model.coolerModel}"
-						materialModel="{model.materialModel}" />
+						materialModel="{model.materialModel}"
+						stateModel="{model.stateModel}"
+						currentApplicationState="{model.stateModel.currentState}" />
             </mx:AddChild>
         </mx:State>
 		
