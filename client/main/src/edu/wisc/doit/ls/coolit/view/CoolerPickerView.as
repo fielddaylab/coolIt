@@ -55,6 +55,7 @@ package edu.wisc.doit.ls.coolit.view {
 			setCoolerEvent.modelLocator = modelLocator;
 			setCoolerEvent.cooler = coolerList.selectedItem as CoolerVO;
 			setCoolerEvent.powerFactor = coolerPowerFactor.value;
+			setCoolerEvent.powerSetting = (inputPower.selected) ? CoolerModel.INPUT_POWER : CoolerModel.OUTPUT_POWER;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setCoolerEvent);
 		}
 		
@@ -67,10 +68,49 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
 			coolerList.addEventListener(Event.CHANGE, onCoolerChange);
+			inputPower.addEventListener(Event.CHANGE, onSettingChange);
+			outputPower.addEventListener(Event.CHANGE, onSettingChange);
+			coolerPowerFactor.addEventListener(SliderEvent.CHANGE, onSliderChange);
+		}
+		
+		private function onSliderChange(event_p:SliderEvent):void {
+			//dispatch get power data
+			//log.debug("{0} - onSliderChange called, calling dispatchGetPowerDataEvent", getQualifiedClassName(this) + ".onComplete");
+			dispatchGetPowerDataEvent();
+		}
+		
+		private function onSettingChange(event_p:Event):void {
+			//dispatch get power data
+			dispatchGetPowerDataEvent();
 		}
 		
 		private function onCoolerChange(event_p:Event):void {
 			dispatchSetCooler();
+		}
+		
+		private function dispatchGetPowerDataEvent():void {
+			//send out a set cooler event with currently selected cooler
+			if(inputPower.selected) {
+				dispatchEventGetInputPowerData();
+			} else {
+				dispatchEventGetOutputPowerData();
+			}
+		}
+		
+		private function dispatchEventGetOutputPowerData():void {
+			var getOutputPowerData:GetOutputPowerDataEvent = new GetOutputPowerDataEvent();
+			getOutputPowerData.modelLocator = modelLocator;
+			getOutputPowerData.coolerName = coolerList.selectedItem.name;
+			getOutputPowerData.powerFactor = coolerPowerFactor.value;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getOutputPowerData);
+		}
+		
+		private function dispatchEventGetInputPowerData():void {
+			var getInputPowerData:GetInputPowerDataEvent = new GetInputPowerDataEvent();
+			getInputPowerData.modelLocator = modelLocator;
+			getInputPowerData.coolerName = coolerList.selectedItem.name;
+			getInputPowerData.powerFactor = coolerPowerFactor.value;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getInputPowerData);
 		}
 	}
 }
