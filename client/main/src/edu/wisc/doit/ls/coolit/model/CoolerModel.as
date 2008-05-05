@@ -16,6 +16,8 @@ package edu.wisc.doit.ls.coolit.model {
 	 *  @author Ben Longoria
 	 */
     [Bindable] public class CoolerModel extends CommonBase {
+		public static const INPUT_POWER:String = "inputPowerData";
+		public static const OUTPUT_POWER:String = "outputPowerData";
 		
 		public var selected:CoolerVO;
 		public var currentData:ArrayCollection;
