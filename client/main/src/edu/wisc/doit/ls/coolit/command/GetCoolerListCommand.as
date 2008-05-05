@@ -3,7 +3,7 @@ package edu.wisc.doit.ls.coolit.command {
 	import mx.rpc.IResponder;
 	
 	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.adobe.cairngorm.control.*;
 	
 	import edu.wisc.doit.ls.coolit.model.*;
 	import edu.wisc.doit.ls.coolit.event.*;
@@ -33,6 +33,8 @@ package edu.wisc.doit.ls.coolit.command {
 		public function result(event_p:Object):void {		
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.coolerModel = new CoolerModel(cleanedXML);
+			
+			//dispatchEventGetInputPowerData();
 		}
 		
 		public function fault(event_p:Object):void {
@@ -40,6 +42,13 @@ package edu.wisc.doit.ls.coolit.command {
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
 		
+		private function dispatchEventGetInputPowerData():void {
+			var getInputPowerData:GetInputPowerDataEvent = new GetInputPowerDataEvent();
+			getInputPowerData.modelLocator = model;
+			getInputPowerData.coolerName = "Small";
+			getInputPowerData.powerFactor = 0.62;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getInputPowerData);
+		}
 	}
 	
 }
