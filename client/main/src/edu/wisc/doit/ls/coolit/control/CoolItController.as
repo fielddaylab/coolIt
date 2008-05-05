@@ -20,6 +20,7 @@ package edu.wisc.doit.ls.coolit.control {
 			
 			addCommand(GetMaterialListEvent.EVENT_GET_MATERIAL_LIST, GetMaterialListCommand);
 			
+			addCommand(GetInputPowerDataEvent.EVENT_GET_INPUT_POWER, GetInputPowerDataCommand);
 		}	
 	}
 	
