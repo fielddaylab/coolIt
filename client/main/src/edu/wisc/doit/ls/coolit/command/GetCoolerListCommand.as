@@ -34,7 +34,7 @@ package edu.wisc.doit.ls.coolit.command {
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.coolerModel = new CoolerModel(cleanedXML);
 			
-			//dispatchEventGetInputPowerData();
+			dispatchEventGetInputPowerData();
 		}
 		
 		public function fault(event_p:Object):void {

@@ -33,21 +33,34 @@ package edu.wisc.doit.ls.coolit.command {
 			var coolerName:String = getInputPowerEvent.coolerName;
 			var powerFactor:Number = getInputPowerEvent.powerFactor;
 			
+			/*
 			//reset cooler model
 			coolerModel.currentData.removeAll();
 			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			
 			//do a 300 count iteration calling get date method each time
-			for(var i:Number = 250; i<301; i++) {
+			for(var i:Number = 0; i<301; i++) {
 				delegate.getInputPowerData(coolerName, powerFactor, i);
 			}
+			*/
+			result(new Object());
 		}
 		
 		public function result(event_p:Object):void {		
+			//DUMMY START
+			//do a 300 count iteration calling get date method each time
+			coolerModel.currentData.removeAll();
+			for(var i:Number = 0; i<301; i++) {
+				var newDPXML:XML =  <DataPoint><temp>{i}</temp><data>{Math.round(i * 0.01)}</data></DataPoint>;
+				var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
+				coolerModel.currentData.addItem(newDataPoint);
+			}
+			//DUMMY END
+			
 			//result should be number
-			var cleanedXML:XML = model.removeNamespaces(event_p.result);
-			log.fatal("{0} - cleanedXML.InputPowerResult: " + cleanedXML.InputPowerResult, getQualifiedClassName(this) + ".result");
+			//var cleanedXML:XML = model.removeNamespaces(event_p.result);
+			//log.fatal("{0} - cleanedXML.InputPowerResult: " + cleanedXML.InputPowerResult, getQualifiedClassName(this) + ".result");
 			//InputPowerResponse
 			//InputPowerResult
 			
