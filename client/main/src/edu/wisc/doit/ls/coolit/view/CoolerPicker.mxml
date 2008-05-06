@@ -3,6 +3,8 @@
 	xmlns:flash="flash.filters.*"
 	horizontalAlign="left" verticalAlign="top">
 	
+	<mx:Script><![CDATA[ import edu.wisc.doit.ls.coolit.model.CoolerModel; ]]></mx:Script>
+	
 	<mx:ComboBox id="coolerList" dataProvider="{model}" />
 	
 	
@@ -10,15 +12,17 @@
 		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
 		<mx:Label text="{coolerPowerFactor.value}" />
 	</mx:HBox>
-	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="1" width="100%"
+	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="{coolerModel.defaultPowerFactor}" width="100%"
             allowTrackClick="true" 
 			snapInterval="0.01"
             liveDragging="true"/>
 	<mx:Spacer height="10" />
 	
 	<mx:HBox width="100%">
-		<mx:RadioButton id="inputPower" label="Input Power" fontSize="9" groupName="powerSettingGroup" />
-		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSettingGroup" selected="true" />
+		<mx:RadioButton id="inputPower" label="Input Power" fontSize="9" groupName="powerSettingGroup"
+						selected="{(coolerModel.defaultPowerSetting == CoolerModel.INPUT_POWER) ? true : false}" />
+		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSettingGroup" 
+						selected="{(coolerModel.defaultPowerSetting == CoolerModel.OUTPUT_POWER) ? true : false}" />
 	</mx:HBox>
 	
 	<!-- data table -->

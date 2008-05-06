@@ -33,6 +33,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var model:ArrayCollection;
 		[Bindable] public var coolerData:ArrayCollection;
+		[Bindable] public var coolerModel:CoolerModel;
 		
 		private var log:ILogger;
 		
