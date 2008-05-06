@@ -22,6 +22,7 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(GetInputPowerDataEvent.EVENT_GET_INPUT_POWER, GetInputPowerDataCommand);
 			addCommand(GetOutputPowerDataEvent.EVENT_GET_OUTPUT_POWER, GetOutputPowerDataCommand);
 			addCommand(SetStrutEvent.EVENT_SET_STRUT, SetStrutCommand);
+			addCommand(RunSimulationEvent.EVENT_RUN_SIM, RunSimulationCommand);
 		}	
 	}
 	
