@@ -52,7 +52,7 @@ package edu.wisc.doit.ls.coolit.command {
 			//do a 300 count iteration calling get date method each time
 			coolerModel.currentData.removeAll();
 			for(var i:Number = 0; i<301; i++) {
-				var newDPXML:XML =  <DataPoint><temp>{i}</temp><data>{Math.round(i * 0.01)}</data></DataPoint>;
+				var newDPXML:XML =  <DataPoint><temp>{i}</temp><data>{Math.round(i * 2)}</data></DataPoint>;
 				var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
 				coolerModel.currentData.addItem(newDataPoint);
 			}
