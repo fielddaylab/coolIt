@@ -41,6 +41,15 @@ package edu.wisc.doit.ls.coolit.command {
 		public function result(event_p:Object):void {		
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
+			
+			//also, now that the strut has been changed, do run sim too
+			dispatchRunSimEvent();
+		}
+		
+		private function dispatchRunSimEvent():void {
+			var runSimEvent:RunSimulationEvent = new RunSimulationEvent();
+			runSimEvent.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(runSimEvent);
 		}
 		
 		public function fault(event_p:Object):void {
