@@ -8,6 +8,11 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true" alignSymbol="left"/>
 	
+	<mx:CurrencyFormatter id="decFormatter" precision="2" 
+        decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="true"/>
+	
 	<mx:Panel id="jobPanel" title="{jobModel.selected.name}" styleName="jobPanel"
 				titleStyleName="largeWhiteTitle" width="100%" height="100%">
 		<mx:ApplicationControlBar width="100%" cornerRadius="0.0">
@@ -31,11 +36,11 @@
 				<mx:HBox width="100%" height="20%" horizontalAlign="left">
 					<mx:Form>
 						<mx:FormItem styleName="h2" label="Cost:">
-							<mx:Label id="costLabel" fontWeight="none" text="$565"/>
+							<mx:Label id="costLabel" fontWeight="none" text="{usdFormatter.format(model.cost)}"/>
 						</mx:FormItem>
 
 						<mx:FormItem styleName="h2" label="Bank Balance:">
-							<mx:Label id="balanceLabel" fontWeight="none" text="$1,500"/>
+							<mx:Label id="balanceLabel" fontWeight="none" text="{usdFormatter.format(model.bankBalance)}"/>
 						</mx:FormItem>
 						
 						<mx:FormItem styleName="h2" label="Incentive:">
@@ -45,15 +50,15 @@
 					
 					<mx:Form>
 						<mx:FormItem styleName="h2" label="Maximum Stress (MN):">
-							<mx:Label id="maxStressLabel" fontWeight="none" text="(unknown)"/>
+							<mx:Label id="maxStressLabel" fontWeight="none" text="{decFormatter.format(model.stressLimit)}"/>
 						</mx:FormItem>
 
 						<mx:FormItem styleName="h2" label="Input Power (watts):">
-							<mx:Label id="inputPowerLabel" fontWeight="none" text="60.26"/>
+							<mx:Label id="inputPowerLabel" fontWeight="none" text="{decFormatter.format(model.inputPower)}"/>
 						</mx:FormItem>
 						
 						<mx:FormItem styleName="h2" label="Temp (Deg K):">
-							<mx:Label id="tempLabel" fontWeight="none" text="278.45"/>
+							<mx:Label id="tempLabel" fontWeight="none" text="{decFormatter.format(model.temperature)}"/>
 						</mx:FormItem>
 					</mx:Form>
 					

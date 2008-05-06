@@ -47,11 +47,19 @@ package edu.wisc.doit.ls.coolit.command {
 			} else {
 				dispatchEventGetOutputPowerData();
 			}
+			//also, now that the cooler has been changed, do run sim too
+			dispatchRunSimEvent();
 		}
 		
 		public function fault(event_p:Object):void {
 			//log failure here
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
+		}
+		
+		private function dispatchRunSimEvent():void {
+			var runSimEvent:RunSimulationEvent = new RunSimulationEvent();
+			runSimEvent.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(runSimEvent);
 		}
 		
 		private function dispatchEventGetOutputPowerData():void {

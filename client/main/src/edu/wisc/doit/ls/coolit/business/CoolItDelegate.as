@@ -98,6 +98,14 @@ package edu.wisc.doit.ls.coolit.business {
 			token.addResponder(responder);
 		}
 		
+		/**
+		 * run simulation
+		 */
+		public function run():void {
+			var token:AsyncToken = service.Run();
+			token.addResponder(responder);
+		}
+		
 	}
 	
 }
