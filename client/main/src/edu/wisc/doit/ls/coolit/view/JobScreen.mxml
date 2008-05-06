@@ -25,7 +25,7 @@
 		<mx:HBox width="100%" height="100%" styleName="jobBox">
 			
 			<!-- left stack -->
-			<mx:VBox width="70%" height="100%" styleName="noPadding">
+			<mx:VBox width="60%" height="100%" styleName="noPadding">
 				<!-- image holder -->
 				<mx:Box width="100%" height="80%" backgroundColor="0x000000" backgroundAlpha="0.25"
 						verticalAlign="middle" horizontalAlign="center">
@@ -34,7 +34,7 @@
 				
 				<!-- details box -->
 				<mx:HBox width="100%" height="20%" horizontalAlign="left">
-					<mx:Form>
+					<mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 						<mx:FormItem styleName="h2" label="Cost:">
 							<mx:Label id="costLabel" fontWeight="none" text="{usdFormatter.format(model.cost)}"/>
 						</mx:FormItem>
@@ -48,7 +48,7 @@
 						</mx:FormItem>
 					</mx:Form>
 					
-					<mx:Form>
+					<mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 						<mx:FormItem styleName="h2" label="Maximum Stress (MN):">
 							<mx:Label id="maxStressLabel" fontWeight="none" text="{decFormatter.format(model.stressLimit)}"/>
 						</mx:FormItem>
@@ -68,7 +68,7 @@
 			
 			
 			<!-- sidebar -->
-			<mx:Accordion id="pickerAccordion" width="30%" height="100%" creationPolicy="all">
+			<mx:Accordion id="pickerAccordion" width="40%" height="100%" creationPolicy="all">
 				
 				<mx:Box id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 0)}">
