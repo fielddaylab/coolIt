@@ -22,6 +22,9 @@ package edu.wisc.doit.ls.coolit.model {
 		public var selected:CoolerVO;
 		public var currentData:ArrayCollection;
 		
+		public var defaultPowerFactor:Number = 1;
+		public var defaultPowerSetting:String = OUTPUT_POWER;
+		
 		private var core:XML;
 		private var coolerList:ArrayCollection;
 		

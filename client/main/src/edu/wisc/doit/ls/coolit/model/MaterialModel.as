@@ -20,6 +20,9 @@ package edu.wisc.doit.ls.coolit.model {
 		public var selected:MaterialVO;
 		public var currentData:ArrayCollection;
 		
+		public var defaultLength:Number = 0.89;
+		public var defaultCrossSection:Number = 0.1;
+		
 		private var core:XML;
 		private var materialList:ArrayCollection;
 		
