@@ -51,15 +51,23 @@
 	</mx:Form>
 	
 	<!-- material data -->
-	<!-- data table -->
-	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
-		<mx:DataGrid width="100%" height="100%"
-				draggableColumns="false" resizableColumns="false" dataProvider="{materialData}" >
-			<mx:columns>
-				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
-				<mx:DataGridColumn dataField="data" headerText="Thermal Cond."/>
-			</mx:columns>
-		</mx:DataGrid>
-	</mx:Box>
+	
+	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
+		
+		<view:Graph dataProvider="{materialData}" width="100%" height="100%" label="Graph"
+					yGraphic="{AssetEmbedLocator.thermalText}" xGraphic="{AssetEmbedLocator.tempText}"/>
+		
+		<!-- data table -->
+		<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
+			<mx:DataGrid width="100%" height="100%"
+					draggableColumns="false" resizableColumns="false" dataProvider="{materialData}" >
+				<mx:columns>
+					<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
+					<mx:DataGridColumn dataField="data" headerText="Thermal Cond."/>
+				</mx:columns>
+			</mx:DataGrid>
+		</mx:Box>
+		
+	</mx:TabNavigator>
 	
 </view:StrutPickerView>
