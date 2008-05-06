@@ -5,7 +5,7 @@
 	xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
 	
 	<mx:WebService id="cryoService" wsdl="http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx?WSDL" 
-		useProxy="false" showBusyCursor="true">
+		useProxy="false" showBusyCursor="false">
 		<mx:operation concurrency="multiple" name="GetCoolers" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="GetMaterials" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="Simulate" resultFormat="e4x"/>
