@@ -63,6 +63,18 @@ package edu.wisc.doit.ls.coolit.business {
 		}
 		
 		/**
+		 * Sets strut
+		 *
+		 * @param	name_p			Name of the strut
+		 * @param	length_p
+		 * @param	crossSection_p
+		 */
+		public function setStrut(name_p:String, length_p:Number, crossSection_p:Number):void {
+			var token:AsyncToken = service.SetStrut(name_p, length_p, crossSection_p);
+			token.addResponder(responder);
+		}
+		
+		/**
 		 * Gets input power data
 		 *
 		 * @param	name_p			Name of the cooler
@@ -71,6 +83,18 @@ package edu.wisc.doit.ls.coolit.business {
 		 */
 		public function getInputPowerData(name_p:String, powerFactor_p:Number, temp_p:Number):void {
 			var token:AsyncToken = service.InputPower(name_p, temp_p, powerFactor_p);
+			token.addResponder(responder);
+		}
+		
+		/**
+		 * Gets output power data
+		 *
+		 * @param	name_p			Name of the cooler
+		 * @param	powerFactor_p	
+		 * @param	temp_p
+		 */
+		public function getOutputPowerData(name_p:String, powerFactor_p:Number, temp_p:Number):void {
+			var token:AsyncToken = service.OutputPower(name_p, temp_p, powerFactor_p);
 			token.addResponder(responder);
 		}
 		
