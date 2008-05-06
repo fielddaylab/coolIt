@@ -1,0 +1,14 @@
+<RunResponse>
+  <RunResult>
+    <temperature>278.44762847786251</temperature>
+    <length>0.89</length>
+    <crossSection>0.1</crossSection>
+    <materialName>Aluminum 1100</materialName>
+    <powerFactor>1</powerFactor>
+    <coolerName>Small</coolerName>
+    <inputPower>60.261964346678354</inputPower>
+    <cost>500.9845</cost>
+    <stressLimit>-0.001</stressLimit>
+    <isValidSolution>false</isValidSolution>
+  </RunResult>
+</RunResponse>
