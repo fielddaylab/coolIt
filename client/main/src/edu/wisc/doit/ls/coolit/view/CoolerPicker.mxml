@@ -25,15 +25,22 @@
 						selected="{(coolerModel.defaultPowerSetting == CoolerModel.OUTPUT_POWER) ? true : false}" />
 	</mx:HBox>
 	
-	<!-- data table -->
-	<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
-		<mx:DataGrid width="100%" height="100%"
-				draggableColumns="false" resizableColumns="false" dataProvider="{coolerData}" >
-			<mx:columns>
-				<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
-				<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
-			</mx:columns>
-		</mx:DataGrid>
-	</mx:Box>
+	
+	
+	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
+		<!-- data table -->
+		<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">
+			<mx:DataGrid width="100%" height="100%"
+					draggableColumns="false" resizableColumns="false" dataProvider="{coolerData}" >
+				<mx:columns>
+					<mx:DataGridColumn dataField="temp" headerText="Temp (Deg K)"/>
+					<mx:DataGridColumn dataField="data" headerText="{(inputPower.selected) ? inputPower.label : outputPower.label}"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</mx:Box>
+		
+		<!-- <view:Graph dataProvider="{coolerData}" width="100%" height="100%" label="Graph" /> -->
+		
+	</mx:TabNavigator>
 	
 </view:CoolerPickerView>
