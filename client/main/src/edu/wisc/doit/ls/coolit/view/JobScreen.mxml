@@ -8,7 +8,7 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true" alignSymbol="left"/>
 	
-	<mx:CurrencyFormatter id="decFormatter" precision="2" 
+	<mx:NumberFormatter id="decFormatter" precision="2" 
         decimalSeparatorFrom="."
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true"/>

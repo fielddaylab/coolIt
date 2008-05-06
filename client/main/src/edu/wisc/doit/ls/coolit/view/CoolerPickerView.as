@@ -78,6 +78,7 @@ package edu.wisc.doit.ls.coolit.view {
 			//dispatch get power data
 			//log.debug("{0} - onSliderChange called, calling dispatchGetPowerDataEvent", getQualifiedClassName(this) + ".onComplete");
 			dispatchGetPowerDataEvent();
+			dispatchSetCooler();
 		}
 		
 		private function onSettingChange(event_p:Event):void {
@@ -96,6 +97,12 @@ package edu.wisc.doit.ls.coolit.view {
 			} else {
 				dispatchEventGetOutputPowerData();
 			}
+		}
+		
+		private function dispatchRunSimEvent():void {
+			var runSimEvent:RunSimulationEvent = new RunSimulationEvent();
+			runSimEvent.modelLocator = modelLocator;
+			CairngormEventDispatcher.getInstance().dispatchEvent(runSimEvent);
 		}
 		
 		private function dispatchEventGetOutputPowerData():void {

@@ -69,6 +69,18 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
 			strutList.addEventListener(Event.CHANGE, onStrutChange);
+			lengthM.addEventListener(SliderEvent.CHANGE, onSliderChange);
+			crossSection.addEventListener(SliderEvent.CHANGE, onSliderChange);
+		}
+		
+		private function onSliderChange(event_p:SliderEvent):void {
+			dispatchSetStrut();
+		}
+		
+		private function dispatchRunSimEvent():void {
+			var runSimEvent:RunSimulationEvent = new RunSimulationEvent();
+			runSimEvent.modelLocator = modelLocator;
+			CairngormEventDispatcher.getInstance().dispatchEvent(runSimEvent);
 		}
 		
 		private function onStrutChange(event_p:Event):void {
