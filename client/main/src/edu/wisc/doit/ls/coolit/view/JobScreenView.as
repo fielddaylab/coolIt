@@ -26,6 +26,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var chooseAnotherJob:Button;
 		public var coolerPicker:CoolerPicker;
 		public var strutPicker:StrutPicker;
+		public var commitJob:Button;
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
@@ -60,9 +61,14 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
+			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
 			hasInit = true;
-			//coolerPicker.dispatchSetCooler();
-			//strutPicker.dispatchSetStrut();
+		}
+		
+		private function onCommitClick(event_p:MouseEvent):void {
+			var commitSolutionEvent:CommitSolutionEvent = new CommitSolutionEvent();
+			commitSolutionEvent.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(commitSolutionEvent);
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
