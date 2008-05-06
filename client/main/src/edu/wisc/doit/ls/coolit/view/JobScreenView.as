@@ -25,6 +25,7 @@ package edu.wisc.doit.ls.coolit.view {
 		//MXML components
 		public var chooseAnotherJob:Button;
 		public var coolerPicker:CoolerPicker;
+		public var strutPicker:StrutPicker;
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
@@ -60,7 +61,8 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			hasInit = true;
-			coolerPicker.dispatchSetCooler();
+			//coolerPicker.dispatchSetCooler();
+			//strutPicker.dispatchSetStrut();
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
@@ -92,6 +94,7 @@ package edu.wisc.doit.ls.coolit.view {
 				//dispatchEventGetInputPowerData();
 				if(hasInit) {
 					coolerPicker.dispatchSetCooler();
+					strutPicker.dispatchSetStrut();
 				}
 			}
 			_currentApplicationState = state_p;
