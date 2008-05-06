@@ -3,6 +3,11 @@
 	xmlns:flash="flash.filters.*"
 	horizontalAlign="center" verticalAlign="top">
 	
+	<mx:CurrencyFormatter id="usdFormatter" precision="2" 
+        currencySymbol="$" decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="true" alignSymbol="left"/>
+	
 	<mx:ComboBox id="strutList" dataProvider="{model}" width="200" />
 	<mx:Spacer height="5" />
 	
@@ -10,7 +15,7 @@
 		<mx:Label text="Length (M):" fontWeight="bold" />
 		<mx:Label text="{lengthM.value}" />
 	</mx:HBox>
-	<mx:HSlider id="lengthM" minimum="0.01" maximum="0.89" value="0.89" width="100%"
+	<mx:HSlider id="lengthM" minimum="0.01" maximum="0.89" value="{materialModel.defaultLength}" width="100%"
             allowTrackClick="true" 
 			snapInterval="0.01"
             liveDragging="true"/>
@@ -19,7 +24,7 @@
 		<mx:Label text="Cross Section (M**2):" fontWeight="bold" />
 		<mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/>
 	</mx:HBox>
-	<mx:HSlider id="crossSection" minimum="0.001" maximum="0.1" value="0.1" width="100%"
+	<mx:HSlider id="crossSection" minimum="0.001" maximum="0.1" value="{materialModel.defaultCrossSection}" width="100%"
 			dataTipPrecision="3"
             allowTrackClick="true" 
 			snapInterval="0.001"
@@ -27,21 +32,21 @@
 			mouseMove="{crossSectionDisplay.text = crossSection.value.toString()}"
 			mouseUp="{crossSectionDisplay.text = crossSection.value.toString()}" />
 	
-	<mx:Form fontSize="10" width="100%">
+	<mx:Form fontSize="8" width="100%">
 		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
 			<mx:Label id="stressLimit" fontWeight="none" text="--"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Price ($):">
-			<mx:Label id="priceField" fontWeight="none" text="--"/>
+			<mx:Label id="priceField" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.price)}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Cost/M**3 ($):">
-			<mx:Label id="cost" fontWeight="none" text="--"/>
+			<mx:Label id="cost" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.priceUnit)}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Yield Strength (MPa):">
-			<mx:Label id="yieldStrength" fontWeight="none" text="--"/>
+			<mx:Label id="yieldStrength" fontWeight="none" text="{strutList.selectedItem.yieldStrength}"/>
 		</mx:FormItem>
 	</mx:Form>
 	
