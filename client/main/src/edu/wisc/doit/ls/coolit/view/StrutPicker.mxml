@@ -32,7 +32,7 @@
 			mouseMove="{crossSectionDisplay.text = crossSection.value.toString()}"
 			mouseUp="{crossSectionDisplay.text = crossSection.value.toString()}" />
 	
-	<mx:Form fontSize="8" width="100%">
+	<mx:Form fontSize="9" width="100%" horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
 			<mx:Label id="stressLimit" fontWeight="none" text="--"/>
 		</mx:FormItem>
