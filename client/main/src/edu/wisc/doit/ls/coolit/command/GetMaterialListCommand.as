@@ -3,7 +3,7 @@ package edu.wisc.doit.ls.coolit.command {
 	import mx.rpc.IResponder;
 	
 	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.adobe.cairngorm.control.*;
 	
 	import edu.wisc.doit.ls.coolit.model.*;
 	import edu.wisc.doit.ls.coolit.event.*;
@@ -17,6 +17,7 @@ package edu.wisc.doit.ls.coolit.command {
 	public class GetMaterialListCommand extends CommonBase implements ICommand, IResponder {
 		
 		private var model:CoolItModelLocator;
+		private var materialModel:MaterialModel;
 		
 		public function GetMaterialListCommand() {
 			super();
@@ -33,6 +34,10 @@ package edu.wisc.doit.ls.coolit.command {
 		public function result(event_p:Object):void {		
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.materialModel = new MaterialModel(cleanedXML);
+			materialModel = model.materialModel;
+			materialModel.selected = materialModel.materials.getItemAt(0) as MaterialVO;
+			//now "set" the first strut in the stack
+			dispatchSetStrut();
 		}
 		
 		public function fault(event_p:Object):void {
@@ -40,6 +45,16 @@ package edu.wisc.doit.ls.coolit.command {
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
 		
+		public function dispatchSetStrut():void {
+			//send out a set cooler event with currently selected cooler
+			
+			var setStrutEvent:SetStrutEvent = new SetStrutEvent();
+			setStrutEvent.modelLocator = model;
+			setStrutEvent.material = materialModel.selected;
+			setStrutEvent.length = materialModel.defaultLength;
+			setStrutEvent.crossSection = materialModel.defaultCrossSection;
+			CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+		}
 	}
 	
 }
