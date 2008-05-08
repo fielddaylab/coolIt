@@ -28,11 +28,16 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var strutList:ComboBox;
 		[Bindable] public var lengthM:HSlider;
 		[Bindable] public var crossSection:HSlider;
+		[Bindable] public var crossSectionDisplay:Label;
+		[Bindable] public var lengthDisplay:Label;
 		
 		[Bindable] public var model:ArrayCollection;
 		[Bindable] public var materialData:ArrayCollection;
 		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var materialModel:MaterialModel;
+		
+		private var crossSectionDown:Boolean = false;
+		private var lengthDown:Boolean = false;
 		
 		private var log:ILogger;
 		
@@ -71,10 +76,53 @@ package edu.wisc.doit.ls.coolit.view {
 			strutList.addEventListener(Event.CHANGE, onStrutChange);
 			lengthM.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			crossSection.addEventListener(SliderEvent.CHANGE, onSliderChange);
+			crossSection.addEventListener(MouseEvent.MOUSE_DOWN, onCrossSectionDown);
+			crossSection.addEventListener(MouseEvent.MOUSE_UP, onCrossSectionUp);
+			crossSection.addEventListener(MouseEvent.MOUSE_MOVE, onCrossSectionMove);
+			
+			lengthM.addEventListener(MouseEvent.MOUSE_DOWN, onLengthDown);
+			lengthM.addEventListener(MouseEvent.MOUSE_UP, onLengthUp);
+			lengthM.addEventListener(MouseEvent.MOUSE_MOVE, onLengthMove);
 		}
 		
 		private function onSliderChange(event_p:SliderEvent):void {
+			crossSectionDisplay.text = crossSection.value.toString();
+			lengthDisplay.text = lengthM.value.toString();
 			dispatchSetStrut();
+		}
+		
+		private function onCrossSectionDown(event_p:MouseEvent):void {
+			crossSectionDown = true;
+		}
+		
+		private function onCrossSectionUp(event_p:MouseEvent):void {
+			crossSectionDown = false;
+			crossSectionDisplay.text = crossSection.value.toString();
+			dispatchSetStrut();
+		}
+		
+		private function onCrossSectionMove(event_p:MouseEvent):void {
+			crossSectionDisplay.text = crossSection.value.toString()
+			if(crossSectionDown) {
+				dispatchSetStrut();
+			}
+		}
+		
+		private function onLengthDown(event_p:MouseEvent):void {
+			lengthDown = true;
+		}
+		
+		private function onLengthUp(event_p:MouseEvent):void {
+			lengthDisplay.text = lengthM.value.toString();
+			lengthDown = false;
+			dispatchSetStrut();
+		}
+		
+		private function onLengthMove(event_p:MouseEvent):void {
+			lengthDisplay.text = lengthM.value.toString();
+			if(lengthDown) {
+				dispatchSetStrut();
+			}
 		}
 		
 		private function dispatchRunSimEvent():void {
