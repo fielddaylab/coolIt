@@ -86,7 +86,8 @@
 				<mx:Box label="Struts" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 2)}">
 						<view:StrutPicker id="strutPicker" width="100%" height="100%" model="{materialModel.materials}"
-											materialData="{materialModel.currentData}" modelLocator="{model}" materialModel="{materialModel}" />
+											materialData="{materialModel.currentData}" modelLocator="{model}" materialModel="{materialModel}"
+											selected="{(pickerAccordion.selectedIndex == 2) ? true : false}" />
 				</mx:Box>
 			</mx:Accordion>
 			
