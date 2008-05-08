@@ -50,7 +50,8 @@
 					
 					<mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 						<mx:FormItem styleName="h2" label="Maximum Stress (MN):">
-							<mx:Label id="maxStressLabel" fontWeight="none" text="{decFormatter.format(model.stressLimit)}"/>
+							<mx:Label id="maxStressLabel" fontWeight="none" 
+											text="{(model.stressLimit &lt; 0) ? 'unknown' : decFormatter.format(model.stressLimit)}"/>
 						</mx:FormItem>
 
 						<mx:FormItem styleName="h2" label="Input Power (watts):">
