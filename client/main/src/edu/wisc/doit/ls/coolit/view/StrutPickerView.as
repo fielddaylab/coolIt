@@ -30,6 +30,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var crossSection:HSlider;
 		[Bindable] public var crossSectionDisplay:Label;
 		[Bindable] public var lengthDisplay:Label;
+		[Bindable] public var graphView:Graph;
 		
 		[Bindable] public var model:ArrayCollection;
 		[Bindable] public var materialData:ArrayCollection;
@@ -38,6 +39,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var crossSectionDown:Boolean = false;
 		private var lengthDown:Boolean = false;
+		
+		private var _selected:Boolean = false;
 		
 		private var log:ILogger;
 		
@@ -63,6 +66,16 @@ package edu.wisc.doit.ls.coolit.view {
 			setStrutEvent.length = lengthM.value;
 			setStrutEvent.crossSection = crossSection.value;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+		}
+		
+		[Bindable] public function get selected():Boolean {
+			return _selected;
+		}
+		public function set selected(selected_p:Boolean):void {
+			if(selected_p) {
+				graphView.refresh();
+			}
+			_selected = selected_p;
 		}
 		
 		/*

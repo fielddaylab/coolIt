@@ -52,7 +52,7 @@
 	
 	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
 		
-		<view:Graph dataProvider="{materialData}" width="100%" height="100%" label="Graph"
+		<view:Graph id="graphView" dataProvider="{materialData}" width="100%" height="100%" label="Graph"
 					yGraphic="{AssetEmbedLocator.thermalText}" xGraphic="{AssetEmbedLocator.tempText}"/>
 		
 		<!-- data table -->
