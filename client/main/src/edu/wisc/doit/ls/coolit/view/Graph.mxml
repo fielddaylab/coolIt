@@ -3,8 +3,16 @@
 	xmlns:flash="flash.filters.*"
 	styleName="noPadding" verticalGap="0" horizontalGap="0">
 	
-	<mx:Canvas id="spriteHolder" width="100%" height="100%">
-		<mx:UIComponent id="spriteCanvas" x="{xAxisLabelHeight*10}" y="{yAxisLabelWidth*3}" width="{spriteHolder.width-(yAxisLabelWidth*15)}" height="{spriteHolder.height-(xAxisLabelHeight*10)}" />
-	</mx:Canvas>
+	<mx:HBox width="100%" height="100%" styleName="noPadding" verticalGap="0" horizontalGap="0" verticalAlign="middle">
+		<mx:Image id="refYGraphic" source="{yGraphic}" />
+		<mx:Canvas id="spriteHolder" width="100%" height="100%">
+			<mx:UIComponent id="spriteCanvas" x="{xAxisLabelHeight*10}" y="{yAxisLabelWidth*3}" width="{spriteHolder.width-(yAxisLabelWidth*15)}" height="{spriteHolder.height-(xAxisLabelHeight*10)}" />
+		</mx:Canvas>
+	</mx:HBox>
+	
+	<mx:HBox width="100%" styleName="noPadding" verticalGap="0" horizontalGap="0" horizontalAlign="center">
+		<mx:Spacer width="{refYGraphic.width}" />
+		<mx:Image id="refXGraphic" source="{xGraphic}" />
+	</mx:HBox>
 	
 </view:GraphView>
