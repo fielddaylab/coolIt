@@ -29,6 +29,7 @@ package edu.wisc.doit.ls.coolit.view {
 	import flare.vis.data.DataSprite;
     import flare.vis.operator.encoder.ColorEncoder;
     import flare.vis.operator.encoder.ShapeEncoder;
+	import flare.vis.operator.encoder.PropertyEncoder;
     import flare.vis.operator.layout.AxisLayout;
     import flare.vis.palette.ColorPalette;
 	import flare.vis.axis.CartesianAxes;
@@ -50,6 +51,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		//MXML components
 		[Bindable] public var spriteCanvas:UIComponent;
+		[Bindable] public var lineCanvas:UIComponent;
 		
 		//flare components
 		[Bindable] public var vis:Visualization;
@@ -174,30 +176,44 @@ package edu.wisc.doit.ls.coolit.view {
 				vis.y = 0; 
 				
 				vis.operators.add(new AxisLayout("data.temp", "data.data"));
-				//vis.operators.add(new SCShapeEncoder("data.groupId"));
-				//vis.operators.add(new SCShapeEncoder("data.word"));
+				vis.operators.add(new PropertyEncoder({size:0.10, lineColor:0xFF000000, fillColor:0xFF000000}));
 				
 				vis.addEventListener(VisualizationEvent.UPDATE, onVisUpdate);
 				
 				vis.update();
 				
 				updateAxis();
-				//spriteCanvas.visible = true;
-				//spriteCanvas.alpha = 0;
-				//Tweener.addTween(spriteCanvas, {time:1, transition:"linear", alpha:1.0, delay: 1});
 			}
 			
         }
 		
 		private function onVisUpdate(event_p:VisualizationEvent):void {
 			log.fatal("{0} - !!!!!!!onVisUpdate", getQualifiedClassName(this));
+			drawLines();
+		}
+		
+		private function drawLines():void {
+			//clear data sprite graphics
+			var parentGraphics:Graphics = lineCanvas.graphics;
+			parentGraphics.clear();
 			
-			/*
-			spriteCanvas.validateProperties();
-			spriteCanvas.validateNow();
-			spriteCanvas.validateDisplayList();
-			spriteCanvas.validateSize(true);
-			*/
+			var dataList:Array = vis.data.nodes.list;
+			var dataLen:Number = dataList.length;
+			
+			for(var i:Number = 0; i<dataLen; i++) {
+				var curDS:DataSprite = dataList[i] as DataSprite;
+				var curDSRect:Rectangle = curDS.getRect(lineCanvas);
+				//if ds isn't the last one, lets draw a line from this one to the next
+				if(i < (dataLen-2)) {
+					var nextDS:DataSprite = dataList[i+1] as DataSprite;
+					var nextDSRect:Rectangle = curDS.getRect(lineCanvas);
+					if(i == 0) {
+						parentGraphics.lineStyle(2, 0x000000);
+						parentGraphics.moveTo(curDS.x, curDS.y);
+					}
+					parentGraphics.lineTo(nextDS.x, nextDS.y);
+				}
+			}
 		}
 		
 		private function updateAxis():void {
