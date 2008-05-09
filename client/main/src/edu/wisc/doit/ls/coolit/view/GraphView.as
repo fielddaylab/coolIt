@@ -255,7 +255,7 @@ package edu.wisc.doit.ls.coolit.view {
 					}
 				}
 			}
-			
+			/*
 			for(var i:Number = 0; i<xLabelLen; i++) {
 				var curLabel:AxisLabel = xAxisLabels.getChildAt(i) as AxisLabel;
 				if(i > 0) {
@@ -267,6 +267,7 @@ package edu.wisc.doit.ls.coolit.view {
 					}
 				}
 			}
+			*/
 		}
 		
 	}
