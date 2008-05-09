@@ -106,6 +106,15 @@ package edu.wisc.doit.ls.coolit.business {
 			token.addResponder(responder);
 		}
 		
+		/**
+		 * Sets problem
+		 *
+		 * @param	name_p			problem name
+		 */
+		public function setProblem(name_p:String):void {
+			var token:AsyncToken = service.SetProblem(name_p);
+			token.addResponder(responder);
+		}
 	}
 	
 }
