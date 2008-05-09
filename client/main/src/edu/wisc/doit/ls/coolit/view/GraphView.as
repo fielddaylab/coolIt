@@ -46,7 +46,7 @@ package edu.wisc.doit.ls.coolit.view {
 	 *
 	 *  @author Ben Longoria
 	 */
-	public class GraphView extends Canvas {		
+	public class GraphView extends VBox {		
 		
 		//MXML components
 		[Bindable] public var spriteCanvas:UIComponent;
