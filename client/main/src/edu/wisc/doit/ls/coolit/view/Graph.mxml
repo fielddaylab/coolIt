@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view:GraphView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
-	xmlns:flash="flash.filters.*">
+	xmlns:flash="flash.filters.*"
+	styleName="noPadding" verticalGap="0" horizontalGap="0">
 	
-	<mx:UIComponent id="spriteCanvas" x="{xAxisLabelHeight*10}" y="{yAxisLabelWidth*3}" width="{width-(yAxisLabelWidth*15)}" height="{height-(xAxisLabelHeight*10)}" />
+	<mx:Canvas id="spriteHolder" width="100%" height="100%">
+		<mx:UIComponent id="spriteCanvas" x="{xAxisLabelHeight*10}" y="{yAxisLabelWidth*3}" width="{spriteHolder.width-(yAxisLabelWidth*15)}" height="{spriteHolder.height-(xAxisLabelHeight*10)}" />
+	</mx:Canvas>
 	
 </view:GraphView>
