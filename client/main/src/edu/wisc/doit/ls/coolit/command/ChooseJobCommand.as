@@ -22,7 +22,7 @@ package edu.wisc.doit.ls.coolit.command {
 		
 		public function execute(event:CairngormEvent):void {
 			var chooseJobEvent:ChooseJobEvent = event as ChooseJobEvent;
-			
+			var jobVO:JobVO = chooseJobEvent.job;
 			model = chooseJobEvent.modelLocator;
 			var stateModel:StateModel = model.stateModel;
 			stateModel.currentState = StateModel.JOB_SCREEN;
@@ -32,6 +32,8 @@ package edu.wisc.doit.ls.coolit.command {
 				dispatchGetCoolerListEvent();
 				dispatchGetMaterialListEvent();
 			}
+			
+			dispatchSetProblem(jobVO.name);
 			//var delegate:HelloWorldDelegate = new HelloWorldDelegate(this);
 			//delegate.sendThroughHelloWorld(helloWorldEvent.messageContent);
 		}
@@ -47,6 +49,13 @@ package edu.wisc.doit.ls.coolit.command {
 		
 		public function fault(event:Object):void {
 			//log failure here
+		}
+		
+		private function dispatchSetProblem(name_p:String):void {
+			var setProblemEvent:SetProblemEvent = new SetProblemEvent();
+			setProblemEvent.modelLocator = model;
+			setProblemEvent.problemName = name_p;
+			CairngormEventDispatcher.getInstance().dispatchEvent(setProblemEvent);
 		}
 		
 		private function dispatchGetCoolerListEvent():void {
