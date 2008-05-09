@@ -46,7 +46,7 @@ package edu.wisc.doit.ls.coolit.view {
 	 *
 	 *  @author Ben Longoria
 	 */
-	public class GraphView extends VBox {		
+	public class GraphView extends Canvas {		
 		
 		//MXML components
 		[Bindable] public var spriteCanvas:UIComponent;
@@ -59,6 +59,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var yGraphic:Class;
 		[Bindable] public var xGraphic:Class;
+		[Bindable] public var yAxisLabelWidth:Number;
+		[Bindable] public var xAxisLabelHeight:Number;
 		
 		private var _dataProvider:ArrayCollection;
 		
@@ -130,7 +132,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onResize(event_p:ResizeEvent):void {
 			if(vis) {
-				vis.bounds = new Rectangle(0, 0, width, height);
+				vis.bounds = new Rectangle(0, 0, spriteCanvas.width, spriteCanvas.height);
 				vis.update();
 				updateAxis();
 			}
@@ -167,7 +169,7 @@ package edu.wisc.doit.ls.coolit.view {
 				
 				//log.fatal("{0} - dataObject_p.size: " + dataObject_p.size, getQualifiedClassName(this));
 				vis = new Visualization(dataObject_p);
-				vis.bounds = new Rectangle(0, 0, width, height);
+				vis.bounds = new Rectangle(0, 0, spriteCanvas.width, spriteCanvas.height);
 				vis.x = 0;
 				vis.y = 0; 
 				
@@ -234,7 +236,37 @@ package edu.wisc.doit.ls.coolit.view {
 				curLabel.setTextFormat(format);
 			}
 			
+			yAxisLabelWidth = yAxisLabels.width;
+			xAxisLabelHeight = xAxisLabels.height;
+			
 			spriteCanvas.addChild(vis);
+			
+			//check for overlapping labels
+			for(var i:Number = 0; i<yLabelLen; i++) {
+				var curLabel:AxisLabel = yAxisLabels.getChildAt(i) as AxisLabel;
+				//if this isn't the first label, check the label before and make sure it doesn't overlap
+				//if it does overlap, make visible false
+				if(i > 0) {
+					var prevLabel:AxisLabel = yAxisLabels.getChildAt(i-1) as AxisLabel;
+					if((curLabel.y + curLabel.height) > prevLabel.y && prevLabel.visible == true) {
+						curLabel.visible = false;
+					} else {
+						curLabel.visible = true;
+					}
+				}
+			}
+			
+			for(var i:Number = 0; i<xLabelLen; i++) {
+				var curLabel:AxisLabel = xAxisLabels.getChildAt(i) as AxisLabel;
+				if(i > 0) {
+					var prevLabel:AxisLabel = xAxisLabels.getChildAt(i-1) as AxisLabel;
+					if((prevLabel.x + prevLabel.width) > curLabel.x && prevLabel.visible == true) {
+						curLabel.visible = false;
+					} else {
+						curLabel.visible = true;
+					}
+				}
+			}
 		}
 		
 	}
