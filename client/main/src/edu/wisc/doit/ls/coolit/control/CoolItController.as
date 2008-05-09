@@ -24,6 +24,7 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(SetStrutEvent.EVENT_SET_STRUT, SetStrutCommand);
 			addCommand(RunSimulationEvent.EVENT_RUN_SIM, RunSimulationCommand);
 			addCommand(CommitSolutionEvent.EVENT_COMMIT_SOLUTION, CommitSolutionCommand);
+			addCommand(SetProblemEvent.EVENT_SET_PROBLEM, SetProblemCommand);
 		}	
 	}
 	
