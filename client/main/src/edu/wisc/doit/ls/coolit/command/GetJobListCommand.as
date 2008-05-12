@@ -26,6 +26,8 @@ package edu.wisc.doit.ls.coolit.command {
 			var getJobsEvent:GetJobListEvent = event_p as GetJobListEvent;
 			model = getJobsEvent.modelLocator;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.getProblems();
 		}
@@ -33,6 +35,8 @@ package edu.wisc.doit.ls.coolit.command {
 		public function result(event_p:Object):void {
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.jobModel = new JobModel(cleanedXML);
+			
+			model.servicesOut--;
 		}
 		
 		public function fault(event_p:Object):void {

@@ -27,6 +27,8 @@ package edu.wisc.doit.ls.coolit.command {
 			var getMaterialsEvent:GetMaterialListEvent = event_p as GetMaterialListEvent;
 			model = getMaterialsEvent.modelLocator;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.getMaterials();
 		}
@@ -36,6 +38,9 @@ package edu.wisc.doit.ls.coolit.command {
 			model.materialModel = new MaterialModel(cleanedXML);
 			materialModel = model.materialModel;
 			materialModel.selected = materialModel.materials.getItemAt(0) as MaterialVO;
+			
+			model.servicesOut--;
+			
 			//now "set" the first strut in the stack
 			dispatchSetStrut();
 		}

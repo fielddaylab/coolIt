@@ -34,6 +34,8 @@ package edu.wisc.doit.ls.coolit.command {
 			powerFactor = setCoolerEvent.powerFactor;
 			powerSetting = setCoolerEvent.powerSetting;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setCooler(cooler.name, setCoolerEvent.powerFactor);
 		}
@@ -42,6 +44,9 @@ package edu.wisc.doit.ls.coolit.command {
 			//var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			//model.materialModel = new MaterialModel(cleanedXML);
 			coolerModel.selected = cooler;
+			
+			model.servicesOut--;
+			
 			if(powerSetting == CoolerModel.INPUT_POWER) {
 				dispatchEventGetInputPowerData();
 			} else {

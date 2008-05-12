@@ -33,6 +33,7 @@ package edu.wisc.doit.ls.coolit.command {
 			var coolerName:String = getOutputPowerEvent.coolerName;
 			var powerFactor:Number = getOutputPowerEvent.powerFactor;
 			
+			model.servicesOut++;
 			/*
 			 //reset cooler model
 			 coolerModel.currentData.removeAll();
@@ -47,7 +48,8 @@ package edu.wisc.doit.ls.coolit.command {
 			result(new Object());
 		}
 		
-		public function result(event_p:Object):void {		
+		public function result(event_p:Object):void {
+			model.servicesOut--;
 			//DUMMY START
 			//do a 300 count iteration calling get date method each time
 			coolerModel.currentData.removeAll();

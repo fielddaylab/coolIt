@@ -34,11 +34,14 @@ package edu.wisc.doit.ls.coolit.command {
 			length = setStrutEvent.length;
 			crossSection = setStrutEvent.crossSection;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setStrut(material.name, setStrutEvent.length, setStrutEvent.crossSection);
 		}
 		
-		public function result(event_p:Object):void {		
+		public function result(event_p:Object):void {	
+			model.servicesOut--;
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
 			

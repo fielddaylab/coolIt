@@ -26,11 +26,14 @@ package edu.wisc.doit.ls.coolit.command {
 			var runSimEvent:RunSimulationEvent = event_p as RunSimulationEvent;
 			model = runSimEvent.modelLocator;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.run();
 		}
 		
-		public function result(event_p:Object):void {		
+		public function result(event_p:Object):void {
+			model.servicesOut--;
 			//set the current data with the current material data
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);
 			model.inputPower = parseFloat(cleanedXML.RunResult.inputPower);

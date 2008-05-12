@@ -27,6 +27,8 @@ package edu.wisc.doit.ls.coolit.command {
 			var getCoolersEvent:GetCoolerListEvent = event_p as GetCoolerListEvent;
 			model = getCoolersEvent.modelLocator;
 			
+			model.servicesOut++;
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.getCoolers();
 		}
@@ -36,6 +38,9 @@ package edu.wisc.doit.ls.coolit.command {
 			model.coolerModel = new CoolerModel(cleanedXML);
 			coolerModel = model.coolerModel;
 			coolerModel.selected = coolerModel.coolers.getItemAt(0) as CoolerVO;
+			
+			model.servicesOut--;
+			
 			//dispatch set cooler event
 			dispatchSetCooler();
 		}
