@@ -35,6 +35,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var coolerData:ArrayCollection;
 		[Bindable] public var coolerModel:CoolerModel;
 		
+		private var powerFactorDown:Boolean = false;
+		
 		private var log:ILogger;
 		
 		/*
@@ -72,6 +74,9 @@ package edu.wisc.doit.ls.coolit.view {
 			inputPower.addEventListener(Event.CHANGE, onSettingChange);
 			outputPower.addEventListener(Event.CHANGE, onSettingChange);
 			coolerPowerFactor.addEventListener(SliderEvent.CHANGE, onSliderChange);
+			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_DOWN, onPowerFactorDown);
+			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_UP, onPowerFactorUp);
+			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_MOVE, onPowerFactorMove);
 		}
 		
 		private function onSliderChange(event_p:SliderEvent):void {
@@ -81,9 +86,27 @@ package edu.wisc.doit.ls.coolit.view {
 			dispatchSetCooler();
 		}
 		
+		private function onPowerFactorDown(event_p:MouseEvent):void {
+			powerFactorDown = true;
+		}
+		
+		private function onPowerFactorUp(event_p:MouseEvent):void {
+			powerFactorDown = false;
+			dispatchGetPowerDataEvent();
+			dispatchSetCooler();
+		}
+		
+		private function onPowerFactorMove(event_p:MouseEvent):void {
+			if(powerFactorDown) {
+				dispatchGetPowerDataEvent();
+				dispatchSetCooler();
+			}
+		}
+		
 		private function onSettingChange(event_p:Event):void {
 			//dispatch get power data
 			dispatchGetPowerDataEvent();
+			dispatchSetCooler();
 		}
 		
 		private function onCoolerChange(event_p:Event):void {
