@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?> 
 <coolit:ApplicationClass xmlns:coolit="*" xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml" 
-	horizontalAlign="center" verticalAlign="middle" layout="vertical" currentState="{model.stateModel.currentState}">
+	horizontalAlign="left" verticalAlign="middle" layout="vertical" currentState="{model.stateModel.currentState}" 
+	verticalGap="0" paddingTop="0" paddingLeft="5">
 	
 	<!-- styles -->
 	<mx:Style source="../skin/style.css"/>
@@ -8,13 +9,13 @@
 	<coolit:states>
 		
 		<mx:State name="jobPicker" basedOn="">
-            <mx:AddChild relativeTo="{this}" position="firstChild" creationPolicy="all">
+            <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
 				<view:JobChooser id="jobPickerView" width="600" height="400" model="{model}" />
             </mx:AddChild>
         </mx:State>
 		
 		<mx:State name="jobScreen" basedOn="">
-            <mx:AddChild relativeTo="{this}" position="firstChild" creationPolicy="all">
+            <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
 				<view:JobScreen id="jobScreenScreen" width="800" height="600" model="{model}" 
 						jobModel="{model.jobModel}"
 						coolerModel="{model.coolerModel}"
@@ -25,5 +26,9 @@
         </mx:State>
 		
     </coolit:states>
+	
+	<mx:ProgressBar id="progressBar" indeterminate="true" width="200" labelPlacement="right" 
+		label="Accessing services..." fontWeight="none" fontSize="9" visible="{(model.servicesOut &gt; 0) ? true : false}" />
+	<mx:VBox id="appContainer" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" />
 	
 </coolit:ApplicationClass>
