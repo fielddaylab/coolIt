@@ -26,13 +26,14 @@ package edu.wisc.doit.ls.coolit.command {
 			var setProblemEvent:SetProblemEvent = event_p as SetProblemEvent;
 			model = setProblemEvent.modelLocator;
 			
+			model.servicesOut++;
 			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setProblem(setProblemEvent.problemName);
 		}
 		
 		public function result(event_p:Object):void {		
-			
+			model.servicesOut--;
 		}
 		
 		public function fault(event_p:Object):void {
