@@ -22,6 +22,8 @@ package edu.wisc.doit.ls.coolit.model {
 		public var materialModel:MaterialModel;
 		public var stateModel:StateModel;
 		
+		public var servicesOut:Number = 0;
+		
 		public static function getInstance():CoolItModelLocator {
 			if(modelLocator == null) {
 				modelLocator = new CoolItModelLocator();
