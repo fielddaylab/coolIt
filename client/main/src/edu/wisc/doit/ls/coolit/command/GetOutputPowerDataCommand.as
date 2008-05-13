@@ -30,36 +30,21 @@ package edu.wisc.doit.ls.coolit.command {
 			model = getOutputPowerEvent.modelLocator;
 			coolerModel = model.coolerModel;
 			
+			var cryoLibModel:CryoLibModel = model.cryoLibModel;
 			var coolerName:String = getOutputPowerEvent.coolerName;
 			var powerFactor:Number = getOutputPowerEvent.powerFactor;
 			
-			model.servicesOut++;
-			/*
-			 //reset cooler model
-			 coolerModel.currentData.removeAll();
-			 
-			 var delegate:CoolItDelegate = new CoolItDelegate(this);
-			 
-			 //do a 300 count iteration calling get date method each time
-			 for(var i:Number = 0; i<301; i++) {
-			 delegate.getOutputPowerData(coolerName, powerFactor, i);
-			 }
-			 */
-			result(new Object());
-		}
-		
-		public function result(event_p:Object):void {
-			model.servicesOut--;
-			//DUMMY START
-			//do a 300 count iteration calling get date method each time
 			coolerModel.currentData.removeAll();
 			for(var i:Number = 0; i<301; i++) {
-				var newDPXML:XML =  <DataPoint><temp>{i}</temp><data>{Math.round(i * 2)}</data></DataPoint>;
+				var curTemp:Number = i;
+				var curData:Number = cryoLibModel.calculateOutputPower(curTemp, powerFactor, coolerModel.selected);
+				var newDPXML:XML =  <DataPoint><temp>{curTemp}</temp><data>{curData}</data></DataPoint>;
 				var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
 				coolerModel.currentData.addItem(newDataPoint);
 			}
-			//DUMMY END
 		}
+		
+		public function result(event_p:Object):void {}
 		
 		public function fault(event_p:Object):void {
 			//log failure here
