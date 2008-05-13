@@ -82,7 +82,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onSliderChange(event_p:SliderEvent):void {
 			//dispatch get power data
 			//log.debug("{0} - onSliderChange called, calling dispatchGetPowerDataEvent", getQualifiedClassName(this) + ".onComplete");
-			dispatchGetPowerDataEvent();
+			//dispatchGetPowerDataEvent();
 			dispatchSetCooler();
 		}
 		
@@ -92,20 +92,20 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onPowerFactorUp(event_p:MouseEvent):void {
 			powerFactorDown = false;
-			dispatchGetPowerDataEvent();
+			//dispatchGetPowerDataEvent();
 			dispatchSetCooler();
 		}
 		
 		private function onPowerFactorMove(event_p:MouseEvent):void {
 			if(powerFactorDown) {
-				dispatchGetPowerDataEvent();
+				//dispatchGetPowerDataEvent();
 				dispatchSetCooler();
 			}
 		}
 		
 		private function onSettingChange(event_p:Event):void {
 			//dispatch get power data
-			dispatchGetPowerDataEvent();
+			//dispatchGetPowerDataEvent();
 			dispatchSetCooler();
 		}
 		
