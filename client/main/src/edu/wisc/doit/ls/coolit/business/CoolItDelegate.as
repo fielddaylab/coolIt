@@ -115,6 +115,14 @@ package edu.wisc.doit.ls.coolit.business {
 			var token:AsyncToken = service.SetProblem(name_p);
 			token.addResponder(responder);
 		}
+		
+		/**
+		 * Get specific power data
+		 */
+		public function getSpecificPowerData():void {
+			var token:AsyncToken = service.GetSpecificPowerData();
+			token.addResponder(responder);
+		}
 	}
 	
 }

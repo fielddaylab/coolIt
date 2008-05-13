@@ -16,6 +16,7 @@
 		<mx:operation concurrency="multiple" name="SetStrut" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="Run" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="SetProblem" resultFormat="e4x"/>
+		<mx:operation concurrency="multiple" name="GetSpecificPowerData" resultFormat="e4x"/>
 	</mx:WebService>
 		
 </cairngorm:ServiceLocator>
