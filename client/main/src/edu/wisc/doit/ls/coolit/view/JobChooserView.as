@@ -54,6 +54,10 @@ package edu.wisc.doit.ls.coolit.view {
 			
 			startJob.addEventListener(MouseEvent.CLICK, onStartJobClick);
 			jobList.addEventListener(Event.CHANGE, onJobListChange);
+			
+			var getPowerData:GetSpecificPowerDataEvent = new GetSpecificPowerDataEvent();
+			getPowerData.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getPowerData);
 		}
 		
 		private function onJobListChange(event_p:Event):void {
