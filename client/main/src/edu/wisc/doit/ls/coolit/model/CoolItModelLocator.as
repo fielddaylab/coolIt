@@ -21,6 +21,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var coolerModel:CoolerModel;
 		public var materialModel:MaterialModel;
 		public var stateModel:StateModel;
+		public var cryoLibModel:CryoLibModel;
 		
 		public var servicesOut:Number = 0;
 		
@@ -38,6 +39,7 @@ package edu.wisc.doit.ls.coolit.model {
 			}
 			
 			stateModel = new StateModel();
+			cryoLibModel = new CryoLibModel();
 		}
 		
 		public function removeNamespaces(data_p:*):XML {
