@@ -40,7 +40,7 @@
 							verticalAlign="middle" horizontalAlign="center" />
 					</mx:Canvas>
 					
-					<mx:Box width="100%" height="100%" label="Sketch Pad" />
+					<view:SketchPad width="100%" height="100%" label="Sketch Pad" model="{model}" />
 				</mx:TabNavigator>
 				
 				
