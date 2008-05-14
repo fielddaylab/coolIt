@@ -188,7 +188,6 @@ package edu.wisc.doit.ls.coolit.view {
         }
 		
 		private function onVisUpdate(event_p:VisualizationEvent):void {
-			log.fatal("{0} - !!!!!!!onVisUpdate", getQualifiedClassName(this));
 			drawLines();
 		}
 		
