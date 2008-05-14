@@ -7,8 +7,12 @@ package edu.wisc.doit.ls.coolit.model {
 		public static var COMPONENT_STATE:String = "componentState";
 		public static var SKETCH_STATE:String = "sketchState";
 		
-		public var currentState:String;
+		public static var POWER_FACTOR:String = "powerFactorState";
+		public static var STRUT_LENGTH:String = "strutLengthState";
+		public static var STRUT_CROSS_SECTION:String = "strutCrossSectionState";
 		
+		public var currentState:String;
+		public var sketchState:String = POWER_FACTOR;
 		public var workAreaState:String = COMPONENT_STATE;
 		
 		public function StateModel() {
