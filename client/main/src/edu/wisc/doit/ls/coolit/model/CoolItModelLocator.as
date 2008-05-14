@@ -3,6 +3,7 @@ package edu.wisc.doit.ls.coolit.model {
 	
 	import edu.wisc.doit.ls.coolit.*;
 	import edu.wisc.doit.ls.coolit.model.*;
+	import edu.wisc.doit.ls.coolit.vo.*;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -16,6 +17,11 @@ package edu.wisc.doit.ls.coolit.model {
 		public var cost:Number;
 		public var stressLimit:Number;
 		public var isValidSolution:Boolean;
+		public var powerFactor:Number;
+		public var strutLength:Number;
+		public var crossSection:Number;
+		
+		public var sketchData:ArrayCollection;
 		
 		public var jobModel:JobModel;
 		public var coolerModel:CoolerModel;
@@ -40,6 +46,27 @@ package edu.wisc.doit.ls.coolit.model {
 			
 			stateModel = new StateModel();
 			cryoLibModel = new CryoLibModel();
+			sketchData = new ArrayCollection();
+		}
+		
+		public function updateSketchData():void {
+			if(stateModel.workAreaState == StateModel.SKETCH_STATE) {
+				switch (stateModel.sketchState) {
+					case StateModel.POWER_FACTOR:
+						var newDPXML:XML =  <DataPoint><temp>{powerFactor}</temp><data>{temperature}</data></DataPoint>;
+						var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
+						sketchData.addItem(newDataPoint);
+						break;
+					case StateModel.STRUT_LENGTH:
+						
+						break;
+					case StateModel.STRUT_CROSS_SECTION:
+						
+						break;
+					default:
+						break;
+				}
+			}
 		}
 		
 		public function removeNamespaces(data_p:*):XML {
