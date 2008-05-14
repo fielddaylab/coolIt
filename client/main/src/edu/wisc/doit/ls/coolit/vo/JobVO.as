@@ -1,10 +1,14 @@
 package edu.wisc.doit.ls.coolit.vo {
 	import com.adobe.cairngorm.vo.IValueObject;
 	
+	import mx.collections.ArrayCollection;
+	
 	public class JobVO implements IValueObject {
 		
 		private var core:XML;
-				
+		private var imageURLBase:String = "http://atswindev.doit.wisc.edu/CoolIt_Service/images/";
+		private var imageList:ArrayCollection;
+		
 		public function JobVO(core_p:XML) {
 			super();
 			core = core_p;
@@ -36,6 +40,29 @@ package edu.wisc.doit.ls.coolit.vo {
 		
 		public function get solved():Boolean { return (core.Solved.toLowerCase() == "true") ? true : false; };
 		public function set solved(solved_p:Boolean):void { /* nada */ };
+		
+		public function get images():ArrayCollection { 
+			if(!imageList) {
+				var voList:ArrayCollection = new ArrayCollection();
+				for each (var dataPoint:XML in core.Images.string) {
+					var imageURL:String = imageURLBase + dataPoint.toString();
+					voList.addItem(imageURL);
+				}
+					
+				imageList = voList;
+			}
+			
+			return imageList;
+			
+		}
+		public function set images(images_p:ArrayCollection):void { /* nada */ };
+		
+		public function getImageAt(index_p:Number):String {
+			var curImages:ArrayCollection = images;
+			var curURL:String = curImages.getItemAt(index_p) as String;
+			
+			return curURL;
+		}
 		
 		public function toString():String {
 			return name;

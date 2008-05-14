@@ -27,10 +27,16 @@
 			<!-- left stack -->
 			<mx:VBox width="60%" height="100%" styleName="noPadding">
 				<!-- image holder -->
-				<mx:Box width="100%" height="80%" backgroundColor="0x000000" backgroundAlpha="0.25"
-						verticalAlign="middle" horizontalAlign="center">
-					<mx:Label text="Main image here" fontWeight="bold" />
-				</mx:Box>
+				<mx:Canvas width="100%" height="80%" backgroundColor="0x000000" backgroundAlpha="0.25">
+					<mx:HBox x="5" y="5">
+						<mx:Button id="firstImage" label="1" selected="true" 
+								click="{secondImage.selected=false;firstImage.selected=true;jobImage.source=jobModel.selected.getImageAt(0)}" />
+						<mx:Button id="secondImage" label="2"
+								click="{secondImage.selected=true;firstImage.selected=false;jobImage.source=jobModel.selected.getImageAt(1)}"/>
+					</mx:HBox>
+					<mx:Image id="jobImage" source="{jobModel.selected.getImageAt(0)}" width="100%" height="100%"
+						verticalAlign="middle" horizontalAlign="center" />
+				</mx:Canvas>
 				
 				<!-- details box -->
 				<mx:HBox width="100%" height="20%" horizontalAlign="left">
