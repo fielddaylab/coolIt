@@ -63,6 +63,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var xGraphic:Class;
 		[Bindable] public var yAxisLabelWidth:Number;
 		[Bindable] public var xAxisLabelHeight:Number;
+		[Bindable] public var connectDataPoints:Boolean = true;
 		
 		private var _dataProvider:ArrayCollection;
 		
@@ -188,7 +189,10 @@ package edu.wisc.doit.ls.coolit.view {
         }
 		
 		private function onVisUpdate(event_p:VisualizationEvent):void {
-			drawLines();
+			if(connectDataPoints) {
+				drawLines();
+			}
+			
 		}
 		
 		private function drawLines():void {
