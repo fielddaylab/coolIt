@@ -30,6 +30,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var coolerList:ComboBox;
 		[Bindable] public var coolerPowerFactor:HSlider;
 		
+		private var buttonGroup:RadioButtonGroup;
+		
 		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var model:ArrayCollection;
 		[Bindable] public var coolerData:ArrayCollection;
@@ -70,9 +72,11 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
+			buttonGroup = inputPower.group;
+			
 			coolerList.addEventListener(Event.CHANGE, onCoolerChange);
-			inputPower.addEventListener(Event.CHANGE, onSettingChange);
-			outputPower.addEventListener(Event.CHANGE, onSettingChange);
+			//buttonGroup.addEventListener(MouseEvent.MOUSE_UP, onSettingChange);
+			buttonGroup.addEventListener(ItemClickEvent.ITEM_CLICK, onRadioGroupClick);
 			coolerPowerFactor.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_DOWN, onPowerFactorDown);
 			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_UP, onPowerFactorUp);
@@ -103,9 +107,14 @@ package edu.wisc.doit.ls.coolit.view {
 			}
 		}
 		
-		private function onSettingChange(event_p:Event):void {
+		private function onSettingChange(event_p:MouseEvent):void {
 			//dispatch get power data
 			//dispatchGetPowerDataEvent();
+			dispatchSetCooler();
+		}
+		
+		private function onRadioGroupClick(event_p:ItemClickEvent):void {
+			//log.fatal("{0} - inputPower.selected: " + inputPower.selected + " outputPower.selected: " + outputPower.selected, getQualifiedClassName(this) + ".onComplete");
 			dispatchSetCooler();
 		}
 		
