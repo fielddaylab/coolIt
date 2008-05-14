@@ -30,6 +30,56 @@
 		2B6719170DC110A9004B8F9E /* StateModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = StateModel.as; sourceTree = "<group>"; };
 		2B6719310DC119CD004B8F9E /* JobScreen.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = JobScreen.mxml; sourceTree = "<group>"; };
 		2B6719320DC11A99004B8F9E /* JobScreenView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = JobScreenView.as; sourceTree = "<group>"; };
+		2B671A1F0DC228B0004B8F9E /* closed_arrow.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = closed_arrow.swf; sourceTree = "<group>"; };
+		2B671A200DC228B0004B8F9E /* open_arrow.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = open_arrow.swf; sourceTree = "<group>"; };
+		2B671A210DC228B0004B8F9E /* temp_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_image.png; sourceTree = "<group>"; };
+		2B671AA40DC240F9004B8F9E /* ViewJobListEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ViewJobListEvent.as; sourceTree = "<group>"; };
+		2B671AA50DC2412D004B8F9E /* ViewJobListCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ViewJobListCommand.as; sourceTree = "<group>"; };
+		2B671ABF0DC243CF004B8F9E /* CoolerModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolerModel.as; sourceTree = "<group>"; };
+		2B671ACA0DC24462004B8F9E /* get_coolers_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_coolers_doc.xml; sourceTree = "<group>"; };
+		2B671AF40DC2472E004B8F9E /* CoolerVO.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolerVO.as; sourceTree = "<group>"; };
+		2B671AF50DC2494A004B8F9E /* DataPointVO.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = DataPointVO.as; sourceTree = "<group>"; };
+		2B671AF60DC24C32004B8F9E /* get_materials_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_materials_doc.xml; sourceTree = "<group>"; };
+		2B671AF70DC2503B004B8F9E /* MaterialModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = MaterialModel.as; sourceTree = "<group>"; };
+		2B671AF80DC251A4004B8F9E /* MaterialVO.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = MaterialVO.as; sourceTree = "<group>"; };
+		2B671AF90DC25374004B8F9E /* GetCoolerListEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetCoolerListEvent.as; sourceTree = "<group>"; };
+		2B671AFA0DC25408004B8F9E /* GetCoolerListCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetCoolerListCommand.as; sourceTree = "<group>"; };
+		2B671B2E0DC25908004B8F9E /* GetMaterialListEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetMaterialListEvent.as; sourceTree = "<group>"; };
+		2B671B2F0DC2593C004B8F9E /* GetMaterialListCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetMaterialListCommand.as; sourceTree = "<group>"; };
+		2B671B660DC25DB8004B8F9E /* CoolerPicker.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = CoolerPicker.mxml; sourceTree = "<group>"; };
+		2B671B670DC25E15004B8F9E /* CoolerPickerView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CoolerPickerView.as; sourceTree = "<group>"; };
+		2BA635270DCB9BCB00B63E99 /* SetCoolerEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetCoolerEvent.as; sourceTree = "<group>"; };
+		2BA635280DCB9C2E00B63E99 /* SetCoolerCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetCoolerCommand.as; sourceTree = "<group>"; };
+		2BA635290DCBA32700B63E99 /* StrutPicker.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = StrutPicker.mxml; sourceTree = "<group>"; };
+		2BA6352A0DCBA44100B63E99 /* StrutPickerView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = StrutPickerView.as; sourceTree = "<group>"; };
+		2BA635590DCF4FAF00B63E99 /* GetInputPowerDataEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetInputPowerDataEvent.as; sourceTree = "<group>"; };
+		2BA6355A0DCF504100B63E99 /* GetInputPowerDataCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetInputPowerDataCommand.as; sourceTree = "<group>"; };
+		2BA635DC0DCF5CD900B63E99 /* get_input_power_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_input_power_doc.xml; sourceTree = "<group>"; };
+		2BA636EC0DCF934100B63E99 /* GetOutputPowerDataEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetOutputPowerDataEvent.as; sourceTree = "<group>"; };
+		2BA636ED0DCF93F100B63E99 /* GetOutputPowerDataCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetOutputPowerDataCommand.as; sourceTree = "<group>"; };
+		2BA637400DCFA1C400B63E99 /* SetStrutEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetStrutEvent.as; sourceTree = "<group>"; };
+		2BA637410DCFA22C00B63E99 /* SetStrutCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetStrutCommand.as; sourceTree = "<group>"; };
+		2BA638510DD09E8000B63E99 /* RunSimulationEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = RunSimulationEvent.as; sourceTree = "<group>"; };
+		2BA638520DD0A0FB00B63E99 /* RunSimulationCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = RunSimulationCommand.as; sourceTree = "<group>"; };
+		2BA638660DD0A23800B63E99 /* run_sim_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = run_sim_doc.xml; sourceTree = "<group>"; };
+		2BA638930DD0A6B100B63E99 /* CommitSolutionEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CommitSolutionEvent.as; sourceTree = "<group>"; };
+		2BA638940DD0A6E000B63E99 /* CommitSolutionCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CommitSolutionCommand.as; sourceTree = "<group>"; };
+		2BA639000DD0B5F600B63E99 /* Graph.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = Graph.mxml; sourceTree = "<group>"; };
+		2BA639010DD0B63A00B63E99 /* GraphView.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GraphView.as; sourceTree = "<group>"; };
+		2BA63A2E0DD0E2F200B63E99 /* input_cooling_power.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = input_cooling_power.swf; sourceTree = "<group>"; };
+		2BA63A2F0DD0E2F300B63E99 /* output_cooling_power.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = output_cooling_power.swf; sourceTree = "<group>"; };
+		2BA63A300DD0E2F300B63E99 /* temp_text.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = temp_text.swf; sourceTree = "<group>"; };
+		2BA63A310DD0E2F300B63E99 /* thermal_text.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thermal_text.swf; sourceTree = "<group>"; };
+		2BA63A3A0DD0E44F00B63E99 /* input_cooling_power.fla */ = {isa = PBXFileReference; lastKnownFileType = file; path = input_cooling_power.fla; sourceTree = "<group>"; };
+		2BA63A3B0DD0E44F00B63E99 /* output_cooling_power.fla */ = {isa = PBXFileReference; lastKnownFileType = file; path = output_cooling_power.fla; sourceTree = "<group>"; };
+		2BA63A3C0DD0E44F00B63E99 /* temp_text.fla */ = {isa = PBXFileReference; lastKnownFileType = file; path = temp_text.fla; sourceTree = "<group>"; };
+		2BA63A3D0DD0E44F00B63E99 /* thermal_text.fla */ = {isa = PBXFileReference; lastKnownFileType = file; path = thermal_text.fla; sourceTree = "<group>"; };
+		2BA63CF90DD4E5B500B63E99 /* SetProblemEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetProblemEvent.as; sourceTree = "<group>"; };
+		2BA63CFA0DD4E61000B63E99 /* SetProblemCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = SetProblemCommand.as; sourceTree = "<group>"; };
+		2BA63E7B0DDA183B00B63E99 /* CryoLibModel.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = CryoLibModel.as; sourceTree = "<group>"; };
+		2BA63E7C0DDA29D500B63E99 /* GetSpecificPowerDataEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetSpecificPowerDataEvent.as; sourceTree = "<group>"; };
+		2BA63E7D0DDA2A3900B63E99 /* GetSpecificPowerDataCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = GetSpecificPowerDataCommand.as; sourceTree = "<group>"; };
+		2BA63EB00DDA2C9900B63E99 /* get_power_data_doc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = get_power_data_doc.xml; sourceTree = "<group>"; };
 		2BAC79350B04CC3600207774 /* ApplicationClass.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ApplicationClass.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +134,17 @@
 			children = (
 				2B6715850DBFC943004B8F9E /* ChooseJobCommand.as */,
 				2B6716E50DC0CD52004B8F9E /* GetJobListCommand.as */,
+				2B671AA50DC2412D004B8F9E /* ViewJobListCommand.as */,
+				2B671AFA0DC25408004B8F9E /* GetCoolerListCommand.as */,
+				2B671B2F0DC2593C004B8F9E /* GetMaterialListCommand.as */,
+				2BA635280DCB9C2E00B63E99 /* SetCoolerCommand.as */,
+				2BA6355A0DCF504100B63E99 /* GetInputPowerDataCommand.as */,
+				2BA636ED0DCF93F100B63E99 /* GetOutputPowerDataCommand.as */,
+				2BA637410DCFA22C00B63E99 /* SetStrutCommand.as */,
+				2BA638520DD0A0FB00B63E99 /* RunSimulationCommand.as */,
+				2BA638940DD0A6E000B63E99 /* CommitSolutionCommand.as */,
+				2BA63CFA0DD4E61000B63E99 /* SetProblemCommand.as */,
+				2BA63E7D0DDA2A3900B63E99 /* GetSpecificPowerDataCommand.as */,
 			);
 			path = command;
 			sourceTree = "<group>";
@@ -101,6 +162,17 @@
 			children = (
 				2B6715890DBFC943004B8F9E /* ChooseJobEvent.as */,
 				2B6716E40DC0CCFE004B8F9E /* GetJobListEvent.as */,
+				2B671AA40DC240F9004B8F9E /* ViewJobListEvent.as */,
+				2B671AF90DC25374004B8F9E /* GetCoolerListEvent.as */,
+				2B671B2E0DC25908004B8F9E /* GetMaterialListEvent.as */,
+				2BA635270DCB9BCB00B63E99 /* SetCoolerEvent.as */,
+				2BA635590DCF4FAF00B63E99 /* GetInputPowerDataEvent.as */,
+				2BA636EC0DCF934100B63E99 /* GetOutputPowerDataEvent.as */,
+				2BA637400DCFA1C400B63E99 /* SetStrutEvent.as */,
+				2BA638510DD09E8000B63E99 /* RunSimulationEvent.as */,
+				2BA638930DD0A6B100B63E99 /* CommitSolutionEvent.as */,
+				2BA63CF90DD4E5B500B63E99 /* SetProblemEvent.as */,
+				2BA63E7C0DDA29D500B63E99 /* GetSpecificPowerDataEvent.as */,
 			);
 			path = event;
 			sourceTree = "<group>";
@@ -110,7 +182,10 @@
 			children = (
 				2B67158C0DBFC943004B8F9E /* CoolItModelLocator.as */,
 				2B6717A20DC0DF73004B8F9E /* JobModel.as */,
+				2B671ABF0DC243CF004B8F9E /* CoolerModel.as */,
+				2B671AF70DC2503B004B8F9E /* MaterialModel.as */,
 				2B6719170DC110A9004B8F9E /* StateModel.as */,
+				2BA63E7B0DDA183B00B63E99 /* CryoLibModel.as */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -122,6 +197,12 @@
 				2B67158F0DBFC943004B8F9E /* JobChooserView.as */,
 				2B6719310DC119CD004B8F9E /* JobScreen.mxml */,
 				2B6719320DC11A99004B8F9E /* JobScreenView.as */,
+				2B671B660DC25DB8004B8F9E /* CoolerPicker.mxml */,
+				2B671B670DC25E15004B8F9E /* CoolerPickerView.as */,
+				2BA635290DCBA32700B63E99 /* StrutPicker.mxml */,
+				2BA6352A0DCBA44100B63E99 /* StrutPickerView.as */,
+				2BA639000DD0B5F600B63E99 /* Graph.mxml */,
+				2BA639010DD0B63A00B63E99 /* GraphView.as */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -130,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				2B6715910DBFC943004B8F9E /* JobVO.as */,
+				2B671AF40DC2472E004B8F9E /* CoolerVO.as */,
+				2B671AF80DC251A4004B8F9E /* MaterialVO.as */,
+				2B671AF50DC2494A004B8F9E /* DataPointVO.as */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -138,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				2B6715FD0DBFD71F004B8F9E /* style.css */,
+				2B671A1E0DC228B0004B8F9E /* images */,
 			);
 			path = skin;
 			sourceTree = "<group>";
@@ -146,14 +231,45 @@
 			isa = PBXGroup;
 			children = (
 				2B67176D0DC0DBA8004B8F9E /* get_problems_doc.xml */,
+				2B671ACA0DC24462004B8F9E /* get_coolers_doc.xml */,
+				2B671AF60DC24C32004B8F9E /* get_materials_doc.xml */,
+				2BA635DC0DCF5CD900B63E99 /* get_input_power_doc.xml */,
+				2BA638660DD0A23800B63E99 /* run_sim_doc.xml */,
+				2BA63EB00DDA2C9900B63E99 /* get_power_data_doc.xml */,
 			);
 			path = docs;
+			sourceTree = "<group>";
+		};
+		2B671A1E0DC228B0004B8F9E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				2B671A1F0DC228B0004B8F9E /* closed_arrow.swf */,
+				2B671A200DC228B0004B8F9E /* open_arrow.swf */,
+				2B671A210DC228B0004B8F9E /* temp_image.png */,
+				2BA63A2E0DD0E2F200B63E99 /* input_cooling_power.swf */,
+				2BA63A2F0DD0E2F300B63E99 /* output_cooling_power.swf */,
+				2BA63A300DD0E2F300B63E99 /* temp_text.swf */,
+				2BA63A310DD0E2F300B63E99 /* thermal_text.swf */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		2BA63A390DD0E44F00B63E99 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				2BA63A3A0DD0E44F00B63E99 /* input_cooling_power.fla */,
+				2BA63A3B0DD0E44F00B63E99 /* output_cooling_power.fla */,
+				2BA63A3C0DD0E44F00B63E99 /* temp_text.fla */,
+				2BA63A3D0DD0E44F00B63E99 /* thermal_text.fla */,
+			);
+			path = graphics;
 			sourceTree = "<group>";
 		};
 		88230FFA05D9926E00FE8D22 = {
 			isa = PBXGroup;
 			children = (
 				2B4EF0B70A6D37A600A6532F /* build.xml */,
+				2BA63A390DD0E44F00B63E99 /* graphics */,
 				2B67176C0DC0DB98004B8F9E /* docs */,
 				2B6715FC0DBFD71F004B8F9E /* skin */,
 				2B4EF0B80A6D37A600A6532F /* lib */,
