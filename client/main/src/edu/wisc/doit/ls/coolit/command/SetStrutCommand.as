@@ -45,6 +45,9 @@ package edu.wisc.doit.ls.coolit.command {
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
 			
+			model.strutLength = length;
+			model.crossSection = crossSection;
+						
 			//also, now that the strut has been changed, do run sim too
 			dispatchRunSimEvent();
 		}

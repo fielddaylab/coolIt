@@ -42,6 +42,7 @@ package edu.wisc.doit.ls.coolit.command {
 			model.stressLimit = parseFloat(cleanedXML.RunResult.stressLimit);
 			model.isValidSolution = (cleanedXML.RunResult.isValidSolution.toString().toLowerCase() == "true") ? true : false;
 			
+			model.updateSketchData();
 			//log.fatal("{0} - model.temperature: " + model.temperature, getQualifiedClassName(this) + ".fault");
 		}
 		

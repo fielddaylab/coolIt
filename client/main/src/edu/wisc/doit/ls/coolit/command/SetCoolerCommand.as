@@ -47,6 +47,8 @@ package edu.wisc.doit.ls.coolit.command {
 			
 			model.servicesOut--;
 			
+			model.powerFactor = powerFactor;
+			
 			if(powerSetting == CoolerModel.INPUT_POWER) {
 				dispatchEventGetInputPowerData();
 			} else {
