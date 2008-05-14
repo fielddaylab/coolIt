@@ -17,6 +17,10 @@ package edu.wisc.doit.ls.coolit.view {
 	
 	import mx.collections.ArrayCollection;
 	
+	import mx.formatters.NumberFormatter;
+	
+	import mx.controls.dataGridClasses.DataGridColumn;
+	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
 	 *
@@ -29,6 +33,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var outputPower:RadioButton;
 		[Bindable] public var coolerList:ComboBox;
 		[Bindable] public var coolerPowerFactor:HSlider;
+		[Bindable] public var decFormatter:NumberFormatter;
+		public var graphView:Graph;
 		
 		private var buttonGroup:RadioButtonGroup;
 		
@@ -38,6 +44,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var coolerModel:CoolerModel;
 		
 		private var powerFactorDown:Boolean = false;
+		private var _selected:Boolean = false;
 		
 		private var log:ILogger;
 		
@@ -62,6 +69,21 @@ package edu.wisc.doit.ls.coolit.view {
 			setCoolerEvent.powerFactor = coolerPowerFactor.value;
 			setCoolerEvent.powerSetting = (inputPower.selected) ? CoolerModel.INPUT_POWER : CoolerModel.OUTPUT_POWER;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setCoolerEvent);
+		}
+		
+		public function dataLabelFormat(item_p:Object, column_p:DataGridColumn):String {
+			//decFormatter
+			return decFormatter.format(item_p.data as Number);
+		}
+		
+		[Bindable] public function get selected():Boolean {
+			return _selected;
+		}
+		public function set selected(selected_p:Boolean):void {
+			if(selected_p) {
+				graphView.refresh();
+			}
+			_selected = selected_p;
 		}
 		
 		/*
@@ -115,6 +137,11 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onRadioGroupClick(event_p:ItemClickEvent):void {
 			//log.fatal("{0} - inputPower.selected: " + inputPower.selected + " outputPower.selected: " + outputPower.selected, getQualifiedClassName(this) + ".onComplete");
+			if(inputPower.selected) {
+				graphView.yGraphic = AssetEmbedLocator.inputText;
+			} else {
+				graphView.yGraphic = AssetEmbedLocator.outputText;
+			}
 			dispatchSetCooler();
 		}
 		

@@ -80,7 +80,8 @@
 				<mx:Box label="Coolers" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}">
 						<view:CoolerPicker id="coolerPicker" width="100%" height="100%" model="{coolerModel.coolers}" 
-											coolerData="{coolerModel.currentData}" modelLocator="{model}" coolerModel="{coolerModel}" />
+											coolerData="{coolerModel.currentData}" modelLocator="{model}" coolerModel="{coolerModel}"
+											selected="{(pickerAccordion.selectedIndex == 1) ? true : false}" />
 				</mx:Box>
 				
 				<mx:Box label="Struts" styleName="jobBox" width="100%" height="100%"
