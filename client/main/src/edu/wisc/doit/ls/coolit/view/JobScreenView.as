@@ -1,6 +1,7 @@
 package edu.wisc.doit.ls.coolit.view {
     import mx.controls.*;
 	import mx.containers.VBox;
+	import mx.containers.TabNavigator;
 	import mx.events.*;
 	
 	import mx.logging.ILogger;
@@ -27,6 +28,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var coolerPicker:CoolerPicker;
 		public var strutPicker:StrutPicker;
 		public var commitJob:Button;
+		[Bindable] public var mainWorkArea:TabNavigator;
 		
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var jobModel:JobModel;
@@ -60,9 +62,18 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
+			mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
 			hasInit = true;
+		}
+		
+		private function onMainWorkAreaChange(event_p:IndexChangedEvent):void {
+			if(event_p.newIndex == 0) {
+				dispatchChangeWorkAreaState(StateModel.COMPONENT_STATE);
+			} else {
+				dispatchChangeWorkAreaState(StateModel.SKETCH_STATE);
+			}
 		}
 		
 		private function onCommitClick(event_p:MouseEvent):void {
@@ -112,6 +123,13 @@ package edu.wisc.doit.ls.coolit.view {
 			} else {
 				return AssetEmbedLocator.closedArrow;
 			}
+		}
+		
+		private function dispatchChangeWorkAreaState(stateName_p:String):void {
+			var changeWorkArea:ChangeWorkAreaStateEvent = new ChangeWorkAreaStateEvent();
+			changeWorkArea.modelLocator = model;
+			changeWorkArea.stateName = stateName_p;
+			CairngormEventDispatcher.getInstance().dispatchEvent(changeWorkArea);
 		}
 		
 	}
