@@ -62,7 +62,7 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
-			mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
+			//mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
 			hasInit = true;

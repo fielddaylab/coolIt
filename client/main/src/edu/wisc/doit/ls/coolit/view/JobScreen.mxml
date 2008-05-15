@@ -28,8 +28,8 @@
 			<mx:VBox width="60%" height="100%" styleName="noPadding">
 				<!-- image holder -->
 				
-				<mx:TabNavigator id="mainWorkArea" width="100%" height="80%" creationPolicy="all">
-					<mx:Canvas width="100%" height="100%" label="Component">
+				<!-- <mx:TabNavigator id="mainWorkArea" width="100%" height="80%" creationPolicy="all"> -->
+					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25">
 						<mx:HBox x="5" y="5">
 							<mx:Button id="firstImage" label="1" selected="true" 
 									click="{secondImage.selected=false;firstImage.selected=true;jobImage.source=jobModel.selected.getImageAt(0)}" />
@@ -40,8 +40,8 @@
 							verticalAlign="middle" horizontalAlign="center" />
 					</mx:Canvas>
 					
-					<view:SketchPad width="100%" height="100%" label="Sketch Pad" model="{model}" />
-				</mx:TabNavigator>
+					<!-- <view:SketchPad width="100%" height="100%" label="Sketch Pad" model="{model}" />
+				</mx:TabNavigator> -->
 				
 				
 				
