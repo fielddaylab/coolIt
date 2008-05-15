@@ -46,6 +46,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private var powerFactorDown:Boolean = false;
 		private var _selected:Boolean = false;
 		
+		private var sliderTimer:Timer;
+		
 		private var log:ILogger;
 		
 		/*
@@ -57,6 +59,9 @@ package edu.wisc.doit.ls.coolit.view {
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
 			log.debug("{0} - View instantiated", getQualifiedClassName(this));
+			
+			sliderTimer = new Timer(500, 1);
+            sliderTimer.addEventListener(TimerEvent.TIMER, onSliderCheck);
 			
 			addEventListener(FlexEvent.CREATION_COMPLETE, onComplete);
 		}
@@ -105,11 +110,17 @@ package edu.wisc.doit.ls.coolit.view {
 			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_MOVE, onPowerFactorMove);
 		}
 		
+		private function onSliderCheck(event_p:TimerEvent):void {
+			dispatchSetCooler();
+		}
+		
 		private function onSliderChange(event_p:SliderEvent):void {
 			//dispatch get power data
 			//log.debug("{0} - onSliderChange called, calling dispatchGetPowerDataEvent", getQualifiedClassName(this) + ".onComplete");
-			//dispatchGetPowerDataEvent();
-			dispatchSetCooler();
+			dispatchGetPowerDataEvent();
+			sliderTimer.reset();
+			sliderTimer.start();
+			//dispatchSetCooler();
 		}
 		
 		private function onPowerFactorDown(event_p:MouseEvent):void {
@@ -124,8 +135,10 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onPowerFactorMove(event_p:MouseEvent):void {
 			if(powerFactorDown) {
-				//dispatchGetPowerDataEvent();
-				dispatchSetCooler();
+				dispatchGetPowerDataEvent();
+				//dispatchSetCooler();
+				sliderTimer.reset();
+				sliderTimer.start();
 			}
 		}
 		
