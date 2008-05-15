@@ -27,6 +27,7 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(SetProblemEvent.EVENT_SET_PROBLEM, SetProblemCommand);
 			addCommand(GetSpecificPowerDataEvent.EVENT_GET_POWER, GetSpecificPowerDataCommand);
 			addCommand(ChangeWorkAreaStateEvent.EVENT_CHANGE_WORK_STATE, ChangeWorkAreaStateCommand);
+			addCommand(ProcessPowerFactorEvent.EVENT_PROCESS_POWER_FACTOR, ProcessPowerFactorCommand);
 		}	
 	}
 	
