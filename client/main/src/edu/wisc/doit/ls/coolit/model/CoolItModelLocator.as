@@ -20,6 +20,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var powerFactor:Number;
 		public var strutLength:Number;
 		public var crossSection:Number;
+		public var powerSetting:String;
 		
 		public var sketchData:ArrayCollection;
 		
@@ -30,6 +31,16 @@ package edu.wisc.doit.ls.coolit.model {
 		public var cryoLibModel:CryoLibModel;
 		
 		public var servicesOut:Number = 0;
+		
+		public var sketchCount:Number;
+		
+		
+		//power factor sketch pad parameters
+		private var powerFactorMax:Number = 1;
+		private var powerFactorMin:Number = 0.01;
+		private var powerFactorResolution:Number = 50;
+		private var powerFactorSpread:Number = powerFactorMax - powerFactorMin;
+		private var powerFactorUnit:Number = powerFactorSpread/powerFactorResolution;
 		
 		public static function getInstance():CoolItModelLocator {
 			if(modelLocator == null) {
