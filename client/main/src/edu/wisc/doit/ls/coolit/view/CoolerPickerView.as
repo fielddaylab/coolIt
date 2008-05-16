@@ -135,7 +135,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onPowerFactorMove(event_p:MouseEvent):void {
 			if(powerFactorDown) {
-				dispatchGetPowerDataEvent();
+				//dispatchGetPowerDataEvent();
 				//dispatchSetCooler();
 				sliderTimer.reset();
 				sliderTimer.start();
@@ -151,9 +151,9 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onRadioGroupClick(event_p:ItemClickEvent):void {
 			//log.fatal("{0} - inputPower.selected: " + inputPower.selected + " outputPower.selected: " + outputPower.selected, getQualifiedClassName(this) + ".onComplete");
 			if(inputPower.selected) {
-				graphView.yGraphic = AssetEmbedLocator.inputText;
+				graphView.yAxisLabel = "Input Cooling Power";
 			} else {
-				graphView.yGraphic = AssetEmbedLocator.outputText;
+				graphView.yAxisLabel = "Output Cooling Power";
 			}
 			dispatchSetCooler();
 		}
