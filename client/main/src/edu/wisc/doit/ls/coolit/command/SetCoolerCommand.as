@@ -44,6 +44,7 @@ package edu.wisc.doit.ls.coolit.command {
 			//var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			//model.materialModel = new MaterialModel(cleanedXML);
 			coolerModel.selected = cooler;
+			var cryoLibModel:CryoLibModel = model.cryoLibModel;
 			
 			model.servicesOut--;
 			
@@ -55,6 +56,30 @@ package edu.wisc.doit.ls.coolit.command {
 			} else {
 				dispatchEventGetOutputPowerData();
 			}
+			
+			
+			//determine input and output power max
+			var outputPowerMax:Number = cryoLibModel.calculateOutputPower(300, 1, coolerModel.selected);
+			coolerModel.outputPowerMax = outputPowerMax;
+			
+			var inputPowerMax:Number = 0;
+			//to determine input power max, we need to loop over power factor 1, with temperatures, find highest, then set that
+			for(var i:Number = 0; i<301; i++) {
+				var curTemp:Number = i;
+				var curData:Number = cryoLibModel.calculateInputPower(curTemp, 1, coolerModel.selected);
+				if(curData > inputPowerMax) {
+					inputPowerMax = curData;
+				}
+			}
+			//now set the highest
+			coolerModel.inputPowerMax = inputPowerMax;
+			log.fatal("{0} - inputPowerMax: " + inputPowerMax, getQualifiedClassName(this) + ".result");
+			if(powerSetting == CoolerModel.INPUT_POWER) {
+				coolerModel.currentPowerMax = coolerModel.inputPowerMax;
+			} else {
+				coolerModel.currentPowerMax = coolerModel.outputPowerMax;
+			}
+			
 			//also, now that the cooler has been changed, do run sim too
 			dispatchRunSimEvent();
 		}

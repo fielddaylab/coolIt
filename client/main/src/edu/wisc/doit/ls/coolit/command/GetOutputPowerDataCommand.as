@@ -34,14 +34,23 @@ package edu.wisc.doit.ls.coolit.command {
 			var coolerName:String = getOutputPowerEvent.coolerName;
 			var powerFactor:Number = getOutputPowerEvent.powerFactor;
 			
-			coolerModel.currentData.removeAll();
+			coolerModel.currentPowerMax = coolerModel.outputPowerMax;
+			//coolerModel.currentData.removeAll();
+			
+			var tempData:Array = new Array();
 			for(var i:Number = 0; i<301; i++) {
 				var curTemp:Number = i;
 				var curData:Number = cryoLibModel.calculateOutputPower(curTemp, powerFactor, coolerModel.selected);
-				var newDPXML:XML =  <DataPoint><temp>{curTemp}</temp><data>{curData}</data></DataPoint>;
-				var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
-				coolerModel.currentData.addItem(newDataPoint);
+				if(curData >= 0) {
+					var newDPXML:XML =  <DataPoint><temp>{curTemp}</temp><data>{curData}</data></DataPoint>;
+					var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
+					//coolerModel.currentData.addItem(newDataPoint);
+					tempData.push(newDataPoint);
+				}
 			}
+			
+			coolerModel.currentData  = new ArrayCollection(tempData);
+			coolerModel.currentData.refresh();
 		}
 		
 		public function result(event_p:Object):void {}
