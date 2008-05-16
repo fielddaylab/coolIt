@@ -23,6 +23,8 @@ package edu.wisc.doit.ls.coolit.view {
 	import edu.wisc.doit.ls.coolit.event.*;
 	import edu.wisc.doit.ls.coolit.vo.*;
 	
+	import mx.charts.HitData;
+	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
 	 *
@@ -33,10 +35,8 @@ package edu.wisc.doit.ls.coolit.view {
 		//MXML components
 		[Bindable] public var spriteCanvas:UIComponent;
 		[Bindable] public var lineCanvas:UIComponent;
-		
-		
 		public var decFormatter:NumberFormatter;
-		
+				
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var horizontalMaximum:Number;
 		[Bindable] public var verticalMaximum:Number;
@@ -90,5 +90,12 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onGraphDataChange(event_p:CollectionEvent):void {
 		}
 		
+		public function dataTipFunction(hitData_p:HitData):String {
+			var formattedX:String = decFormatter.format(hitData_p.item.temp);
+			var formattedY:String = decFormatter.format(hitData_p.item.data);
+			var dataTip:String = "(" + formattedX + "," + formattedY + ")";
+			
+			return dataTip;
+		}
 	}
 }

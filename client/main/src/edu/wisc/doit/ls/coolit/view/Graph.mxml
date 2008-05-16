@@ -3,7 +3,13 @@
 	xmlns:flash="flash.filters.*"
 	styleName="noPadding" verticalGap="0" horizontalGap="0">
 	
-	<mx:LineChart dataProvider="{dataProvider}" width="100%" height="100%">
+	<mx:NumberFormatter id="decFormatter" precision="2" 
+        decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="true"/>
+	
+	<mx:LineChart dataProvider="{dataProvider}" width="100%" height="100%" dataTipMode="multiple" showDataTips="true"
+					dataTipFunction="{dataTipFunction}">
 		<mx:horizontalAxis>
 				<mx:LinearAxis title="{xAxisLabel}" minimum="0" maximum="{horizontalMaximum}" />
 		</mx:horizontalAxis>
