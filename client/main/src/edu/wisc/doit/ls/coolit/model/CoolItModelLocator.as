@@ -64,7 +64,7 @@ package edu.wisc.doit.ls.coolit.model {
 			if(stateModel.workAreaState == StateModel.SKETCH_STATE) {
 				switch (stateModel.sketchState) {
 					case StateModel.POWER_FACTOR:
-						var newDPXML:XML =  <DataPoint><temp>{powerFactor}</temp><data>{temperature}</data></DataPoint>;
+						var newDPXML:XML =  <DataPoint><temp>{temperature}</temp><data>{powerFactor}</data></DataPoint>;
 						var newDataPoint:DataPointVO = new DataPointVO(newDPXML);
 						sketchData.addItem(newDataPoint);
 						break;
