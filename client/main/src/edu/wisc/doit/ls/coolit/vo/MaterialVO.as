@@ -43,6 +43,15 @@ package edu.wisc.doit.ls.coolit.vo {
 		}
 		public function set mp(mp_p:ArrayCollection):void { /* nada */ };
 		
+		public function getHighestDataValue():Number {
+			var arrayList:Array = mp.toArray();
+			arrayList.sortOn("data");
+			//now get last val
+			var maxValue:Number = arrayList[arrayList.length-1];
+			
+			return maxValue;
+		}
+		
 		public function toString():String {
 			return name;
 		}
