@@ -2,7 +2,7 @@
 <project name="DefaultProject" default="build" basedir=".">
 	<!-- global properties -->
 	<property name="project.root" value="${basedir}"/>
-	<property name="flexSDK" value="/Developer/SDKs/Flex" />
+	<property name="flexSDK" value="/Applications/Adobe Flex Builder 3/sdks/3.0.0" />
 	<property name="mxmlc" value="${flexSDK}/bin/mxmlc" />
 	<property name="mxmlc.jar" value="${flexSDK}/lib/mxmlc.jar" />
 	<property name="asdoc" value="${flexSDK}/bin/asdoc" />
