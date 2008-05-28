@@ -9,6 +9,8 @@ package {
 		[Embed(source="../skin/images/temp_text.swf")] public static var tempText:Class;
 		[Embed(source="../skin/images/output_cooling_power.swf")] public static var outputText:Class;
 		[Embed(source="../skin/images/input_cooling_power.swf")] public static var inputText:Class;
+		[Embed(source="../skin/images/splash.png")] public static var splashLogo:Class;
+		[Embed(source="../skin/images/gen_dude.jpg")] public static var genDude:Class;
 		
 		public function AssetEmbedLocator() {}
 		

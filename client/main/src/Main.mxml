@@ -8,6 +8,12 @@
 	
 	<coolit:states>
 		
+		<mx:State name="login" basedOn="">
+            <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
+				<view:Login id="loginView" model="{model}" />
+            </mx:AddChild>
+        </mx:State>
+		
 		<mx:State name="jobPicker" basedOn="">
             <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
 				<view:JobChooser id="jobPickerView" width="600" height="400" model="{model}" />
