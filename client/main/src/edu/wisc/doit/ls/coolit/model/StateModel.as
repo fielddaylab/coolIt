@@ -2,6 +2,7 @@ package edu.wisc.doit.ls.coolit.model {
 	
 	[Bindable]
 	public class StateModel {
+		public static var LOGIN_SCREEN:String = "login";
 		public static var JOB_PICKER:String = "jobPicker";
 		public static var JOB_SCREEN:String = "jobScreen";
 		public static var COMPONENT_STATE:String = "componentState";
@@ -16,7 +17,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var workAreaState:String = COMPONENT_STATE;
 		
 		public function StateModel() {
-			currentState = StateModel.JOB_PICKER;
+			currentState = StateModel.LOGIN_SCREEN;
 		}
 		
 	}
