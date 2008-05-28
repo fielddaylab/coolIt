@@ -5,11 +5,21 @@
 	
 	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" />
 	
-	<mx:HBox id="loginBox" verticalAlign="middle">
-		<mx:Label text="Account ID:" fontWeight="bold" />
-		<mx:TextInput id="accountId" />
-		<mx:Button id="login" label="Login" />
+	<mx:Panel id="loginBox" title="Login" layout="horizontal">
+		<mx:HBox id="loginHolder">
+			<mx:Label text="Account ID:" />
+			<mx:TextInput id="accountId" />
+			<mx:Button id="login" label="Login" />
+		</mx:HBox>
+		
+		<mx:HBox id="introHolder" visible="false" height="0" width="0">
+			<mx:Text text="{AssetEmbedLocator.greekText1}" width="100%" height="100%" fontSize="13" textAlign="left" />
+			<mx:Image source="{AssetEmbedLocator.genDude}" />
+		</mx:HBox>
+	</mx:Panel>
+	<mx:HBox width="{loginBox.width}" paddingTop="5">
+		<mx:Spacer width="100%" />
+		<mx:Button id="continueGame" label="Continue" visible="false" />
 	</mx:HBox>
-	
 	
 </view:LoginView>

@@ -28,10 +28,12 @@ package edu.wisc.doit.ls.coolit.view {
 		public var login:Button;
 		public var accountId:TextInput;
 		public var splashLogo:Image;
-		public var loginBox:HBox;
+		public var loginHolder:HBox;
+		public var introHolder:HBox;
+		public var continueGame:Button;
+		[Bindable] public var loginBox:Panel;
 		
-		[Bindable]
-		public var model:CoolItModelLocator;
+		[Bindable] public var model:CoolItModelLocator;
 		
 		private var log:ILogger;
 		
@@ -57,6 +59,7 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
 			login.addEventListener(MouseEvent.CLICK, onLoginClick);
+			continueGame.addEventListener(MouseEvent.CLICK, onContinueClick);
 		}
 		
 		/*
@@ -65,8 +68,24 @@ package edu.wisc.doit.ls.coolit.view {
 		 * @param	event_p	MouseEvent
 		 */
 		private function onLoginClick(event_p:MouseEvent):void {
-			loginBox.visible = false;
-			Tweener.addTween(splashLogo, {alpha:0.0, time:0.5, transition:"linear", onComplete:dispatchLoginEvent});
+			//loginBox.visible = false;
+			//Tweener.addTween(splashLogo, {alpha:0.0, time:0.5, transition:"linear", onComplete:dispatchLoginEvent});
+			//loginHolder.visible = false;
+			//loginHolder.height = 0;
+			Tweener.addTween(loginBox, {width:splashLogo.width - 50, height:250, time:0.25, transition:"linear", onComplete:showIntro});
+			loginBox.removeChild(loginHolder);
+		}
+		
+		private function showIntro():void {
+			introHolder.visible = true;
+			introHolder.percentWidth = 100;
+			introHolder.percentHeight = 100;
+			loginBox.title = "Intro";
+			continueGame.visible = true;
+		}
+		
+		private function onContinueClick(event_p:MouseEvent):void {
+			dispatchLoginEvent();
 		}
 		
 		private function dispatchLoginEvent():void {
