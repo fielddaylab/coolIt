@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:LoginView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flash="flash.filters.*"
+	horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" />
+	
+	<mx:HBox id="loginBox" verticalAlign="middle">
+		<mx:Label text="Account ID:" fontWeight="bold" />
+		<mx:TextInput id="accountId" />
+		<mx:Button id="login" label="Login" />
+	</mx:HBox>
+	
+	
+</view:LoginView>
