@@ -8,23 +8,30 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true"/>
 	
-	<mx:LineChart dataProvider="{dataProvider}" width="100%" height="100%" dataTipMode="multiple" showDataTips="true"
+	<!-- y axis and line chart in hbox -->
+	<mx:HBox width="100%" height="100%" verticalAlign="middle">
+		<mx:Image id="yGraphic" source="{yAxisGraphic}" />
+		<mx:LineChart dataProvider="{dataProvider}" width="100%" height="100%" dataTipMode="multiple" showDataTips="true"
 					dataTipFunction="{dataTipFunction}">
-		<mx:horizontalAxis>
-				<mx:LinearAxis title="{xAxisLabel}" minimum="0" maximum="{horizontalMaximum}" />
-		</mx:horizontalAxis>
-		
-		<mx:verticalAxis>
-			<mx:LinearAxis title="{yAxisLabel}" minimum="0" maximum="{verticalMaximum}"/>
-		</mx:verticalAxis>
-		
-		<mx:series>
-			<mx:LineSeries displayName="Data" yField="data">
-				<mx:lineStroke>
-					<mx:Stroke color="0x415D85" weight="2" alpha="0.6" />
-				</mx:lineStroke>
-			</mx:LineSeries>
-		</mx:series>
-	</mx:LineChart>
+			<mx:horizontalAxis>
+					<mx:LinearAxis minimum="0" maximum="{horizontalMaximum}" />
+			</mx:horizontalAxis>
+			
+			<mx:verticalAxis>
+				<mx:LinearAxis minimum="0" maximum="{verticalMaximum}"/>
+			</mx:verticalAxis>
+			
+			<mx:series>
+				<mx:LineSeries displayName="Data" yField="data">
+					<mx:lineStroke>
+						<mx:Stroke color="0x415D85" weight="2" alpha="0.6" />
+					</mx:lineStroke>
+				</mx:LineSeries>
+			</mx:series>
+		</mx:LineChart>
+	</mx:HBox>
+	<mx:HBox width="100%" horizontalAlign="center" paddingBottom="5">
+		<mx:Image id="xGraphic" source="{xAxisGraphic}" />
+	</mx:HBox>
 	
 </view:GraphView>

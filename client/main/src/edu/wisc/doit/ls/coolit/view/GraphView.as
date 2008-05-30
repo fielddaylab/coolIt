@@ -42,6 +42,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var verticalMaximum:Number;
 		[Bindable] public var yAxisLabel:String = "y";
 		[Bindable] public var xAxisLabel:String = "Temp (Deg K)";
+		[Bindable] public var yAxisGraphic:*;
+		[Bindable] public var xAxisGraphic:*;
 		
 		private var _dataProvider:ArrayCollection;
 		

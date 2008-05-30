@@ -34,7 +34,7 @@
 	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
 		
 		<view:Graph id="graphView" dataProvider="{coolerData}" width="100%" height="100%" label="Graph"
-					yAxisLabel="Output Cooling Power" xAxisLabel="Temp (Deg K)" verticalMaximum="{coolerModel.currentPowerMax}" horizontalMaximum="300" />
+					yAxisGraphic="{AssetEmbedLocator.outputText}" xAxisGraphic="{AssetEmbedLocator.tempText}" verticalMaximum="{coolerModel.currentPowerMax}" horizontalMaximum="300" />
 		
 		<!-- data table -->
 		<mx:Box width="100%" height="100%" styleName="noPadding" label="Table">

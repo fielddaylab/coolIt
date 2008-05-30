@@ -151,9 +151,9 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onRadioGroupClick(event_p:ItemClickEvent):void {
 			//log.fatal("{0} - inputPower.selected: " + inputPower.selected + " outputPower.selected: " + outputPower.selected, getQualifiedClassName(this) + ".onComplete");
 			if(inputPower.selected) {
-				graphView.yAxisLabel = "Input Cooling Power";
+				graphView.yAxisGraphic = AssetEmbedLocator.inputText;
 			} else {
-				graphView.yAxisLabel = "Output Cooling Power";
+				graphView.yAxisGraphic = AssetEmbedLocator.outputText;
 			}
 			dispatchSetCooler();
 		}
