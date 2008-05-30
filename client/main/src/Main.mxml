@@ -16,7 +16,7 @@
 		
 		<mx:State name="jobPicker" basedOn="">
             <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
-				<view:JobChooser id="jobPickerView" width="800" height="600" model="{model}" />
+				<view:JobChooser id="jobPickerView" width="800" height="525" model="{model}" />
             </mx:AddChild>
         </mx:State>
 		
