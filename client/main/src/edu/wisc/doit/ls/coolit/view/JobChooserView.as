@@ -1,6 +1,6 @@
 package edu.wisc.doit.ls.coolit.view {
     import mx.controls.*;
-	import mx.containers.VBox;
+	import mx.containers.HBox;
 	import mx.events.*;
 	
 	import mx.logging.ILogger;
@@ -20,17 +20,19 @@ package edu.wisc.doit.ls.coolit.view {
 	 *
 	 *  @author Ben Longoria
 	 */
-	public class JobChooserView extends VBox {		
+	public class JobChooserView extends HBox {		
 		
 		//MXML components
 		public var startJob:Button;
-		[Bindable] public var jobList:List;
+		[Bindable] public var jobList:DataGrid;
 		
 		[Bindable]
 		public var model:CoolItModelLocator;
+		public var tempRequirements:String = "<br />Temp: --<br />Weight: --<br />Input: --<br />Cost: --<br />";
 		
 		private var log:ILogger;
-				
+		
+		
 		/*
 		 * Constructor
 		 */
@@ -58,6 +60,10 @@ package edu.wisc.doit.ls.coolit.view {
 			var getPowerData:GetSpecificPowerDataEvent = new GetSpecificPowerDataEvent();
 			getPowerData.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(getPowerData);
+			
+			if(model.jobModel.selected) {
+				jobList.selectedItem = model.jobModel.selected;
+			}
 		}
 		
 		private function onJobListChange(event_p:Event):void {

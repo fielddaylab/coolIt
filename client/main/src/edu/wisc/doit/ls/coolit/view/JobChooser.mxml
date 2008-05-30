@@ -1,28 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view:JobChooserView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:flash="flash.filters.*"
-	horizontalAlign="center" verticalAlign="middle">
+	horizontalAlign="center">
 	
-	<mx:Panel id="jobPanel" title="JOBS" width="100%" height="100%">
-		<mx:HBox styleName="blueBox" width="100%" height="150">
-			<mx:filters>
-				<flash:DropShadowFilter distance="0" angle="266" blurX='15' blurY='12' alpha="0.5" />
-			</mx:filters>
-			<mx:Image id="jobImage" source="{model.jobModel.selected.getImageAt(0)}" width="130" height="130"
-						verticalAlign="middle" horizontalAlign="center" />
-			<mx:VBox width="100%" height="100%">
-				<mx:Label styleName="h1" text="{model.jobModel.selected.name}" />
-				<mx:TextArea id="jobDescription" width="100%" height="100%" 
-					styleName="invisibleTextAreaBorders" editable="false" text="{model.jobModel.selected.description}" />
-			</mx:VBox>
-			
+	<mx:CurrencyFormatter id="usdFormatter" precision="2" 
+        currencySymbol="$" decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="true" alignSymbol="left"/>
+	
+	<mx:VBox styleName="blueBox" width="60%" height="100%">
+		<mx:filters>
+			<flash:DropShadowFilter distance="0" angle="266" blurX='15' blurY='12' alpha="0.5" />
+		</mx:filters>
+		
+		<!-- company and logo -->
+		<mx:HBox width="100%" verticalAlign="middle" paddingTop="10">
+			<mx:Label text="NASA" styleName="jumboHeader" />
+			<mx:Spacer width="100%" />
+			<mx:Canvas width="75" height="75" borderStyle="solid" 
+						borderColor="0x999999" backgroundColor="0xCCCCCC">
+				<mx:Label text="Logo Here" color="0x999999" verticalCenter="0" horizontalCenter="0" />
+			</mx:Canvas>
 		</mx:HBox>
 		
-		<mx:List id="jobList" dataProvider="{model.jobModel.jobs}" width="100%" height="100%" selectedItem="{model.jobModel.selected}">
-			<mx:filters>
-				<flash:DropShadowFilter distance="0" angle="266" blurX='15' blurY='12' alpha="0.25" />
-			</mx:filters>
-		</mx:List>
+		<mx:Spacer height="10" />
+		
+		<mx:Form width="100%" height="100%" fontWeight="bold" verticalGap="20" fontSize="12">
+            <mx:FormItem label="Job:">
+                <mx:Label text="{model.jobModel.selected.name}" fontWeight="none"/>
+            </mx:FormItem>
+
+            <mx:FormItem label="Story:" width="100%">
+                <mx:TextArea id="jobDescription" width="100%" height="175" fontWeight="none"
+						styleName="invisibleTextAreaBorders" editable="false" text="{model.jobModel.selected.description}" />
+            </mx:FormItem>
+			
+			<mx:FormItem label="Payment:">
+                <mx:Label text="{usdFormatter.format(model.jobModel.selected.pay)}" fontWeight="none"/>
+            </mx:FormItem>
+			
+			<mx:FormItem label="Requirements:" width="100%">
+                <mx:Text fontWeight="none" width="100%" htmlText="{tempRequirements}" />
+            </mx:FormItem>
+        </mx:Form>
+		
+		<!-- <mx:Image id="jobImage" source="{model.jobModel.selected.getImageAt(0)}" width="130" height="130"
+					verticalAlign="middle" horizontalAlign="center" /> -->
+		<!-- <mx:VBox width="100%" height="100%">
+			<mx:Label styleName="h1" text="{model.jobModel.selected.name}" />
+			<mx:TextArea id="jobDescription" width="100%" height="100%" 
+				styleName="invisibleTextAreaBorders" editable="false" text="{model.jobModel.selected.description}" />
+		</mx:VBox> -->
+	</mx:VBox>
+	
+	<mx:Spacer width="5" />
+	
+	<mx:Panel id="jobPanel" title="JOBS" width="40%" height="50%">
+		
+		<mx:DataGrid id="jobList" width="100%" height="100%" dataProvider="{model.jobModel.jobs}"
+				draggableColumns="false" resizableColumns="false" selectedItem="{model.jobModel.selected}">
+			<mx:columns>
+				<mx:DataGridColumn dataField="name" headerText="Name"/>
+				<mx:DataGridColumn dataField="completed" headerText="Complete" width="65" />
+				<mx:DataGridColumn dataField="difficulty" headerText="Difficulty" width="65" />
+			</mx:columns>
+		</mx:DataGrid>
 		
 		<mx:HBox width="100%" styleName="noPadding">
 			<mx:Spacer width="100%" />
