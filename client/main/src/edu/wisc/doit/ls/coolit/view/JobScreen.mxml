@@ -15,28 +15,35 @@
 	
 	<mx:Panel id="jobPanel" title="{jobModel.selected.name}" styleName="jobPanel"
 				titleStyleName="largeWhiteTitle" width="100%" height="100%">
-		<mx:ApplicationControlBar width="100%" cornerRadius="0.0">
-			<mx:Button id="chooseAnotherJob" label="Switch Jobs" />
-			<mx:Spacer width="100%" />
-			<mx:Button id="commitJob" label="Commit" />
-		</mx:ApplicationControlBar>
 		
 		<!-- main job details here -->
 		<mx:HBox width="100%" height="100%" styleName="jobBox">
 			
+			<!-- toolbar -->
+			<mx:Panel id="toolbar" width="50" height="100%" styleName="smallPadding" fontSize="9" verticalAlign="middle"
+						paddingBottom="5" paddingTop="5" verticalGap="5">
+				<mx:Button id="viewGraph" styleName="graphButton" width="40" height="40" toolTip="View Graph" />
+				<mx:Button id="checkConsultant" styleName="consultantButton" width="40" height="40" toolTip="Visit Consultant" />
+				<mx:Button id="helpButton" styleName="helpButton" width="40" height="40" toolTip="Help" />
+				<mx:Spacer height="100%" />
+				<mx:Button id="chooseAnotherJob" styleName="switchButton" width="40" height="40" toolTip="Switch Jobs" />
+				<mx:Button id="commitJob" styleName="commitButton" width="40" height="40" toolTip="Commit Job" />
+			</mx:Panel>
+			
 			<!-- left stack -->
-			<mx:VBox width="60%" height="100%" styleName="noPadding">
+			<mx:VBox width="50%" height="100%" styleName="noPadding">
 				<!-- image holder -->
 				
 				<!-- <mx:TabNavigator id="mainWorkArea" width="100%" height="80%" creationPolicy="all"> -->
-					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25">
-						<mx:HBox x="5" y="5">
+					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25"
+								verticalScrollPolicy="off" horizontalScrollPolicy="off">
+						<!-- <mx:HBox x="5" y="5">
 							<mx:Button id="firstImage" label="1" selected="true" 
 									click="{secondImage.selected=false;firstImage.selected=true;jobImage.source=jobModel.selected.getImageAt(0)}" />
 							<mx:Button id="secondImage" label="2"
 									click="{secondImage.selected=true;firstImage.selected=false;jobImage.source=jobModel.selected.getImageAt(1)}"/>
-						</mx:HBox>
-						<mx:Image id="jobImage" source="{jobModel.selected.getImageAt(0)}" width="100%" height="100%"
+						</mx:HBox> -->
+						<mx:Image id="jobImage" source="{jobModel.selected.image}" width="457" height="100%"
 							verticalAlign="middle" horizontalAlign="center" />
 					</mx:Canvas>
 					
@@ -82,7 +89,7 @@
 			
 			
 			<!-- sidebar -->
-			<mx:Accordion id="pickerAccordion" width="40%" height="100%" creationPolicy="all">
+			<mx:Accordion id="pickerAccordion" width="50%" height="100%" creationPolicy="all">
 				
 				<mx:Box id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%"
 						icon="{setArrowIcon(pickerAccordion.selectedIndex, 0)}">

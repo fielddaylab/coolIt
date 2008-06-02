@@ -44,6 +44,13 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - View instantiated", getQualifiedClassName(this));
 			
 			addEventListener(FlexEvent.CREATION_COMPLETE, onComplete);
+			addEventListener(Event.RENDER, onRender);
+		}
+		
+		private function onRender(event_p:Event):void {
+			if(model.jobModel.selected) {
+				jobList.selectedItem = model.jobModel.selected;
+			}
 		}
 		
 		/*

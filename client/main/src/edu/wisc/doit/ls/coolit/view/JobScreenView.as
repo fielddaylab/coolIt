@@ -2,6 +2,7 @@ package edu.wisc.doit.ls.coolit.view {
     import mx.controls.*;
 	import mx.containers.VBox;
 	import mx.containers.TabNavigator;
+	import mx.containers.Accordion;
 	import mx.events.*;
 	
 	import mx.logging.ILogger;
@@ -28,6 +29,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var coolerPicker:CoolerPicker;
 		public var strutPicker:StrutPicker;
 		public var commitJob:Button;
+		public var pickerAccordion:Accordion;
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
 		[Bindable] public var model:CoolItModelLocator;
@@ -83,6 +85,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
+			pickerAccordion.selectedIndex = 0;
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(viewJobList);
