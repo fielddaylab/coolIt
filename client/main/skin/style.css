@@ -42,6 +42,14 @@ Panel {
 	padding-right: 10px;
 }
 
+.sideBox {
+	border-style: solid;
+	border-color: #CCCCCC;
+	background-color: #FFFFFF;
+	border-thickness: 1;
+	corner-radius: 10px;
+}
+
 .jobPanel {
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -158,4 +166,24 @@ Panel {
 	selectedOverSkin: Embed(source="../skin/images/switch_over.swf");
 	selectedDownSkin: Embed(source="../skin/images/switch_down.swf");
 	selectedUpSkin: Embed(source="../skin/images/switch_up.swf");
+}
+
+.coolerButton {
+	disabledSkin: Embed(source="../skin/images/cooler_up.swf");
+	downSkin: Embed(source="../skin/images/cooler_down.swf");
+	overSkin: Embed(source="../skin/images/cooler_over.swf");
+	upSkin: Embed(source="../skin/images/cooler_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/cooler_selected.swf");
+	selectedDownSkin: Embed(source="../skin/images/cooler_selected.swf");
+	selectedUpSkin: Embed(source="../skin/images/cooler_selected.swf");
+}
+
+.supportsButton {
+	disabledSkin: Embed(source="../skin/images/supports_up.swf");
+	downSkin: Embed(source="../skin/images/supports_down.swf");
+	overSkin: Embed(source="../skin/images/supports_over.swf");
+	upSkin: Embed(source="../skin/images/supports_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/supports_selected.swf");
+	selectedDownSkin: Embed(source="../skin/images/supports_selected.swf");
+	selectedUpSkin: Embed(source="../skin/images/supports_selected.swf");
 }
