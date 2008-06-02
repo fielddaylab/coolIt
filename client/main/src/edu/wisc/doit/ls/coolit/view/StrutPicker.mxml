@@ -8,7 +8,16 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true" alignSymbol="left"/>
 	
-	<mx:ComboBox id="strutList" dataProvider="{model}" width="200" />
+	<mx:HBox width="100%">
+		<mx:Label text="Supports" styleName="h1" />
+		<mx:Spacer width="100%" />
+	</mx:HBox>
+	<mx:Spacer height="5" />
+	
+	<mx:HBox width="100%">
+		<mx:ComboBox id="strutList" dataProvider="{model}" width="200" />
+		<mx:Spacer width="100%" />
+	</mx:HBox>
 	<mx:Spacer height="5" />
 	
 	<mx:HBox width="100%" styleName="noPadding">
@@ -24,6 +33,7 @@
 		<mx:Label text="Cross Section (M**2):" fontWeight="bold" />
 		<mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/>
 	</mx:HBox>
+	
 	<mx:HSlider id="crossSection" minimum="0.001" maximum="0.1" value="{materialModel.defaultCrossSection}" width="100%"
 			dataTipPrecision="3"
             allowTrackClick="true" 

@@ -10,7 +10,12 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true"/>
 	
+	<mx:Label text="Cooler" styleName="h1" />
+	<mx:Spacer height="5" />
+	
 	<mx:ComboBox id="coolerList" dataProvider="{model}" />
+	
+	<mx:Spacer height="10" />
 	
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
@@ -22,14 +27,12 @@
             liveDragging="true"/>
 	<mx:Spacer height="10" />
 	
-	<mx:HBox width="100%">
-		<mx:RadioButton id="inputPower" label="Input Power" fontSize="9" groupName="powerSettingGroup"
+	<mx:RadioButton id="inputPower" label="Input Power" groupName="powerSettingGroup"
 						selected="{(coolerModel.defaultPowerSetting == CoolerModel.INPUT_POWER) ? true : false}" />
-		<mx:RadioButton id="outputPower" label="Output Power" fontSize="9" groupName="powerSettingGroup" 
-						selected="{(coolerModel.defaultPowerSetting == CoolerModel.OUTPUT_POWER) ? true : false}" />
-	</mx:HBox>
+	<mx:RadioButton id="outputPower" label="Output Power" groupName="powerSettingGroup" 
+					selected="{(coolerModel.defaultPowerSetting == CoolerModel.OUTPUT_POWER) ? true : false}" />
 	
-	
+	<mx:Spacer height="10" />
 	
 	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
 		
