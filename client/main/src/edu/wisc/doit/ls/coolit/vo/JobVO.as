@@ -41,11 +41,24 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get solved():Boolean { return (core.Solved.toLowerCase() == "true") ? true : false; };
 		public function set solved(solved_p:Boolean):void { /* nada */ };
 		
+		public function get image():String {
+			var imageList:ArrayCollection = images;
+			return images.getItemAt(0) as String;
+		}
+		public function set image(images_p:String):void { /* nada */ };
+		
 		public function get images():ArrayCollection { 
 			if(!imageList) {
 				var voList:ArrayCollection = new ArrayCollection();
 				for each (var dataPoint:XML in core.Images.string) {
-					var imageURL:String = imageURLBase + dataPoint.toString();
+					var imageURL:String;
+					var tempURL:String = dataPoint.toString();
+					if(tempURL == "2.18.08 Minesweeper.JPG") {
+						imageURL = "./minesweeper.jpg";
+					} else {
+						imageURL = imageURLBase + tempURL;
+					}
+					
 					voList.addItem(imageURL);
 				}
 					
