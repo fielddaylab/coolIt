@@ -102,6 +102,9 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onJobListClick(event_p:MouseEvent):void {
 			pickerViewstack.selectedIndex = 0;
+			supportsButton.selected = false;
+			coolerButton.selected = false;
+			
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(viewJobList);

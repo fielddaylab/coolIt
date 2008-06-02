@@ -43,10 +43,10 @@
 								verticalAlign="middle" horizontalAlign="center" />
 							
 							<mx:Button id="coolerButton" styleName="coolerButton" x="270" y="5"
-									width="133" height="34" toggle="true" />
+									width="133" height="34" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 									
 							<mx:Button id="supportsButton" styleName="supportsButton" x="44" y="16"
-										width="183" height="186" toggle="true" />
+										width="183" height="186" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 						</mx:Canvas>
 						
 					</mx:Canvas>
