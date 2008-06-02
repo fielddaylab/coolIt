@@ -64,6 +64,7 @@
 	<target name="assemble">
 		<copy file="${lib.dir}/myApp.html" tofile="${dist.dir}/index.html" />
 		<copy file="${lib.dir}/swfobject.js" todir="${dist.dir}" />
+		<copy file="${lib.dir}/minesweeper.jpg" todir="${dist.dir}" />
 	</target>
 	
 	<!-- :::::: run :::::: -->
