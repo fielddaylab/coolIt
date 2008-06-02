@@ -23,6 +23,18 @@ Panel {
 	vertical-gap: 15px;
 }
 
+.smallPadding {
+	background-color: #EEEEEE;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 3px;
+	padding-right: 0px;
+	border-thickness-left: 0px;
+	border-thickness-top: 0px;
+	border-thickness-bottom: 0px;
+	border-thickness-right: 0px;
+}
+
 .jobBox {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -96,4 +108,54 @@ Panel {
 .center {
 	vertical-align: "middle";
 	horizontal-align: "center";
+}
+
+.commitButton {
+	disabledSkin: Embed(source="../skin/images/commit_up.swf");
+	downSkin: Embed(source="../skin/images/commit_down.swf");
+	overSkin: Embed(source="../skin/images/commit_over.swf");
+	upSkin: Embed(source="../skin/images/commit_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/commit_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/commit_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/commit_up.swf");
+}
+
+.consultantButton {
+	disabledSkin: Embed(source="../skin/images/consultant_up.swf");
+	downSkin: Embed(source="../skin/images/consultant_down.swf");
+	overSkin: Embed(source="../skin/images/consultant_over.swf");
+	upSkin: Embed(source="../skin/images/consultant_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/consultant_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/consultant_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/consultant_up.swf");
+}
+
+.graphButton {
+	disabledSkin: Embed(source="../skin/images/graph_up.swf");
+	downSkin: Embed(source="../skin/images/graph_down.swf");
+	overSkin: Embed(source="../skin/images/graph_over.swf");
+	upSkin: Embed(source="../skin/images/graph_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/graph_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/graph_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/graph_up.swf");
+}
+
+.helpButton {
+	disabledSkin: Embed(source="../skin/images/help_up.swf");
+	downSkin: Embed(source="../skin/images/help_down.swf");
+	overSkin: Embed(source="../skin/images/help_over.swf");
+	upSkin: Embed(source="../skin/images/help_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/help_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/help_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/help_up.swf");
+}
+
+.switchButton {
+	disabledSkin: Embed(source="../skin/images/switch_up.swf");
+	downSkin: Embed(source="../skin/images/switch_down.swf");
+	overSkin: Embed(source="../skin/images/switch_over.swf");
+	upSkin: Embed(source="../skin/images/switch_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/switch_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/switch_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/switch_up.swf");
 }
