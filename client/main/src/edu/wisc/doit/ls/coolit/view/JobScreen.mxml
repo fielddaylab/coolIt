@@ -37,14 +37,18 @@
 				<!-- <mx:TabNavigator id="mainWorkArea" width="100%" height="80%" creationPolicy="all"> -->
 					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25"
 								verticalScrollPolicy="off" horizontalScrollPolicy="off">
-						<!-- <mx:HBox x="5" y="5">
-							<mx:Button id="firstImage" label="1" selected="true" 
-									click="{secondImage.selected=false;firstImage.selected=true;jobImage.source=jobModel.selected.getImageAt(0)}" />
-							<mx:Button id="secondImage" label="2"
-									click="{secondImage.selected=true;firstImage.selected=false;jobImage.source=jobModel.selected.getImageAt(1)}"/>
-						</mx:HBox> -->
-						<mx:Image id="jobImage" source="{jobModel.selected.image}" width="457" height="100%"
-							verticalAlign="middle" horizontalAlign="center" />
+						
+						<mx:Canvas width="457" height="280" verticalCenter="0">
+							<mx:Image id="jobImage" source="{jobModel.selected.image}" width="457" height="100%"
+								verticalAlign="middle" horizontalAlign="center" />
+							
+							<mx:Button id="coolerButton" styleName="coolerButton" x="270" y="5"
+									width="133" height="34" toggle="true" />
+									
+							<mx:Button id="supportsButton" styleName="supportsButton" x="44" y="16"
+										width="183" height="186" toggle="true" />
+						</mx:Canvas>
+						
 					</mx:Canvas>
 					
 					<!-- <view:SketchPad width="100%" height="100%" label="Sketch Pad" model="{model}" />
@@ -89,28 +93,26 @@
 			
 			
 			<!-- sidebar -->
-			<mx:Accordion id="pickerAccordion" width="50%" height="100%" creationPolicy="all">
+			<mx:ViewStack id="pickerViewstack" width="50%" height="100%" creationPolicy="all" styleName="sideBox">
 				
-				<mx:Box id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%"
-						icon="{setArrowIcon(pickerAccordion.selectedIndex, 0)}">
+				<mx:VBox id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%">
+						<mx:Label text="Description" styleName="h1" />
 						<mx:TextArea id="jobDescription" width="100%" height="100%" 
 							styleName="invisibleTextAreaBorders" editable="false" text="{jobModel.selected.description}" />
-				</mx:Box>
+				</mx:VBox>
 				
-				<mx:Box label="Coolers" styleName="jobBox" width="100%" height="100%"
-						icon="{setArrowIcon(pickerAccordion.selectedIndex, 1)}">
+				<mx:Box label="Coolers" styleName="jobBox" width="100%" height="100%">
 						<view:CoolerPicker id="coolerPicker" width="100%" height="100%" model="{coolerModel.coolers}" 
 											coolerData="{coolerModel.currentData}" modelLocator="{model}" coolerModel="{coolerModel}"
-											selected="{(pickerAccordion.selectedIndex == 1) ? true : false}" />
+											selected="{(pickerViewstack.selectedIndex == 1) ? true : false}" />
 				</mx:Box>
 				
-				<mx:Box label="Struts" styleName="jobBox" width="100%" height="100%"
-						icon="{setArrowIcon(pickerAccordion.selectedIndex, 2)}">
+				<mx:Box label="Struts" styleName="jobBox" width="100%" height="100%">
 						<view:StrutPicker id="strutPicker" width="100%" height="100%" model="{materialModel.materials}"
 											materialData="{materialModel.currentData}" modelLocator="{model}" materialModel="{materialModel}"
-											selected="{(pickerAccordion.selectedIndex == 2) ? true : false}" />
+											selected="{(pickerViewstack.selectedIndex == 2) ? true : false}" />
 				</mx:Box>
-			</mx:Accordion>
+			</mx:ViewStack>
 			
 		</mx:HBox>
 		

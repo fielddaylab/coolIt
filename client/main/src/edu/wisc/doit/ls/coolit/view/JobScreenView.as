@@ -2,7 +2,7 @@ package edu.wisc.doit.ls.coolit.view {
     import mx.controls.*;
 	import mx.containers.VBox;
 	import mx.containers.TabNavigator;
-	import mx.containers.Accordion;
+	import mx.containers.ViewStack;
 	import mx.events.*;
 	
 	import mx.logging.ILogger;
@@ -29,7 +29,9 @@ package edu.wisc.doit.ls.coolit.view {
 		public var coolerPicker:CoolerPicker;
 		public var strutPicker:StrutPicker;
 		public var commitJob:Button;
-		public var pickerAccordion:Accordion;
+		public var pickerViewstack:ViewStack;
+		public var coolerButton:Button;
+		public var supportsButton:Button;
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
 		[Bindable] public var model:CoolItModelLocator;
@@ -67,7 +69,21 @@ package edu.wisc.doit.ls.coolit.view {
 			//mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
+			coolerButton.addEventListener(MouseEvent.CLICK, onCoolerClick);
+			supportsButton.addEventListener(MouseEvent.CLICK, onSupportsClick);
 			hasInit = true;
+		}
+		
+		private function onCoolerClick(event_p:MouseEvent):void {
+			pickerViewstack.selectedIndex = 1;
+			coolerButton.selected = true;
+			supportsButton.selected = false;
+		}
+		
+		private function onSupportsClick(event_p:MouseEvent):void {
+			pickerViewstack.selectedIndex = 2;
+			supportsButton.selected = true;
+			coolerButton.selected = false;
 		}
 		
 		private function onMainWorkAreaChange(event_p:IndexChangedEvent):void {
@@ -85,7 +101,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
-			pickerAccordion.selectedIndex = 0;
+			pickerViewstack.selectedIndex = 0;
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(viewJobList);
