@@ -29,6 +29,8 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(ChangeWorkAreaStateEvent.EVENT_CHANGE_WORK_STATE, ChangeWorkAreaStateCommand);
 			addCommand(ProcessPowerFactorEvent.EVENT_PROCESS_POWER_FACTOR, ProcessPowerFactorCommand);
 			addCommand(LoginEvent.EVENT_LOGIN, LoginCommand);
+			addCommand(EnterCutScreenEvent.EVENT_ENTER_CUT, EnterCutScreenCommand);
+			addCommand(LeaveCutScreenEvent.EVENT_LEAVE_CUT, LeaveCutScreenCommand);
 		}	
 	}
 	
