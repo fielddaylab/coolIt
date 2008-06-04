@@ -31,7 +31,7 @@
 			</mx:Panel>
 			
 			<!-- left stack -->
-			<mx:VBox width="50%" height="100%" styleName="noPadding">
+			<mx:VBox width="457" height="100%" styleName="noPadding">
 				<!-- image holder -->
 				
 				<!-- <mx:TabNavigator id="mainWorkArea" width="100%" height="80%" creationPolicy="all"> -->
@@ -58,7 +58,31 @@
 				
 				<!-- details box -->
 				<mx:HBox width="100%" height="20%" horizontalAlign="left">
-					<mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
+					
+					<view:Meter id="tempMeter" label="Temp" minimum="150" maximum="500" 
+								value="{parseInt(decFormatter.format(model.temperature))}" />
+					
+					<view:Meter id="strengthMeter" label="Strength" minimum="0" maximum="60" 
+								value="{model.stressLimit}" />
+								
+					<view:Meter id="powerMeter" label="Power" minimum="0" maximum="400" 
+								value="{parseInt(decFormatter.format(model.inputPower))}" />
+					
+					<mx:VBox fontSize="10">
+						<mx:HBox>
+							<mx:Label text="Cost:" fontWeight="bold" />
+							<mx:Label text="{usdFormatter.format(model.cost)}" />
+						</mx:HBox> 
+						<mx:HBox>
+							<mx:Label text="Bal:" fontWeight="bold" />
+							<mx:Label text="{usdFormatter.format(model.bankBalance)}" />
+						</mx:HBox> 
+						<mx:HBox>
+							<mx:Label text="Pay:" fontWeight="bold" />
+							<mx:Label text="{usdFormatter.format(jobModel.selected.pay)}" />
+						</mx:HBox> 
+					</mx:VBox> 
+					<!-- <mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 						<mx:FormItem styleName="h2" label="Cost:">
 							<mx:Label id="costLabel" fontWeight="none" text="{usdFormatter.format(model.cost)}"/>
 						</mx:FormItem>
@@ -70,30 +94,17 @@
 						<mx:FormItem styleName="h2" label="Incentive:">
 							<mx:Label id="incentiveLabel" fontWeight="none" text="{usdFormatter.format(jobModel.selected.pay)}"/>
 						</mx:FormItem>
-					</mx:Form>
+					</mx:Form> -->
 					
-					<mx:Form horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
-						<mx:FormItem styleName="h2" label="Maximum Stress (MN):">
-							<mx:Label id="maxStressLabel" fontWeight="none" 
-											text="{(model.stressLimit &lt; 0) ? 'unknown' : decFormatter.format(model.stressLimit)}"/>
-						</mx:FormItem>
-
-						<mx:FormItem styleName="h2" label="Input Power (watts):">
-							<mx:Label id="inputPowerLabel" fontWeight="none" text="{decFormatter.format(model.inputPower)}"/>
-						</mx:FormItem>
-						
-						<mx:FormItem styleName="h2" label="Temp (Deg K):">
-							<mx:Label id="tempLabel" fontWeight="none" text="{decFormatter.format(model.temperature)}"/>
-						</mx:FormItem>
-					</mx:Form>
 					
 				</mx:HBox>
+				
 			</mx:VBox>
 			
 			
 			
 			<!-- sidebar -->
-			<mx:ViewStack id="pickerViewstack" width="50%" height="100%" creationPolicy="all" styleName="sideBox">
+			<mx:ViewStack id="pickerViewstack" width="100%" height="100%" creationPolicy="all" styleName="sideBox">
 				
 				<mx:VBox id="jobSummary" label="Summary" styleName="jobBox" width="100%" height="100%">
 						<mx:Label text="Description" styleName="h1" />
