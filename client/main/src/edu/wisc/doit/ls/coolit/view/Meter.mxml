@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalAlign="center" verticalAlign="middle" creationComplete="{setupMeter()}" width="105">
+	
+	<mx:Script><![CDATA[ 
+		import mx.core.UIComponent;
+		import com.bit101.components.Meter;
+		
+		private var _value:Number;
+		private var meter:com.bit101.components.Meter;
+		private var invalidValue:Boolean = false;
+		
+		[Bindable] public var maximum:Number;
+		[Bindable] public var minimum:Number;
+		[Bindable] public function set value(value_p:Number):void {
+			if(value_p < 0) {
+				invalidValue = true;
+				_value = 0;
+			} else {
+				invalidValue = false;
+				_value = value_p;
+			}
+			
+			if(meter) {
+				meter.value = _value;
+			}
+		}
+		public function get value():Number { return _value; }
+		
+		public function setupMeter():void {
+			meter = new com.bit101.components.Meter();
+			meter.x = 0;
+			meter.y = 0;
+			meter.maximum = maximum;
+			meter.minimum = minimum;
+			meter.value = value;
+			meter.label = label;
+			meter.showValues = true;
+			meter.setSize(105, 300);
+			meterHolder.addChild(meter);
+		}
+		
+	]]></mx:Script>
+	
+	<mx:UIComponent id="meterHolder" width="105" height="62.5"/>
+	<mx:Label text="Current: {(invalidValue) ? 'unknown' : value}" />
+	
+</mx:VBox>
