@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:CutScreenView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" alpha="0" />
+	
+	<mx:VBox width="320" height="240" creationPolicy="all" styleName="sideBox" verticalAlign="middle" horizontalAlign="center">
+		<mx:Label text="Cut Screen Here" styleName="h1" />
+	</mx:VBox>
+	
+</view:CutScreenView>
