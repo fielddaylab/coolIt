@@ -48,8 +48,10 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onRender(event_p:Event):void {
-			if(model.jobModel.selected) {
-				jobList.selectedItem = model.jobModel.selected;
+			if(model) {
+				if(model.jobModel.selected) {
+					jobList.selectedItem = model.jobModel.selected;
+				}
 			}
 		}
 		
