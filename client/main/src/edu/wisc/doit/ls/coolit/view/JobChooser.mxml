@@ -68,7 +68,7 @@
 		
 		<mx:HBox width="100%" styleName="noPadding">
 			<mx:Spacer width="100%" />
-			<mx:Button id="startJob" label="Start Job" />
+			<mx:Button id="startJob" label="Start Job" enabled="{(model.jobModel.selected) ? true : false }" />
 		</mx:HBox>
 		
 	</mx:Panel>
