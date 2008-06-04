@@ -31,6 +31,12 @@
             </mx:AddChild>
         </mx:State>
 		
+		<mx:State name="cutScreen" basedOn="">
+            <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
+				<view:CutScreen id="cutScreenView" model="{model}" currentApplicationState="{model.stateModel.currentState}" />
+            </mx:AddChild>
+        </mx:State>
+		
     </coolit:states>
 	
 	<mx:ProgressBar id="progressBar" indeterminate="true" width="200" labelPlacement="right" 
