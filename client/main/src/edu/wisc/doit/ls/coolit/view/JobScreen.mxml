@@ -38,15 +38,19 @@
 					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25"
 								verticalScrollPolicy="off" horizontalScrollPolicy="off">
 						
-						<mx:Canvas width="457" height="280" verticalCenter="0">
+						<mx:Canvas id="mainImageHolder" width="457" height="280" verticalCenter="0">
 							<mx:Image id="jobImage" source="{jobModel.selected.image}" width="457" height="100%"
 								verticalAlign="middle" horizontalAlign="center" />
 							
-							<mx:Button id="coolerButton" styleName="coolerButton" x="270" y="5"
+							<view:PNGButtonPane id="supportsButton" width="457" height="100%" 
+									upImage="./ms_support_up.png" overImage="./ms_support_over.png" downImage="./ms_support_down.png"
+									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
+							
+							<!-- <mx:Button id="coolerButton" styleName="coolerButton" x="270" y="5"
 									width="133" height="34" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 									
 							<mx:Button id="supportsButton" styleName="supportsButton" x="44" y="16"
-										width="183" height="186" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
+										width="183" height="186" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" /> -->
 						</mx:Canvas>
 						
 					</mx:Canvas>

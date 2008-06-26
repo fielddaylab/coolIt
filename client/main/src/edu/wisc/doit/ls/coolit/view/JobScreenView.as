@@ -1,8 +1,6 @@
 package edu.wisc.doit.ls.coolit.view {
     import mx.controls.*;
-	import mx.containers.VBox;
-	import mx.containers.TabNavigator;
-	import mx.containers.ViewStack;
+	import mx.containers.*;
 	import mx.events.*;
 	
 	import mx.logging.ILogger;
@@ -16,6 +14,10 @@ package edu.wisc.doit.ls.coolit.view {
 	import edu.wisc.doit.ls.coolit.model.*;
 	import edu.wisc.doit.ls.coolit.event.*;
 	import edu.wisc.doit.ls.coolit.vo.*;
+	
+	import com.dougmccune.HitTester;
+	
+	import flash.geom.Point;
 	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
@@ -31,7 +33,9 @@ package edu.wisc.doit.ls.coolit.view {
 		public var commitJob:Button;
 		public var pickerViewstack:ViewStack;
 		public var coolerButton:Button;
-		public var supportsButton:Button;
+		public var supportsButton:PNGButtonPane;
+		public var mainImageHolder:Canvas;
+		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
 		[Bindable] public var model:CoolItModelLocator;
@@ -69,21 +73,21 @@ package edu.wisc.doit.ls.coolit.view {
 			//mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
-			coolerButton.addEventListener(MouseEvent.CLICK, onCoolerClick);
-			supportsButton.addEventListener(MouseEvent.CLICK, onSupportsClick);
+			//coolerButton.addEventListener(MouseEvent.CLICK, onCoolerClick);
+			supportsButton.addEventListener(PNGButtonPaneView.CLICK_HIT_EVENT, onSupportsClick);
 			hasInit = true;
 		}
 		
 		private function onCoolerClick(event_p:MouseEvent):void {
 			pickerViewstack.selectedIndex = 1;
-			coolerButton.selected = true;
+			//coolerButton.selected = true;
 			supportsButton.selected = false;
 		}
 		
-		private function onSupportsClick(event_p:MouseEvent):void {
+		private function onSupportsClick(event_p:Event):void {
 			pickerViewstack.selectedIndex = 2;
 			supportsButton.selected = true;
-			coolerButton.selected = false;
+			//coolerButton.selected = false;
 		}
 		
 		private function onMainWorkAreaChange(event_p:IndexChangedEvent):void {
@@ -103,7 +107,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onJobListClick(event_p:MouseEvent):void {
 			pickerViewstack.selectedIndex = 0;
 			supportsButton.selected = false;
-			coolerButton.selected = false;
+			//coolerButton.selected = false;
 			
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;
