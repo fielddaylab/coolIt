@@ -8,6 +8,7 @@ package edu.wisc.doit.ls.coolit.vo {
 		private var core:XML;
 		private var imageURLBase:String = "http://atswindev.doit.wisc.edu/CoolIt_Service/images/";
 		private var imageList:ArrayCollection;
+		private var requirementList:ArrayCollection;
 		
 		public function JobVO(core_p:XML) {
 			super();
@@ -76,6 +77,21 @@ package edu.wisc.doit.ls.coolit.vo {
 			
 			return curURL;
 		}
+		
+		public function get requirements():ArrayCollection { 
+			if(!requirementList) {
+				var voList:ArrayCollection = new ArrayCollection();
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var newReq:RequirementVO = new RequirementVO(dataPoint);
+					voList.addItem(newReq);
+				}
+				requirementList = voList;
+			}
+			
+			return requirementList;
+			
+		}
+		public function set requirements(reqs_p:ArrayCollection):void { /* nada */ };
 		
 		public function toString():String {
 			return name;
