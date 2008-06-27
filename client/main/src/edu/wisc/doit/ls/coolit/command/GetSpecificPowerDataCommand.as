@@ -47,6 +47,9 @@ package edu.wisc.doit.ls.coolit.command {
 			
 			var cryoLibModel:CryoLibModel = model.cryoLibModel;
 			cryoLibModel.initSpecificPowerData(voList);
+			
+			dispatchGetCoolerListEvent();
+			dispatchGetMaterialListEvent();
 		}
 		
 		public function fault(event_p:Object):void {
@@ -54,6 +57,17 @@ package edu.wisc.doit.ls.coolit.command {
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
 		
+		private function dispatchGetCoolerListEvent():void {
+			var getCoolers:GetCoolerListEvent = new GetCoolerListEvent();
+			getCoolers.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getCoolers);
+		}
+		
+		private function dispatchGetMaterialListEvent():void {
+			var getMaterials:GetMaterialListEvent = new GetMaterialListEvent();
+			getMaterials.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(getMaterials);
+		}
 	}
 	
 }
