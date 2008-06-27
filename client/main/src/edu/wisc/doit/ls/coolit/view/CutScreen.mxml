@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view:CutScreenView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
-	horizontalAlign="center" verticalAlign="middle">
+	horizontalAlign="center" verticalAlign="middle" paddingLeft="0" paddingRight="0">
 	
-	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" alpha="0" />
-	
-	<mx:VBox width="320" height="240" creationPolicy="all" styleName="sideBox" verticalAlign="middle" horizontalAlign="center">
-		<mx:Label text="Cut Screen Here" styleName="h1" />
-	</mx:VBox>
+	<mx:HBox width="100%" creationPolicy="all" styleName="cutScreenBox" verticalAlign="middle" horizontalAlign="center">
+		<mx:VideoDisplay
+			id="cutScreenMovie"
+            source="./minesweeper_cut.flv"
+            width="457" 
+            height="280"/>
+		<!-- <mx:Spacer width="198" /> -->
+		<mx:Spacer id="shiftSpacerWidth" width="0" />
+	</mx:HBox>
+	<mx:Spacer id="shiftSpacerHeight" height="0" />
 	
 </view:CutScreenView>

@@ -23,11 +23,16 @@ package edu.wisc.doit.ls.coolit.view {
 	 *  @author Ben Longoria
 	 */
 	public class CutScreenView extends VBox {		
+		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
 		
 		//MXML components
-		public var splashLogo:Image;
+		public var cutScreenMovie:VideoDisplay;
+		public var shiftSpacerWidth:Spacer;
+		public var shiftSpacerHeight:Spacer;
 		
 		[Bindable] public var model:CoolItModelLocator;
+		[Bindable] public var heightPushAmount:Number = 0;
+		[Bindable] public var widthPushAmount:Number = 0;
 		
 		private var _currentApplicationState:String;
 		
@@ -50,10 +55,16 @@ package edu.wisc.doit.ls.coolit.view {
 			return _currentApplicationState;
 		}
 		public function set currentApplicationState(state_p:String):void {
-			if(state_p != StateModel.CUT_SCREEN_STATE) {
-				splashLogo.alpha = 0;
+			shiftSpacerWidth.width = 0;
+			shiftSpacerHeight.height = 0;
+			
+			if(state_p != StateModel.JOB_SCREEN) {
+				cutScreenMovie.stop();
 			} else {
-				Tweener.addTween(splashLogo, {alpha:1.0, time:1, transition:"linear", onComplete:leaveCut});
+				visible = true;
+				alpha = 1;
+				//Tweener.addTween(this, {alpha:1, time:1, transition:"easeInQuart", onComplete:startVideo});
+				cutScreenMovie.play();
 			}
 		}
 		
@@ -65,6 +76,27 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
+			cutScreenMovie.addEventListener(VideoEvent.COMPLETE, onVideoFinished);
+		}
+		
+		private function startVideo():void {
+			cutScreenMovie.play();
+		}
+		
+		private function onVideoFinished(event_p:VideoEvent):void {
+			//leaveCut();
+			Tweener.addTween(shiftSpacerWidth, {width:widthPushAmount, time:1, transition:"easeOutQuart"});
+			Tweener.addTween(shiftSpacerHeight, {height:heightPushAmount, time:1, transition:"easeOutQuart", onComplete:dispatchCutDoneEvent});
+			Tweener.addTween(this, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:flipOff});
+		}
+		
+		private function dispatchCutDoneEvent():void {
+			var curDoneEvent:Event = new Event(CUT_DONE);
+			dispatchEvent(curDoneEvent);
+		}
+		
+		private function flipOff():void {
+			visible = false;
 		}
 		
 		private function leaveCut():void {
