@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?> 
 <coolit:ApplicationClass xmlns:coolit="*" xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml" 
 	horizontalAlign="left" verticalAlign="middle" layout="vertical" currentState="{model.stateModel.currentState}" 
-	verticalGap="0" paddingTop="0" paddingLeft="5">
+	verticalGap="0" paddingTop="0" paddingLeft="0">
 	
 	<!-- styles -->
 	<mx:Style source="../skin/style.css"/>
@@ -22,7 +22,7 @@
 		
 		<mx:State name="jobScreen" basedOn="">
             <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
-				<view:JobScreen id="jobScreenScreen" width="800" height="600" model="{model}" 
+				<view:JobScreen id="jobScreenScreen" width="100%" height="100%" model="{model}" 
 						jobModel="{model.jobModel}"
 						coolerModel="{model.coolerModel}"
 						materialModel="{model.materialModel}"
@@ -41,6 +41,6 @@
 	
 	<mx:ProgressBar id="progressBar" indeterminate="true" width="200" labelPlacement="right" 
 		label="Accessing services..." fontWeight="none" fontSize="9" visible="{(model.servicesOut &gt; 0) ? true : false}" />
-	<mx:VBox id="appContainer" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" />
+	<mx:VBox id="appContainer" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" paddingLeft="0" paddingRight="0" />
 	
 </coolit:ApplicationClass>
