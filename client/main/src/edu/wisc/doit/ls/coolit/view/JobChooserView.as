@@ -15,6 +15,8 @@ package edu.wisc.doit.ls.coolit.view {
 	import edu.wisc.doit.ls.coolit.event.*;
 	import edu.wisc.doit.ls.coolit.vo.*;
 	
+	import mx.collections.ArrayCollection;
+	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
 	 *
@@ -26,9 +28,10 @@ package edu.wisc.doit.ls.coolit.view {
 		public var startJob:Button;
 		[Bindable] public var jobList:DataGrid;
 		
-		[Bindable]
-		public var model:CoolItModelLocator;
-		public var tempRequirements:String = "<br />Temp: --<br />Weight: --<br />Input: --<br />Cost: --<br />";
+		[Bindable] public var requirementsList:ArrayCollection;
+		
+		[Bindable] public var model:CoolItModelLocator;
+		[Bindable] public var tempRequirements:String = "<br />Temp: --<br />Weight: --<br />Input: --<br />Cost: --<br />";
 		
 		private var log:ILogger;
 		
@@ -38,6 +41,8 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		public function JobChooserView():void {
 			super();
+			
+			requirementsList = new ArrayCollection();
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -74,11 +79,26 @@ package edu.wisc.doit.ls.coolit.view {
 			
 			if(model.jobModel.selected) {
 				jobList.selectedItem = model.jobModel.selected;
+				requirementsList = model.jobModel.selected.requirements;
+				buildRequirements();
+				//log.fatal("{0} - requirementsList.getItemAt(0).core: " + requirementsList.getItemAt(0).core, getQualifiedClassName(this));
 			}
 		}
 		
 		private function onJobListChange(event_p:Event):void {
 			model.jobModel.selected = jobList.selectedItem as JobVO;
+			requirementsList = model.jobModel.selected.requirements;
+			buildRequirements();
+			//log.fatal("{0} - requirementsList.getItemAt(0).core: " + requirementsList.getItemAt(0).core, getQualifiedClassName(this));
+		}
+		
+		private function buildRequirements():void {
+			var reqLen:Number = requirementsList.length;
+			tempRequirements = "";
+			for(var i:Number = 0; i<reqLen; i++) {
+				var curReq:RequirementVO = requirementsList.getItemAt(i) as RequirementVO;
+				tempRequirements = tempRequirements + "<br /><b>" + curReq.label + "</b>: " + curReq.target;
+			}
 		}
 		
 		/*

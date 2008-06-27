@@ -40,7 +40,14 @@
             </mx:FormItem>
 			
 			<mx:FormItem label="Requirements:" width="100%">
-                <mx:Text fontWeight="none" width="100%" htmlText="{tempRequirements}" />
+				<mx:Text fontWeight="none" width="100%" htmlText="{tempRequirements}" />
+			    <!-- <mx:Label text="{requirementsList.getItemAt(0)}" /> -->
+				<!-- <mx:Repeater id="regRepeater" dataProvider="{requirementsList}">
+					
+					<mx:Button height="49" width="50" 
+						label="{String(rp.currentItem)}" 
+						click="Alert.show(String(event.currentTarget.getRepeaterItem()) + ' pressed')"/>
+				</mx:Repeater> -->
             </mx:FormItem>
         </mx:Form>
 		
