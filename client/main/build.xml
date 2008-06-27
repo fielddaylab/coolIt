@@ -65,6 +65,12 @@
 		<copy file="${lib.dir}/myApp.html" tofile="${dist.dir}/index.html" />
 		<copy file="${lib.dir}/swfobject.js" todir="${dist.dir}" />
 		<copy file="${lib.dir}/minesweeper.jpg" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_support_down.png" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_support_over.png" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_support_up.png" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_cooler_down.png" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_cooler_over.png" todir="${dist.dir}" />
+		<copy file="${lib.dir}/ms_cooler_up.png" todir="${dist.dir}" />
 	</target>
 	
 	<!-- :::::: run :::::: -->
