@@ -11,44 +11,27 @@ package edu.wisc.doit.ls.coolit.command {
 	
 	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
+	
 	/**
 	 * 
 	 */
-	public class ChooseJobCommand implements ICommand, IResponder {
+	public class ChooseJobCommand implements ICommand {
 		
 		private var model:CoolItModelLocator;
+		private var jobVO:JobVO;
 		
 		public function ChooseJobCommand() {}
 		
 		public function execute(event:CairngormEvent):void {
 			var chooseJobEvent:ChooseJobEvent = event as ChooseJobEvent;
-			var jobVO:JobVO = chooseJobEvent.job;
+			jobVO = chooseJobEvent.job;
 			model = chooseJobEvent.modelLocator;
 			var stateModel:StateModel = model.stateModel;
 			stateModel.currentState = StateModel.JOB_SCREEN;
 			
-			//check coolers and materials
-			if(!model.coolerModel) {
-				dispatchGetCoolerListEvent();
-				dispatchGetMaterialListEvent();
-			}
-			
 			dispatchSetProblem(jobVO.name);
-			//var delegate:HelloWorldDelegate = new HelloWorldDelegate(this);
-			//delegate.sendThroughHelloWorld(helloWorldEvent.messageContent);
-		}
-		
-		public function result(event:Object):void {		
-			var result:Object = event.result;	
-			/*
-			var model:MessageModelLocator = MessageModelLocator.getInstance();
-			var message:MessageVO = model.messageHolder.message;
-			message.content = String(result);
-			*/
-		}
-		
-		public function fault(event:Object):void {
-			//log failure here
 		}
 		
 		private function dispatchSetProblem(name_p:String):void {
@@ -56,18 +39,6 @@ package edu.wisc.doit.ls.coolit.command {
 			setProblemEvent.modelLocator = model;
 			setProblemEvent.problemName = name_p;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setProblemEvent);
-		}
-		
-		private function dispatchGetCoolerListEvent():void {
-			var getCoolers:GetCoolerListEvent = new GetCoolerListEvent();
-			getCoolers.modelLocator = model;
-			CairngormEventDispatcher.getInstance().dispatchEvent(getCoolers);
-		}
-		
-		private function dispatchGetMaterialListEvent():void {
-			var getMaterials:GetMaterialListEvent = new GetMaterialListEvent();
-			getMaterials.modelLocator = model;
-			CairngormEventDispatcher.getInstance().dispatchEvent(getMaterials);
 		}
 		
 	}
