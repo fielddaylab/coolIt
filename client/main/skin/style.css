@@ -50,6 +50,13 @@ Panel {
 	corner-radius: 10px;
 }
 
+.cutScreenBox {
+	border-style: solid;
+	border-color: #CCCCCC;
+	background-color: #FFFFFF;
+	border-thickness: 1;
+}
+
 .jobPanel {
 	padding-top: 0px;
 	padding-bottom: 0px;
