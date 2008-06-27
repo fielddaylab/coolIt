@@ -19,6 +19,7 @@ package edu.wisc.doit.ls.coolit.view {
 	 */
 	public class PNGButtonPaneView extends VBox {		
 		public static var CLICK_HIT_EVENT:String = "edu.wisc.doit.ls.coolit.view.PNGButtonPaneView.clickHitEvent";
+		public static var MOUSE_OVER_TRANSPARENT:String = "edu.wisc.doit.ls.coolit.view.PNGButtonPaneView.mouseOverTransparent";
 		
 		//bindable properties
 		[Bindable] public var upImage:*;
@@ -67,11 +68,12 @@ package edu.wisc.doit.ls.coolit.view {
 		public function set selected(selected_p:Boolean):void {
 			if(selected_p) {
 				imageStack.selectedIndex = 2;
-				imageStack.removeEventListener(MouseEvent.MOUSE_MOVE, onImageMouseMove);
+				//imageStack.removeEventListener(MouseEvent.MOUSE_MOVE, onImageMouseMove);
 				imageStack.removeEventListener(MouseEvent.MOUSE_DOWN, onImageMouseDown);
 				imageStack.removeEventListener(MouseEvent.MOUSE_UP, onImageMouseUp);
 			} else {
-				imageStack.addEventListener(MouseEvent.MOUSE_MOVE, onImageMouseMove);
+				imageStack.selectedIndex = 0;
+				//imageStack.addEventListener(MouseEvent.MOUSE_MOVE, onImageMouseMove);
 				imageStack.addEventListener(MouseEvent.MOUSE_DOWN, onImageMouseDown);
 				imageStack.addEventListener(MouseEvent.MOUSE_UP, onImageMouseUp);
 			}
@@ -104,25 +106,40 @@ package edu.wisc.doit.ls.coolit.view {
 			var imageOverHitResult:Boolean = HitTester.realHitTest(imageOver, new Point(event_p.stageX, event_p.stageY));
 			//do different actions depending on stack state
 			
-			switch(imageStack.selectedIndex) {
-				case 0:
-				case 1:
-					if(imageUpHitResult) {
-						imageStack.selectedIndex = 1;
-					} else {
+			if(selected) {
+				if(!imageDownHitResult) {
+					dispatchMouseOverTransparencyEvent();
+				}
+			} else {
+				switch(imageStack.selectedIndex) {
+					case 0:
+					case 1:
+						if(imageUpHitResult) {
+							imageStack.selectedIndex = 1;
+						} else {
+							dispatchMouseOverTransparencyEvent();
+							imageStack.selectedIndex = 0;
+						}
+						break;
+						case 2:
+						if(imageDownHitResult) {
+							imageStack.selectedIndex = 2;
+						} else {
+							dispatchMouseOverTransparencyEvent();
+							imageStack.selectedIndex = 0;
+						}
+						break;
+						default:
+						dispatchMouseOverTransparencyEvent();
 						imageStack.selectedIndex = 0;
-					}
-					break;
-				case 2:
-					if(imageDownHitResult) {
-						imageStack.selectedIndex = 2;
-					} else {
-						imageStack.selectedIndex = 0;
-					}
-					break;
-				default:
-					imageStack.selectedIndex = 0;
+				}
 			}
+			
+		}
+		
+		private function dispatchMouseOverTransparencyEvent():void {
+			var mouseOverTransparency:Event = new Event(MOUSE_OVER_TRANSPARENT);
+			dispatchEvent(mouseOverTransparency);
 		}
 		
 	}
