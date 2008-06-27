@@ -32,7 +32,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var strutPicker:StrutPicker;
 		public var commitJob:Button;
 		public var pickerViewstack:ViewStack;
-		public var coolerButton:Button;
+		public var coolerButton:PNGButtonPane;
 		public var supportsButton:PNGButtonPane;
 		public var mainImageHolder:Canvas;
 		
@@ -49,6 +49,9 @@ package edu.wisc.doit.ls.coolit.view {
 		private var _currentApplicationState:String;
 		
 		private var hasInit:Boolean = false;
+		
+		private var highestPNGButton:PNGButtonPane = coolerButton;
+		private var lowestPNGButton:PNGButtonPane = supportsButton;
 		
 		/*
 		 * Constructor
@@ -73,21 +76,27 @@ package edu.wisc.doit.ls.coolit.view {
 			//mainWorkArea.addEventListener(IndexChangedEvent.CHANGE, onMainWorkAreaChange);
 			chooseAnotherJob.addEventListener(MouseEvent.CLICK, onJobListClick);
 			commitJob.addEventListener(MouseEvent.CLICK, onCommitClick);
-			//coolerButton.addEventListener(MouseEvent.CLICK, onCoolerClick);
+			coolerButton.addEventListener(PNGButtonPaneView.CLICK_HIT_EVENT, onCoolerClick);
+			coolerButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			supportsButton.addEventListener(PNGButtonPaneView.CLICK_HIT_EVENT, onSupportsClick);
+			supportsButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			hasInit = true;
 		}
 		
-		private function onCoolerClick(event_p:MouseEvent):void {
+		private function onPNGButtonTransparencyOver(event_p:Event):void {
+			mainImageHolder.swapChildren(supportsButton, coolerButton);
+		}
+		
+		private function onCoolerClick(event_p:Event):void {
 			pickerViewstack.selectedIndex = 1;
-			//coolerButton.selected = true;
+			coolerButton.selected = true;
 			supportsButton.selected = false;
 		}
 		
 		private function onSupportsClick(event_p:Event):void {
 			pickerViewstack.selectedIndex = 2;
 			supportsButton.selected = true;
-			//coolerButton.selected = false;
+			coolerButton.selected = false;
 		}
 		
 		private function onMainWorkAreaChange(event_p:IndexChangedEvent):void {
@@ -107,7 +116,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onJobListClick(event_p:MouseEvent):void {
 			pickerViewstack.selectedIndex = 0;
 			supportsButton.selected = false;
-			//coolerButton.selected = false;
+			coolerButton.selected = false;
 			
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;

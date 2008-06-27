@@ -45,6 +45,10 @@
 							<view:PNGButtonPane id="supportsButton" width="457" height="100%" 
 									upImage="./ms_support_up.png" overImage="./ms_support_over.png" downImage="./ms_support_down.png"
 									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
+									
+							<view:PNGButtonPane id="coolerButton" width="457" height="100%" 
+									upImage="./ms_cooler_up.png" overImage="./ms_cooler_over.png" downImage="./ms_cooler_down.png"
+									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 							
 							<!-- <mx:Button id="coolerButton" styleName="coolerButton" x="270" y="5"
 									width="133" height="34" toggle="true" visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
