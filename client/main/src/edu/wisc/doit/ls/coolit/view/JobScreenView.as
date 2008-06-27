@@ -35,6 +35,8 @@ package edu.wisc.doit.ls.coolit.view {
 		public var coolerButton:PNGButtonPane;
 		public var supportsButton:PNGButtonPane;
 		public var mainImageHolder:Canvas;
+		public var cutScreenView:CutScreen;
+		public var jobPanel:Panel;
 		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
@@ -80,7 +82,12 @@ package edu.wisc.doit.ls.coolit.view {
 			coolerButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			supportsButton.addEventListener(PNGButtonPaneView.CLICK_HIT_EVENT, onSupportsClick);
 			supportsButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
+			cutScreenView.addEventListener(CutScreenView.CUT_DONE, onCutDone);
 			hasInit = true;
+		}
+		
+		private function onCutDone(event_p:Event):void {
+			jobPanel.visible = true;
 		}
 		
 		private function onPNGButtonTransparencyOver(event_p:Event):void {
@@ -117,6 +124,7 @@ package edu.wisc.doit.ls.coolit.view {
 			pickerViewstack.selectedIndex = 0;
 			supportsButton.selected = false;
 			coolerButton.selected = false;
+			jobPanel.visible = false;
 			
 			var viewJobList:ViewJobListEvent = new ViewJobListEvent();
 			viewJobList.modelLocator = model;
