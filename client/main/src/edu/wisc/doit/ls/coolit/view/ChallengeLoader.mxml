@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+	
+	<mx:Image width="542" height="198" source="{AssetEmbedLocator.challengeLoader}" />
+	<mx:Image x="25" y="25" width="50" height="50" source="{AssetEmbedLocator.spinner}" />
+	
+</mx:Canvas>
