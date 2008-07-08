@@ -20,6 +20,12 @@ package edu.wisc.doit.ls.coolit.model {
 		public var selected:MaterialVO;
 		public var currentData:ArrayCollection;
 		
+		public var lengthMax:Number = 0.89;
+		public var lengthMin:Number = 0.01;
+		
+		public var crossSectionMax:Number = 0.1;
+		public var crossSectionMin:Number = 0.001;
+		
 		public var defaultLength:Number = 0.89;
 		public var defaultCrossSection:Number = 0.1;
 		
