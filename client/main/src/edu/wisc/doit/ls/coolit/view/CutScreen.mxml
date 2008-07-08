@@ -6,8 +6,10 @@
 		<mx:VideoDisplay
 			id="cutScreenMovie"
             source="./minesweeper_cut.flv"
+			autoPlay="false"
             width="457" 
-            height="280"/>
+            height="280"
+			visible="false" />
 		<!-- <mx:Spacer width="198" /> -->
 		<mx:Spacer id="shiftSpacerWidth" width="0" />
 	</mx:HBox>

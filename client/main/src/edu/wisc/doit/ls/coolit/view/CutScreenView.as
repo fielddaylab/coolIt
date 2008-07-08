@@ -22,7 +22,8 @@ package edu.wisc.doit.ls.coolit.view {
 	 *
 	 *  @author Ben Longoria
 	 */
-	public class CutScreenView extends VBox {		
+	public class CutScreenView extends VBox {
+		public static var CUT_LOADED:String = "edu.wisc.doit.ls.coolit.view.curLoaded";
 		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
 		
 		//MXML components
@@ -59,12 +60,11 @@ package edu.wisc.doit.ls.coolit.view {
 			shiftSpacerHeight.height = 0;
 			
 			if(state_p != StateModel.JOB_SCREEN) {
+				cutScreenMovie.visible = false;
 				cutScreenMovie.stop();
 			} else {
 				visible = true;
 				alpha = 1;
-				//Tweener.addTween(this, {alpha:1, time:1, transition:"easeInQuart", onComplete:startVideo});
-				cutScreenMovie.play();
 			}
 		}
 		
@@ -75,12 +75,18 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
-			
 			cutScreenMovie.addEventListener(VideoEvent.COMPLETE, onVideoFinished);
+			cutScreenMovie.addEventListener(VideoEvent.READY, onVideoReady);
 		}
 		
-		private function startVideo():void {
+		public function startVideo():void {
+			cutScreenMovie.visible = true;
 			cutScreenMovie.play();
+		}
+		
+		private function onVideoReady(event_p:VideoEvent):void {
+			var cutLoadedEvent:Event = new Event(CUT_LOADED);
+			dispatchEvent(cutLoadedEvent);
 		}
 		
 		private function onVideoFinished(event_p:VideoEvent):void {
