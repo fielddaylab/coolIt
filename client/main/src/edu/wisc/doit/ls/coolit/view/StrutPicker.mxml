@@ -24,7 +24,7 @@
 		<mx:Label text="Length (M):" fontWeight="bold" />
 		<mx:Label id="lengthDisplay" text="{lengthM.value}" />
 	</mx:HBox>
-	<mx:HSlider id="lengthM" minimum="0.01" maximum="0.89" value="{materialModel.defaultLength}" width="100%"
+	<mx:HSlider id="lengthM" minimum="{materialModel.lengthMin}" maximum="{materialModel.lengthMax}" value="{materialModel.defaultLength}" width="100%"
             allowTrackClick="true" 
 			snapInterval="0.01"
             liveDragging="true"/>
@@ -34,7 +34,7 @@
 		<mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/>
 	</mx:HBox>
 	
-	<mx:HSlider id="crossSection" minimum="0.001" maximum="0.1" value="{materialModel.defaultCrossSection}" width="100%"
+	<mx:HSlider id="crossSection" minimum="{materialModel.crossSectionMin}" maximum="{materialModel.crossSectionMax}" value="{materialModel.defaultCrossSection}" width="100%"
 			dataTipPrecision="3"
             allowTrackClick="true" 
 			snapInterval="0.001"
