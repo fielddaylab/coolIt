@@ -19,6 +19,8 @@ package edu.wisc.doit.ls.coolit.view {
 	
 	import flash.geom.Point;
 	
+	import caurina.transitions.Tweener;
+	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
 	 *
@@ -37,6 +39,8 @@ package edu.wisc.doit.ls.coolit.view {
 		public var mainImageHolder:Canvas;
 		public var cutScreenView:CutScreen;
 		public var jobPanel:Panel;
+		public var loadingProgress:ChallengeLoader;
+		public var jobImage:NestedVideoView;
 		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
@@ -46,6 +50,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var materialModel:MaterialModel;
 		[Bindable] public var stateModel:StateModel;
 		
+		[Bindable] public var jobLoaded:Boolean = false;
+		
 		private var log:ILogger;
 		
 		private var _currentApplicationState:String;
@@ -54,6 +60,9 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var highestPNGButton:PNGButtonPane = coolerButton;
 		private var lowestPNGButton:PNGButtonPane = supportsButton;
+		
+		private var cutLoaded:Boolean = false;
+		private var imagesLoaded:Boolean = false;
 		
 		/*
 		 * Constructor
@@ -83,7 +92,36 @@ package edu.wisc.doit.ls.coolit.view {
 			supportsButton.addEventListener(PNGButtonPaneView.CLICK_HIT_EVENT, onSupportsClick);
 			supportsButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			cutScreenView.addEventListener(CutScreenView.CUT_DONE, onCutDone);
+			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
+			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			hasInit = true;
+		}
+		
+		private function onNestedImagesLoaded(event_p:Event):void {
+			imagesLoaded = true;
+			if(cutLoaded) {
+				jobLoaded = true;
+				startJob();
+			}
+		}
+		
+		private function onCutLoaded(event_p:Event):void {
+			cutLoaded = true;
+			if(imagesLoaded) {
+				jobLoaded = true;
+				startJob();
+			}
+		}
+		
+		private function startJob():void {
+			loadingProgress.visible = true;
+			loadingProgress.alpha = 1;
+			Tweener.addTween(loadingProgress, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:activateJob});
+		}
+		
+		private function activateJob():void {
+			loadingProgress.visible = false;
+			cutScreenView.startVideo();
 		}
 		
 		private function onCutDone(event_p:Event):void {
@@ -155,6 +193,9 @@ package edu.wisc.doit.ls.coolit.view {
 				if(hasInit) {
 					coolerPicker.dispatchSetCooler();
 					strutPicker.dispatchSetStrut();
+				}
+				if(jobLoaded) {
+					startJob();
 				}
 			}
 			_currentApplicationState = state_p;
