@@ -5,12 +5,19 @@ package edu.wisc.doit.ls.coolit.vo {
 		
 		public var core:XML;
 		
+		private var opTable:Object;
+		
 		public function RequirementVO(core_p:XML) {
 			super();
 			core = core_p;
+			opTable = new Object();
+			opTable["GE"] = "&gt;=";
+			opTable["LE"] = "&lt;=";
+			opTable["GT"] = "&gt;";
+			opTable["LT"] = "&lt;";
 		}
 		
-		public function get operation():String { return core.@Op; };
+		public function get operation():String { return opTable[core.@Op]; };
 		public function set operation(op_p:String):void { /* nada */ };
 		
 		public function get label():String { return core.@Value; };
