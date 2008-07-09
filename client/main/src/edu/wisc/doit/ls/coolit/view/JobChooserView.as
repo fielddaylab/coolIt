@@ -97,7 +97,7 @@ package edu.wisc.doit.ls.coolit.view {
 			tempRequirements = "";
 			for(var i:Number = 0; i<reqLen; i++) {
 				var curReq:RequirementVO = requirementsList.getItemAt(i) as RequirementVO;
-				tempRequirements = tempRequirements + "<br /><b>" + curReq.label + "</b>: " + curReq.target;
+				tempRequirements = tempRequirements + "<br /><b>" + curReq.label + "</b> " + curReq.operation + " <b>" + curReq.target + "</b>";
 			}
 		}
 		
