@@ -67,7 +67,7 @@
 									value="{parseInt(decFormatter.format(model.temperature))}" />
 						
 						<view:Meter id="strengthMeter" label="Strength" minimum="0" maximum="60" 
-									value="{model.stressLimit}" />
+									value="{parseInt(decFormatter.format(model.stressLimit))}" />
 									
 						<view:Meter id="powerMeter" label="Power" minimum="0" maximum="400" 
 									value="{parseInt(decFormatter.format(model.inputPower))}" />
