@@ -13,6 +13,7 @@
 	<property name="src.dir" value="${project.root}/src"/>
 	<property name="flashlib.dir" value="${lib.dir}/lsLib"/>
 	<property name="cairngorm.lib" value="${lib.dir}/lsLib/Cairngorm.swc" />
+	<property name="imagelist.lib" value="${lib.dir}/minesweeper_graphics" />
 	
 	
 	<!-- :::::: clean :::::: -->
@@ -72,6 +73,35 @@
 		<copy file="${lib.dir}/ms_cooler_over.png" todir="${dist.dir}" />
 		<copy file="${lib.dir}/ms_cooler_up.png" todir="${dist.dir}" />
 		<copy file="${lib.dir}/minesweeper_cut.flv" todir="${dist.dir}" />
+		
+	</target>
+	
+	<target name="assembleImageList">
+		<copy todir="${dist.dir}/00thickness">
+			<fileset dir="${imagelist.lib}/00thickness">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}/01thickness">
+			<fileset dir="${imagelist.lib}/01thickness">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}/02thickness">
+			<fileset dir="${imagelist.lib}/02thickness">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}/03thickness">
+			<fileset dir="${imagelist.lib}/03thickness">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}/04thickness">
+			<fileset dir="${imagelist.lib}/04thickness">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
 	</target>
 	
 	<!-- :::::: run :::::: -->
@@ -82,7 +112,7 @@
 	</target>
 	
 	<!-- collected builds -->
-	<target name="buildFlashWithLib" depends="cleanWithAs,setup,setUpAS,compile,doc,assemble" />
+	<target name="buildFlashWithLib" depends="cleanWithAs,setup,setUpAS,compile,doc,assemble,assembleImageList" />
 	<target name="radBuildAndRun" depends="compile,run"/>
 
 	<target name="build" depends="buildFlashWithLib"/>
