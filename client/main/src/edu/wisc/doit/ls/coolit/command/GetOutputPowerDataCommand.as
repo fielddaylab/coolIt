@@ -5,7 +5,7 @@ package edu.wisc.doit.ls.coolit.command {
 	import mx.collections.ArrayCollection;
 	
 	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.adobe.cairngorm.control.*;
 	
 	import edu.wisc.doit.ls.coolit.model.*;
 	import edu.wisc.doit.ls.coolit.event.*;
@@ -38,6 +38,7 @@ package edu.wisc.doit.ls.coolit.command {
 			//coolerModel.currentData.removeAll();
 			
 			var tempData:Array = new Array();
+			var outputData:Array = new Array();
 			for(var i:Number = 0; i<301; i++) {
 				var curTemp:Number = i;
 				var curData:Number = cryoLibModel.calculateOutputPower(curTemp, powerFactor, coolerModel.selected);
@@ -47,10 +48,18 @@ package edu.wisc.doit.ls.coolit.command {
 					//coolerModel.currentData.addItem(newDataPoint);
 					tempData.push(newDataPoint);
 				}
+				var newDPXML2:XML = <DataPoint><temp>{curTemp}</temp><data>{curData}</data></DataPoint>;
+				var newDataPoint2:DataPointVO = new DataPointVO(newDPXML2);
+				//coolerModel.currentData.addItem(newDataPoint);
+				outputData.push(newDataPoint2);
 			}
 			
-			coolerModel.currentData  = new ArrayCollection(tempData);
+			coolerModel.outputPowerData = new ArrayCollection(outputData);
+			coolerModel.outputPowerData.refresh();
+			coolerModel.currentData = new ArrayCollection(tempData);
 			coolerModel.currentData.refresh();
+			
+			dispatchUpdateStateCapture();
 		}
 		
 		public function result(event_p:Object):void {}
@@ -58,6 +67,12 @@ package edu.wisc.doit.ls.coolit.command {
 		public function fault(event_p:Object):void {
 			//log failure here
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
+		}
+		
+		public function dispatchUpdateStateCapture():void {
+			var updateCapture:UpdateStateCaptureEvent = new UpdateStateCaptureEvent();
+			updateCapture.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(updateCapture);
 		}
 		
 	}
