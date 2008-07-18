@@ -31,6 +31,8 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(LoginEvent.EVENT_LOGIN, LoginCommand);
 			addCommand(EnterCutScreenEvent.EVENT_ENTER_CUT, EnterCutScreenCommand);
 			addCommand(LeaveCutScreenEvent.EVENT_LEAVE_CUT, LeaveCutScreenCommand);
+			addCommand(UpdateStateCaptureEvent.EVENT_UPDATE_CAPTURE, UpdateStateCaptureCommand);
+			addCommand(AddNewStateCaptureEvent.EVENT_ADD_CAPTURE, AddNewStateCaptureCommand);
 		}	
 	}
 	
