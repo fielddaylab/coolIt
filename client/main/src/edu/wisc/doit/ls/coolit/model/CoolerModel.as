@@ -18,6 +18,7 @@ package edu.wisc.doit.ls.coolit.model {
     [Bindable] public class CoolerModel extends CommonBase {
 		public static const INPUT_POWER:String = "inputPowerData";
 		public static const OUTPUT_POWER:String = "outputPowerData";
+		public static const DEFAULT_POWER_FACTOR:Number = 1;
 		
 		public var selected:CoolerVO;
 		public var currentData:ArrayCollection;
@@ -27,7 +28,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var outputPowerMax:Number = 300;
 		public var currentPowerMax:Number = 300;
 		
-		public var defaultPowerFactor:Number = 1;
+		public var defaultPowerFactor:Number = DEFAULT_POWER_FACTOR;
 		public var defaultPowerSetting:String = OUTPUT_POWER;
 		
 		private var core:XML;
