@@ -63,6 +63,9 @@ package edu.wisc.doit.ls.coolit.model {
 			cryoLibModel = new CryoLibModel();
 			sketchData = new ArrayCollection();
 			graphColorModel = new GraphColorModel();
+			powerFactor = CoolerModel.DEFAULT_POWER_FACTOR;
+			strutLength = MaterialModel.DEFAULT_LENGTH;
+			crossSection = MaterialModel.DEFAULT_CROSS_SECTION;
 			
 			//set up default state snapshot
 			stateSnapshot = new StateSnapshotVO();
