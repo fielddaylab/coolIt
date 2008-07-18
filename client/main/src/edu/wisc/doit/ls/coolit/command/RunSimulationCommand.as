@@ -42,7 +42,8 @@ package edu.wisc.doit.ls.coolit.command {
 			model.stressLimit = parseFloat(cleanedXML.RunResult.stressLimit);
 			model.isValidSolution = (cleanedXML.RunResult.isValidSolution.toString().toLowerCase() == "true") ? true : false;
 			
-			model.updateSketchData();
+			//model.updateSketchData();
+			dispatchUpdateStateCapture();
 			//log.fatal("{0} - model.temperature: " + model.temperature, getQualifiedClassName(this) + ".fault");
 		}
 		
@@ -51,6 +52,11 @@ package edu.wisc.doit.ls.coolit.command {
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
 		
+		public function dispatchUpdateStateCapture():void {
+			var updateCapture:UpdateStateCaptureEvent = new UpdateStateCaptureEvent();
+			updateCapture.modelLocator = model;
+			CairngormEventDispatcher.getInstance().dispatchEvent(updateCapture);
+		}
 	}
 	
 }
