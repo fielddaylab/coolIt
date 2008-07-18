@@ -7,6 +7,8 @@ package edu.wisc.doit.ls.coolit.vo {
 		
 		private var core:XML;
 		private var mpList:ArrayCollection;
+		private var itcList:ArrayCollection;
+		private var tempCondMap:Object;
 		
 		public function MaterialVO(core_p:XML) {
 			super();
@@ -43,6 +45,21 @@ package edu.wisc.doit.ls.coolit.vo {
 		}
 		public function set mp(mp_p:ArrayCollection):void { /* nada */ };
 		
+		public function get itc():ArrayCollection { 
+			if(!itcList) {
+				var voList:ArrayCollection = new ArrayCollection();
+				for each (var dataPoint:XML in core.IntegratedThermalConductivity.DataPoint) {
+					var newDataPoint:DataPointVO = new DataPointVO(dataPoint);
+					voList.addItem(newDataPoint);
+				}
+					
+				itcList = voList;
+			}
+			
+			return itcList;
+		}
+		public function set itc(itc_p:ArrayCollection):void { /* nada */ };
+		
 		public function getHighestDataValue():Number {
 			var arrayList:Array = mp.toArray();
 			arrayList.sortOn("data");
@@ -50,6 +67,27 @@ package edu.wisc.doit.ls.coolit.vo {
 			var maxValue:Number = arrayList[arrayList.length-1];
 			
 			return maxValue;
+		}
+		
+		public function getConductivityForTemp(temp_p:Number):Number {
+			if(!tempCondMap) {
+				tempCondMap = new Object();
+				var curList:ArrayCollection = itc;
+				var itcLen:Number = curList.length;
+				for(var i:Number = 0; i<itcLen; i++) {
+					var curData:DataPointVO = curList.getItemAt(i) as DataPointVO;
+					tempCondMap[curData.temp] = curData.data;
+				}
+			}
+			
+			var conductivity:Number;
+			if(!tempCondMap[temp_p] || tempCondMap[temp_p] < 0) {
+				conductivity = 0;
+			} else {
+				conductivity = tempCondMap[temp_p];
+			}
+			
+			return conductivity;
 		}
 		
 		public function toString():String {
