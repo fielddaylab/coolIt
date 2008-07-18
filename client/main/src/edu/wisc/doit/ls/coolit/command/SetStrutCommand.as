@@ -36,6 +36,19 @@ package edu.wisc.doit.ls.coolit.command {
 			
 			model.servicesOut++;
 			
+			var newPropCache:Object = new Object();
+			newPropCache.length = length;
+			newPropCache.crossSection = crossSection;
+			materialModel.propertyCache.addItem(newPropCache);
+			
+			//model.strutLength = length;
+			//model.crossSection = crossSection;
+			if(materialModel.propertyCache.length > 0) {
+				var curPropCache:Object = materialModel.propertyCache.getItemAt(0) as Object;
+				model.strutLength = curPropCache.length;
+				model.crossSection = curPropCache.crossSection;
+			}
+			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setStrut(material.name, setStrutEvent.length, setStrutEvent.crossSection);
 		}
@@ -45,8 +58,12 @@ package edu.wisc.doit.ls.coolit.command {
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
 			
-			model.strutLength = length;
-			model.crossSection = crossSection;
+			//remove first item
+			if(materialModel.propertyCache.length > 0) {
+				var curPropCache:Object = materialModel.propertyCache.removeItemAt(0) as Object;
+				model.strutLength = curPropCache.length;
+				model.crossSection = curPropCache.crossSection;
+			}
 						
 			//also, now that the strut has been changed, do run sim too
 			dispatchRunSimEvent();
@@ -62,7 +79,6 @@ package edu.wisc.doit.ls.coolit.command {
 			//log failure here
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
-		
 	}
 	
 }
