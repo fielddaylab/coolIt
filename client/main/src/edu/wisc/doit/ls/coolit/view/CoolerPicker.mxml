@@ -13,7 +13,7 @@
 	<mx:Label text="Cooler" styleName="h1" />
 	<mx:Spacer height="5" />
 	
-	<mx:ComboBox id="coolerList" dataProvider="{model}" />
+	<mx:ComboBox id="coolerList" dataProvider="{model}" selectedItem="{coolerModel.selected}" />
 	
 	<mx:Spacer height="10" />
 	
@@ -21,7 +21,7 @@
 		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
 		<mx:Label text="{coolerPowerFactor.value}" />
 	</mx:HBox>
-	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="{coolerModel.defaultPowerFactor}" width="100%"
+	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="{modelLocator.powerFactor}" width="100%"
             allowTrackClick="true" 
 			snapInterval="0.01"
             liveDragging="true"/>
