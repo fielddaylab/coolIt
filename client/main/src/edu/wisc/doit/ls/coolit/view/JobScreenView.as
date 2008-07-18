@@ -41,6 +41,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var jobPanel:Panel;
 		public var loadingProgress:ChallengeLoader;
 		public var jobImage:NestedVideoView;
+		public var viewGraph:Button;
 		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
@@ -51,6 +52,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var stateModel:StateModel;
 		
 		[Bindable] public var jobLoaded:Boolean = false;
+		
+		[Bindable] public var masterGraphSelected:Boolean = false;
 		
 		private var log:ILogger;
 		
@@ -94,7 +97,12 @@ package edu.wisc.doit.ls.coolit.view {
 			cutScreenView.addEventListener(CutScreenView.CUT_DONE, onCutDone);
 			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
 			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
+			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
 			hasInit = true;
+		}
+		
+		private function onViewGraphClick(event_p:MouseEvent):void {
+			masterGraphSelected = !masterGraphSelected;
 		}
 		
 		private function onNestedImagesLoaded(event_p:Event):void {

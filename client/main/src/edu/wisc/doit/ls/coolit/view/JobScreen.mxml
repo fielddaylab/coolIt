@@ -37,10 +37,10 @@
 				<mx:VBox width="457" height="100%" styleName="noPadding">
 					<!-- image holder -->
 					
-					<mx:Canvas width="100%" height="80%" label="Component" backgroundColor="0x000000" backgroundAlpha="0.25"
+					<mx:Canvas width="100%" height="100%" label="Component" backgroundColor="0xAAAAAA"
 								verticalScrollPolicy="off" horizontalScrollPolicy="off">
 						
-						<mx:Canvas id="mainImageHolder" width="457" height="280" verticalCenter="0">
+						<mx:Canvas id="mainImageHolder" width="457" height="280" verticalCenter="0" visible="{!masterGraphSelected}">
 							
 							<view:NestedVideoView id="jobImage" width="457" height="100%"
 										verticalAlign="middle" horizontalAlign="center" 
@@ -58,10 +58,14 @@
 							
 						</mx:Canvas>
 						
+						<view:MasterGraph id="masterGraph" width="100%" height="100%" backgroundColor="0xAAAAAA" stateSnapshot="{model.stateSnapshot}"
+												modelLocator="{model}" coolerModel="{coolerModel}" coolerData="{coolerModel.currentData}"
+												selected="{masterGraphSelected}" visible="{masterGraphSelected}" />
+						
 					</mx:Canvas>
 					
 					<!-- details box -->
-					<mx:HBox width="100%" height="20%" horizontalAlign="left">
+					<mx:HBox width="100%" height="90" horizontalAlign="left">
 						
 						<view:Meter id="tempMeter" label="Temp" minimum="150" maximum="500" 
 									value="{parseInt(decFormatter.format(model.temperature))}" />
@@ -75,7 +79,8 @@
 						<mx:VBox fontSize="10">
 							<mx:HBox>
 								<mx:Label text="Cost:" fontWeight="bold" />
-								<mx:Label text="{usdFormatter.format(model.cost)}" />
+								<!-- <mx:Label text="{usdFormatter.format(model.cost)}" /> -->
+								<mx:Label text="N/A" />
 							</mx:HBox> 
 							<mx:HBox>
 								<mx:Label text="Bal:" fontWeight="bold" />
@@ -119,7 +124,7 @@
 	
 		<!-- cutscreen verticalCenter="-40"  -->
 		<view:CutScreen id="cutScreenView" model="{model}" currentApplicationState="{model.stateModel.currentState}" 
-							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="76" />
+							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="55" />
 		
 		<!-- loading screen -->
 		<view:ChallengeLoader id="loadingProgress" horizontalCenter="0" verticalCenter="0" />

@@ -39,8 +39,9 @@
                 <mx:Label text="{usdFormatter.format(model.jobModel.selected.pay)}" fontWeight="none"/>
             </mx:FormItem>
 			
-			<mx:FormItem label="Requirements:" width="100%">
-				<mx:Text fontWeight="none" width="100%" htmlText="{tempRequirements}" />
+			<mx:FormItem label="Requirements:" width="100%" height="100%">
+				<mx:TextArea fontWeight="none" width="100%" height="100%" backgroundAlpha="0" borderStyle="none" 
+								editable="false" htmlText="{tempRequirements}" />
             </mx:FormItem>
         </mx:Form>
 	</mx:VBox>
