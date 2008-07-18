@@ -92,10 +92,12 @@ package edu.wisc.doit.ls.coolit.view {
 			crossSection.addEventListener(MouseEvent.MOUSE_DOWN, onCrossSectionDown);
 			crossSection.addEventListener(MouseEvent.MOUSE_UP, onCrossSectionUp);
 			crossSection.addEventListener(MouseEvent.MOUSE_MOVE, onCrossSectionMove);
+			crossSection.addEventListener(MouseEvent.MOUSE_OUT, onCrossSectionOut);
 			
 			lengthM.addEventListener(MouseEvent.MOUSE_DOWN, onLengthDown);
 			lengthM.addEventListener(MouseEvent.MOUSE_UP, onLengthUp);
 			lengthM.addEventListener(MouseEvent.MOUSE_MOVE, onLengthMove);
+			lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
 		}
 		
 		private function onSliderChange(event_p:SliderEvent):void {
@@ -114,6 +116,10 @@ package edu.wisc.doit.ls.coolit.view {
 			dispatchSetStrut();
 		}
 		
+		private function onCrossSectionOut(event_p:MouseEvent):void {
+			crossSectionDown = false;
+		}
+		
 		private function onCrossSectionMove(event_p:MouseEvent):void {
 			crossSectionDisplay.text = crossSection.value.toString()
 			if(crossSectionDown) {
@@ -123,6 +129,10 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onLengthDown(event_p:MouseEvent):void {
 			lengthDown = true;
+		}
+		
+		private function onLengthOut(event_p:MouseEvent):void {
+			lengthDown = false;
 		}
 		
 		private function onLengthUp(event_p:MouseEvent):void {
