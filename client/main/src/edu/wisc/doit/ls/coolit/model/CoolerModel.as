@@ -21,6 +21,7 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var selected:CoolerVO;
 		public var currentData:ArrayCollection;
+		public var outputPowerData:ArrayCollection;
 		public var tempMax:Number = 300;
 		public var inputPowerMax:Number = 300;
 		public var outputPowerMax:Number = 300;

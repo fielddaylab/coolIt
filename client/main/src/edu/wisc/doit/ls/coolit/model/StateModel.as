@@ -20,6 +20,9 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var currentCutSource:*;
 		
+		//manages if services are out
+		public var setStrutCommandOut:Boolean = false;
+		
 		public function StateModel() {
 			currentState = StateModel.LOGIN_SCREEN;
 		}

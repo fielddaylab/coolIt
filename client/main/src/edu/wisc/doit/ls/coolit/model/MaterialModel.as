@@ -32,10 +32,13 @@ package edu.wisc.doit.ls.coolit.model {
 		private var core:XML;
 		private var materialList:ArrayCollection;
 		
+		public var propertyCache:ArrayCollection;
+		
 		public function MaterialModel(core_p:XML) {
 			super();
 			core = core_p;
 			currentData = new ArrayCollection();
+			propertyCache = new ArrayCollection();
 		}
 		
 		public function get materials():ArrayCollection {

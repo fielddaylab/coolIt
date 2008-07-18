@@ -22,6 +22,9 @@ package edu.wisc.doit.ls.coolit.model {
 		public var crossSection:Number;
 		public var powerSetting:String;
 		
+		public var stateSnapshot:StateSnapshotVO;
+		public var snapshotList:ArrayCollection;
+		
 		public var sketchData:ArrayCollection;
 		
 		public var jobModel:JobModel;
@@ -29,6 +32,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var materialModel:MaterialModel;
 		public var stateModel:StateModel;
 		public var cryoLibModel:CryoLibModel;
+		public var graphColorModel:GraphColorModel;
 		
 		public var servicesOut:Number = 0;
 		
@@ -58,6 +62,12 @@ package edu.wisc.doit.ls.coolit.model {
 			stateModel = new StateModel();
 			cryoLibModel = new CryoLibModel();
 			sketchData = new ArrayCollection();
+			graphColorModel = new GraphColorModel();
+			
+			//set up default state snapshot
+			stateSnapshot = new StateSnapshotVO();
+			snapshotList = new ArrayCollection();
+			snapshotList.addItem(stateSnapshot);
 		}
 		
 		public function updateSketchData():void {
