@@ -28,5 +28,15 @@
         <data>113.472444562049</data>
       </DataPoint>
     </MP>
+	<IntegratedThermalConductivity>
+      <DataPoint>
+        <temp>4</temp>
+        <data>72468.7663043377</data>
+      </DataPoint>
+      <DataPoint>
+        <temp>5</temp>
+        <data>72403.6179423766</data>
+      </DataPoint>
+	</IntegratedThermalConductivity>
   </Material>
 </ArrayOfMaterial>
