@@ -33,6 +33,8 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(LeaveCutScreenEvent.EVENT_LEAVE_CUT, LeaveCutScreenCommand);
 			addCommand(UpdateStateCaptureEvent.EVENT_UPDATE_CAPTURE, UpdateStateCaptureCommand);
 			addCommand(AddNewStateCaptureEvent.EVENT_ADD_CAPTURE, AddNewStateCaptureCommand);
+			addCommand(RemoveStateCaptureEvent.EVENT_REMOVE_CAPTURE, RemoveStateCaptureCommand);
+			addCommand(SelectStateCaptureEvent.EVENT_SELECT_CAPTURE, SelectStateCaptureCommand);
 		}	
 	}
 	
