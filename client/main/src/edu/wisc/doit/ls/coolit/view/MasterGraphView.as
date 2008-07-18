@@ -33,10 +33,12 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		//MXML components
 		public var addEntry:Button;
+		public var removeEntry:Button;
 		[Bindable] public var decFormatter:NumberFormatter;
 		[Bindable] public var lineChart:LineChart;
 		[Bindable] public var mainHorizontalAxis:LinearAxis;
 		[Bindable] public var mainVerticalAxis:LinearAxis;
+		[Bindable] public var snapList:DataGrid;
 		
 		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var coolerData:ArrayCollection;
@@ -68,7 +70,24 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
-			addEntry.addEventListener(MouseEvent.CLICK, onAddEntryClick);		
+			addEntry.addEventListener(MouseEvent.CLICK, onAddEntryClick);
+			removeEntry.addEventListener(MouseEvent.CLICK, onRemoveEntryClick);
+			snapList.addEventListener(Event.CHANGE, onCaptureChange);
+		}
+		
+		private function onCaptureChange(event_p:Event):void {
+			var selCapture:StateSnapshotVO = snapList.selectedItem as StateSnapshotVO;
+			
+			var selectCapture:SelectStateCaptureEvent = new SelectStateCaptureEvent();
+			selectCapture.modelLocator = modelLocator;
+			selectCapture.stateSnapshot = selCapture;
+			CairngormEventDispatcher.getInstance().dispatchEvent(selectCapture);
+		}
+		
+		private function onRemoveEntryClick(event_p:MouseEvent):void {
+			var removeNewCapture:RemoveStateCaptureEvent = new RemoveStateCaptureEvent();
+			removeNewCapture.modelLocator = modelLocator;
+			CairngormEventDispatcher.getInstance().dispatchEvent(removeNewCapture);
 		}
 		
 		private function onAddEntryClick(event_p:MouseEvent):void {
@@ -131,14 +150,6 @@ package edu.wisc.doit.ls.coolit.view {
 						if(curSnapshot.highestDataValue > highestValue) {
 							highestValue = curSnapshot.highestDataValue;
 						}
-						
-						//create a new linear axis to use
-						//<mx:LinearAxis id="v2" minimum="150" maximum="170"/>
-						/*
-						var newAxis:LinearAxis = new LinearAxis();
-						newAxis.minimum = 0;
-						newAxis.maximum = curSnapshot.highestDataValue;
-						*/
 						 
 						var lineSeries1:LineSeries = new LineSeries();
 						lineSeries1.id = "id1" + i;
