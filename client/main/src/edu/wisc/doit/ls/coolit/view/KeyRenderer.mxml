@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalAlign="center" verticalAlign="middle">
+	<mx:Canvas width="100%" backgroundColor="{data.heatLeakStroke.color}" backgroundAlpha="{data.heatLeakStroke.alpha}">
+		<mx:Label text="Heat Leak" color="0x000000" horizontalCenter="0" />
+	</mx:Canvas>
+	<mx:Canvas width="100%" backgroundColor="{data.coolerStroke.color}" backgroundAlpha="{data.coolerStroke.alpha}">
+		<mx:Label text="Output Cooling" color="0x000000" horizontalCenter="0" />
+	</mx:Canvas>
+</mx:Box>
