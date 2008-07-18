@@ -47,6 +47,7 @@ package edu.wisc.doit.ls.coolit.command {
 				var curPropCache:Object = materialModel.propertyCache.getItemAt(0) as Object;
 				model.strutLength = curPropCache.length;
 				model.crossSection = curPropCache.crossSection;
+				materialModel.selected = material;
 			}
 			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
@@ -63,6 +64,7 @@ package edu.wisc.doit.ls.coolit.command {
 				var curPropCache:Object = materialModel.propertyCache.removeItemAt(0) as Object;
 				model.strutLength = curPropCache.length;
 				model.crossSection = curPropCache.crossSection;
+				materialModel.selected = material;
 			}
 						
 			//also, now that the strut has been changed, do run sim too
