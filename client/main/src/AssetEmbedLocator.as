@@ -12,6 +12,8 @@ package {
 		[Embed(source="../skin/images/gen_dude.jpg")] public static var genDude:Class;
 		[Embed(source="../skin/images/challenge_loading.swf")] public static var challengeLoader:Class;
 		[Embed(source="../skin/images/spinner.swf")] public static var spinner:Class;
+		[Embed(source="../skin/images/camera.png")] public static var camera:Class;
+		[Embed(source="../skin/images/watts_text.swf")] public static var wattsText:Class;
 		
 		public static var greekText1:String = "You are a .... no dicant conceptam eum. Fugit nostro ex sed, his ex feugait periculis spless " + 
 												"No dicant conceptam eum. Fugit nostro ex sed, his ex feugait periculis ff" +
