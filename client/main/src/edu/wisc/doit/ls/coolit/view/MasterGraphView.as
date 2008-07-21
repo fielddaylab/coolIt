@@ -127,7 +127,9 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onProviderChange(event_p:CollectionEvent):void {
-			invalidateProperties();
+			if(_selected) {
+				invalidateProperties();
+			}
 		}
 		
 		override protected function commitProperties():void {
