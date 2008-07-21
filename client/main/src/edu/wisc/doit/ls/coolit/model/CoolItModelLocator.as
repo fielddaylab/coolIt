@@ -11,6 +11,8 @@ package edu.wisc.doit.ls.coolit.model {
 	public class CoolItModelLocator implements ModelLocator {
 		private static var modelLocator:CoolItModelLocator;
 		
+		public var runSimCount:Number = 0;
+		
 		public var bankBalance:Number = 1500;
 		public var temperature:Number;
 		public var inputPower:Number;
