@@ -59,7 +59,7 @@ package edu.wisc.doit.ls.coolit.command {
 			coolerModel.currentData = new ArrayCollection(tempData);
 			coolerModel.currentData.refresh();
 			
-			dispatchUpdateStateCapture();
+			//dispatchUpdateStateCapture();
 		}
 		
 		public function result(event_p:Object):void {}
