@@ -27,12 +27,14 @@ package edu.wisc.doit.ls.coolit.command {
 			model = runSimEvent.modelLocator;
 			
 			model.servicesOut++;
+			model.runSimCount++;
 			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.run();
 		}
 		
 		public function result(event_p:Object):void {
+			model.runSimCount--;
 			model.servicesOut--;
 			//set the current data with the current material data
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);
@@ -43,7 +45,9 @@ package edu.wisc.doit.ls.coolit.command {
 			model.isValidSolution = (cleanedXML.RunResult.isValidSolution.toString().toLowerCase() == "true") ? true : false;
 			
 			//model.updateSketchData();
-			dispatchUpdateStateCapture();
+			if(model.runSimCount == 0) {
+				dispatchUpdateStateCapture();
+			}
 			//log.fatal("{0} - model.temperature: " + model.temperature, getQualifiedClassName(this) + ".fault");
 		}
 		
