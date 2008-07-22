@@ -9,8 +9,12 @@
 		<mx:Canvas id="loginHolder">
 			<!-- <mx:Label text="Account ID:" />
 			<mx:TextInput id="accountId" /> -->
-			<mx:Label text="Services initializing..." fontSize="12" verticalCenter="0" horizontalCenter="0"
-						visible="{(model.servicesOut &gt; 0) ? true : false}"/>
+			<mx:HBox visible="{(model.servicesOut &gt; 0) ? true : false}" verticalCenter="0" horizontalCenter="0"
+				verticalAlign="middle" horizontalAlign="center">
+				<mx:Label text="Services initializing" fontSize="12" />
+				<mx:Image source="{AssetEmbedLocator.spinner}" width="35" height="35" />
+			</mx:HBox>
+			
 			<mx:Button id="login" label="Start" verticalCenter="0" horizontalCenter="0" styleName="jumboButton"
 						visible="{(model.servicesOut &gt; 0) ? false : true}"/>
 		</mx:Canvas>
