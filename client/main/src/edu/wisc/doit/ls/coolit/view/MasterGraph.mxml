@@ -28,7 +28,8 @@
 		<mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 			<mx:Image id="yGraphic" source="{AssetEmbedLocator.wattsText}" width="19" height="37" />
 			
-			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true">
+			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true"
+							dataTipFunction="{dataTipFunction}">
 				<mx:horizontalAxis>
 						<mx:LinearAxis id="mainHorizontalAxis" minimum="0" maximum="300" />
 				</mx:horizontalAxis>
@@ -48,20 +49,47 @@
 		
 	</mx:VBox>
 	
+	<mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center"
+				styleName="jobBox" backgroundColor="0x000000" backgroundAlpha="0.05">
+		<mx:VBox width="150" height="100%">
+			<mx:DataGrid id="snapList" width="100%" height="150" dataProvider="{modelLocator.snapshotList}" selectedItem="{stateSnapshot}"
+						draggableColumns="false" resizableColumns="false" variableRowHeight="true" wordWrap="true">
+				<mx:columns>
+					<mx:DataGridColumn itemRenderer="edu.wisc.doit.ls.coolit.view.KeyRenderer" headerText="Key" width="100" />
+					<!-- <mx:DataGridColumn dataField="description" headerText="State" /> -->
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:Button id="addEntry" toolTip="Add New Snapshot" icon="{AssetEmbedLocator.camera}" height="18" />
+				<mx:Button id="removeEntry" label="-" toolTip="Remove Selected" visible="{(modelLocator.snapshotList.length &gt; 1) ? true : false}" height="18" />
+			</mx:HBox>
+		</mx:VBox>
+		
+		<!-- props var -->
+		<mx:Form height="100%" fontWeight="bold" verticalGap="3" fontSize="11">
+            <mx:FormItem label="Material:">
+				<mx:LinkButton label="{stateSnapshot.material}" styleName="formTextLink" click="{selectSupports()}" />
+            </mx:FormItem>
+			
+           <mx:FormItem label="Strut Length:">
+				<mx:LinkButton label="{stateSnapshot.strutLength}" styleName="formTextLink" click="{selectSupports()}" />
+            </mx:FormItem>
+			
+			<mx:FormItem label="Cross Section:">
+				<mx:LinkButton label="{stateSnapshot.crossSection}" styleName="formTextLink" click="{selectSupports()}" />
+            </mx:FormItem>
+			
+			<mx:FormItem label="Cooler:">
+				<mx:LinkButton label="{stateSnapshot.cooler}" styleName="formTextLink" click="{selectCoolers()}" />
+            </mx:FormItem>
+			
+			<mx:FormItem label="Power Factor:">
+                <mx:LinkButton label="{stateSnapshot.powerFactor}" styleName="formTextLink" click="{selectCoolers()}" />
+            </mx:FormItem>
+        </mx:Form>
+		
+	</mx:HBox>
 	
-	<mx:VBox height="100%" width="100%" styleName="jobBox" backgroundColor="0x000000" backgroundAlpha="0.05">
-		<mx:DataGrid id="snapList" width="100%" height="150" dataProvider="{modelLocator.snapshotList}" selectedItem="{stateSnapshot}"
-					draggableColumns="false" resizableColumns="false" variableRowHeight="true" wordWrap="true">
-			<mx:columns>
-				<mx:DataGridColumn itemRenderer="edu.wisc.doit.ls.coolit.view.KeyRenderer" headerText="Key" width="100" />
-				<mx:DataGridColumn dataField="description" headerText="State" />
-			</mx:columns>
-		</mx:DataGrid>
-		<mx:HBox width="100%" verticalAlign="middle">
-			<mx:Button id="addEntry" toolTip="Add New Snapshot" icon="{AssetEmbedLocator.camera}" height="18" />
-			<mx:Button id="removeEntry" label="-" toolTip="Remove Selected" visible="{(modelLocator.snapshotList.length &gt; 1) ? true : false}" height="18" />
-		</mx:HBox>
-	</mx:VBox>
 	<!-- <mx:Legend dataProvider="{lineChart}"/> -->
 	
 </view:MasterGraphView>

@@ -103,6 +103,16 @@ package edu.wisc.doit.ls.coolit.view {
 			dispatchEvent(pickerEvent);
 		}
 		
+		public function selectCoolers():void {
+			var pickerEvent:Event = new Event(COOLERS);
+			dispatchEvent(pickerEvent);
+		}
+		
+		public function selectSupports():void {
+			var pickerEvent:Event = new Event(SUPPORTS);
+			dispatchEvent(pickerEvent);
+		}
+		
 		private function onBackClick(event_p:MouseEvent):void {
 			var backEvent:Event = new Event(BACK_EVENT);
 			dispatchEvent(backEvent);
@@ -185,11 +195,11 @@ package edu.wisc.doit.ls.coolit.view {
 						if(curSnapshot.highestDataValue > highestValue) {
 							highestValue = curSnapshot.highestDataValue;
 						}
-						 
+						
 						var lineSeries1:LineSeries = new LineSeries();
 						lineSeries1.id = "id1" + i;
 						lineSeries1.yField = "coolingOutputWatts";
-						lineSeries1.displayName = "Output Cooling Power (Watts) " + (i + 1);
+						lineSeries1.displayName = "Output Cooling Power (Watts)";
 						lineSeries1.verticalAxis = mainVerticalAxis;
 						lineSeries1.horizontalAxis = mainHorizontalAxis;
 						lineSeries1.dataProvider = curSnapshot.captureData;
@@ -198,7 +208,7 @@ package edu.wisc.doit.ls.coolit.view {
 						var lineSeries2:LineSeries = new LineSeries();
 						lineSeries2.id = "id2" + i;
 						lineSeries2.yField = "heatLeakWatts";
-						lineSeries2.displayName = "Heat Leak (Watts) " + (i + 1);
+						lineSeries2.displayName = "Heat Leak (Watts)";
 						lineSeries2.verticalAxis = mainVerticalAxis;
 						lineSeries2.horizontalAxis = mainHorizontalAxis;
 						lineSeries2.dataProvider = curSnapshot.captureData;
@@ -219,5 +229,15 @@ package edu.wisc.doit.ls.coolit.view {
 			
 		}
 		
+		public function dataTipFunction(hitData_p:HitData):String {
+			var temperature:String = decFormatter.format(hitData_p.item.temperature);
+			var coolingOutputWatts:String = decFormatter.format(hitData_p.item.coolingOutputWatts);
+			var heatLeakWatts:String = decFormatter.format(hitData_p.item.heatLeakWatts);
+			var dataTip:String = "<b>Temp:</b> " + temperature + "<br/>";
+			dataTip += "<b>Cooling Power:</b> " + coolingOutputWatts + "<br/>";
+			dataTip += "<b>Heat Leak: </b>" + heatLeakWatts;
+			
+			return dataTip;
+		}
 	}
 }
