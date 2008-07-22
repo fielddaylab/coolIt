@@ -39,6 +39,7 @@ package edu.wisc.doit.ls.coolit.command {
 			coolerModel.selected = stateSnapshot.cooler;
 			materialModel.selected = stateSnapshot.material;
 			model.powerFactor = stateSnapshot.powerFactor;
+			model.powerSetting = CoolerModel.OUTPUT_POWER;
 			model.strutLength = stateSnapshot.strutLength;
 			model.crossSection = stateSnapshot.crossSection;
 			
