@@ -10,6 +10,8 @@
 	<property name="dist.dir" value="${project.root}/dist"/>
 	<property name="tools.dir" value="${project.root}/tools"/>
 	<property name="lib.dir" value="${project.root}/lib"/>
+	<property name="skin.dir" value="${project.root}/skin"/>
+	<property name="skinimages.dir" value="${skin.dir}/images"/>
 	<property name="src.dir" value="${project.root}/src"/>
 	<property name="flashlib.dir" value="${lib.dir}/lsLib"/>
 	<property name="cairngorm.lib" value="${lib.dir}/lsLib/Cairngorm.swc" />
@@ -63,7 +65,9 @@
 	
 	<!-- :::::: assemble :::::: -->
 	<target name="assemble">
-		<copy file="${lib.dir}/myApp.html" tofile="${dist.dir}/index.html" />
+		<copy file="${lib.dir}/myApp.html" tofile="${dist.dir}/coolit.html" />
+		<copy file="${lib.dir}/launcher.html" tofile="${dist.dir}/index.html" />
+		<copy file="${skinimages.dir}/splash.png" todir="${dist.dir}" />
 		<copy file="${lib.dir}/swfobject.js" todir="${dist.dir}" />
 		<copy file="${lib.dir}/minesweeper.jpg" todir="${dist.dir}" />
 		<copy file="${lib.dir}/ms_support_down.png" todir="${dist.dir}" />
