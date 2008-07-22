@@ -51,6 +51,8 @@ package edu.wisc.doit.ls.coolit.command {
 			newSnapshot.coolerStroke = newColorSet.getItemAt(0) as Stroke;
 			newSnapshot.heatLeakStroke = newColorSet.getItemAt(1) as Stroke;
 			
+			model.powerSetting = CoolerModel.OUTPUT_POWER;
+			
 			model.snapshotList.addItem(newSnapshot);
 			model.stateSnapshot = null;
 			model.stateSnapshot = newSnapshot;
