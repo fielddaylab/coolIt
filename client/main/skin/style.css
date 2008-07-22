@@ -35,6 +35,11 @@ Panel {
 	border-thickness-right: 0px;
 }
 
+.formTextLink {
+	font-weight: none;
+	text-decoration: underline;
+}
+
 .jobBox {
 	padding-top: 10px;
 	padding-bottom: 10px;
