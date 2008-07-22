@@ -71,6 +71,7 @@ package edu.wisc.doit.ls.coolit.model {
 			powerFactor = CoolerModel.DEFAULT_POWER_FACTOR;
 			strutLength = MaterialModel.DEFAULT_LENGTH;
 			crossSection = MaterialModel.DEFAULT_CROSS_SECTION;
+			powerSetting = CoolerModel.OUTPUT_POWER;
 			
 			//set up default state snapshot
 			stateSnapshot = new StateSnapshotVO();
