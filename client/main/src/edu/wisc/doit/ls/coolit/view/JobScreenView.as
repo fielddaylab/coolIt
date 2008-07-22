@@ -42,6 +42,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var loadingProgress:ChallengeLoader;
 		public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
+		public var masterGraph:MasterGraphView;
 		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
@@ -98,7 +99,14 @@ package edu.wisc.doit.ls.coolit.view {
 			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
 			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
+			masterGraph.addEventListener(MasterGraphView.BACK_EVENT, onMasterGraphBackClick);
+			masterGraph.addEventListener(MasterGraphView.COOLERS, onMasterGraphCoolerClick);
+			masterGraph.addEventListener(MasterGraphView.SUPPORTS, onMasterGraphSupportClick);
 			hasInit = true;
+		}
+		
+		private function onMasterGraphBackClick(event_p:Event):void {
+			masterGraphSelected = false;
 		}
 		
 		private function onViewGraphClick(event_p:MouseEvent):void {
@@ -140,16 +148,34 @@ package edu.wisc.doit.ls.coolit.view {
 			mainImageHolder.swapChildren(supportsButton, coolerButton);
 		}
 		
+		private function onMasterGraphCoolerClick(event_p:Event):void {
+			selectCoolerPicker();
+		}
+		
+		private function onMasterGraphSupportClick(event_p:Event):void {
+			selectSupportPicker();
+		}
+		
 		private function onCoolerClick(event_p:Event):void {
-			pickerViewstack.selectedIndex = 1;
-			coolerButton.selected = true;
-			supportsButton.selected = false;
+			selectCoolerPicker();
 		}
 		
 		private function onSupportsClick(event_p:Event):void {
+			selectSupportPicker();
+		}
+		
+		private function selectSupportPicker():void {
 			pickerViewstack.selectedIndex = 2;
 			supportsButton.selected = true;
 			coolerButton.selected = false;
+			masterGraph.selectedPickerIndex = 1;
+		}
+		
+		private function selectCoolerPicker():void {
+			pickerViewstack.selectedIndex = 1;
+			coolerButton.selected = true;
+			supportsButton.selected = false;
+			masterGraph.selectedPickerIndex = 0;
 		}
 		
 		private function onMainWorkAreaChange(event_p:IndexChangedEvent):void {

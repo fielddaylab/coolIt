@@ -17,7 +17,7 @@
 		
 		<!-- main job panel -->
 		<mx:Panel id="jobPanel" title="{jobModel.selected.name}" styleName="jobPanel" visible="false"
-					titleStyleName="largeWhiteTitle" width="800" height="600" verticalCenter="0" horizontalCenter="0">
+					titleStyleName="largeWhiteTitle" width="983" height="600" verticalCenter="0" horizontalCenter="0">
 			
 			<!-- main job details here -->
 			<mx:HBox width="100%" height="100%" styleName="jobBox">
@@ -34,31 +34,31 @@
 				</mx:Panel>
 				
 				<!-- left stack -->
-				<mx:VBox width="457" height="100%" styleName="noPadding">
+				<mx:VBox width="{model.mainMediaWidth}" height="100%" styleName="noPadding">
 					<!-- image holder -->
 					
-					<mx:Canvas width="100%" height="100%" label="Component" backgroundColor="0xAAAAAA"
+					<mx:Canvas width="100%" height="100%" label="Component" backgroundColor="0xFFFFFF"
 								verticalScrollPolicy="off" horizontalScrollPolicy="off">
 						
-						<mx:Canvas id="mainImageHolder" width="457" height="280" verticalCenter="0" visible="{!masterGraphSelected}">
+						<mx:Canvas id="mainImageHolder" width="{model.mainMediaWidth}" height="{model.mainMediaHeight}" verticalCenter="0" visible="{!masterGraphSelected}">
 							
-							<view:NestedVideoView id="jobImage" width="457" height="100%"
+							<view:NestedVideoView id="jobImage" width="{model.mainMediaWidth}" height="{model.mainMediaHeight}"
 										verticalAlign="middle" horizontalAlign="center" 
 										firstDimensionMax="{materialModel.crossSectionMax}" firstDimensionMin="{materialModel.crossSectionMin}"
 										secondDimensionMax="{materialModel.lengthMax}" secondDimensionMin="{materialModel.lengthMin}"
 										firstDimensionValue="{model.crossSection}" secondDimensionValue="{model.strutLength}" />
 							
-							<view:PNGButtonPane id="supportsButton" width="457" height="100%" 
+							<view:PNGButtonPane id="supportsButton" width="{model.mainMediaWidth}" height="100%" 
 									upImage="./ms_support_up.png" overImage="./ms_support_over.png" downImage="./ms_support_down.png"
 									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 									
-							<view:PNGButtonPane id="coolerButton" width="457" height="100%" 
+							<view:PNGButtonPane id="coolerButton" width="{model.mainMediaWidth}" height="100%" 
 									upImage="./ms_cooler_up.png" overImage="./ms_cooler_over.png" downImage="./ms_cooler_down.png"
 									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 							
 						</mx:Canvas>
 						
-						<view:MasterGraph id="masterGraph" width="100%" height="100%" backgroundColor="0xAAAAAA" stateSnapshot="{model.stateSnapshot}"
+						<view:MasterGraph id="masterGraph" width="100%" height="100%" backgroundColor="0xFFFFFF" stateSnapshot="{model.stateSnapshot}"
 												modelLocator="{model}" coolerModel="{coolerModel}" coolerData="{coolerModel.currentData}"
 												selected="{masterGraphSelected}" visible="{masterGraphSelected}" />
 						
@@ -124,7 +124,8 @@
 	
 		<!-- cutscreen verticalCenter="-40"  -->
 		<view:CutScreen id="cutScreenView" model="{model}" currentApplicationState="{model.stateModel.currentState}" 
-							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="55" />
+							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="55" 
+							mediaWidth="{model.mainMediaWidth}" mediaHeight="{model.mainMediaHeight}" />
 		
 		<!-- loading screen -->
 		<view:ChallengeLoader id="loadingProgress" horizontalCenter="0" verticalCenter="0" />

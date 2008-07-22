@@ -30,10 +30,15 @@ package edu.wisc.doit.ls.coolit.view {
 	 *  @author Ben Longoria
 	 */
 	public class MasterGraphView extends VBox {		
+		public static var BACK_EVENT:String = "edu.wisc.doit.ls.coolit.MasterGraphView.backEvent";
+		public static var COOLERS:String = "coolers";
+		public static var SUPPORTS:String = "supports";
 		
 		//MXML components
 		public var addEntry:Button;
 		public var removeEntry:Button;
+		public var backToMain:Button;
+		public var pickerSelector:ComboBox;
 		[Bindable] public var decFormatter:NumberFormatter;
 		[Bindable] public var lineChart:LineChart;
 		[Bindable] public var mainHorizontalAxis:LinearAxis;
@@ -45,6 +50,9 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var coolerModel:CoolerModel;
 		[Bindable] public var stateSnapshot:StateSnapshotVO;
 		
+		[Bindable] public var selectedPickerIndex:Number = 0;
+		[Bindable] public var pickersProvider:ArrayCollection;
+		
 		private var _selected:Boolean = false;
 		private var _dataProvider:ArrayCollection;
 		
@@ -55,6 +63,18 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		public function MasterGraphView():void {
 			super();
+			
+			var picker1:Object = new Object();
+			picker1.label = "Coolers ->";
+			picker1.data = COOLERS;
+			
+			var picker2:Object = new Object();
+			picker2.label = "Supports ->";
+			picker2.data = SUPPORTS;
+			
+			pickersProvider = new ArrayCollection();
+			pickersProvider.addItem(picker1);
+			pickersProvider.addItem(picker2);
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -73,6 +93,19 @@ package edu.wisc.doit.ls.coolit.view {
 			addEntry.addEventListener(MouseEvent.CLICK, onAddEntryClick);
 			removeEntry.addEventListener(MouseEvent.CLICK, onRemoveEntryClick);
 			snapList.addEventListener(Event.CHANGE, onCaptureChange);
+			backToMain.addEventListener(MouseEvent.CLICK, onBackClick);
+			pickerSelector.addEventListener(Event.CHANGE, onSelectPicker);
+		}
+		
+		private function onSelectPicker(event_p:Event):void {
+			var selItem:Object = pickerSelector.selectedItem as Object;
+			var pickerEvent:Event = new Event(selItem.data);
+			dispatchEvent(pickerEvent);
+		}
+		
+		private function onBackClick(event_p:MouseEvent):void {
+			var backEvent:Event = new Event(BACK_EVENT);
+			dispatchEvent(backEvent);
 		}
 		
 		private function onCaptureChange(event_p:Event):void {

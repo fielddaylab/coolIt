@@ -7,8 +7,9 @@
 			id="cutScreenMovie"
             source="./minesweeper_cut.flv"
 			autoPlay="false"
-            width="457" 
-            height="280"
+			autoRewind="false"
+            width="{mediaWidth}" 
+            height="{mediaHeight}"
 			visible="false" />
 		<!-- <mx:Spacer width="198" /> -->
 		<mx:Spacer id="shiftSpacerWidth" width="0" />

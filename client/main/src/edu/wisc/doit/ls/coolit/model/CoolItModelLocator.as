@@ -11,6 +11,9 @@ package edu.wisc.doit.ls.coolit.model {
 	public class CoolItModelLocator implements ModelLocator {
 		private static var modelLocator:CoolItModelLocator;
 		
+		public var mainMediaWidth:Number = 640;
+		public var mainMediaHeight:Number = 360;
+		
 		public var runSimCount:Number = 0;
 		
 		public var bankBalance:Number = 1500;

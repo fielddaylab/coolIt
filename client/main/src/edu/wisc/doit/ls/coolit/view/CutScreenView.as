@@ -34,6 +34,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var heightPushAmount:Number = 0;
 		[Bindable] public var widthPushAmount:Number = 0;
+		[Bindable] public var mediaWidth:Number = 457;
+		[Bindable] public var mediaHeight:Number = 280;
 		
 		private var _currentApplicationState:String;
 		
@@ -61,6 +63,7 @@ package edu.wisc.doit.ls.coolit.view {
 			
 			if(state_p != StateModel.JOB_SCREEN) {
 				cutScreenMovie.visible = false;
+				cutScreenMovie.play();
 				cutScreenMovie.stop();
 			} else {
 				visible = true;

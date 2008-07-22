@@ -13,10 +13,10 @@
 	
 	<mx:Spacer height="5" />
 	
-	<mx:HBox width="100%" paddingLeft="5" paddingRight="5">
-		<mx:Button id="backToMain" label="&lt;- Back" enabled="false" />
+	<mx:HBox width="100%" paddingLeft="10" paddingRight="10">
+		<mx:Button id="backToMain" label="Back" />
 		<mx:Spacer width="100%" />
-		<mx:ComboBox id="flipPickers" dataProvider="{['Cooler ->', 'Supports ->']}" enabled="false" />
+		<mx:ComboBox id="pickerSelector" dataProvider="{pickersProvider}" selectedIndex="{selectedPickerIndex}" />
 	</mx:HBox>
 	
 	<mx:Spacer height="3" />
@@ -28,7 +28,7 @@
 		<mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 			<mx:Image id="yGraphic" source="{AssetEmbedLocator.wattsText}" width="19" height="37" />
 			
-			<mx:LineChart id="lineChart" width="100%" height="100%" dataTipMode="multiple" showDataTips="true">
+			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true">
 				<mx:horizontalAxis>
 						<mx:LinearAxis id="mainHorizontalAxis" minimum="0" maximum="300" />
 				</mx:horizontalAxis>
@@ -49,7 +49,7 @@
 	</mx:VBox>
 	
 	
-	<mx:VBox height="100%" width="100%" styleName="jobBox" backgroundColor="0x000000" backgroundAlpha="0.15">
+	<mx:VBox height="100%" width="100%" styleName="jobBox" backgroundColor="0x000000" backgroundAlpha="0.05">
 		<mx:DataGrid id="snapList" width="100%" height="150" dataProvider="{modelLocator.snapshotList}" selectedItem="{stateSnapshot}"
 					draggableColumns="false" resizableColumns="false" variableRowHeight="true" wordWrap="true">
 			<mx:columns>

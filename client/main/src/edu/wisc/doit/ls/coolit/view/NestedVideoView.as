@@ -56,16 +56,27 @@ package edu.wisc.doit.ls.coolit.view {
 				var curNum:Number = i;
 				var curDir:String = "./0" + curNum + "thickness/";
 				var nestedList:ArrayCollection = new ArrayCollection();
-				nestedList.addItem(curDir + "minesweeper_001.png");
-				nestedList.addItem(curDir + "minesweeper_002.png");
-				nestedList.addItem(curDir + "minesweeper_003.png");
-				nestedList.addItem(curDir + "minesweeper_004.png");
-				nestedList.addItem(curDir + "minesweeper_005.png");
-				nestedList.addItem(curDir + "minesweeper_006.png");
-				nestedList.addItem(curDir + "minesweeper_007.png");
-				nestedList.addItem(curDir + "minesweeper_008.png");
-				nestedList.addItem(curDir + "minesweeper_009.png");
-				nestedList.addItem(curDir + "minesweeper_010.png");
+				//"mineslider10000.png"
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0000.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0001.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0002.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0003.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0004.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0005.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0006.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0007.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0008.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0009.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0010.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0011.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0012.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0013.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0014.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0015.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0016.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0017.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0018.png");
+				nestedList.addItem(curDir + "mineslider" + (i+1) + "0019.png");
 				
 				topLevel.addItem(nestedList);
 			}
@@ -131,8 +142,8 @@ package edu.wisc.doit.ls.coolit.view {
 					nestedImage.addEventListener(Event.COMPLETE, onLoaderComplete);
 					nestedImage.addEventListener(IOErrorEvent.IO_ERROR, onLoaderError);
 					nestedImage.source = curImageURL;
-					nestedImage.width = 457;
-					nestedImage.height = 280;
+					nestedImage.width = width;
+					nestedImage.height = height;
 					imageBox.addChild(nestedImage);
 					nestedStack.addChild(imageBox);
 					
