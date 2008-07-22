@@ -125,6 +125,14 @@ Panel {
 	horizontal-align: "center";
 }
 
+.jumboButton {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 15px;
+}
+
 .commitButton {
 	disabledSkin: Embed(source="../skin/images/commit_up.swf");
 	downSkin: Embed(source="../skin/images/commit_down.swf");
