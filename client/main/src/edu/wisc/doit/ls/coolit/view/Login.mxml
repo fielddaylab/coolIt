@@ -5,12 +5,15 @@
 	
 	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" />
 	
-	<mx:Panel id="loginBox" title="Login" layout="horizontal">
-		<mx:HBox id="loginHolder">
-			<mx:Label text="Account ID:" />
-			<mx:TextInput id="accountId" />
-			<mx:Button id="login" label="Login" />
-		</mx:HBox>
+	<mx:Panel id="loginBox" layout="horizontal">
+		<mx:Canvas id="loginHolder">
+			<!-- <mx:Label text="Account ID:" />
+			<mx:TextInput id="accountId" /> -->
+			<mx:Label text="Services initializing..." fontSize="12" verticalCenter="0" horizontalCenter="0"
+						visible="{(model.servicesOut &gt; 0) ? true : false}"/>
+			<mx:Button id="login" label="Start" verticalCenter="0" horizontalCenter="0" styleName="jumboButton"
+						visible="{(model.servicesOut &gt; 0) ? false : true}"/>
+		</mx:Canvas>
 		
 		<mx:HBox id="introHolder" visible="false" height="0" width="0">
 			<mx:Text text="{AssetEmbedLocator.greekText1}" width="100%" height="100%" fontSize="13" textAlign="left" />

@@ -28,7 +28,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var login:Button;
 		public var accountId:TextInput;
 		public var splashLogo:Image;
-		public var loginHolder:HBox;
+		public var loginHolder:Canvas;
 		public var introHolder:HBox;
 		public var continueGame:Button;
 		[Bindable] public var loginBox:Panel;
@@ -91,7 +91,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private function dispatchLoginEvent():void {
 			var loginEvent:LoginEvent = new LoginEvent();
 			loginEvent.modelLocator = model;
-			loginEvent.accountId = accountId.text;
+			loginEvent.accountId = "foo";//accountId.text;
 			CairngormEventDispatcher.getInstance().dispatchEvent(loginEvent);
 		}
 	}
