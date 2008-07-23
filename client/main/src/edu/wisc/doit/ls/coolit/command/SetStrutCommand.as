@@ -21,6 +21,7 @@ package edu.wisc.doit.ls.coolit.command {
 		private var material:MaterialVO;
 		private var length:Number;
 		private var crossSection:Number;
+		private var doRunSim:Boolean;
 		
 		public function SetStrutCommand() {
 			super();
@@ -33,7 +34,7 @@ package edu.wisc.doit.ls.coolit.command {
 			material = setStrutEvent.material;
 			length = setStrutEvent.length;
 			crossSection = setStrutEvent.crossSection;
-			
+			doRunSim = setStrutEvent.doRunSim;
 			
 			model.strutLength = length;
 			model.crossSection = crossSection;
@@ -51,16 +52,12 @@ package edu.wisc.doit.ls.coolit.command {
 			newPropCache.crossSection = crossSection;
 			materialModel.propertyCache.addItem(newPropCache);
 			
-			var curPropCache:Object = materialModel.propertyCache.getItemAt(0) as Object;
-			model.strutLength = curPropCache.length;
-			model.crossSection = curPropCache.crossSection;
-			materialModel.selected = material;
-			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setStrut(material.name, setStrutEvent.length, setStrutEvent.crossSection);
 		}
 		
 		public function result(event_p:Object):void {	
+			var stateModel:StateModel = model.stateModel;
 			model.servicesOut--;
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
@@ -72,9 +69,11 @@ package edu.wisc.doit.ls.coolit.command {
 				model.crossSection = curPropCache.crossSection;
 				materialModel.selected = material;
 			}
-						
+			
 			//also, now that the strut has been changed, do run sim too
-			dispatchRunSimEvent();
+			if(stateModel.simulationMode != StateModel.GRAPH_SIM || doRunSim) {
+				dispatchRunSimEvent();
+			}
 		}
 		
 		private function dispatchRunSimEvent():void {
