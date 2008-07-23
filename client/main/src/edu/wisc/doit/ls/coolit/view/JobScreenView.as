@@ -106,11 +106,20 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onMasterGraphBackClick(event_p:Event):void {
-			masterGraphSelected = false;
+			setMasterGraphActive(false);
 		}
 		
 		private function onViewGraphClick(event_p:MouseEvent):void {
-			masterGraphSelected = !masterGraphSelected;
+			setMasterGraphActive(!masterGraphSelected);
+		}
+		
+		private function setMasterGraphActive(active_p:Boolean):void {
+			masterGraphSelected = active_p;
+			if(masterGraphSelected) {
+				dispatchGraphMode();
+			} else {
+				dispatchGeometryMode();
+			}
 		}
 		
 		private function onNestedImagesLoaded(event_p:Event):void {
@@ -248,6 +257,20 @@ package edu.wisc.doit.ls.coolit.view {
 			changeWorkArea.modelLocator = model;
 			changeWorkArea.stateName = stateName_p;
 			CairngormEventDispatcher.getInstance().dispatchEvent(changeWorkArea);
+		}
+		
+		private function dispatchGeometryMode():void {
+			var setSimModeEvent:SetSimulationModeEvent = new SetSimulationModeEvent();
+			setSimModeEvent.modelLocator = model;
+			setSimModeEvent.mode = StateModel.GEOMETRY_SIM;
+			CairngormEventDispatcher.getInstance().dispatchEvent(setSimModeEvent);
+		}
+		
+		private function dispatchGraphMode():void {
+			var setSimModeEvent:SetSimulationModeEvent = new SetSimulationModeEvent();
+			setSimModeEvent.modelLocator = model;
+			setSimModeEvent.mode = StateModel.GRAPH_SIM;
+			CairngormEventDispatcher.getInstance().dispatchEvent(setSimModeEvent);
 		}
 		
 	}
