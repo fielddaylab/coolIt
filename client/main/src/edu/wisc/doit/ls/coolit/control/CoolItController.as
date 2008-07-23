@@ -35,6 +35,7 @@ package edu.wisc.doit.ls.coolit.control {
 			addCommand(AddNewStateCaptureEvent.EVENT_ADD_CAPTURE, AddNewStateCaptureCommand);
 			addCommand(RemoveStateCaptureEvent.EVENT_REMOVE_CAPTURE, RemoveStateCaptureCommand);
 			addCommand(SelectStateCaptureEvent.EVENT_SELECT_CAPTURE, SelectStateCaptureCommand);
+			addCommand(SetSimulationModeEvent.EVENT_SET_SIM_MODE, SetSimulationModeCommand);
 		}	
 	}
 	
