@@ -34,21 +34,27 @@ package edu.wisc.doit.ls.coolit.command {
 			length = setStrutEvent.length;
 			crossSection = setStrutEvent.crossSection;
 			
+			
+			model.strutLength = length;
+			model.crossSection = crossSection;
+			materialModel.selected = material;
+			
 			model.servicesOut++;
+			
+			//if the list is above a certain number, take a chunk out of the beginning
+			if(materialModel.propertyCache.length > 1) {
+				materialModel.propertyCache.removeItemAt(0);
+			}
 			
 			var newPropCache:Object = new Object();
 			newPropCache.length = length;
 			newPropCache.crossSection = crossSection;
 			materialModel.propertyCache.addItem(newPropCache);
 			
-			//model.strutLength = length;
-			//model.crossSection = crossSection;
-			if(materialModel.propertyCache.length > 0) {
-				var curPropCache:Object = materialModel.propertyCache.getItemAt(0) as Object;
-				model.strutLength = curPropCache.length;
-				model.crossSection = curPropCache.crossSection;
-				materialModel.selected = material;
-			}
+			var curPropCache:Object = materialModel.propertyCache.getItemAt(0) as Object;
+			model.strutLength = curPropCache.length;
+			model.crossSection = curPropCache.crossSection;
+			materialModel.selected = material;
 			
 			var delegate:CoolItDelegate = new CoolItDelegate(this);
 			delegate.setStrut(material.name, setStrutEvent.length, setStrutEvent.crossSection);
