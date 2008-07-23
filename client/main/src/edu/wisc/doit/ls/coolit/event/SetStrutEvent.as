@@ -12,6 +12,7 @@ package edu.wisc.doit.ls.coolit.event {
 		public var material:MaterialVO;
 		public var length:Number;
 		public var crossSection:Number;
+		public var doRunSim:Boolean = true;
 		
 		/**
 		 * Constructor.
