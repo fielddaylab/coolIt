@@ -7,6 +7,8 @@ package edu.wisc.doit.ls.coolit.model {
 	
 	import mx.collections.ArrayCollection;
 	
+	import flash.utils.*;
+	
 	[Bindable]
 	public class CoolItModelLocator implements ModelLocator {
 		private static var modelLocator:CoolItModelLocator;
@@ -74,7 +76,7 @@ package edu.wisc.doit.ls.coolit.model {
 			powerSetting = CoolerModel.OUTPUT_POWER;
 			
 			//set up default state snapshot
-			stateSnapshot = new StateSnapshotVO();
+			stateSnapshot = new StateSnapshotVO(flash.utils.getTimer());
 			snapshotList = new ArrayCollection();
 			snapshotList.addItem(stateSnapshot);
 		}
