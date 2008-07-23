@@ -36,6 +36,7 @@ Panel {
 }
 
 .formTextLink {
+	height: 15px;
 	font-weight: none;
 	text-decoration: underline;
 }
