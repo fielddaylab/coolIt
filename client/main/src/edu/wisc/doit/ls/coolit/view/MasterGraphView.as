@@ -190,6 +190,47 @@ package edu.wisc.doit.ls.coolit.view {
 					if(stateSnapshot.highestDataValue > mainVerticalAxis.maximum) {
 						mainVerticalAxis.maximum = stateSnapshot.highestDataValue;
 					}
+				} else if(kind == CollectionEventKind.ADD) {
+					var curSnapshot:StateSnapshotVO = items[0] as StateSnapshotVO;
+					var newIndex:Number = _dataProvider.length;
+					curSnapshot.label = "Snapshot " + newIndex;
+					
+					if(curSnapshot.highestDataValue > mainVerticalAxis.maximum) {
+						mainVerticalAxis.maximum = curSnapshot.highestDataValue;
+					}
+					
+					var lineSeries1:LineSeries = new LineSeries();
+					lineSeries1.id = "id1" + newIndex;
+					lineSeries1.yField = "coolingOutputWatts";
+					lineSeries1.displayName = "Output Cooling Power (Watts)";
+					lineSeries1.verticalAxis = mainVerticalAxis;
+					lineSeries1.horizontalAxis = mainHorizontalAxis;
+					lineSeries1.dataProvider = curSnapshot.captureData;
+					lineSeries1.setStyle("lineStroke", curSnapshot.coolerStroke);
+					
+					var lineSeries2:LineSeries = new LineSeries();
+					lineSeries2.id = "id2" + newIndex;
+					lineSeries2.yField = "heatLeakWatts";
+					lineSeries2.displayName = "Heat Leak (Watts)";
+					lineSeries2.verticalAxis = mainVerticalAxis;
+					lineSeries2.horizontalAxis = mainHorizontalAxis;
+					lineSeries2.dataProvider = curSnapshot.captureData;
+					lineSeries2.setStyle("lineStroke", curSnapshot.heatLeakStroke);
+					
+					//add to lookup table
+					var lines:Object = new Object();
+					lines.line1 = lineSeries1;
+					lines.line2 = lineSeries2;
+					lineSeriesLookup[curSnapshot.id] = lines;
+					
+					var curSeries:Array = lineChart.series;
+					curSeries.push(lineSeries1);
+					curSeries.push(lineSeries2);
+					
+					lineChart.series = curSeries;
+					
+					lineChart.validateNow();
+					
 				} else {
 					invalidateProperties();
 				}

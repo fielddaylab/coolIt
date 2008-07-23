@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
-	horizontalAlign="center" verticalAlign="middle">
-	<mx:Canvas width="100%" backgroundColor="{data.heatLeakStroke.color}" backgroundAlpha="{data.heatLeakStroke.alpha}">
-		<mx:Label text="Heat Leak" color="0x000000" horizontalCenter="0" />
-	</mx:Canvas>
-	<mx:Canvas width="100%" backgroundColor="{data.coolerStroke.color}" backgroundAlpha="{data.coolerStroke.alpha}">
-		<mx:Label text="Output Cooling" color="0x000000" horizontalCenter="0" />
-	</mx:Canvas>
-</mx:Box>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalAlign="center" verticalAlign="middle" paddingTop="2" paddingBottom="2">
+	<mx:Canvas width="15" height="15" borderColor="0x666666" borderStyle="solid" borderThickness="0.5"
+		backgroundColor="{data.heatLeakStroke.color}" backgroundAlpha="{data.heatLeakStroke.alpha}" />
+	<mx:Label text="{data.label}" />
+</mx:HBox>
