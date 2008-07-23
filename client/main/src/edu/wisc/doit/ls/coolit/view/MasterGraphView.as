@@ -56,6 +56,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private var _selected:Boolean = false;
 		private var _dataProvider:ArrayCollection;
 		
+		private var lineSeriesLookup:Object;
+		
 		private var log:ILogger;
 		
 		/*
@@ -63,6 +65,8 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		public function MasterGraphView():void {
 			super();
+			
+			lineSeriesLookup = new Object();
 			
 			var picker1:Object = new Object();
 			picker1.label = "Coolers ->";
@@ -149,7 +153,8 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		public function set selected(selected_p:Boolean):void {
 			if(selected_p) {
-				lineChart.validateNow();
+				//lineChart.validateNow();
+				invalidateProperties();
 			}
 			_selected = selected_p;
 		}
@@ -171,7 +176,25 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onProviderChange(event_p:CollectionEvent):void {
 			if(_selected) {
-				invalidateProperties();
+				var kind:String = event_p.kind;
+				var items:Array = event_p.items;
+				var itemLen:Number = items.length;
+				
+				log.fatal("{0} - kind: " + kind, getQualifiedClassName(this) + ".onProviderChange");
+				if(kind == CollectionEventKind.UPDATE) {
+					var lines:Object = lineSeriesLookup[snapList.selectedItem.id] as Object;
+					//update dataproviders in lineseries
+					lines.line1.dataProvider = stateSnapshot.captureData;
+					lines.line2.dataProvider = stateSnapshot.captureData;
+					
+					if(stateSnapshot.highestDataValue > mainVerticalAxis.maximum) {
+						mainVerticalAxis.maximum = stateSnapshot.highestDataValue;
+					}
+				} else {
+					invalidateProperties();
+				}
+				//invalidateProperties();
+				//update only the difference
 			}
 		}
 		
@@ -213,6 +236,12 @@ package edu.wisc.doit.ls.coolit.view {
 						lineSeries2.horizontalAxis = mainHorizontalAxis;
 						lineSeries2.dataProvider = curSnapshot.captureData;
 						lineSeries2.setStyle("lineStroke", curSnapshot.heatLeakStroke);
+						
+						//add to lookup table
+						var lines:Object = new Object();
+						lines.line1 = lineSeries1;
+						lines.line2 = lineSeries2;
+						lineSeriesLookup[curSnapshot.id] = lines;
 						
 						//newSeries.dataProvider = curSnapshot.captureData;
 						newSeries.push(lineSeries1);
