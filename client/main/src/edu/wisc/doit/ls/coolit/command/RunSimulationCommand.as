@@ -34,6 +34,8 @@ package edu.wisc.doit.ls.coolit.command {
 		}
 		
 		public function result(event_p:Object):void {
+			var stateModel:StateModel = model.stateModel;
+			
 			model.runSimCount--;
 			model.servicesOut--;
 			//set the current data with the current material data
@@ -45,7 +47,7 @@ package edu.wisc.doit.ls.coolit.command {
 			model.isValidSolution = (cleanedXML.RunResult.isValidSolution.toString().toLowerCase() == "true") ? true : false;
 			
 			//model.updateSketchData();
-			if(model.runSimCount == 0) {
+			if(model.runSimCount == 0 && stateModel.simulationMode == StateModel.GRAPH_SIM) {
 				dispatchUpdateStateCapture();
 			}
 			//log.fatal("{0} - model.temperature: " + model.temperature, getQualifiedClassName(this) + ".fault");
