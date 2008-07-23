@@ -13,6 +13,12 @@ package edu.wisc.doit.ls.coolit.model {
 		public static var STRUT_LENGTH:String = "strutLengthState";
 		public static var STRUT_CROSS_SECTION:String = "strutCrossSectionState";
 		
+		//sim modes
+		public static var GEOMETRY_SIM:String = "geometrySim";
+		public static var GRAPH_SIM:String = "graphSim";
+		
+		public var simulationMode:String = GEOMETRY_SIM;
+		
 		public var currentState:String;
 		public var sketchState:String = POWER_FACTOR;
 		public var workAreaState:String = COMPONENT_STATE;
