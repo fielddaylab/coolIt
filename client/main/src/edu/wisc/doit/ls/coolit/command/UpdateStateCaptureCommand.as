@@ -105,8 +105,8 @@ package edu.wisc.doit.ls.coolit.command {
 				}
 				model.stateSnapshot = null;
 				model.stateSnapshot = stateSnapshot;
-				
-				model.snapshotList.refresh();
+				model.snapshotList.itemUpdated(model.stateSnapshot);
+				//model.snapshotList.refresh();
 			}
 			
 		}

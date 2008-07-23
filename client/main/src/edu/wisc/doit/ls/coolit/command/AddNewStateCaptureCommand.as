@@ -38,7 +38,7 @@ package edu.wisc.doit.ls.coolit.command {
 			var stateSnapshot:StateSnapshotVO = model.stateSnapshot;
 			var newColorSet:ArrayCollection = graphColorModel.getNextColorSet();
 			
-			var newSnapshot:StateSnapshotVO = new StateSnapshotVO();
+			var newSnapshot:StateSnapshotVO = new StateSnapshotVO(flash.utils.getTimer());
 			newSnapshot.cooler = stateSnapshot.cooler;
 			newSnapshot.material = stateSnapshot.material;
 			newSnapshot.powerFactor = stateSnapshot.powerFactor;
