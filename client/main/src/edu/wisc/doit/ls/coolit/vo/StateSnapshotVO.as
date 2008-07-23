@@ -10,6 +10,7 @@ package edu.wisc.doit.ls.coolit.vo {
 	public class StateSnapshotVO implements IValueObject {
 		
 		//main state vars
+		public var id:String;
 		public var cooler:CoolerVO;
 		public var material:MaterialVO;
 		public var powerFactor:Number;
@@ -26,7 +27,9 @@ package edu.wisc.doit.ls.coolit.vo {
 		public var heatLeakStroke:Stroke;
 		public var label:String;
 		
-		public function StateSnapshotVO() {}
+		public function StateSnapshotVO(id_p:Number) {
+			id = id_p.toString();
+		}
 		
 		public function get description():String {
 			//start with material
