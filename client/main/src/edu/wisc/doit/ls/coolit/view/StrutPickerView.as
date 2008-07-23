@@ -57,7 +57,7 @@ package edu.wisc.doit.ls.coolit.view {
 			addEventListener(FlexEvent.CREATION_COMPLETE, onComplete);
 		}
 		
-		public function dispatchSetStrut():void {
+		public function dispatchSetStrut(doRunSim_p:Boolean = false):void {
 			//send out a set cooler event with currently selected cooler
 			
 			var setStrutEvent:SetStrutEvent = new SetStrutEvent();
@@ -65,6 +65,7 @@ package edu.wisc.doit.ls.coolit.view {
 			setStrutEvent.material = strutList.selectedItem as MaterialVO;
 			setStrutEvent.length = lengthM.value;
 			setStrutEvent.crossSection = crossSection.value;
+			setStrutEvent.doRunSim = doRunSim_p;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
 		}
 		
@@ -90,61 +91,81 @@ package edu.wisc.doit.ls.coolit.view {
 			lengthM.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			crossSection.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			crossSection.addEventListener(MouseEvent.MOUSE_DOWN, onCrossSectionDown);
-			crossSection.addEventListener(MouseEvent.MOUSE_UP, onCrossSectionUp);
+			//crossSection.addEventListener(MouseEvent.MOUSE_UP, onCrossSectionUp);
 			crossSection.addEventListener(MouseEvent.MOUSE_MOVE, onCrossSectionMove);
-			crossSection.addEventListener(MouseEvent.MOUSE_OUT, onCrossSectionOut);
+			//crossSection.addEventListener(MouseEvent.MOUSE_OUT, onCrossSectionOut);
 			
 			lengthM.addEventListener(MouseEvent.MOUSE_DOWN, onLengthDown);
-			lengthM.addEventListener(MouseEvent.MOUSE_UP, onLengthUp);
+			//lengthM.addEventListener(MouseEvent.MOUSE_UP, onLengthUp);
 			lengthM.addEventListener(MouseEvent.MOUSE_MOVE, onLengthMove);
-			lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
+			//lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
 		}
 		
 		private function onSliderChange(event_p:SliderEvent):void {
 			crossSectionDisplay.text = crossSection.value.toString();
 			lengthDisplay.text = lengthM.value.toString();
-			dispatchSetStrut();
+			dispatchSetStrut(false);
 		}
 		
 		private function onCrossSectionDown(event_p:MouseEvent):void {
 			crossSectionDown = true;
+			stage.addEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutCrossSection);
+		}
+		
+		private function onCheckMouseOutCrossSection(event_p:MouseEvent):void {
+			crossSectionDown = false;
+			crossSectionDisplay.text = crossSection.value.toString();
+			dispatchSetStrut(true);
+			
+			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutCrossSection);
 		}
 		
 		private function onCrossSectionUp(event_p:MouseEvent):void {
 			crossSectionDown = false;
 			crossSectionDisplay.text = crossSection.value.toString();
-			dispatchSetStrut();
+			dispatchSetStrut(true);
 		}
 		
 		private function onCrossSectionOut(event_p:MouseEvent):void {
 			crossSectionDown = false;
+			//dispatchSetStrut(true);
 		}
 		
 		private function onCrossSectionMove(event_p:MouseEvent):void {
 			crossSectionDisplay.text = crossSection.value.toString()
 			if(crossSectionDown) {
-				dispatchSetStrut();
+				dispatchSetStrut(false);
 			}
 		}
 		
 		private function onLengthDown(event_p:MouseEvent):void {
 			lengthDown = true;
+			stage.addEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutLength);
+		}
+		
+		private function onCheckMouseOutLength(event_p:MouseEvent):void {
+			lengthDisplay.text = lengthM.value.toString();
+			lengthDown = false;
+			dispatchSetStrut(true);
+			
+			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutLength);
 		}
 		
 		private function onLengthOut(event_p:MouseEvent):void {
 			lengthDown = false;
+			//dispatchSetStrut(true);
 		}
 		
 		private function onLengthUp(event_p:MouseEvent):void {
 			lengthDisplay.text = lengthM.value.toString();
 			lengthDown = false;
-			dispatchSetStrut();
+			dispatchSetStrut(true);
 		}
 		
 		private function onLengthMove(event_p:MouseEvent):void {
 			lengthDisplay.text = lengthM.value.toString();
 			if(lengthDown) {
-				dispatchSetStrut();
+				dispatchSetStrut(false);
 			}
 		}
 		
@@ -155,7 +176,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onStrutChange(event_p:Event):void {
-			dispatchSetStrut();
+			dispatchSetStrut(true);
 		}
 	}
 }
