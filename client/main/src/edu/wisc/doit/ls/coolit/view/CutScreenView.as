@@ -83,7 +83,9 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		public function startVideo():void {
+			cutScreenMovie.playheadTime = 0;
 			cutScreenMovie.visible = true;
+			cutScreenMovie.alpha = 1;
 			cutScreenMovie.play();
 		}
 		
@@ -94,9 +96,20 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onVideoFinished(event_p:VideoEvent):void {
 			//leaveCut();
+			finishCut();
+		}
+		
+		private function finishCut():void {
 			Tweener.addTween(shiftSpacerWidth, {width:widthPushAmount, time:1, transition:"easeOutQuart"});
 			Tweener.addTween(shiftSpacerHeight, {height:heightPushAmount, time:1, transition:"easeOutQuart", onComplete:dispatchCutDoneEvent});
 			Tweener.addTween(this, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:flipOff});
+		}
+		
+		public function skipCut():void {
+			cutScreenMovie.stop();
+			cutScreenMovie.alpha = 0;
+			//cutScreenMovie.playheadTime = totalTime;
+			finishCut();
 		}
 		
 		private function dispatchCutDoneEvent():void {

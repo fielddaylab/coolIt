@@ -43,6 +43,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
 		public var masterGraph:MasterGraphView;
+		[Bindable] public var skipButton:Button;
 		
 		[Bindable] public var mainWorkArea:TabNavigator;
 		
@@ -140,6 +141,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function startJob():void {
 			loadingProgress.visible = true;
+			skipButton.visible = true;
 			loadingProgress.alpha = 1;
 			Tweener.addTween(loadingProgress, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:activateJob});
 		}
@@ -151,6 +153,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onCutDone(event_p:Event):void {
 			jobPanel.visible = true;
+			skipButton.visible = false;
 		}
 		
 		private function onPNGButtonTransparencyOver(event_p:Event):void {
