@@ -31,7 +31,7 @@
 			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true"
 							dataTipFunction="{dataTipFunction}">
 				<mx:horizontalAxis>
-						<mx:LinearAxis id="mainHorizontalAxis" minimum="0" maximum="300" />
+						<mx:LinearAxis id="mainHorizontalAxis" minimum="0" maximum="300" autoAdjust="false" />
 				</mx:horizontalAxis>
 				
 				<mx:verticalAxis>

@@ -58,6 +58,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var lineSeriesLookup:Object;
 		
+		private var lastHighestValue:Number = 0;
+		
 		private var log:ILogger;
 		
 		/*
@@ -187,17 +189,11 @@ package edu.wisc.doit.ls.coolit.view {
 					lines.line1.dataProvider = stateSnapshot.captureData;
 					lines.line2.dataProvider = stateSnapshot.captureData;
 					
-					if(stateSnapshot.highestDataValue > mainVerticalAxis.maximum) {
-						mainVerticalAxis.maximum = stateSnapshot.highestDataValue;
-					}
+					findHighestValue();
 				} else if(kind == CollectionEventKind.ADD) {
 					var curSnapshot:StateSnapshotVO = items[0] as StateSnapshotVO;
 					var newIndex:Number = _dataProvider.length;
 					curSnapshot.label = "Snapshot " + newIndex;
-					
-					if(curSnapshot.highestDataValue > mainVerticalAxis.maximum) {
-						mainVerticalAxis.maximum = curSnapshot.highestDataValue;
-					}
 					
 					var lineSeries1:LineSeries = new LineSeries();
 					lineSeries1.id = "id1" + newIndex;
@@ -231,6 +227,11 @@ package edu.wisc.doit.ls.coolit.view {
 					
 					lineChart.validateNow();
 					
+					var selectCapture:SelectStateCaptureEvent = new SelectStateCaptureEvent();
+					selectCapture.modelLocator = modelLocator;
+					selectCapture.stateSnapshot = curSnapshot;
+					CairngormEventDispatcher.getInstance().dispatchEvent(selectCapture);
+					
 				} else {
 					invalidateProperties();
 				}
@@ -241,7 +242,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		override protected function commitProperties():void {
 			super.commitProperties();
-			
+			log.fatal("{0} - !! commitProperties CALLED", getQualifiedClassName(this) + ".commitProperties");
 			if(_dataProvider) {
 				if(_dataProvider.length > 0) {
 					//re-build chart
@@ -291,12 +292,43 @@ package edu.wisc.doit.ls.coolit.view {
 					}
 					lineChart.series = newSeries;
 					//lineChart.validateNow();
-					mainVerticalAxis.maximum = highestValue;
+					updateMaxValue(highestValue);
 					
 					//lineChart.dataProvider = _dataProvider;
 				}
 			}
 			
+		}
+		
+		private function findHighestValue():void {
+			if(_dataProvider) {
+				if(_dataProvider.length > 0) {
+					var dataLen:Number = _dataProvider.length;
+					var highestValue:Number = 0;
+					
+					for(var i:Number = 0; i<dataLen; i++) {
+						//get snapshot vo
+						var curSnapshot:StateSnapshotVO = _dataProvider.getItemAt(i) as StateSnapshotVO;
+						
+						if(curSnapshot.highestDataValue > highestValue) {
+							highestValue = curSnapshot.highestDataValue;
+						}
+						
+					}
+					
+					updateMaxValue(highestValue);
+				}
+			}
+		}
+		
+		private function updateMaxValue(value_p:Number):void {
+			if(value_p > mainVerticalAxis.maximum || isNaN(mainVerticalAxis.maximum)) {
+				mainVerticalAxis.maximum = value_p;
+				lastHighestValue = value_p;
+			}
+			//mainVerticalAxis.maximum = value_p;
+			//lastHighestValue = value_p;
+			//lineChart.validateNow();
 		}
 		
 		public function dataTipFunction(hitData_p:HitData):String {
