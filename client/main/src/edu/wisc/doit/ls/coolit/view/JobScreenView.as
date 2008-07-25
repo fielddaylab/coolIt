@@ -45,6 +45,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
 		public var viewEquip:Button;
+		public var viewDescription:Button;
 		public var masterGraph:MasterGraphView;
 		[Bindable] public var skipButton:Button;
 		
@@ -104,6 +105,7 @@ package edu.wisc.doit.ls.coolit.view {
 			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
 			viewEquip.addEventListener(MouseEvent.CLICK, onViewEquipClick);
+			viewDescription.addEventListener(MouseEvent.CLICK, onViewDescriptionClick);
 			masterGraph.addEventListener(MasterGraphView.BACK_EVENT, onMasterGraphBackClick);
 			masterGraph.addEventListener(MasterGraphView.COOLERS, onMasterGraphCoolerClick);
 			masterGraph.addEventListener(MasterGraphView.SUPPORTS, onMasterGraphSupportClick);
@@ -120,6 +122,10 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onViewEquipClick(event_p:MouseEvent):void {
 			setMasterGraphActive(false);
+		}
+		
+		private function onViewDescriptionClick(event_p:MouseEvent):void {
+			selectDescription();
 		}
 		
 		private function setMasterGraphActive(active_p:Boolean):void {
@@ -201,6 +207,13 @@ package edu.wisc.doit.ls.coolit.view {
 		private function selectCoolerPicker():void {
 			pickerViewstack.selectedIndex = 1;
 			coolerButton.selected = true;
+			supportsButton.selected = false;
+			masterGraph.selectedPickerIndex = 0;
+		}
+		
+		private function selectDescription():void {
+			pickerViewstack.selectedIndex = 0;
+			coolerButton.selected = false;
 			supportsButton.selected = false;
 			masterGraph.selectedPickerIndex = 0;
 		}
