@@ -99,7 +99,6 @@ package edu.wisc.doit.ls.coolit.view {
 			addEntry.addEventListener(MouseEvent.CLICK, onAddEntryClick);
 			removeEntry.addEventListener(MouseEvent.CLICK, onRemoveEntryClick);
 			snapList.addEventListener(Event.CHANGE, onCaptureChange);
-			backToMain.addEventListener(MouseEvent.CLICK, onBackClick);
 			pickerSelector.addEventListener(Event.CHANGE, onSelectPicker);
 		}
 		

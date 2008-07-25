@@ -14,8 +14,6 @@
 	<mx:Spacer height="5" />
 	
 	<mx:HBox width="100%" paddingLeft="10" paddingRight="10">
-		<mx:Button id="backToMain" label="Back" />
-		<mx:Spacer width="100%" />
 		<mx:Label styleName="h2" text="Cooling Power vs Heat Leak" />
 		<mx:Spacer width="100%" />
 		<mx:ComboBox id="pickerSelector" dataProvider="{pickersProvider}" selectedIndex="{selectedPickerIndex}" />
