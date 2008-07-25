@@ -8,6 +8,11 @@
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true" alignSymbol="left"/>
 	
+	<mx:NumberFormatter id="decFormatter" precision="2" 
+        decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="true"/>
+	
 	<mx:HBox width="100%">
 		<mx:Label text="Supports" styleName="h1" />
 		<mx:Spacer width="100%" />
@@ -43,18 +48,19 @@
 	
 	<mx:Form fontSize="9" width="100%" horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
-			<mx:Label id="stressLimit" fontWeight="none" text="--"/>
+			<mx:Label id="stressLimit" fontWeight="none" 
+				text="{decFormatter.format(strutList.selectedItem.yieldStrength * (crossSection.value/100))}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Price ($):">
-			<mx:Label id="priceField" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.price)}"/>
+			<mx:Label id="priceField" fontWeight="none" text="{usdFormatter.format((strutList.selectedItem.price/1000000) * crossSection.value * lengthM.value)}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Cost/M**3 ($):">
-			<mx:Label id="cost" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.priceUnit)}"/>
+			<mx:Label id="cost" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.price/1000000)}"/>
 		</mx:FormItem>
 		
-		<mx:FormItem fontWeight="bold" label="Yield Strength (MPa):">
+		<mx:FormItem fontWeight="bold" label="Yield Strength:">
 			<mx:Label id="yieldStrength" fontWeight="none" text="{strutList.selectedItem.yieldStrength}"/>
 		</mx:FormItem>
 	</mx:Form>
