@@ -32,6 +32,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var firstDimensionMin:Number;
 		[Bindable] public var secondDimensionMax:Number;
 		[Bindable] public var secondDimensionMin:Number;
+		[Bindable] public var topImage:Image;
 		
 		private var log:ILogger;
 		
@@ -146,6 +147,11 @@ package edu.wisc.doit.ls.coolit.view {
 					nestedImage.height = height;
 					imageBox.addChild(nestedImage);
 					nestedStack.addChild(imageBox);
+					
+					//add as top image if counters are both zero
+					if(i == 0 && j == 0) {
+						topImage = nestedImage;
+					}
 					
 					newStack.addChild(nestedStack);
 				}
