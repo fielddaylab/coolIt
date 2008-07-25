@@ -121,7 +121,7 @@ package edu.wisc.doit.ls.coolit.view {
 							imageStack.selectedIndex = 0;
 						}
 						break;
-						case 2:
+					case 2:
 						if(imageDownHitResult) {
 							imageStack.selectedIndex = 2;
 						} else {
@@ -129,10 +129,21 @@ package edu.wisc.doit.ls.coolit.view {
 							imageStack.selectedIndex = 0;
 						}
 						break;
-						default:
+					default:
 						dispatchMouseOverTransparencyEvent();
 						imageStack.selectedIndex = 0;
 				}
+			}
+			
+			var curImage:Image = imageStack.selectedChild.getChildAt(0) as Image;
+			
+			//check to see if there are any hits, if so, show hand cursor, if not, hide
+			if(imageUpHitResult || imageDownHitResult || imageOverHitResult) {
+				curImage.useHandCursor = true;
+				curImage.buttonMode = true;
+			} else {
+				curImage.useHandCursor = false;
+				curImage.buttonMode = false;
 			}
 			
 		}
