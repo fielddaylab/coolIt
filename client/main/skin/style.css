@@ -189,6 +189,17 @@ Panel {
 	selectedUpSkin: Embed(source="../skin/images/switch_up.swf");
 }
 
+.descriptionButton {
+	disabledSkin: Embed(source="../skin/images/description_up.swf");
+	downSkin: Embed(source="../skin/images/description_down.swf");
+	overSkin: Embed(source="../skin/images/description_over.swf");
+	upSkin: Embed(source="../skin/images/description_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/description_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/description_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/description_up.swf");
+}
+
+
 .genericButton {
 	disabledSkin: Embed(source="../skin/images/generic_button_up.swf");
 	downSkin: Embed(source="../skin/images/generic_button_down.swf");
