@@ -26,6 +26,7 @@
 				<mx:Panel id="toolbar" width="50" height="100%" styleName="smallPadding" fontSize="9" verticalAlign="middle"
 							paddingBottom="5" paddingTop="5" verticalGap="5">
 					<mx:Button id="viewGraph" styleName="graphButton" width="40" height="40" toolTip="View Graph" />
+					<mx:Button id="viewEquip" styleName="genericButton" width="40" height="40" toolTip="View Equipment" />
 					<mx:Button id="checkConsultant" styleName="consultantButton" width="40" height="40" toolTip="Visit Consultant" />
 					<mx:Button id="helpButton" styleName="helpButton" width="40" height="40" toolTip="Help" />
 					<mx:Spacer height="100%" />

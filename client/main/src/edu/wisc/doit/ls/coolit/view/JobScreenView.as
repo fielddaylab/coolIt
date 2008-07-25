@@ -21,6 +21,8 @@ package edu.wisc.doit.ls.coolit.view {
 	
 	import caurina.transitions.Tweener;
 	
+	import com.benstucki.utilities.IconUtility;
+	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
 	 *
@@ -42,6 +44,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var loadingProgress:ChallengeLoader;
 		public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
+		public var viewEquip:Button;
 		public var masterGraph:MasterGraphView;
 		[Bindable] public var skipButton:Button;
 		
@@ -100,6 +103,7 @@ package edu.wisc.doit.ls.coolit.view {
 			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
 			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
+			viewEquip.addEventListener(MouseEvent.CLICK, onViewEquipClick);
 			masterGraph.addEventListener(MasterGraphView.BACK_EVENT, onMasterGraphBackClick);
 			masterGraph.addEventListener(MasterGraphView.COOLERS, onMasterGraphCoolerClick);
 			masterGraph.addEventListener(MasterGraphView.SUPPORTS, onMasterGraphSupportClick);
@@ -111,7 +115,11 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onViewGraphClick(event_p:MouseEvent):void {
-			setMasterGraphActive(!masterGraphSelected);
+			setMasterGraphActive(true);
+		}
+		
+		private function onViewEquipClick(event_p:MouseEvent):void {
+			setMasterGraphActive(false);
 		}
 		
 		private function setMasterGraphActive(active_p:Boolean):void {
@@ -124,11 +132,18 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onNestedImagesLoaded(event_p:Event):void {
+			//call method to turn top image to bitmap data and assign to model's equipmentIcon
+			createEquipmentIcon();
 			imagesLoaded = true;
 			if(cutLoaded) {
 				jobLoaded = true;
 				startJob();
 			}
+		}
+		
+		private function createEquipmentIcon():void {
+			var topImage:Image = jobImage.topImage;
+			viewEquip.setStyle("icon", IconUtility.getClass(viewEquip, topImage.source as String, 45, 26));
 		}
 		
 		private function onCutLoaded(event_p:Event):void {
