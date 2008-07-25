@@ -5,7 +5,7 @@
 	
 	<mx:Image id="splashLogo" source="{AssetEmbedLocator.splashLogo}" />
 	
-	<mx:Panel id="loginBox" layout="horizontal" horizontalAlign="center" verticalAlign="middle">
+	<mx:Panel id="loginBox" layout="vertical" horizontalAlign="center" verticalAlign="middle">
 		<mx:Canvas id="loginHolder">
 			<!-- <mx:Label text="Account ID:" />
 			<mx:TextInput id="accountId" /> -->
