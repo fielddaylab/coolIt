@@ -4,11 +4,19 @@ package edu.wisc.doit.ls.coolit.vo {
 	import mx.collections.ArrayCollection;
 	
 	public class JobVO implements IValueObject {
+		public static var STRUT_LENGTH:String = "STRUT_LENGTH";
+		public static var STRUT_CROSS_SECTION:String = "STRUT_CROSS_SECTION";
+		public static var GREATER_THAN_OR_EQUAL:String = "GE";
+		public static var LESS_THAN_OR_EQUAL:String = "LE";
 		
 		private var core:XML;
 		private var imageURLBase:String = "http://atswindev.doit.wisc.edu/CoolIt_Service/images/";
 		private var imageList:ArrayCollection;
 		private var requirementList:ArrayCollection;
+		
+		private var _strutLengthMin:Number;
+		private var _strutLengthMax:Number;
+		private var _strutCrossSectionMax:Number;
 		
 		public function JobVO(core_p:XML) {
 			super();
@@ -92,6 +100,60 @@ package edu.wisc.doit.ls.coolit.vo {
 			
 		}
 		public function set requirements(reqs_p:ArrayCollection):void { /* nada */ };
+		
+		public function get strutLengthMin():Number { 
+			if(!_strutLengthMin) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var curValue:String = dataPoint.@Value.toString();
+					var curOp:String = dataPoint.@Op.toString();
+					var curTarget:Number = parseFloat(dataPoint.@Target);
+					if(curValue == STRUT_LENGTH && curOp == GREATER_THAN_OR_EQUAL) {
+						_strutLengthMin = curTarget;
+						break;
+					}
+				}
+			}
+			
+			return _strutLengthMin;
+			
+		}
+		public function set strutLengthMin(value_p:Number):void { /* nada */ };
+		
+		public function get strutLengthMax():Number { 
+			if(!_strutLengthMax) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var curValue:String = dataPoint.@Value.toString();
+					var curOp:String = dataPoint.@Op.toString();
+					var curTarget:Number = parseFloat(dataPoint.@Target);
+					if(curValue == STRUT_LENGTH && curOp == LESS_THAN_OR_EQUAL) {
+						_strutLengthMax = curTarget;
+						break;
+					}
+				}
+			}
+			
+			return _strutLengthMax;
+			
+		}
+		public function set strutLengthMax(value_p:Number):void { /* nada */ };
+		
+		public function get strutCrossSectionMax():Number { 
+			if(!_strutCrossSectionMax) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var curValue:String = dataPoint.@Value.toString();
+					var curOp:String = dataPoint.@Op.toString();
+					var curTarget:Number = parseFloat(dataPoint.@Target);
+					if(curValue == STRUT_CROSS_SECTION && curOp == LESS_THAN_OR_EQUAL) {
+						_strutCrossSectionMax = curTarget;
+						break;
+					}
+				}
+			}
+			
+			return _strutCrossSectionMax;
+			
+		}
+		public function set strutCrossSectionMax(value_p:Number):void { /* nada */ };
 		
 		public function toString():String {
 			return name;
