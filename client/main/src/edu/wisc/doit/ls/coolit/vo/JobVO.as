@@ -6,6 +6,8 @@ package edu.wisc.doit.ls.coolit.vo {
 	public class JobVO implements IValueObject {
 		public static var STRUT_LENGTH:String = "STRUT_LENGTH";
 		public static var STRUT_CROSS_SECTION:String = "STRUT_CROSS_SECTION";
+		public static var FORCE_LIMIT:String = "FORCE_LIMIT";
+		public static var INPUT_POWER:String = "INPUT_POWER";
 		public static var GREATER_THAN_OR_EQUAL:String = "GE";
 		public static var LESS_THAN_OR_EQUAL:String = "LE";
 		
@@ -17,6 +19,8 @@ package edu.wisc.doit.ls.coolit.vo {
 		private var _strutLengthMin:Number;
 		private var _strutLengthMax:Number;
 		private var _strutCrossSectionMax:Number;
+		private var _forceLimit:Number;
+		private var _inputPower:Number;
 		
 		public function JobVO(core_p:XML) {
 			super();
@@ -154,6 +158,40 @@ package edu.wisc.doit.ls.coolit.vo {
 			
 		}
 		public function set strutCrossSectionMax(value_p:Number):void { /* nada */ };
+		
+		public function get forceLimit():Number { 
+			if(!_forceLimit) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var curValue:String = dataPoint.@Value.toString();
+					var curTarget:Number = parseFloat(dataPoint.@Target);
+					if(curValue == FORCE_LIMIT) {
+						_forceLimit = curTarget;
+						break;
+					}
+				}
+			}
+			
+			return _forceLimit;
+			
+		}
+		public function set forceLimit(value_p:Number):void { /* nada */ };
+		
+		public function get inputPower():Number { 
+			if(!_inputPower) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
+					var curValue:String = dataPoint.@Value.toString();
+					var curTarget:Number = parseFloat(dataPoint.@Target);
+					if(curValue == INPUT_POWER) {
+						_inputPower = curTarget;
+						break;
+					}
+				}
+					}
+			
+			return _inputPower;
+			
+		}
+		public function set inputPower(value_p:Number):void { /* nada */ };
 		
 		public function toString():String {
 			return name;
