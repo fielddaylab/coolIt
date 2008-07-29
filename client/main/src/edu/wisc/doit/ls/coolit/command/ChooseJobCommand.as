@@ -29,7 +29,13 @@ package edu.wisc.doit.ls.coolit.command {
 			jobVO = chooseJobEvent.job;
 			model = chooseJobEvent.modelLocator;
 			var stateModel:StateModel = model.stateModel;
+			var materialModel:MaterialModel = model.materialModel;
+			
 			stateModel.currentState = StateModel.JOB_SCREEN;
+			
+			materialModel.lengthMin = jobVO.strutLengthMin;
+			materialModel.lengthMax = jobVO.strutLengthMax;
+			materialModel.crossSectionMax = jobVO.strutCrossSectionMax;
 			
 			dispatchSetProblem(jobVO.name);
 		}
