@@ -1,78 +1,20 @@
-<GetProblemsResponse xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.wisc.edu/doit/ls/coolit/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <GetProblemsResult>
-    <Problem Name="Minesweeper I">
-      <Description>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting magnet that must be cooled to 25 K in order to operate reliably. Power constraints on the ship limit the power consumed by the cryocooler to less than 20 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs 250 kg is to be mounted on a support cylinder inside a cylindrical vessel that has maximum inside dimensions of 0.6 m diameter by 1.5 m length. The flexible current leads that provide electric current to the magnet add a constant 50-watt heat load on the cryocooler. Determine a low cost support system for the superconducting magnet. The navy is offering $10,000 for a valid solution to this problem.</Description>
-      <MonetaryIncentive>10000</MonetaryIncentive>
-      <HeatLeak>50</HeatLeak>
-      <SupportMode>COMPRESSION</SupportMode>
-      <MinStrutLength>0.001</MinStrutLength>
-      <MaxStrutLength>0.5</MaxStrutLength>
-      <SupportNumber>1</SupportNumber>
-      <Constraints>
-        <Constraint Op="GE" Value="FORCE_LIMIT" Target="2.5"/>
-        <Constraint Op="LE" Value="INPUT_POWER" Target="20000"/>
-        <Constraint Op="LE" Value="TEMP" Target="25"/>
-      </Constraints>
-      <Images>
-        <string>2.18.08 Minesweeper.JPG</string>
-        <string>2.18.08 Minesweeper cross-section_2.JPG</string>
-      </Images>
-      <Solved>false</Solved>
-    </Problem>
-    <Problem Name="Space Depot (hydrogen)">
-      <Description>NASA is developing a space cryogen depot for travel to Mars. Zero boil off dewars are a critical component in NASA's plans for a space cryogen depot. A zero-boil-off dewar is one for which a cryocooler intercepts the heat leak to the inner vessel so that no liquid cryogen boils away. As shown on the design board, a set of 8 identical straps is used to support the inner vessel of the dewar inside its vacuum shell. Determine appropriate straps (geometry and material) so that the dewar can be used to store liquid hydrogen at its normal boiling point of 20.3 K indefinitely.</Description>
-      <MonetaryIncentive>1000</MonetaryIncentive>
-      <HeatLeak>0</HeatLeak>
-      <SupportMode>TENSION</SupportMode>
-      <MinStrutLength>0.01</MinStrutLength>
-      <MaxStrutLength>2</MaxStrutLength>
-      <SupportNumber>8</SupportNumber>
-      <Constraints>
-        <Constraint Op="LT" Value="TEMP" Target="20.3"/>
-      </Constraints>
-      <Images>
-        <string>Depot strap attachment.JPG</string>
-        <string>Depot Cross-Section Model.JPG</string>
-      </Images>
-      <Solved>false</Solved>
-    </Problem>
-    <Problem Name="Minesweeper II">
-      <Description>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting magnet that must be cooled to 100 K in order to operate reliably. Power constraints on the ship limit the power consumed by the cryocooler to less than 100 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs 250 kg is to be mounted on a support cylinder inside a cylindrical vessel that has maximum inside dimensions of 0.6 m diameter by 3 m length. You can ignore the heat load caused by the flexible current leads that provide electric current to the magnet. Determine a low cost support system for the superconducting magnet. The navy is offering $5,000 for a valid solution to this problem.</Description>
-      <MonetaryIncentive>5000</MonetaryIncentive>
-      <HeatLeak>0</HeatLeak>
-      <SupportMode>COMPRESSION</SupportMode>
-      <MinStrutLength>0.01</MinStrutLength>
-      <MaxStrutLength>2</MaxStrutLength>
-      <SupportNumber>1</SupportNumber>
-      <Constraints>
-        <Constraint Op="GE" Value="FORCE_LIMIT" Target="2.5"/>
-        <Constraint Op="LE" Value="INPUT_POWER" Target="100000"/>
-        <Constraint Op="LE" Value="TEMP" Target="100"/>
-      </Constraints>
-      <Images>
-        <string>2.18.08 Minesweeper.JPG</string>
-        <string>2.18.08 Minesweeper cross-section_2.JPG</string>
-      </Images>
-      <Solved>false</Solved>
-    </Problem>
-    <Problem Name="Minesweeper III">
-      <Description>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting magnet that must be cooled to 20 K in order to operate reliably. Power constraints on the ship limit the power consumed by the cryocooler to less than 20 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs 500 kg is to be mounted on 6 identical support posts inside a cylindrical vessel that has maximum inside dimensions of 0.6 m diameter by 1.5 m length. The flexible current leads that provide electric current to the magnet add a constant 50-watt heat load on the cryocooler. Determine a low cost support system for the superconducting magnet. The navy is offering $15,000 for a valid soultion to this problem.</Description>
-      <MonetaryIncentive>15000</MonetaryIncentive>
-      <HeatLeak>50</HeatLeak>
-      <SupportMode>COMPRESSION</SupportMode>
-      <MinStrutLength>0.01</MinStrutLength>
-      <MaxStrutLength>0.5</MaxStrutLength>
-      <SupportNumber>6</SupportNumber>
-      <Constraints>
-        <Constraint Op="GE" Value="FORCE_LIMIT" Target="5"/>
-        <Constraint Op="LE" Value="INPUT_POWER" Target="20000"/>
-        <Constraint Op="LE" Value="TEMP" Target="20"/>
-      </Constraints>
-      <Images>
-        <string>2.18.08 Minesweeper.JPG</string>
-        <string>2.18.08 Minesweeper cross-section_2.JPG</string>
-      </Images>
-      <Solved>false</Solved>
-    </Problem>
-  </GetProblemsResult>
-</GetProblemsResponse>
+<Problem Name="Minesweeper I">
+	<Description>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting magnet that must be cooled to 25 K in order to operate reliably. Power constraints on the ship limit the power consumed by the cryocooler to less than 20 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs 250 kg is to be mounted on a support cylinder inside a cylindrical vessel that has maximum inside dimensions of 0.6 m diameter by 1.5 m length. The flexible current leads that provide electric current to the magnet add a constant 50-watt heat load on the cryocooler. Determine a low cost support system for the superconducting magnet. The navy is offering $10,000 for a valid solution to this problem.</Description>
+	<MonetaryIncentive>10000</MonetaryIncentive>
+	<HeatLeak>50</HeatLeak>
+	<SupportMode>COMPRESSION</SupportMode>
+	<SupportNumber>1</SupportNumber>
+	<Constraints>
+	  <Constraint Value="STRUT_LENGTH" Op="GE" Target="0.001" />
+	  <Constraint Value="STRUT_LENGTH" Op="LE" Target="0.5" />
+	  <Constraint Value="STRUT_CROSS_SECTION" Op="LE" Target="0.16" />
+	  <Constraint Value="FORCE_LIMIT" Op="GE" Target="2.5" />
+	  <Constraint Value="INPUT_POWER" Op="LE" Target="20000" />
+	  <Constraint Value="TEMP" Op="LE" Target="25" />
+	</Constraints>
+	<Images>
+	  <string>2.18.08 Minesweeper.JPG</string>
+	  <string>2.18.08 Minesweeper cross-section_2.JPG</string>
+	</Images>
+	<Solved>false</Solved>
+</Problem>
