@@ -69,13 +69,13 @@
 					<!-- details box -->
 					<mx:HBox width="100%" height="90" horizontalAlign="left">
 						
-						<view:Meter id="tempMeter" label="Temp" minimum="150" maximum="500" 
+						<view:Meter id="tempMeter" label="Temp" minimum="0" maximum="300" 
 									value="{parseInt(decFormatter.format(model.temperature))}" />
 						
-						<view:Meter id="strengthMeter" label="Strength" minimum="0" maximum="60" 
+						<view:Meter id="strengthMeter" label="Strength" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
 									value="{parseInt(decFormatter.format(model.stressLimit))}" />
 									
-						<view:Meter id="powerMeter" label="Power" minimum="0" maximum="400" 
+						<view:Meter id="powerMeter" label="Power" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
 									value="{parseInt(decFormatter.format(model.inputPower))}" />
 						
 						<mx:VBox fontSize="10">
