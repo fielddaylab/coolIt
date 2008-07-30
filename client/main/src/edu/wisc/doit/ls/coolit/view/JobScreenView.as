@@ -262,6 +262,10 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		public function set currentApplicationState(state_p:String):void {
 			if(state_p == StateModel.JOB_SCREEN) {
+				//set first cooler and material
+				coolerPicker.reset();
+				strutPicker.reset();
+				
 				//get input power data
 				//dispatchEventGetInputPowerData();
 				if(hasInit) {
