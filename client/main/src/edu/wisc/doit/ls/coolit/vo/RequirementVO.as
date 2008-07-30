@@ -8,6 +8,7 @@ package edu.wisc.doit.ls.coolit.vo {
 		private var opTable:Object;
 		
 		private var labelTable:Object;
+		private var unitTable:Object;
 		
 		public function RequirementVO(core_p:XML) {
 			super();
@@ -24,6 +25,13 @@ package edu.wisc.doit.ls.coolit.vo {
 			labelTable["FORCE_LIMIT"] = "Force Limit";
 			labelTable["INPUT_POWER"] = "Input Power";
 			labelTable["TEMP"] = "Temp";
+			
+			unitTable = new Object();
+			unitTable["STRUT_LENGTH"] = "(m)";
+			unitTable["STRUT_CROSS_SECTION"] = "(m^2)";
+			unitTable["FORCE_LIMIT"] = "(mN)";
+			unitTable["INPUT_POWER"] = "(W)";
+			unitTable["TEMP"] = "(K)";
 		}
 		
 		public function get operation():String { return opTable[core.@Op]; };
@@ -43,6 +51,9 @@ package edu.wisc.doit.ls.coolit.vo {
 		
 		public function get target():Number { return parseFloat(core.@Target); };
 		public function set target(target_p:Number):void { /* nada */ };
+		
+		public function get unit():String { return unitTable[core.@Value]; };
+		public function set unit(unit_p:String):void { /* nada */ };
 		
 		public function toString():String {
 			return "(" + operation + "," + label + "," + target + ")";
