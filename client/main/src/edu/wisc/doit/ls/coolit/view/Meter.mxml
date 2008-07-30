@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
-	horizontalAlign="center" verticalAlign="middle" creationComplete="{setupMeter()}" width="105">
+	horizontalAlign="center" verticalAlign="middle" creationComplete="{setupMeter()}" width="105" verticalGap="0">
 	
 	<mx:Script><![CDATA[ 
 		import mx.core.UIComponent;
@@ -42,7 +42,9 @@
 		
 	]]></mx:Script>
 	
-	<mx:UIComponent id="meterHolder" width="105" height="62.5"/>
-	<mx:Label text="Current: {(invalidValue) ? 'unknown' : value}" />
+	<mx:UIComponent id="meterHolder" width="105" height="55"/>
+	<mx:Canvas width="105" height="35" styleName="meterLCDStyle">
+		<mx:Label text="{(invalidValue) ? 'unknown' : value}" textAlign="center" verticalCenter="0" horizontalCenter="0" />
+	</mx:Canvas>
 	
 </mx:VBox>
