@@ -42,6 +42,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var _selected:Boolean = false;
 		
+		private var runSimDelay:Timer;
+		
 		private var log:ILogger;
 		
 		/*
@@ -49,6 +51,10 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		public function StrutPickerView():void {
 			super();
+			
+			runSimDelay = new Timer(500, 1);
+            runSimDelay.addEventListener(TimerEvent.TIMER, onRunSimDelay);
+			
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -101,6 +107,10 @@ package edu.wisc.doit.ls.coolit.view {
 			//lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
 		}
 		
+		private function onRunSimDelay(event_p:TimerEvent):void {
+			dispatchSetStrut(true);
+		}
+		
 		private function onSliderChange(event_p:SliderEvent):void {
 			crossSectionDisplay.text = crossSection.value.toString();
 			lengthDisplay.text = lengthM.value.toString();
@@ -116,6 +126,9 @@ package edu.wisc.doit.ls.coolit.view {
 			crossSectionDown = false;
 			crossSectionDisplay.text = crossSection.value.toString();
 			dispatchSetStrut(true);
+			
+			runSimDelay.reset();
+			runSimDelay.start();
 			
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutCrossSection);
 		}
@@ -147,6 +160,9 @@ package edu.wisc.doit.ls.coolit.view {
 			lengthDisplay.text = lengthM.value.toString();
 			lengthDown = false;
 			dispatchSetStrut(true);
+			
+			runSimDelay.reset();
+			runSimDelay.start();
 			
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutLength);
 		}
