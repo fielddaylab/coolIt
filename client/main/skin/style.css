@@ -229,3 +229,17 @@ Panel {
 	selectedDownSkin: Embed(source="../skin/images/supports_selected.swf");
 	selectedUpSkin: Embed(source="../skin/images/supports_selected.swf");
 }
+
+@font-face {
+    src:url("../lib/LCD-BOLD.TTF");
+    fontWeight: bold;
+    fontFamily: LCDFont;
+}
+
+.meterLCDStyle {
+	fontFamily: LCDFont;
+    fontWeight: bold;
+	fontSize: 30px;
+	color: red;
+	backgroundColor: #000000;
+}
