@@ -98,7 +98,7 @@ package edu.wisc.doit.ls.coolit.view {
 			for(var i:Number = 0; i<reqLen; i++) {
 				var curReq:RequirementVO = requirementsList.getItemAt(i) as RequirementVO;
 				var firstBreak:String = (i == 0) ? "" : "<br />";
-				tempRequirements = tempRequirements + firstBreak + "<b>" + curReq.label + "</b> " + curReq.operation + " <b>" + curReq.target + "</b>";
+				tempRequirements = tempRequirements + firstBreak + "<b>" + curReq.label + "</b> " + curReq.operation + " <b>" + curReq.target + " " + curReq.unit + "</b>";
 			}
 		}
 		
