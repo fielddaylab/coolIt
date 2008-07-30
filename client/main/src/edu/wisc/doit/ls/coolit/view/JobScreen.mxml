@@ -69,20 +69,19 @@
 					<!-- details box -->
 					<mx:HBox width="100%" height="90" horizontalAlign="left">
 						
-						<view:Meter id="tempMeter" label="Temp" minimum="0" maximum="300" 
-									value="{parseInt(decFormatter.format(model.temperature))}" />
+						<view:Meter id="tempMeter" label="Temp (k)" minimum="0" maximum="300" 
+									value="{parseFloat(decFormatter.format(model.temperature))}" />
 						
-						<view:Meter id="strengthMeter" label="Strength" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
-									value="{parseInt(decFormatter.format(model.stressLimit))}" />
+						<view:Meter id="strengthMeter" label="Strength (mN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
+									value="{parseFloat(decFormatter.format(model.stressLimit))}" />
 									
-						<view:Meter id="powerMeter" label="Power" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
-									value="{parseInt(decFormatter.format(model.inputPower))}" />
+						<view:Meter id="powerMeter" label="Power (w)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
+									value="{parseFloat(decFormatter.format(model.inputPower))}" />
 						
 						<mx:VBox fontSize="10" width="100%" height="100%" styleName="noPadding" verticalAlign="middle" horizontalAlign="center">
-							
 							<mx:HBox>
 								<mx:Label text="Cost:" styleName="jumboHeader"/>
-								<mx:Label text="{usdFormatter.format(model.cost/1000000)}" fontWeight="none" styleName="jumboHeader" />
+								<mx:Label text="{usdFormatter.format(model.cost)}" fontWeight="none" styleName="jumboHeader" />
 							</mx:HBox>
 							<mx:HBox>
 								<mx:Label text="Bal:" fontWeight="bold" />
