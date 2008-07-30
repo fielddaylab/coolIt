@@ -27,12 +27,14 @@ package edu.wisc.doit.ls.coolit.command {
 		public function execute(event_p:CairngormEvent):void {
 			var commitEvent:CommitSolutionEvent = event_p as CommitSolutionEvent;
 			model = commitEvent.modelLocator;
+			var jobModel:JobModel = model.jobModel;
 			
 			var message:String;
 			var title:String;
 			if(model.isValidSolution) {
 				message = "Your solution is valid!!";
 				title = "Nice Job!";
+				model.bankBalance += jobModel.selected.pay;
 			} else {
 				message = "Your solution is invalid.";
 				title = "Oops!";
