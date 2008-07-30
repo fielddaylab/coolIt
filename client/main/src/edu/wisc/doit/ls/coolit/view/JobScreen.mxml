@@ -78,19 +78,19 @@
 						<view:Meter id="powerMeter" label="Power" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
 									value="{parseInt(decFormatter.format(model.inputPower))}" />
 						
-						<mx:VBox fontSize="10">
+						<mx:VBox fontSize="10" width="100%" height="100%" styleName="noPadding" verticalAlign="middle" horizontalAlign="center">
+							
 							<mx:HBox>
-								<mx:Label text="Cost:" fontWeight="bold" />
-								<mx:Label text="{usdFormatter.format(model.cost/1000000)}" />
-							</mx:HBox> 
+								<mx:Label text="Cost:" styleName="jumboHeader"/>
+								<mx:Label text="{usdFormatter.format(model.cost/1000000)}" fontWeight="none" styleName="jumboHeader" />
+							</mx:HBox>
 							<mx:HBox>
 								<mx:Label text="Bal:" fontWeight="bold" />
 								<mx:Label text="{usdFormatter.format(model.bankBalance)}" />
-							</mx:HBox> 
-							<mx:HBox>
-								<mx:Label text="Pay:" fontWeight="bold" />
+								<mx:Label text=" Pay:" fontWeight="bold" />
 								<mx:Label text="{usdFormatter.format(jobModel.selected.pay)}" />
 							</mx:HBox> 
+							
 						</mx:VBox> 
 						
 					</mx:HBox>
