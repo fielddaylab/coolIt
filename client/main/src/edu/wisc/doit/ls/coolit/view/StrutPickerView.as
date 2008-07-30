@@ -107,6 +107,11 @@ package edu.wisc.doit.ls.coolit.view {
 			//lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
 		}
 		
+		public function reset():void {
+			strutList.selectedIndex = 0;
+			dispatchSetStrut(true);
+		}
+		
 		private function onRunSimDelay(event_p:TimerEvent):void {
 			dispatchSetStrut(true);
 		}

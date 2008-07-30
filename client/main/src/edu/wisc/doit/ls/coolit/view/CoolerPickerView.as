@@ -110,6 +110,12 @@ package edu.wisc.doit.ls.coolit.view {
 			coolerPowerFactor.addEventListener(MouseEvent.MOUSE_MOVE, onPowerFactorMove);
 		}
 		
+		public function reset():void {
+			coolerList.selectedIndex = 0;
+			coolerPowerFactor.value = 1;
+			dispatchSetCooler();
+		}
+		
 		private function onSliderCheck(event_p:TimerEvent):void {
 			dispatchSetCooler();
 		}
