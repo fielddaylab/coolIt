@@ -43,6 +43,9 @@ package edu.wisc.doit.ls.coolit.view {
 		private var _selected:Boolean = false;
 		
 		private var runSimDelay:Timer;
+		private var setStrutTimer:Timer;
+		
+		private var cacheStream:ArrayCollection;
 		
 		private var log:ILogger;
 		
@@ -55,6 +58,10 @@ package edu.wisc.doit.ls.coolit.view {
 			runSimDelay = new Timer(500, 1);
             runSimDelay.addEventListener(TimerEvent.TIMER, onRunSimDelay);
 			
+			setStrutTimer = new Timer(100, 0);
+			setStrutTimer.addEventListener(TimerEvent.TIMER, onSetStrutDelay);
+			
+			cacheStream = new ArrayCollection();
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -66,6 +73,20 @@ package edu.wisc.doit.ls.coolit.view {
 		public function dispatchSetStrut(doRunSim_p:Boolean = false):void {
 			//send out a set cooler event with currently selected cooler
 			
+			if(cacheStream.length > 2) {
+				cacheStream.removeItemAt(0);
+			}
+			
+			//add current state snapshot to cacheStream
+			var newCache:Object = new Object();
+			newCache.modelLocator = modelLocator;
+			newCache.material = strutList.selectedItem as MaterialVO;
+			newCache.length = lengthM.value;
+			newCache.crossSection = crossSection.value;
+			newCache.doRunSim = doRunSim_p;
+			cacheStream.addItem(newCache);
+			
+			/*
 			var setStrutEvent:SetStrutEvent = new SetStrutEvent();
 			setStrutEvent.modelLocator = modelLocator;
 			setStrutEvent.material = strutList.selectedItem as MaterialVO;
@@ -73,6 +94,7 @@ package edu.wisc.doit.ls.coolit.view {
 			setStrutEvent.crossSection = crossSection.value;
 			setStrutEvent.doRunSim = doRunSim_p;
 			CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+			*/
 		}
 		
 		[Bindable] public function get selected():Boolean {
@@ -97,19 +119,50 @@ package edu.wisc.doit.ls.coolit.view {
 			lengthM.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			crossSection.addEventListener(SliderEvent.CHANGE, onSliderChange);
 			crossSection.addEventListener(MouseEvent.MOUSE_DOWN, onCrossSectionDown);
-			//crossSection.addEventListener(MouseEvent.MOUSE_UP, onCrossSectionUp);
 			crossSection.addEventListener(MouseEvent.MOUSE_MOVE, onCrossSectionMove);
-			//crossSection.addEventListener(MouseEvent.MOUSE_OUT, onCrossSectionOut);
 			
 			lengthM.addEventListener(MouseEvent.MOUSE_DOWN, onLengthDown);
-			//lengthM.addEventListener(MouseEvent.MOUSE_UP, onLengthUp);
 			lengthM.addEventListener(MouseEvent.MOUSE_MOVE, onLengthMove);
-			//lengthM.addEventListener(MouseEvent.MOUSE_OUT, onLengthOut);
 		}
 		
 		public function reset():void {
 			strutList.selectedIndex = 0;
 			dispatchSetStrut(true);
+		}
+		
+		private function onSetStrutDelay(event_p:TimerEvent):void {
+			//onSetStrutDelay
+			popTopItem();
+		}
+		
+		private function popBottomItem():void {
+			//remove first item
+			if(cacheStream.length > 0) {
+				var curCache:Object = cacheStream.removeItemAt(0) as Object;
+				
+				var setStrutEvent:SetStrutEvent = new SetStrutEvent();
+				setStrutEvent.modelLocator = curCache.modelLocator;
+				setStrutEvent.material = curCache.material;
+				setStrutEvent.length = curCache.length;
+				setStrutEvent.crossSection = curCache.crossSection;
+				setStrutEvent.doRunSim = curCache.doRunSim;
+				CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+			}
+		}
+		
+		private function popTopItem():void {
+			//remove first item
+			if(cacheStream.length > 0) {
+				var curCache:Object = cacheStream.removeItemAt(cacheStream.length-1) as Object;
+				
+				var setStrutEvent:SetStrutEvent = new SetStrutEvent();
+				setStrutEvent.modelLocator = curCache.modelLocator;
+				setStrutEvent.material = curCache.material;
+				setStrutEvent.length = curCache.length;
+				setStrutEvent.crossSection = curCache.crossSection;
+				setStrutEvent.doRunSim = curCache.doRunSim;
+				CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+			}
 		}
 		
 		private function onRunSimDelay(event_p:TimerEvent):void {
@@ -119,12 +172,14 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onSliderChange(event_p:SliderEvent):void {
 			crossSectionDisplay.text = crossSection.value.toString();
 			lengthDisplay.text = lengthM.value.toString();
-			dispatchSetStrut(false);
+			dispatchSetStrut(true);
 		}
 		
 		private function onCrossSectionDown(event_p:MouseEvent):void {
 			crossSectionDown = true;
 			stage.addEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutCrossSection);
+			
+			setStrutTimer.start();
 		}
 		
 		private function onCheckMouseOutCrossSection(event_p:MouseEvent):void {
@@ -135,18 +190,11 @@ package edu.wisc.doit.ls.coolit.view {
 			runSimDelay.reset();
 			runSimDelay.start();
 			
+			setStrutTimer.stop();
+			popTopItem();
+			cacheStream.removeAll();
+			
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutCrossSection);
-		}
-		
-		private function onCrossSectionUp(event_p:MouseEvent):void {
-			crossSectionDown = false;
-			crossSectionDisplay.text = crossSection.value.toString();
-			dispatchSetStrut(true);
-		}
-		
-		private function onCrossSectionOut(event_p:MouseEvent):void {
-			crossSectionDown = false;
-			//dispatchSetStrut(true);
 		}
 		
 		private function onCrossSectionMove(event_p:MouseEvent):void {
@@ -159,6 +207,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onLengthDown(event_p:MouseEvent):void {
 			lengthDown = true;
 			stage.addEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutLength);
+			
+			setStrutTimer.start();
 		}
 		
 		private function onCheckMouseOutLength(event_p:MouseEvent):void {
@@ -169,18 +219,11 @@ package edu.wisc.doit.ls.coolit.view {
 			runSimDelay.reset();
 			runSimDelay.start();
 			
+			setStrutTimer.stop();
+			popTopItem();
+			cacheStream.removeAll();
+			
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onCheckMouseOutLength);
-		}
-		
-		private function onLengthOut(event_p:MouseEvent):void {
-			lengthDown = false;
-			//dispatchSetStrut(true);
-		}
-		
-		private function onLengthUp(event_p:MouseEvent):void {
-			lengthDisplay.text = lengthM.value.toString();
-			lengthDown = false;
-			dispatchSetStrut(true);
 		}
 		
 		private function onLengthMove(event_p:MouseEvent):void {
