@@ -44,7 +44,9 @@
 	
 	<mx:UIComponent id="meterHolder" width="120" height="55"/>
 	<mx:Canvas width="120" height="35" styleName="meterLCDStyle">
-		<mx:Label text="{(invalidValue) ? 'unknown' : value}" textAlign="center" verticalCenter="0" horizontalCenter="0" />
+		<mx:Label width="100%" text="0000.00" textAlign="right" verticalCenter="0" color="0x550000" />
+		<mx:Label width="100%" text="1111.11" textAlign="right" verticalCenter="0" color="0x550000" />
+		<mx:Label width="100%" text="{(invalidValue) ? 'unknown' : value}" textAlign="right" verticalCenter="0" />
 	</mx:Canvas>
 	
 </mx:VBox>
