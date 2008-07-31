@@ -241,6 +241,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onStrutChange(event_p:Event):void {
 			dispatchSetStrut(true);
+			popTopItem();
+			cacheStream.removeAll();
 		}
 	}
 }
