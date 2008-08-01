@@ -45,7 +45,7 @@
 						<mx:Canvas id="mainImageHolder" width="{model.mainMediaWidth}" height="{model.mainMediaHeight}" verticalCenter="0" visible="{!masterGraphSelected}">
 							
 							<view:NestedVideoView id="jobImage" width="{model.mainMediaWidth}" height="{model.mainMediaHeight}"
-										verticalAlign="middle" horizontalAlign="center" 
+										verticalAlign="middle" horizontalAlign="center" nestedImageProvider="{jobModel.selected.nestedImageProvider}"
 										firstDimensionMax="{materialModel.crossSectionMax}" firstDimensionMin="{materialModel.crossSectionMin}"
 										secondDimensionMax="{materialModel.lengthMax}" secondDimensionMin="{materialModel.lengthMin}"
 										firstDimensionValue="{model.crossSection}" secondDimensionValue="{model.strutLength}" />
@@ -125,7 +125,8 @@
 		<!-- cutscreen verticalCenter="-40"  -->
 		<view:CutScreen id="cutScreenView" model="{model}" currentApplicationState="{model.stateModel.currentState}" 
 							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="55" 
-							mediaWidth="{model.mainMediaWidth}" mediaHeight="{model.mainMediaHeight}" />
+							mediaWidth="{model.mainMediaWidth}" mediaHeight="{model.mainMediaHeight}" mediaURL="{jobModel.selected.introVideoURL}" />
+							
 		<mx:LinkButton id="skipButton" x="{width-skipButton.width}" y="{height-skipButton.height}" 
 					label="Skip Assembly" click="{cutScreenView.skipCut()}" textDecoration="underline" visible="false"/>
 		<!-- loading screen -->
