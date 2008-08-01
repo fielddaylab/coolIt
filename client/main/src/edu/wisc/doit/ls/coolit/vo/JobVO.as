@@ -11,10 +11,15 @@ package edu.wisc.doit.ls.coolit.vo {
 		public static var GREATER_THAN_OR_EQUAL:String = "GE";
 		public static var LESS_THAN_OR_EQUAL:String = "LE";
 		
+		public var imageURLBase:String;
+		public var imageMatrixExtension:String;
+		public var videoExtension:String;
+		
 		private var core:XML;
-		private var imageURLBase:String = "http://atswindev.doit.wisc.edu/CoolIt_Service/images/";
 		private var imageList:ArrayCollection;
 		private var requirementList:ArrayCollection;
+		
+		private var _nestedImageProvider:ArrayCollection;
 		
 		private var _strutLengthMin:Number;
 		private var _strutLengthMax:Number;
@@ -54,41 +59,58 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get solved():Boolean { return (core.Solved.toLowerCase() == "true") ? true : false; };
 		public function set solved(solved_p:Boolean):void { /* nada */ };
 		
-		public function get image():String {
-			var imageList:ArrayCollection = images;
-			return images.getItemAt(0) as String;
-		}
-		public function set image(images_p:String):void { /* nada */ };
+		public function get baseImageId():String { return core.ImageCollection.BaseURI; };
+		public function set baseImageId(url_p:String):void { /* nada */ };
 		
-		public function get images():ArrayCollection { 
-			if(!imageList) {
-				var voList:ArrayCollection = new ArrayCollection();
-				for each (var dataPoint:XML in core.Images.string) {
-					var imageURL:String;
-					var tempURL:String = dataPoint.toString();
-					if(tempURL == "2.18.08 Minesweeper.JPG") {
-						imageURL = "./minesweeper.jpg";
-					} else {
-						imageURL = imageURLBase + tempURL;
+		public function get baseImageCollectionId():String { return core.ImageCollection.PickerImageCollection.BaseName; };
+		public function set baseImageCollectionId(url_p:String):void { /* nada */ };
+		
+		public function get introVideoURL():String { return formulateVideoURL(core.ImageCollection.Intro); };
+		public function set introVideoURL(url_p:String):void { /* nada */ };
+		
+		public function get successVideoURL():String { return formulateVideoURL(core.ImageCollection.Success); };
+		public function set successVideoURL(url_p:String):void { /* nada */ };
+		
+		public function get failPowerLimitVideoURL():String { return formulateVideoURL(core.ImageCollection.FailPowerLimit); };
+		public function set failPowerLimitVideoURL(url_p:String):void { /* nada */ };
+		
+		public function get failTooHotVideoURL():String { return formulateVideoURL(core.ImageCollection.FailTooHot); };
+		public function set failTooHotVideoURL(url_p:String):void { /* nada */ };
+		
+		public function get failStrutBreaksVideoURL():String { return formulateVideoURL(core.ImageCollection.FailStrutBreaks); };
+		public function set failStrutBreaksVideoURL(url_p:String):void { /* nada */ };
+		
+		public function get imageCollectionLength():Number { return 5; /* parseInt(core.ImageCollection.PickerImageCollection.Length);*/ };
+		public function set imageCollectionLength(length_p:Number):void { /* nada */ };
+		
+		public function get imageCollectionWidth():Number { return 20; /* parseInt(core.ImageCollection.PickerImageCollection.Width);*/ };
+		public function set imageCollectionWidth(length_p:Number):void { /* nada */ };
+		
+		private function formulateVideoURL(name_p:String):String {
+			return imageURLBase + baseImageId + "/" + name_p + "." + videoExtension;
+		}
+		
+		public function get nestedImageProvider():ArrayCollection {
+			if(!_nestedImageProvider) {
+				_nestedImageProvider = new ArrayCollection();
+				
+				for(var i:Number = 0; i<imageCollectionLength; i++) {
+					var curNum:Number = i;
+					var curDir:String = curNum.toString();
+					var nestedList:ArrayCollection = new ArrayCollection();
+					
+					for(var j:Number = 0; j<imageCollectionWidth; j++) {
+						var imagePath:String = imageURLBase + baseImageId + "/" + curDir + "/" + baseImageCollectionId + j + "."  +imageMatrixExtension;
+						nestedList.addItem(imagePath);
 					}
 					
-					voList.addItem(imageURL);
+					_nestedImageProvider.addItem(nestedList);
 				}
-					
-				imageList = voList;
 			}
 			
-			return imageList;
-			
+			return _nestedImageProvider;
 		}
-		public function set images(images_p:ArrayCollection):void { /* nada */ };
-		
-		public function getImageAt(index_p:Number):String {
-			var curImages:ArrayCollection = images;
-			var curURL:String = curImages.getItemAt(index_p) as String;
-			
-			return curURL;
-		}
+		public function set nestedImageProvider(list_p:ArrayCollection):void { /* nada */ };
 		
 		public function get requirements():ArrayCollection { 
 			if(!requirementList) {
