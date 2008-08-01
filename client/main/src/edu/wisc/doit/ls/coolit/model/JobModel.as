@@ -19,6 +19,10 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var selected:JobVO;
 		
+		public var imageURLBase:String;
+		public var imageMatrixExtension:String;
+		public var videoExtension:String;
+		
 		private var core:XML;
 		private var jobList:ArrayCollection;
 		
@@ -44,6 +48,9 @@ package edu.wisc.doit.ls.coolit.model {
 			var voList:ArrayCollection = new ArrayCollection();
 			for each (var job:XML in core_p.GetProblemsResult.Problem) {
 				var newJob:JobVO = new JobVO(job);
+				newJob.imageURLBase = imageURLBase;
+				newJob.imageMatrixExtension = imageMatrixExtension;
+				newJob.videoExtension = videoExtension;
 				voList.addItem(newJob);
 			}
 			
