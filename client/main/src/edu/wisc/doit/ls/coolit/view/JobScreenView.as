@@ -42,7 +42,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var cutScreenView:CutScreen;
 		public var jobPanel:Panel;
 		public var loadingProgress:ChallengeLoader;
-		public var jobImage:NestedVideoView;
+		[Bindable] public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
 		public var viewEquip:Button;
 		public var viewDescription:Button;
@@ -102,7 +102,6 @@ package edu.wisc.doit.ls.coolit.view {
 			supportsButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			cutScreenView.addEventListener(CutScreenView.CUT_DONE, onCutDone);
 			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
-			jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
 			viewEquip.addEventListener(MouseEvent.CLICK, onViewEquipClick);
 			viewDescription.addEventListener(MouseEvent.CLICK, onViewDescriptionClick);
@@ -262,6 +261,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		public function set currentApplicationState(state_p:String):void {
 			if(state_p == StateModel.JOB_SCREEN) {
+				jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 				//set first cooler and material
 				coolerPicker.reset();
 				strutPicker.reset();
@@ -272,9 +272,19 @@ package edu.wisc.doit.ls.coolit.view {
 					coolerPicker.dispatchSetCooler();
 					strutPicker.dispatchSetStrut();
 				}
+				/*
+				cutLoaded = false;
+				imagesLoaded = false;
+				cutScreenView.init();
+				jobImage.init();
+				*/
+				 /*
 				if(jobLoaded) {
 					startJob();
 				}
+				*/
+			} else {
+				jobImage.removeEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			}
 			_currentApplicationState = state_p;
 		}
