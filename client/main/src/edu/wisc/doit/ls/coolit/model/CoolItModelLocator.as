@@ -41,6 +41,10 @@ package edu.wisc.doit.ls.coolit.model {
 		public var cryoLibModel:CryoLibModel;
 		public var graphColorModel:GraphColorModel;
 		
+		public var mediaBase:String;
+		public var imageMatrixExtension:String;
+		public var videoExtension:String;
+		
 		public var servicesOut:Number = 0;
 		
 		public var sketchCount:Number;
