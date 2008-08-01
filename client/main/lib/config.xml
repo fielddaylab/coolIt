@@ -1,0 +1,6 @@
+<config>
+	<serviceWSDL>http://atswindev.doit.wisc.edu/CoolIt_Service_2_9/CoolIt_Service.asmx?WSDL</serviceWSDL>
+	<mediaBase>../coolit_media/</mediaBase>
+	<imageMatrixExtension>png</imageMatrixExtension>
+	<videoExtension>flv</videoExtension>
+</config>
