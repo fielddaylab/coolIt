@@ -5,7 +5,7 @@
 	<mx:HBox width="100%" creationPolicy="all" styleName="cutScreenBox" verticalAlign="middle" horizontalAlign="center">
 		<mx:VideoDisplay
 			id="cutScreenMovie"
-            source="./minesweeper_cut.flv"
+            source="{mediaURL}"
 			autoPlay="false"
 			autoRewind="false"
             width="{mediaWidth}" 

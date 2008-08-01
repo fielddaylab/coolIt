@@ -36,6 +36,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var widthPushAmount:Number = 0;
 		[Bindable] public var mediaWidth:Number = 457;
 		[Bindable] public var mediaHeight:Number = 280;
+		[Bindable] public var mediaURL:String;
 		
 		private var _currentApplicationState:String;
 		
@@ -66,6 +67,7 @@ package edu.wisc.doit.ls.coolit.view {
 				cutScreenMovie.play();
 				cutScreenMovie.stop();
 			} else {
+				//cutScreenMovie.source = mediaURL;
 				visible = true;
 				alpha = 1;
 			}
@@ -80,6 +82,10 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			cutScreenMovie.addEventListener(VideoEvent.COMPLETE, onVideoFinished);
 			cutScreenMovie.addEventListener(VideoEvent.READY, onVideoReady);
+		}
+		
+		public function init():void {
+			cutScreenMovie.source = mediaURL;
 		}
 		
 		public function startVideo():void {
