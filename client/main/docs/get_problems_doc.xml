@@ -14,11 +14,11 @@
     </Constraints>
     <ImageCollection>
       <BaseURI>Minesweeper_I</BaseURI>
-      <Intro>Intro.jpg</Intro>
-      <Success>Success.jpg</Success>
-      <FailPowerLimit>PowerLimitExceeded.jpg</FailPowerLimit>
-      <FailTooHot>TooHot.jpg</FailTooHot>
-      <FailStrutBreaks>StrutBreaks.jpg</FailStrutBreaks>
+      <Intro>Intro</Intro>
+      <Success>Success</Success>
+      <FailPowerLimit>PowerLimitExceeded</FailPowerLimit>
+      <FailTooHot>TooHot</FailTooHot>
+      <FailStrutBreaks>StrutBreaks</FailStrutBreaks>
       <PickerImageCollection>
         <BaseName>Strut</BaseName>
         <Length>2</Length>
