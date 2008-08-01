@@ -35,6 +35,9 @@ package edu.wisc.doit.ls.coolit.command {
 		public function result(event_p:Object):void {
 			var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			model.jobModel = new JobModel(cleanedXML);
+			model.jobModel.imageURLBase = model.mediaBase;
+			model.jobModel.imageMatrixExtension = model.imageMatrixExtension;
+			model.jobModel.videoExtension = model.videoExtension;
 			
 			model.servicesOut--;
 		}
