@@ -4,7 +4,11 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
 	
-	<mx:WebService id="cryoService" wsdl="http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx?WSDL" 
+	<mx:Script><![CDATA[ 
+		[Bindable] public var serviceWSDL:String = ""; 
+	]]></mx:Script>
+	
+	<mx:WebService id="cryoService" wsdl="{serviceWSDL}" 
 		useProxy="false" showBusyCursor="false">
 		<mx:operation concurrency="multiple" name="GetCoolers" resultFormat="e4x"/>
 		<mx:operation concurrency="multiple" name="GetMaterials" resultFormat="e4x"/>
