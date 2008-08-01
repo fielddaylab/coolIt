@@ -3,6 +3,11 @@
 	horizontalAlign="left" verticalAlign="middle" layout="absolute" currentState="{model.stateModel.currentState}" 
 	verticalGap="0" paddingTop="0" paddingLeft="0">
 	
+	 <mx:HTTPService 
+        id="configService"
+        url="./config.xml" 
+        resultFormat="object" />
+	
 	<!-- styles -->
 	<mx:Style source="../skin/style.css"/>
 	
