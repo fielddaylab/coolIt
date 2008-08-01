@@ -36,7 +36,7 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var log:ILogger;
 		
-		private var topLevel:ArrayCollection;
+		private var _nestedImageProvider:ArrayCollection;
 		private var imagesLoaded:Number = 0;
 		
 		private var _firstDimensionValue:Number = 0.1;
@@ -50,37 +50,6 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		public function NestedVideoView():void {
 			super();
-			
-			topLevel = new ArrayCollection();
-			
-			for(var i:Number = 0; i<5; i++) {
-				var curNum:Number = i;
-				var curDir:String = "./0" + curNum + "thickness/";
-				var nestedList:ArrayCollection = new ArrayCollection();
-				//"mineslider10000.png"
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0000.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0001.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0002.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0003.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0004.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0005.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0006.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0007.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0008.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0009.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0010.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0011.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0012.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0013.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0014.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0015.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0016.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0017.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0018.png");
-				nestedList.addItem(curDir + "mineslider" + (i+1) + "0019.png");
-				
-				topLevel.addItem(nestedList);
-			}
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -97,6 +66,10 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
+			//buildViewStacks();
+		}
+		
+		public function init():void {
 			buildViewStacks();
 		}
 		
@@ -126,12 +99,27 @@ package edu.wisc.doit.ls.coolit.view {
 			calculateSecondDimensionSlot();
 		}
 		
+		[Bindable] public function get nestedImageProvider():ArrayCollection {
+			return _nestedImageProvider;
+		}
+		public function set nestedImageProvider(list_p:ArrayCollection):void {
+			if(list_p) {
+				_nestedImageProvider = list_p;
+				if(topStack && contains(topStack)) {
+					removeChild(topStack);
+				}
+				
+				buildViewStacks();
+			}
+		}
+		
 		private function buildViewStacks():void {
+			imagesLoaded = 0;
 			topStack = new ViewStack();
 			
-			var topLevelLen:Number = topLevel.length;
-			for(var i:Number = 0; i<topLevelLen; i++) {
-				var curNested:ArrayCollection = topLevel.getItemAt(i) as ArrayCollection;
+			var _nestedImageProviderLen:Number = _nestedImageProvider.length;
+			for(var i:Number = 0; i<_nestedImageProviderLen; i++) {
+				var curNested:ArrayCollection = _nestedImageProvider.getItemAt(i) as ArrayCollection;
 				var nestLen:Number = curNested.length;
 				var newStack:ViewStack = new ViewStack();
 				for(var j:Number = 0; j<nestLen; j++) {
@@ -160,7 +148,7 @@ package edu.wisc.doit.ls.coolit.view {
 			}
 			
 			addChild(topStack);
-			
+			validateNow();
 			updatedStackIndexes();
 		}
 		
@@ -173,14 +161,14 @@ package edu.wisc.doit.ls.coolit.view {
 		private function calculateFirstDimensionSlot():void {
 			var indexValue:Number;
 			var difference:Number = firstDimensionMax - firstDimensionMin;
-			var dividedValue:Number = difference / topLevel.length;
+			var dividedValue:Number = difference / _nestedImageProvider.length;
 			var indexCandidate:Number = _firstDimensionValue / dividedValue;
 			indexValue = Math.round(indexCandidate);
 			
 			if(indexValue < 0) {
 				indexValue = 0;
-			} else if(indexValue > (topLevel.length-1)) {
-				indexValue = topLevel.length-1;
+			} else if(indexValue > (_nestedImageProvider.length-1)) {
+				indexValue = _nestedImageProvider.length-1;
 			}
 			currentTopIndex = indexValue;
 			
@@ -190,15 +178,15 @@ package edu.wisc.doit.ls.coolit.view {
 		private function calculateSecondDimensionSlot():void {
 			var indexValue:Number;
 			var difference:Number = secondDimensionMax - secondDimensionMin;
-			var dividedValue:Number = difference / topLevel.getItemAt(0).length;
+			var dividedValue:Number = difference / _nestedImageProvider.getItemAt(0).length;
 			var indexCandidate:Number = _secondDimensionValue / dividedValue;
 			indexValue = Math.round(indexCandidate);
 			if(indexValue < 0) {
 				indexValue = 0;
-			} else if(indexValue > (topLevel.getItemAt(0).length - 1)) {
-				indexValue = topLevel.getItemAt(0).length - 1;
+			} else if(indexValue > (_nestedImageProvider.getItemAt(0).length - 1)) {
+				indexValue = _nestedImageProvider.getItemAt(0).length - 1;
 			}
-			currentNestedIndex = (topLevel.getItemAt(0).length - 1) - indexValue;
+			currentNestedIndex = (_nestedImageProvider.getItemAt(0).length - 1) - indexValue;
 			
 			updatedStackIndexes();
 			
@@ -223,7 +211,9 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function dispatchImagesLoaded():void {
-			if(imagesLoaded == ((topLevel.length) * (topLevel.getItemAt(0).length))) {
+			if(imagesLoaded == ((_nestedImageProvider.length) * (_nestedImageProvider.getItemAt(0).length))) {
+				calculateFirstDimensionSlot();
+				calculateSecondDimensionSlot();
 				var imagesAreLoaded:Event = new Event(IMAGES_LOADED);
 				dispatchEvent(imagesAreLoaded);
 			}
