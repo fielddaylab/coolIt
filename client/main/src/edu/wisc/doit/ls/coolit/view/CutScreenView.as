@@ -27,6 +27,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
 		
 		//MXML components
+		public var videoHolder:Box;
 		public var cutScreenMovie:VideoDisplay;
 		public var shiftSpacerWidth:Spacer;
 		public var shiftSpacerHeight:Spacer;
@@ -63,9 +64,13 @@ package edu.wisc.doit.ls.coolit.view {
 			shiftSpacerHeight.height = 0;
 			
 			if(state_p != StateModel.JOB_SCREEN) {
-				cutScreenMovie.visible = false;
+				//cutScreenMovie.source = null;
+				//cutScreenMovie.visible = false;
+				/*
 				cutScreenMovie.play();
 				cutScreenMovie.stop();
+				*/
+				removeVideo();
 			} else {
 				//cutScreenMovie.source = mediaURL;
 				visible = true;
@@ -80,22 +85,60 @@ package edu.wisc.doit.ls.coolit.view {
 		 */
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
-			cutScreenMovie.addEventListener(VideoEvent.COMPLETE, onVideoFinished);
-			cutScreenMovie.addEventListener(VideoEvent.READY, onVideoReady);
+			
+		}
+		
+		public function reset():void {
+			removeVideo();
 		}
 		
 		public function init():void {
+			removeVideo();
+			//cutScreenMovie.source = mediaURL;
+			cutScreenMovie = new VideoDisplay();
+			cutScreenMovie.autoPlay = false;
+			cutScreenMovie.autoRewind = false;
+			cutScreenMovie.percentWidth = 100;
+			cutScreenMovie.percentHeight = 100;
+			cutScreenMovie.addEventListener(VideoEvent.COMPLETE, onVideoFinished);
+			cutScreenMovie.addEventListener(VideoEvent.READY, onVideoReady);
+			cutScreenMovie.visible = false;
+			videoHolder.addChild(cutScreenMovie);
+			//cutScreenMovie.load();
 			cutScreenMovie.source = mediaURL;
 		}
 		
+		public function removeVideo():void {
+			if(cutScreenMovie) {
+				cutScreenMovie.removeEventListener(VideoEvent.COMPLETE, onVideoFinished);
+				cutScreenMovie.removeEventListener(VideoEvent.READY, onVideoReady);
+				if(videoHolder.contains(cutScreenMovie)) {
+					videoHolder.removeChild(cutScreenMovie);
+					cutScreenMovie = null;
+				}
+			}
+			/*
+			 <mx:VideoDisplay
+			 id="cutScreenMovie"
+			 autoPlay="false"
+			 autoRewind="false"
+			 width="{mediaWidth}" 
+			 height="{mediaHeight}"
+			 visible="false" />
+			*/
+		}
+		
 		public function startVideo():void {
+			/*
 			cutScreenMovie.playheadTime = 0;
 			cutScreenMovie.visible = true;
 			cutScreenMovie.alpha = 1;
+			*/
 			cutScreenMovie.play();
 		}
 		
 		private function onVideoReady(event_p:VideoEvent):void {
+			cutScreenMovie.visible = true;
 			var cutLoadedEvent:Event = new Event(CUT_LOADED);
 			dispatchEvent(cutLoadedEvent);
 		}
@@ -112,8 +155,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		public function skipCut():void {
-			cutScreenMovie.stop();
-			cutScreenMovie.alpha = 0;
+			removeVideo();
 			//cutScreenMovie.playheadTime = totalTime;
 			finishCut();
 		}

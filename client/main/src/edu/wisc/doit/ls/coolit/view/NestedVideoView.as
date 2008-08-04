@@ -105,15 +105,15 @@ package edu.wisc.doit.ls.coolit.view {
 		public function set nestedImageProvider(list_p:ArrayCollection):void {
 			if(list_p) {
 				_nestedImageProvider = list_p;
-				if(topStack && contains(topStack)) {
-					removeChild(topStack);
-				}
-				
-				buildViewStacks();
+				//buildViewStacks();
 			}
 		}
 		
 		private function buildViewStacks():void {
+			if(topStack && contains(topStack)) {
+				removeChild(topStack);
+			}
+			
 			imagesLoaded = 0;
 			topStack = new ViewStack();
 			

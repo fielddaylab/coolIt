@@ -3,14 +3,16 @@
 	horizontalAlign="center" verticalAlign="middle" paddingLeft="0" paddingRight="0">
 	
 	<mx:HBox width="100%" creationPolicy="all" styleName="cutScreenBox" verticalAlign="middle" horizontalAlign="center">
-		<mx:VideoDisplay
+		<mx:Box id="videoHolder" width="{mediaWidth}" height="{mediaHeight}" styleName="noPadding">
+			
+		</mx:Box>
+		<!--<mx:VideoDisplay
 			id="cutScreenMovie"
-            source="{mediaURL}"
 			autoPlay="false"
 			autoRewind="false"
             width="{mediaWidth}" 
             height="{mediaHeight}"
-			visible="false" />
+			visible="false" /> -->
 		<!-- <mx:Spacer width="198" /> -->
 		<mx:Spacer id="shiftSpacerWidth" width="0" />
 	</mx:HBox>

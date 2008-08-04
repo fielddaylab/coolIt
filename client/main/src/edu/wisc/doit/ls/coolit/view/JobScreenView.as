@@ -73,11 +73,16 @@ package edu.wisc.doit.ls.coolit.view {
 		private var cutLoaded:Boolean = false;
 		private var imagesLoaded:Boolean = false;
 		
+		private var startCutTimer:Timer;
+		
 		/*
 		 * Constructor
 		 */
 		public function JobScreenView():void {
 			super();
+			
+			startCutTimer = new Timer(3000, 1);
+			startCutTimer.addEventListener(TimerEvent.TIMER, onStartCutTimer);
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -137,6 +142,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onNestedImagesLoaded(event_p:Event):void {
+			log.fatal("{0} - IMAGES LOADED!!", getQualifiedClassName(this) + ".onNestedImagesLoaded");
 			//call method to turn top image to bitmap data and assign to model's equipmentIcon
 			createEquipmentIcon();
 			imagesLoaded = true;
@@ -152,6 +158,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onCutLoaded(event_p:Event):void {
+			log.fatal("{0} - VIDEO LOADED!!", getQualifiedClassName(this) + ".onCutLoaded");
 			cutLoaded = true;
 			if(imagesLoaded) {
 				jobLoaded = true;
@@ -272,12 +279,19 @@ package edu.wisc.doit.ls.coolit.view {
 					coolerPicker.dispatchSetCooler();
 					strutPicker.dispatchSetStrut();
 				}
-				/*
+				
 				cutLoaded = false;
 				imagesLoaded = false;
-				cutScreenView.init();
-				jobImage.init();
-				*/
+				
+				cutScreenView.reset();
+				cutScreenView.visible = true;
+				cutScreenView.alpha = 1;
+				loadingProgress.visible = true;
+				loadingProgress.alpha = 1;
+				
+				startCutTimer.reset();
+				startCutTimer.start();
+				
 				 /*
 				if(jobLoaded) {
 					startJob();
@@ -287,6 +301,11 @@ package edu.wisc.doit.ls.coolit.view {
 				jobImage.removeEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 			}
 			_currentApplicationState = state_p;
+		}
+		
+		private function onStartCutTimer(event_p:TimerEvent):void {
+			cutScreenView.init();
+			jobImage.init();
 		}
 		
 		public function setArrowIcon(index_p:Number, match_p:Number):Class {
