@@ -23,6 +23,8 @@ package edu.wisc.doit.ls.coolit.model {
 		public var imageMatrixExtension:String;
 		public var videoExtension:String;
 		
+		public var finishCutURL:String;
+		
 		private var core:XML;
 		private var jobList:ArrayCollection;
 		
