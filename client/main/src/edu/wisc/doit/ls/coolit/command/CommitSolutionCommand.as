@@ -39,7 +39,9 @@ package edu.wisc.doit.ls.coolit.command {
 				message = "Your solution is invalid.";
 				title = "Oops!";
 			}
-			Alert.show(message, title);
+			
+			//Alert.show(message, title);
+			jobModel.finishCutURL = jobModel.selected.successVideoURL;
 		}
 		
 		public function result(event_p:Object):void {		
