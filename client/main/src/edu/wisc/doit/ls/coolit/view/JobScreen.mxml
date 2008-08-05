@@ -125,7 +125,7 @@
 		<!-- cutscreen verticalCenter="-40"  -->
 		<view:CutScreen id="cutScreenView" model="{model}" currentApplicationState="{model.stateModel.currentState}" 
 							verticalCenter="0" width="100%" widthPushAmount="199" heightPushAmount="55" 
-							mediaWidth="{model.mainMediaWidth}" mediaHeight="{model.mainMediaHeight}" mediaURL="{jobModel.selected.introVideoURL}" />
+							mediaWidth="{model.mainMediaWidth}" mediaHeight="{model.mainMediaHeight}" />
 							
 		<mx:LinkButton id="skipButton" x="{width-skipButton.width}" y="{height-skipButton.height}" 
 					label="Skip Assembly" click="{cutScreenView.skipCut()}" textDecoration="underline" visible="false"/>

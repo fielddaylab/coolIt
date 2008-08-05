@@ -75,6 +75,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private var startCutTimer:Timer;
 		
+		private var introScreenCutPlaying:Boolean = true;
+		
 		/*
 		 * Constructor
 		 */
@@ -142,7 +144,6 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onNestedImagesLoaded(event_p:Event):void {
-			log.fatal("{0} - IMAGES LOADED!!", getQualifiedClassName(this) + ".onNestedImagesLoaded");
 			//call method to turn top image to bitmap data and assign to model's equipmentIcon
 			createEquipmentIcon();
 			imagesLoaded = true;
@@ -158,9 +159,8 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onCutLoaded(event_p:Event):void {
-			log.fatal("{0} - VIDEO LOADED!!", getQualifiedClassName(this) + ".onCutLoaded");
 			cutLoaded = true;
-			if(imagesLoaded) {
+			if(imagesLoaded && introScreenCutPlaying) {
 				jobLoaded = true;
 				startJob();
 			}
@@ -236,6 +236,13 @@ package edu.wisc.doit.ls.coolit.view {
 			var commitSolutionEvent:CommitSolutionEvent = new CommitSolutionEvent();
 			commitSolutionEvent.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(commitSolutionEvent);
+			
+			introScreenCutPlaying = false;
+			jobPanel.visible = false;
+			cutScreenView.initCutOutro(jobModel.finishCutURL, 199, 55);
+			
+			cutScreenView.init();
+			cutScreenView.startVideo();
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
@@ -249,20 +256,6 @@ package edu.wisc.doit.ls.coolit.view {
 			CairngormEventDispatcher.getInstance().dispatchEvent(viewJobList);
 		}
 		
-		/*
-		 * Catches mouse click from choose job button
-		 *
-		 * @param	event_p	MouseEvent
-		 */
-		private function onStartJobClick(event_p:MouseEvent):void {	
-			/*
-			var chooseJob:ChooseJobEvent = new ChooseJobEvent();
-			chooseJob.modelLocator = model;
-			chooseJob.job = model.jobModel.selected;
-			CairngormEventDispatcher.getInstance().dispatchEvent(chooseJob);
-			*/
-		}
-		
 		[Bindable] public function get currentApplicationState():String {
 			return _currentApplicationState;
 		}
@@ -272,6 +265,8 @@ package edu.wisc.doit.ls.coolit.view {
 				//set first cooler and material
 				coolerPicker.reset();
 				strutPicker.reset();
+				
+				introScreenCutPlaying = true;
 				
 				//get input power data
 				//dispatchEventGetInputPowerData();
@@ -283,9 +278,8 @@ package edu.wisc.doit.ls.coolit.view {
 				cutLoaded = false;
 				imagesLoaded = false;
 				
-				cutScreenView.reset();
-				cutScreenView.visible = true;
-				cutScreenView.alpha = 1;
+				cutScreenView.initCutIntro(jobModel.selected.introVideoURL, 0, 0);
+				
 				loadingProgress.visible = true;
 				loadingProgress.alpha = 1;
 				
