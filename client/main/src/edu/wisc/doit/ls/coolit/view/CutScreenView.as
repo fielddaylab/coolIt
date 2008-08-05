@@ -25,6 +25,8 @@ package edu.wisc.doit.ls.coolit.view {
 	public class CutScreenView extends VBox {
 		public static var CUT_LOADED:String = "edu.wisc.doit.ls.coolit.view.curLoaded";
 		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
+		public static var INTRO:String = "edu.wisc.doit.ls.coolit.view.intro";
+		public static var OUTRO:String = "edu.wisc.doit.ls.coolit.view.outro";
 		
 		//MXML components
 		public var videoHolder:Box;
@@ -40,6 +42,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var mediaURL:String;
 		
 		private var _currentApplicationState:String;
+		
+		private var currentlyPlaying:String = INTRO;
 		
 		private var log:ILogger;
 		
@@ -60,19 +64,9 @@ package edu.wisc.doit.ls.coolit.view {
 			return _currentApplicationState;
 		}
 		public function set currentApplicationState(state_p:String):void {
-			shiftSpacerWidth.width = 0;
-			shiftSpacerHeight.height = 0;
-			
 			if(state_p != StateModel.JOB_SCREEN) {
-				//cutScreenMovie.source = null;
-				//cutScreenMovie.visible = false;
-				/*
-				cutScreenMovie.play();
-				cutScreenMovie.stop();
-				*/
 				removeVideo();
 			} else {
-				//cutScreenMovie.source = mediaURL;
 				visible = true;
 				alpha = 1;
 			}
@@ -86,6 +80,29 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onComplete(event_p:FlexEvent):void {
 			log.debug("{0} - creationComplete called", getQualifiedClassName(this) + ".onComplete");
 			
+		}
+		
+		public function initCutIntro(mediaURL_p:String, spacerWidth_p:Number, spacerHeight_p:Number):void {
+			currentlyPlaying = INTRO;
+			setSpacerSize(0, 0);
+			reset();
+			mediaURL = mediaURL_p;
+			visible = true;
+			alpha = 1;
+		}
+		
+		public function initCutOutro(mediaURL_p:String, spacerWidth_p:Number, spacerHeight_p:Number):void {
+			currentlyPlaying = OUTRO;
+			visible = true;
+			alpha = 0;
+			setSpacerSize(spacerWidth_p, spacerHeight_p);
+			reset();
+			mediaURL = mediaURL_p;
+		}
+		
+		public function setSpacerSize(width_p:Number, height_p:Number):void {
+			shiftSpacerWidth.width = width_p;
+			shiftSpacerHeight.height = height_p;
 		}
 		
 		public function reset():void {
@@ -117,23 +134,20 @@ package edu.wisc.doit.ls.coolit.view {
 					cutScreenMovie = null;
 				}
 			}
-			/*
-			 <mx:VideoDisplay
-			 id="cutScreenMovie"
-			 autoPlay="false"
-			 autoRewind="false"
-			 width="{mediaWidth}" 
-			 height="{mediaHeight}"
-			 visible="false" />
-			*/
 		}
 		
 		public function startVideo():void {
-			/*
-			cutScreenMovie.playheadTime = 0;
-			cutScreenMovie.visible = true;
-			cutScreenMovie.alpha = 1;
-			*/
+			if(currentlyPlaying == INTRO) {
+				cutScreenMovie.play();
+			} else {
+				Tweener.addTween(this, {alpha:1, time:1, transition:"easeOutQuart"});
+				Tweener.addTween(shiftSpacerWidth, {width:0, time:1, delay:1, transition:"easeOutQuart"});
+				Tweener.addTween(shiftSpacerHeight, {height:0, time:1, delay:1, transition:"easeOutQuart", onComplete:playVideoProxy});
+				
+			}
+		}
+		
+		private function playVideoProxy():void {
 			cutScreenMovie.play();
 		}
 		
