@@ -30,12 +30,12 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		private function createNewColorSet(color_p:Number):ArrayCollection {
 			var stroke1:Stroke = new Stroke();
-			stroke1.weight = 4;
+			stroke1.weight = 2;
 			stroke1.color = color_p;
 			stroke1.alpha = 0.20;
 			
 			var stroke2:Stroke = new Stroke();
-			stroke2.weight = 2;
+			stroke2.weight = 1;
 			stroke2.color = color_p;
 			stroke2.alpha = 0.75;
 			
