@@ -26,7 +26,8 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		//MXML components
 		public var startJob:Button;
-		[Bindable] public var jobList:DataGrid;
+		public var jobImage:Image;
+		[Bindable] public var jobList:List;
 		
 		[Bindable] public var requirementsList:ArrayCollection;
 		
@@ -49,7 +50,7 @@ package edu.wisc.doit.ls.coolit.view {
 			log.debug("{0} - View instantiated", getQualifiedClassName(this));
 			
 			addEventListener(FlexEvent.CREATION_COMPLETE, onComplete);
-			addEventListener(Event.RENDER, onRender);
+			//addEventListener(Event.RENDER, onRender);
 		}
 		
 		private function onRender(event_p:Event):void {
@@ -81,6 +82,12 @@ package edu.wisc.doit.ls.coolit.view {
 				jobList.selectedItem = model.jobModel.selected;
 				requirementsList = model.jobModel.selected.requirements;
 				buildRequirements();
+				
+				var selJob:JobVO = model.jobModel.selected;
+				var imageList:ArrayCollection = selJob.nestedImageProvider;
+				var topImage:String = imageList.getItemAt(0).getItemAt(0) as String;
+				
+				jobImage.source = topImage;
 				//log.fatal("{0} - requirementsList.getItemAt(0).core: " + requirementsList.getItemAt(0).core, getQualifiedClassName(this));
 			}
 		}
@@ -89,7 +96,14 @@ package edu.wisc.doit.ls.coolit.view {
 			model.jobModel.selected = jobList.selectedItem as JobVO;
 			requirementsList = model.jobModel.selected.requirements;
 			buildRequirements();
-			//log.fatal("{0} - requirementsList.getItemAt(0).core: " + requirementsList.getItemAt(0).core, getQualifiedClassName(this));
+			
+			var selJob:JobVO = model.jobModel.selected;
+			var imageList:ArrayCollection = selJob.nestedImageProvider;
+			var topImage:String = imageList.getItemAt(0).getItemAt(0) as String;
+			
+			jobImage.source = topImage;
+			
+			//log.fatal("{0} - topImage: " + topImage, getQualifiedClassName(this) + ".onJobListChange");
 		}
 		
 		private function buildRequirements():void {
