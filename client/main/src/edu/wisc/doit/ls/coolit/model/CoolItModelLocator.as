@@ -44,6 +44,7 @@ package edu.wisc.doit.ls.coolit.model {
 		public var mediaBase:String;
 		public var imageMatrixExtension:String;
 		public var videoExtension:String;
+		public var introText:String;
 		
 		public var servicesOut:Number = 0;
 		
