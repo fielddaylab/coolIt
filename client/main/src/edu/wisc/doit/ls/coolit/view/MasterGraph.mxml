@@ -62,7 +62,8 @@
 			</mx:DataGrid>
 			<mx:HBox width="100%" verticalAlign="middle">
 				<mx:Button id="addEntry" toolTip="Add New Snapshot" icon="{AssetEmbedLocator.camera}" height="18" />
-				<mx:Button id="removeEntry" label="-" toolTip="Remove Selected" visible="{(modelLocator.snapshotList.length &gt; 1) ? true : false}" height="18" />
+				<mx:Button id="removeEntry" toolTip="Remove Selected" icon="{AssetEmbedLocator.removeItem}"
+								visible="{(modelLocator.snapshotList.length &gt; 1) ? true : false}" height="18" />
 			</mx:HBox>
 		</mx:VBox>
 		
