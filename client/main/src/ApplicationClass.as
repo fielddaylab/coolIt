@@ -79,6 +79,7 @@ package {
 			model.mediaBase = config.mediaBase;
 			model.imageMatrixExtension = config.imageMatrixExtension;
 			model.videoExtension = config.videoExtension;
+			model.introText = config.introText;
 			
 			dispatchGetJobList();
 		}
