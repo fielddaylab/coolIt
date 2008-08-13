@@ -20,7 +20,8 @@
 		</mx:Canvas>
 		
 		<mx:HBox id="introHolder" visible="false" height="0" width="0">
-			<mx:Text text="{AssetEmbedLocator.greekText1}" width="100%" height="100%" fontSize="13" textAlign="left" />
+			<mx:TextArea text="{model.introText}" width="100%" height="100%" fontSize="13" textAlign="left"
+					styleName="floatingBoxStyle" editable="false" />
 			<mx:Image source="{AssetEmbedLocator.genDude}" />
 		</mx:HBox>
 	</mx:Panel>
