@@ -29,7 +29,7 @@
 			<mx:Image id="yGraphic" source="{AssetEmbedLocator.wattsText}" width="19" height="37" />
 			
 			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true"
-							dataTipFunction="{dataTipFunction}">
+							dataTipFunction="{dataTipFunction}" seriesFilters="[]">
 				<mx:horizontalAxis>
 						<mx:LinearAxis id="mainHorizontalAxis" minimum="1" maximum="300" autoAdjust="false" />
 				</mx:horizontalAxis>
