@@ -46,6 +46,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var viewGraph:Button;
 		public var viewEquip:Button;
 		public var viewDescription:Button;
+		public var replayButton:Button;
 		public var masterGraph:MasterGraphView;
 		[Bindable] public var skipButton:Button;
 		
@@ -74,8 +75,12 @@ package edu.wisc.doit.ls.coolit.view {
 		private var imagesLoaded:Boolean = false;
 		
 		private var startCutTimer:Timer;
+		private var goalTimer:Timer;
 		
 		private var introScreenCutPlaying:Boolean = true;
+		private var introReplaying:Boolean = false;
+		
+		private var goalsShown:Boolean = false;
 		
 		/*
 		 * Constructor
@@ -85,6 +90,9 @@ package edu.wisc.doit.ls.coolit.view {
 			
 			startCutTimer = new Timer(3000, 1);
 			startCutTimer.addEventListener(TimerEvent.TIMER, onStartCutTimer);
+			
+			goalTimer = new Timer(500, 1);
+			goalTimer.addEventListener(TimerEvent.TIMER, onGoalDisplayEvent);
 			
 			//set up logging
 			log = Log.getLogger(ApplicationClass.APP_CATEGORY);
@@ -112,10 +120,21 @@ package edu.wisc.doit.ls.coolit.view {
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
 			viewEquip.addEventListener(MouseEvent.CLICK, onViewEquipClick);
 			viewDescription.addEventListener(MouseEvent.CLICK, onViewDescriptionClick);
+			replayButton.addEventListener(MouseEvent.CLICK, onReplayAssembly);
 			masterGraph.addEventListener(MasterGraphView.BACK_EVENT, onMasterGraphBackClick);
 			masterGraph.addEventListener(MasterGraphView.COOLERS, onMasterGraphCoolerClick);
 			masterGraph.addEventListener(MasterGraphView.SUPPORTS, onMasterGraphSupportClick);
 			hasInit = true;
+			
+		}
+		
+		private function onReplayAssembly(event_p:MouseEvent):void {
+			introReplaying = true;
+			introScreenCutPlaying = true;
+			jobPanel.visible = false;
+			cutScreenView.initCutIntro(jobModel.selected.introVideoURL, 0, 0);
+			cutScreenView.init();
+			cutScreenView.startVideo();
 		}
 		
 		private function onMasterGraphBackClick(event_p:Event):void {
@@ -167,10 +186,14 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function startJob():void {
-			loadingProgress.visible = true;
 			skipButton.visible = true;
-			loadingProgress.alpha = 1;
-			Tweener.addTween(loadingProgress, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:activateJob});
+			if(!introReplaying) {
+				introReplaying = false;
+				loadingProgress.visible = true;
+				loadingProgress.alpha = 1;
+				Tweener.addTween(loadingProgress, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:activateJob});
+			}
+			
 		}
 		
 		private function activateJob():void {
@@ -181,6 +204,14 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onCutDone(event_p:Event):void {
 			jobPanel.visible = true;
 			skipButton.visible = false;
+			if(!goalsShown) {
+				goalsShown = true;
+				goalTimer.start();
+			}
+		}
+		
+		private function onGoalDisplayEvent(event_p:TimerEvent):void {
+			var goalAlert:Alert = Alert.show("1. Review the Job\n2. Meet the design requirements to get paid\n3. Solve another Job for more money","Your Goals");
 		}
 		
 		private function onPNGButtonTransparencyOver(event_p:Event):void {
@@ -237,6 +268,7 @@ package edu.wisc.doit.ls.coolit.view {
 			commitSolutionEvent.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(commitSolutionEvent);
 			
+			introReplaying = false;
 			introScreenCutPlaying = false;
 			jobPanel.visible = false;
 			cutScreenView.initCutOutro(jobModel.finishCutURL, 199, 55);
@@ -260,6 +292,7 @@ package edu.wisc.doit.ls.coolit.view {
 			return _currentApplicationState;
 		}
 		public function set currentApplicationState(state_p:String):void {
+			introReplaying = false;
 			if(state_p == StateModel.JOB_SCREEN) {
 				jobImage.addEventListener(NestedVideoView.IMAGES_LOADED, onNestedImagesLoaded);
 				//set first cooler and material

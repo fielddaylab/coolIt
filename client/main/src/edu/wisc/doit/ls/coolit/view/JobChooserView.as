@@ -107,6 +107,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function buildRequirements():void {
+			/*
 			var reqLen:Number = requirementsList.length;
 			tempRequirements = "";
 			for(var i:Number = 0; i<reqLen; i++) {
@@ -114,6 +115,9 @@ package edu.wisc.doit.ls.coolit.view {
 				var firstBreak:String = (i == 0) ? "" : "<br />";
 				tempRequirements = tempRequirements + firstBreak + "<b>" + curReq.label + "</b> " + curReq.operation + " <b>" + curReq.target + " " + curReq.unit + "</b>";
 			}
+			*/
+			var selJob:JobVO = model.jobModel.selected;
+			tempRequirements = selJob.getFormattedRequirements();
 		}
 		
 		/*
