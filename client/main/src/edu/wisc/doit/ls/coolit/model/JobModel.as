@@ -6,7 +6,7 @@ package edu.wisc.doit.ls.coolit.model {
 	
 	import mx.collections.ArrayCollection;
 	
-	import edu.wisc.doit.ls.coolit.vo.JobVO;
+	import edu.wisc.doit.ls.coolit.vo.*;
 	
 	import edu.wisc.doit.ls.coolit.CommonBase;
 	
@@ -28,6 +28,8 @@ package edu.wisc.doit.ls.coolit.model {
 		public var tempInRange:Boolean;
 		public var strengthInRange:Boolean;
 		public var powerInRange:Boolean;
+		
+		public var currentFeedback:FeedbackVO;
 		
 		private var core:XML;
 		private var jobList:ArrayCollection;
