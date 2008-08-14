@@ -32,6 +32,7 @@
 						coolerModel="{model.coolerModel}"
 						materialModel="{model.materialModel}"
 						stateModel="{model.stateModel}"
+						finishURL="{model.jobModel.finishCutURL}"
 						currentApplicationState="{model.stateModel.currentState}" />
             </mx:AddChild>
         </mx:State>
