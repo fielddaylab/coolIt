@@ -10,6 +10,7 @@
 		private var meter:com.bit101.components.Meter;
 		private var invalidValue:Boolean = false;
 		
+		[Bindable] public var inRange:Boolean;
 		[Bindable] public var maximum:Number;
 		[Bindable] public var minimum:Number;
 		[Bindable] public function set value(value_p:Number):void {
@@ -44,11 +45,12 @@
 	
 	<mx:UIComponent id="meterHolder" width="120" height="55"/>
 	<mx:Canvas width="120" height="35" styleName="meterLCDStyle">
-		<mx:Label width="100%" text="0000.00" textAlign="right" verticalCenter="0" color="0x550000" paddingRight="5" />
-		<mx:Label width="100%" text="1111.11" textAlign="right" verticalCenter="0" color="0x3C0000" paddingRight="5" />
-		<mx:Label width="100%" text="8888.88" textAlign="right" verticalCenter="0" color="0x3C0000" paddingRight="5" />
-		<mx:Label width="100%" text="7777.77" textAlign="right" verticalCenter="0" color="0x3C0000" paddingRight="5" />
-		<mx:Label width="100%" text="{(invalidValue) ? 'unknown' : value}" textAlign="right" verticalCenter="0" paddingRight="5" />
+		<mx:Label width="100%" text="0000.00" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x004000 : 0x550000}" paddingRight="5" />
+		<mx:Label width="100%" text="1111.11" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
+		<mx:Label width="100%" text="8888.88" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
+		<mx:Label width="100%" text="7777.77" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
+		<mx:Label width="100%" text="{(invalidValue) ? 'unknown' : value}" textAlign="right" color="{(inRange) ? 0x00FF00 : 0xFF0000}"
+					verticalCenter="0" paddingRight="5" />
 	</mx:Canvas>
 	
 </mx:VBox>
