@@ -25,6 +25,10 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var finishCutURL:String;
 		
+		public var tempInRange:Boolean;
+		public var strengthInRange:Boolean;
+		public var powerInRange:Boolean;
+		
 		private var core:XML;
 		private var jobList:ArrayCollection;
 		
