@@ -41,11 +41,19 @@ package edu.wisc.doit.ls.coolit.command {
 			}
 			
 			//Alert.show(message, title);
-			jobModel.finishCutURL = jobModel.selected.successVideoURL;
+			//jobModel.finishCutURL = jobModel.selected.successVideoURL;
+			
+			dispatchGetFeedback();
 		}
 		
 		public function result(event_p:Object):void {		
 			
+		}
+		
+		private function dispatchGetFeedback():void {
+			var getFeedbackEvent:GetFeedbackEvent = new GetFeedbackEvent();
+			getFeedbackEvent.modelLocator = model;
+			getFeedbackEvent.dispatch();
 		}
 		
 		public function fault(event_p:Object):void {
