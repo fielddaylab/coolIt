@@ -38,6 +38,12 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get description():String { return core.Description; };
 		public function set description(description_p:String):void { /* nada */ };
 		
+		public function get fullDescription():String {
+			var fullDesc:String = description + "<br /><br /><b>Requirements</b><br />" + getFormattedRequirements();
+			return fullDesc; 
+		};
+		public function set fullDescription(description_p:String):void { /* nada */ };
+		
 		public function get pay():Number { return parseFloat(core.MonetaryIncentive); };
 		public function set pay(pay_p:Number):void { /* nada */ };
 		
@@ -218,6 +224,20 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function toString():String {
 			return name;
 		}
+		
+		public function getFormattedRequirements():String {
+			var requirementsList:ArrayCollection = requirements;
+			var reqLen:Number = requirementsList.length;
+			var tempRequirements:String = "";
+			for(var i:Number = 0; i<reqLen; i++) {
+				var curReq:RequirementVO = requirementsList.getItemAt(i) as RequirementVO;
+				var firstBreak:String = (i == 0) ? "" : "<br />";
+				tempRequirements = tempRequirements + firstBreak + "<b>" + curReq.label + "</b> " + curReq.operation + " <b>" + curReq.target + " " + curReq.unit + "</b>";
+			}
+			
+			return tempRequirements;
+		}
+		
 	}
 	
 }
