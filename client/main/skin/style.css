@@ -3,6 +3,10 @@ global {
 	theme-color: haloSilver;
 }
 
+Alert {
+	font-size: 14px;
+}
+
 Application {
 	background-color: #FFFFFF;
 	padding-top: 0px;
@@ -187,6 +191,16 @@ Panel {
 	selectedOverSkin: Embed(source="../skin/images/help_over.swf");
 	selectedDownSkin: Embed(source="../skin/images/help_down.swf");
 	selectedUpSkin: Embed(source="../skin/images/help_up.swf");
+}
+
+.replayButton {
+	disabledSkin: Embed(source="../skin/images/replay_up.swf");
+	downSkin: Embed(source="../skin/images/replay_down.swf");
+	overSkin: Embed(source="../skin/images/replay_over.swf");
+	upSkin: Embed(source="../skin/images/replay_up.swf");
+	selectedOverSkin: Embed(source="../skin/images/replay_over.swf");
+	selectedDownSkin: Embed(source="../skin/images/replay_down.swf");
+	selectedUpSkin: Embed(source="../skin/images/replay_up.swf");
 }
 
 .switchButton {
