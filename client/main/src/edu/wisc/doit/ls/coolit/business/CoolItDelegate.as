@@ -123,6 +123,14 @@ package edu.wisc.doit.ls.coolit.business {
 			var token:AsyncToken = service.GetSpecificPowerData();
 			token.addResponder(responder);
 		}
+		
+		/**
+		 * Get feedback
+		 */
+		public function getFeedback():void {
+			var token:AsyncToken = service.GetFeedback();
+			token.addResponder(responder);
+		}
 	}
 	
 }
