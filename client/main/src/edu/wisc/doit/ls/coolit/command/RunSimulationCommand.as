@@ -11,6 +11,8 @@ package edu.wisc.doit.ls.coolit.command {
 	import edu.wisc.doit.ls.coolit.vo.*;
 	import edu.wisc.doit.ls.coolit.CommonBase;
 	
+	import mx.collections.ArrayCollection;
+	
 	/**
 	 * 
 	 */
@@ -35,6 +37,7 @@ package edu.wisc.doit.ls.coolit.command {
 		
 		public function result(event_p:Object):void {
 			var stateModel:StateModel = model.stateModel;
+			var jobModel:JobModel = model.jobModel;
 			
 			model.runSimCount--;
 			model.servicesOut--;
@@ -46,6 +49,40 @@ package edu.wisc.doit.ls.coolit.command {
 			model.stressLimit = parseFloat(cleanedXML.RunResult.stressLimit);
 			model.isValidSolution = (cleanedXML.RunResult.isValidSolution.toString().toLowerCase() == "true") ? true : false;
 			
+			//check for valid ranges
+			//first get current jobs requirements list
+			var requirements:ArrayCollection = jobModel.selected.requirements;
+			var reqLen:Number = requirements.length;
+			var powerInRange:Boolean = true;
+			var tempInRange:Boolean = true;
+			var strengthInRange:Boolean = true;
+			for(var i:Number = 0; i<reqLen; i++) {
+				var curReq:RequirementVO = requirements.getItemAt(i) as RequirementVO;
+				
+				switch(curReq.value) {
+					case RequirementVO.FORCE_LIMIT:
+						if(!curReq.valuePasses(model.stressLimit)) {
+							strengthInRange = false;
+						}
+						break;
+					case RequirementVO.INPUT_POWER:
+						if(!curReq.valuePasses(model.inputPower*1000)) {
+							powerInRange = false;
+						}
+						break;
+					case RequirementVO.TEMP:
+						if(!curReq.valuePasses(model.temperature)) {
+							tempInRange = false;
+						}
+						break;
+					default:
+						break;
+				}
+			}
+			
+			jobModel.powerInRange = powerInRange;
+			jobModel.tempInRange = tempInRange;
+			jobModel.strengthInRange = strengthInRange;
 			//model.updateSketchData();
 			if(model.runSimCount == 0 && stateModel.simulationMode == StateModel.GRAPH_SIM) {
 				dispatchUpdateStateCapture();
