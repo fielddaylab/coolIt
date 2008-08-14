@@ -18,7 +18,7 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var runSimCount:Number = 0;
 		
-		public var bankBalance:Number = 1500;
+		public var bankBalance:Number = 0;
 		public var temperature:Number;
 		public var inputPower:Number;
 		public var cost:Number;
