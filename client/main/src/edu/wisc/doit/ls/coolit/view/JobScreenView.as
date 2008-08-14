@@ -81,6 +81,7 @@ package edu.wisc.doit.ls.coolit.view {
 		private var introReplaying:Boolean = false;
 		
 		private var goalsShown:Boolean = false;
+		private var _finishURL:String;
 		
 		/*
 		 * Constructor
@@ -208,6 +209,9 @@ package edu.wisc.doit.ls.coolit.view {
 				goalsShown = true;
 				goalTimer.start();
 			}
+			if(!introScreenCutPlaying) {
+				var goalAlert:Alert = Alert.show(jobModel.currentFeedback.text, "Your Result");
+			}
 		}
 		
 		private function onGoalDisplayEvent(event_p:TimerEvent):void {
@@ -267,7 +271,7 @@ package edu.wisc.doit.ls.coolit.view {
 			var commitSolutionEvent:CommitSolutionEvent = new CommitSolutionEvent();
 			commitSolutionEvent.modelLocator = model;
 			CairngormEventDispatcher.getInstance().dispatchEvent(commitSolutionEvent);
-			
+			/*
 			introReplaying = false;
 			introScreenCutPlaying = false;
 			jobPanel.visible = false;
@@ -275,6 +279,23 @@ package edu.wisc.doit.ls.coolit.view {
 			
 			cutScreenView.init();
 			cutScreenView.startVideo();
+			*/
+		}
+		
+		[Bindable] public function get finishURL():String {
+			return _finishURL;
+		}
+		public function set finishURL(url_p:String):void {
+			_finishURL = url_p;
+			if(currentApplicationState == StateModel.JOB_SCREEN && _finishURL) {
+				introReplaying = false;
+				introScreenCutPlaying = false;
+				jobPanel.visible = false;
+				cutScreenView.initCutOutro(jobModel.finishCutURL, 199, 55);
+				
+				cutScreenView.init();
+				cutScreenView.startVideo();
+			}
 		}
 		
 		private function onJobListClick(event_p:MouseEvent):void {
