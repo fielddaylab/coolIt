@@ -42,7 +42,7 @@ package edu.wisc.doit.ls.coolit.command {
 			
 			var feedbackVO:FeedbackVO = new FeedbackVO(cleanedXML);
 			jobModel.currentFeedback = feedbackVO;
-			
+			jobModel.finishCutURL = null;
 			var curScreenURL:String;
 			switch(feedbackVO.cutScreen) {
 				case FeedbackVO.SUCCESS:
