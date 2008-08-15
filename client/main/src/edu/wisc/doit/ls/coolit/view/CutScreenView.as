@@ -25,6 +25,7 @@ package edu.wisc.doit.ls.coolit.view {
 	public class CutScreenView extends VBox {
 		public static var CUT_LOADED:String = "edu.wisc.doit.ls.coolit.view.curLoaded";
 		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
+		public static var CUT_WAITING:String = "edu.wisc.doit.ls.coolit.view.cutWaiting";
 		public static var INTRO:String = "edu.wisc.doit.ls.coolit.view.intro";
 		public static var OUTRO:String = "edu.wisc.doit.ls.coolit.view.outro";
 		
@@ -159,10 +160,15 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onVideoFinished(event_p:VideoEvent):void {
 			//leaveCut();
-			finishCut();
+			if(currentlyPlaying == OUTRO) {
+				var cutWaitingEvent:Event = new Event(CUT_WAITING);
+				dispatchEvent(cutWaitingEvent);
+			} else {
+				finishCut();
+			}
 		}
 		
-		private function finishCut():void {
+		public function finishCut():void {
 			Tweener.addTween(shiftSpacerWidth, {width:widthPushAmount, time:1, transition:"easeOutQuart"});
 			Tweener.addTween(shiftSpacerHeight, {height:heightPushAmount, time:1, transition:"easeOutQuart", onComplete:dispatchCutDoneEvent});
 			Tweener.addTween(this, {alpha:0, time:1, delay:1, transition:"easeOutQuart", onComplete:flipOff});

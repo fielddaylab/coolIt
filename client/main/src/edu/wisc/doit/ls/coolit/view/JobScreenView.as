@@ -118,6 +118,7 @@ package edu.wisc.doit.ls.coolit.view {
 			supportsButton.addEventListener(PNGButtonPaneView.MOUSE_OVER_TRANSPARENT, onPNGButtonTransparencyOver);
 			cutScreenView.addEventListener(CutScreenView.CUT_DONE, onCutDone);
 			cutScreenView.addEventListener(CutScreenView.CUT_LOADED, onCutLoaded);
+			cutScreenView.addEventListener(CutScreenView.CUT_WAITING, onCutWaiting);
 			viewGraph.addEventListener(MouseEvent.CLICK, onViewGraphClick);
 			viewEquip.addEventListener(MouseEvent.CLICK, onViewEquipClick);
 			viewDescription.addEventListener(MouseEvent.CLICK, onViewDescriptionClick);
@@ -209,9 +210,16 @@ package edu.wisc.doit.ls.coolit.view {
 				goalsShown = true;
 				goalTimer.start();
 			}
-			if(!introScreenCutPlaying) {
-				var goalAlert:Alert = Alert.show(jobModel.currentFeedback.text, "Your Result");
-			}
+			
+		}
+		
+		private function onCutWaiting(event_p:Event):void {
+			var goalAlert:Alert = Alert.show(jobModel.currentFeedback.text, "Your Result", null, null, onViewedFeedbackClick);
+		}
+		
+		
+		private function onViewedFeedbackClick(event_p:CloseEvent):void {
+			cutScreenView.finishCut();
 		}
 		
 		private function onGoalDisplayEvent(event_p:TimerEvent):void {
