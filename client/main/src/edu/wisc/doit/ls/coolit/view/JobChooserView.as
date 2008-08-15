@@ -90,6 +90,8 @@ package edu.wisc.doit.ls.coolit.view {
 				jobImage.source = topImage;
 				//log.fatal("{0} - requirementsList.getItemAt(0).core: " + requirementsList.getItemAt(0).core, getQualifiedClassName(this));
 			}
+			
+			Alert.show("1. Choose a Job\n2. Meet the design requirements to get paid\n3. Solve additional jobs to make more money.","What To Do");
 		}
 		
 		private function onJobListChange(event_p:Event):void {

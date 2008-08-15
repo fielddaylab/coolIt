@@ -223,7 +223,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onGoalDisplayEvent(event_p:TimerEvent):void {
-			var goalAlert:Alert = Alert.show("1. Review the Job\n2. Meet the design requirements to get paid\n3. Solve another Job for more money","Your Goals");
+			var goalAlert:Alert = Alert.show("Determine a combination of the cooler and supports to meet the problem requirements, then implement your solution by pressing the red arrow on the bottom-left of the screen.\nTry to minimize the cost of the solution.", "What To Do");
 		}
 		
 		private function onPNGButtonTransparencyOver(event_p:Event):void {
