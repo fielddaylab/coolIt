@@ -27,6 +27,12 @@ Panel {
 	vertical-gap: 15px;
 }
 
+.pickerInputBorder {
+	border-style: "solid";
+	border-color: #CCCCCC;
+	border-thickness: 0.5;
+}
+
 .jobDetailBG {
 	padding-left: 5px;
 	color: #666666;
