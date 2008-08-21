@@ -13,18 +13,18 @@ package edu.wisc.doit.ls.coolit.model {
 			colorList = new ArrayCollection();
 			
 			//manually add custom color sets as strokes
-			colorList.addItem(createNewColorSet(0xFF0000));
-			colorList.addItem(createNewColorSet(0x00FF00));
-			colorList.addItem(createNewColorSet(0x0000FF));
-			colorList.addItem(createNewColorSet(0xFFFF00));
-			colorList.addItem(createNewColorSet(0x00FFFF));
-			colorList.addItem(createNewColorSet(0xFF00FF));
-			colorList.addItem(createNewColorSet(0xFF9900));
-			colorList.addItem(createNewColorSet(0x66CC66));
-			colorList.addItem(createNewColorSet(0x6699FF));
-			colorList.addItem(createNewColorSet(0xFFCC33));
-			colorList.addItem(createNewColorSet(0xCC99FF));
-			colorList.addItem(createNewColorSet(0x9900FF));
+			colorList.addItem(createNewColorSet(0xCA0202));
+			colorList.addItem(createNewColorSet(0x01B101));
+			colorList.addItem(createNewColorSet(0x0203C1));
+			colorList.addItem(createNewColorSet(0xCAC902));
+			colorList.addItem(createNewColorSet(0x02CAC9));
+			colorList.addItem(createNewColorSet(0xC902CA));
+			colorList.addItem(createNewColorSet(0xD27E02));
+			colorList.addItem(createNewColorSet(0x37A637));
+			colorList.addItem(createNewColorSet(0x1371FD));
+			colorList.addItem(createNewColorSet(0xF4AB02));
+			colorList.addItem(createNewColorSet(0xAA56FE));
+			colorList.addItem(createNewColorSet(0x7902CA));
 			
 		}
 		
@@ -32,7 +32,7 @@ package edu.wisc.doit.ls.coolit.model {
 			var stroke1:Stroke = new Stroke();
 			stroke1.weight = 2;
 			stroke1.color = color_p;
-			stroke1.alpha = 0.20;
+			stroke1.alpha = 0.15;
 			
 			var stroke2:Stroke = new Stroke();
 			stroke2.weight = 1;
