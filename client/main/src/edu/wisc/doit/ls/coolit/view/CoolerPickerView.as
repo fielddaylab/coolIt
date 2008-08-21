@@ -123,10 +123,14 @@ package edu.wisc.doit.ls.coolit.view {
 		private function onSliderChange(event_p:SliderEvent):void {
 			//dispatch get power data
 			//log.debug("{0} - onSliderChange called, calling dispatchGetPowerDataEvent", getQualifiedClassName(this) + ".onComplete");
+			manualSliderChange();
+			//dispatchSetCooler();
+		}
+		
+		public function manualSliderChange():void {
 			dispatchGetPowerDataEvent();
 			sliderTimer.reset();
 			sliderTimer.start();
-			//dispatchSetCooler();
 		}
 		
 		private function onPowerFactorDown(event_p:MouseEvent):void {

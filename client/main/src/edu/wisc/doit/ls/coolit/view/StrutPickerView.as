@@ -28,8 +28,8 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var strutList:ComboBox;
 		[Bindable] public var lengthM:HSlider;
 		[Bindable] public var crossSection:HSlider;
-		[Bindable] public var crossSectionDisplay:Label;
-		[Bindable] public var lengthDisplay:Label;
+		[Bindable] public var crossSectionDisplay:TextInput;
+		[Bindable] public var lengthDisplay:TextInput;
 		[Bindable] public var graphView:Graph;
 		
 		[Bindable] public var model:ArrayCollection;
@@ -173,6 +173,19 @@ package edu.wisc.doit.ls.coolit.view {
 			crossSectionDisplay.text = crossSection.value.toString();
 			lengthDisplay.text = lengthM.value.toString();
 			dispatchSetStrut(true);
+		}
+		
+		public function manualSliderChange():void {
+			crossSectionDown = false;
+			crossSectionDisplay.text = crossSection.value.toString();
+			dispatchSetStrut(true);
+			
+			runSimDelay.reset();
+			runSimDelay.start();
+			
+			setStrutTimer.stop();
+			popTopItem();
+			cacheStream.removeAll();
 		}
 		
 		private function onCrossSectionDown(event_p:MouseEvent):void {

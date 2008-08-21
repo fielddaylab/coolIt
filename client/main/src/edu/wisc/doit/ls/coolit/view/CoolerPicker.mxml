@@ -24,7 +24,8 @@
 	
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Cooler Power Factor:" fontWeight="bold" />
-		<mx:Label text="{coolerPowerFactor.value}" />
+		<mx:TextInput id="cpfManual" text="{coolerPowerFactor.value}" restrict="[0-9.]" width="100%" styleName="pickerInputBorder"
+				keyDown="{if(event.keyCode == 13) {coolerPowerFactor.value = parseFloat(cpfManual.text); manualSliderChange();}}" />
 	</mx:HBox>
 	<mx:HSlider id="coolerPowerFactor" minimum="0.01" maximum="1" value="{modelLocator.powerFactor}" width="100%"
             allowTrackClick="true" 

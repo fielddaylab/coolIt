@@ -26,8 +26,11 @@
 	<mx:Spacer height="5" />
 	
 	<mx:HBox width="100%" styleName="noPadding">
+		<mx:Spacer width="100%" />
 		<mx:Label text="Length (M):" fontWeight="bold" />
-		<mx:Label id="lengthDisplay" text="{lengthM.value}" />
+		<!-- <mx:Label id="lengthDisplay" text="{lengthM.value}" /> -->
+		<mx:TextInput id="lengthDisplay" text="{lengthM.value}" restrict="[0-9.]" width="{crossSectionDisplay.width}" styleName="pickerInputBorder"
+				keyDown="{if(event.keyCode == 13) {lengthM.value = parseFloat(lengthDisplay.text); manualSliderChange();}}" />
 	</mx:HBox>
 	<mx:HSlider id="lengthM" minimum="{materialModel.lengthMin}" maximum="{materialModel.lengthMax}" value="{modelLocator.strutLength}" width="100%"
             dataTipPrecision="3"
@@ -37,7 +40,9 @@
 	
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Cross Section (m^2):" fontWeight="bold" />
-		<mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/>
+		<!-- <mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/> -->
+		<mx:TextInput id="crossSectionDisplay" text="{crossSection.value.toString()}" restrict="[0-9.]" width="100%" styleName="pickerInputBorder"
+				keyDown="{if(event.keyCode == 13) {crossSection.value = parseFloat(crossSectionDisplay.text); manualSliderChange();}}" />
 	</mx:HBox>
 	
 	<mx:HSlider id="crossSection" minimum="{materialModel.crossSectionMin}" maximum="{materialModel.crossSectionMax}" value="{modelLocator.crossSection}" width="100%"
