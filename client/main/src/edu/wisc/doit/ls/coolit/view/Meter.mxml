@@ -43,13 +43,18 @@
 		
 	]]></mx:Script>
 	
+	<mx:NumberFormatter id="decFormatter" precision="2" 
+        decimalSeparatorFrom="."
+        decimalSeparatorTo="." useNegativeSign="true" 
+        useThousandsSeparator="false"/>
+	
 	<mx:UIComponent id="meterHolder" width="120" height="55"/>
 	<mx:Canvas width="120" height="35" styleName="meterLCDStyle">
 		<mx:Label width="100%" text="0000.00" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x004000 : 0x550000}" paddingRight="5" />
 		<mx:Label width="100%" text="1111.11" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
 		<mx:Label width="100%" text="8888.88" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
 		<mx:Label width="100%" text="7777.77" textAlign="right" verticalCenter="0" color="{(inRange) ? 0x002700 : 0x3C0000}" paddingRight="5" />
-		<mx:Label width="100%" text="{(invalidValue) ? 'unknown' : value}" textAlign="right" color="{(inRange) ? 0x00FF00 : 0xFF0000}"
+		<mx:Label width="100%" text="{(invalidValue) ? 'unknown' : decFormatter.format(value)}" textAlign="right" color="{(inRange) ? 0x00FF00 : 0xFF0000}"
 					verticalCenter="0" paddingRight="5" />
 	</mx:Canvas>
 	

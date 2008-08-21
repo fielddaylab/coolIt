@@ -71,13 +71,13 @@
 					<mx:HBox width="100%" height="90" horizontalAlign="left">
 						
 						<view:Meter id="tempMeter" label="Temp (k)" minimum="0" maximum="300" inRange="{jobModel.tempInRange}"
-									value="{parseFloat(decFormatter.format(model.temperature))}" />
+									value="{model.temperature}" />
 						
 						<view:Meter id="strengthMeter" label="Strength (kN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
-									value="{parseFloat(decFormatter.format(model.stressLimit))}" inRange="{jobModel.strengthInRange}" />
+									value="{model.stressLimit}" inRange="{jobModel.strengthInRange}" />
 									
 						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
-									value="{parseFloat(decFormatter.format(model.inputPower))}" inRange="{jobModel.powerInRange}" />
+									value="{model.inputPower}" inRange="{jobModel.powerInRange}" />
 						
 						<mx:VBox fontSize="10" width="100%" height="100%" styleName="noPadding" verticalAlign="middle" horizontalAlign="center">
 							<mx:HBox>
