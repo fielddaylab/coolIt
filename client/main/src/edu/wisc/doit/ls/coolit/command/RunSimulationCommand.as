@@ -61,17 +61,23 @@ package edu.wisc.doit.ls.coolit.command {
 				
 				switch(curReq.value) {
 					case RequirementVO.FORCE_LIMIT:
-						if(!curReq.valuePasses(model.stressLimit)) {
+						var forceLimitPassed:Boolean = curReq.valuePasses(model.stressLimit);
+						//trace("forceLimitPassed: " + forceLimitPassed);
+						if(!forceLimitPassed) {
 							strengthInRange = false;
 						}
 						break;
 					case RequirementVO.INPUT_POWER:
-						if(!curReq.valuePasses(model.inputPower*1000)) {
+						var inputPowerPassed:Boolean = curReq.valuePasses(model.inputPower*1000);
+						//trace("inputPowerPassed: " + inputPowerPassed + " model.inputPower*1000: " + model.inputPower*1000);
+						if(!inputPowerPassed) {
 							powerInRange = false;
 						}
 						break;
 					case RequirementVO.TEMP:
-						if(!curReq.valuePasses(model.temperature)) {
+						var tempPassed:Boolean = curReq.valuePasses(model.temperature);
+						//trace("tempPassed: " + tempPassed);
+						if(!tempPassed) {
 							tempInRange = false;
 						}
 						break;
