@@ -211,7 +211,9 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onCrossSectionMove(event_p:MouseEvent):void {
-			crossSectionDisplay.text = crossSection.value.toString()
+			if(crossSectionDisplay.focusManager.getFocus() != crossSectionDisplay) {
+				crossSectionDisplay.text = crossSection.value.toString();
+			}
 			if(crossSectionDown) {
 				dispatchSetStrut(false);
 			}
@@ -240,7 +242,9 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		private function onLengthMove(event_p:MouseEvent):void {
-			lengthDisplay.text = lengthM.value.toString();
+			if(lengthDisplay.focusManager.getFocus() != lengthDisplay) {
+				lengthDisplay.text = lengthM.value.toString();
+			}
 			if(lengthDown) {
 				dispatchSetStrut(false);
 			}
