@@ -68,7 +68,7 @@ package edu.wisc.doit.ls.coolit.command {
 						}
 						break;
 					case RequirementVO.INPUT_POWER:
-						var inputPowerPassed:Boolean = curReq.valuePasses(model.inputPower*1000);
+						var inputPowerPassed:Boolean = curReq.valuePasses(model.inputPower);
 						//trace("inputPowerPassed: " + inputPowerPassed + " model.inputPower*1000: " + model.inputPower*1000);
 						if(!inputPowerPassed) {
 							powerInRange = false;
