@@ -36,6 +36,7 @@ package edu.wisc.doit.ls.coolit.view {
 		[Bindable] public var materialData:ArrayCollection;
 		[Bindable] public var modelLocator:CoolItModelLocator;
 		[Bindable] public var materialModel:MaterialModel;
+		[Bindable] public var supportNumber:Number;
 		
 		private var crossSectionDown:Boolean = false;
 		private var lengthDown:Boolean = false;

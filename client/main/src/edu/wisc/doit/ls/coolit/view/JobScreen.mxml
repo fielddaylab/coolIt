@@ -84,7 +84,7 @@
 									value="{model.temperature}" />
 						
 						<view:Meter id="strengthMeter" label="Strength (MN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
-									value="{model.stressLimit}" inRange="{jobModel.strengthInRange}" />
+									value="{model.stressLimit * jobModel.selected.supportNumber}" inRange="{jobModel.strengthInRange}" />
 									
 						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
 									value="{model.inputPower/1000}" inRange="{jobModel.powerInRange}" />
@@ -115,7 +115,7 @@
 					<mx:Box label="Struts" styleName="jobBox" width="100%" height="100%">
 							<view:StrutPicker id="strutPicker" width="100%" height="100%" model="{materialModel.materials}"
 												materialData="{materialModel.currentData}" modelLocator="{model}" materialModel="{materialModel}"
-												selected="{(pickerViewstack.selectedIndex == 2) ? true : false}" />
+												selected="{(pickerViewstack.selectedIndex == 2) ? true : false}" supportNumber="{jobModel.selected.supportNumber}" />
 					</mx:Box>
 				</mx:ViewStack>
 			</mx:HBox>
