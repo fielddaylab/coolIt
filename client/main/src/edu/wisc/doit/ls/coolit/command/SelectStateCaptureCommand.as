@@ -44,6 +44,7 @@ package edu.wisc.doit.ls.coolit.command {
 			model.crossSection = stateSnapshot.crossSection;
 			
 			model.stateSnapshot = stateSnapshot;
+			//model.graphYCeiling = stateSnapshot.highestDataValue;
 			
 			dispatchSetCooler(stateSnapshot.cooler, stateSnapshot.powerFactor);
 			dispatchSetStrut(stateSnapshot.material, stateSnapshot.strutLength, stateSnapshot.crossSection);
