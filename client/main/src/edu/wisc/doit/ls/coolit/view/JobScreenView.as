@@ -40,7 +40,7 @@ package edu.wisc.doit.ls.coolit.view {
 		public var supportsButton:PNGButtonPane;
 		public var mainImageHolder:Canvas;
 		public var cutScreenView:CutScreen;
-		public var jobPanel:Panel;
+		public var jobPanel:VBox;
 		public var loadingProgress:ChallengeLoader;
 		[Bindable] public var jobImage:NestedVideoView;
 		public var viewGraph:Button;
