@@ -9,9 +9,10 @@
 		private var _value:Number;
 		private var meter:com.bit101.components.Meter;
 		private var invalidValue:Boolean = false;
+		private var _maximum:Number;
+		private var hasInit:Boolean = false;
 		
 		[Bindable] public var inRange:Boolean;
-		[Bindable] public var maximum:Number;
 		[Bindable] public var minimum:Number;
 		[Bindable] public function set value(value_p:Number):void {
 			if(value_p < 0) {
@@ -39,7 +40,16 @@
 			meter.showValues = true;
 			meter.setSize(120, 300);
 			meterHolder.addChild(meter);
+			hasInit = true;
 		}
+		
+		[Bindable] public function set maximum(value_p:Number):void {
+			_maximum = value_p;
+			if(hasInit) {
+				meter.maximum = value_p;
+			}
+		}
+		public function get maximum():Number { return _maximum; }
 		
 	]]></mx:Script>
 	
