@@ -83,6 +83,8 @@ package edu.wisc.doit.ls.coolit.view {
 		private var goalsShown:Boolean = false;
 		private var _finishURL:String;
 		
+		private var needsGraphReset:Boolean = true;
+		
 		/*
 		 * Constructor
 		 */
@@ -145,6 +147,10 @@ package edu.wisc.doit.ls.coolit.view {
 		
 		private function onViewGraphClick(event_p:MouseEvent):void {
 			setMasterGraphActive(true);
+			if(needsGraphReset) {
+				needsGraphReset = false;
+				masterGraph.reset();
+			}
 		}
 		
 		private function onViewEquipClick(event_p:MouseEvent):void {
@@ -327,7 +333,8 @@ package edu.wisc.doit.ls.coolit.view {
 				//set first cooler and material
 				coolerPicker.reset();
 				strutPicker.reset();
-				
+				setMasterGraphActive(false);
+				needsGraphReset = true;
 				introScreenCutPlaying = true;
 				
 				//get input power data
