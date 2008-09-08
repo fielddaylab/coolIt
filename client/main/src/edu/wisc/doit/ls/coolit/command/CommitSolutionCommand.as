@@ -28,13 +28,18 @@ package edu.wisc.doit.ls.coolit.command {
 			var commitEvent:CommitSolutionEvent = event_p as CommitSolutionEvent;
 			model = commitEvent.modelLocator;
 			var jobModel:JobModel = model.jobModel;
+			var selectedJob:JobVO = jobModel.selected;
 			
 			var message:String;
 			var title:String;
 			if(model.isValidSolution) {
 				message = "Your solution is valid!!";
 				title = "Nice Job!";
-				model.bankBalance += jobModel.selected.pay;
+				if(!selectedJob.solved) {
+					model.bankBalance += jobModel.selected.pay;
+					selectedJob.solved = true;
+				}
+				
 			} else {
 				message = "Your solution is invalid.";
 				title = "Oops!";
