@@ -89,13 +89,7 @@
 						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
 									value="{model.inputPower/1000}" inRange="{jobModel.powerInRange}" />
 						
-						<mx:VBox fontSize="10" width="100%" height="100%" styleName="noPadding" verticalAlign="middle" horizontalAlign="center">
-							<mx:HBox>
-								<mx:Label text="Cost:" styleName="jumboHeader"/>
-								<mx:Label text="{usdFormatter.format(model.cost)}" fontWeight="none" styleName="jumboHeader" />
-							</mx:HBox>
-							
-						</mx:VBox> 
+						<view:Cost id="currentCost" cost="{usdFormatter.format(model.cost)}" width="100%" />
 						
 					</mx:HBox>
 					
