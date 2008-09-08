@@ -16,6 +16,7 @@ package {
 		[Embed(source="../skin/images/remove_item.png")] public static var removeItem:Class;
 		[Embed(source="../skin/images/watts_text.swf")] public static var wattsText:Class;
 		[Embed(source="../skin/images/job_detail_bg.swf")] public static var jobDetailBG:Class;
+		[Embed(source="../skin/images/blue_gradient.swf")] public static var blueGradient:Class;
 		
 		public static var greekText1:String = "You are a .... no dicant conceptam eum. Fugit nostro ex sed, his ex feugait periculis spless " + 
 												"No dicant conceptam eum. Fugit nostro ex sed, his ex feugait periculis ff" +
