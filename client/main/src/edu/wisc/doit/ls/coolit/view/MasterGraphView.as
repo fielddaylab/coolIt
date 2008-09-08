@@ -102,6 +102,12 @@ package edu.wisc.doit.ls.coolit.view {
 			pickerSelector.addEventListener(Event.CHANGE, onSelectPicker);
 		}
 		
+		public function reset():void {
+			var clearCapturesEvent:ClearStateCapturesEvent = new ClearStateCapturesEvent();
+			clearCapturesEvent.modelLocator = modelLocator;
+			CairngormEventDispatcher.getInstance().dispatchEvent(clearCapturesEvent);
+		}
+		
 		private function onSelectPicker(event_p:Event):void {
 			var selItem:Object = pickerSelector.selectedItem as Object;
 			var pickerEvent:Event = new Event(selItem.data);
