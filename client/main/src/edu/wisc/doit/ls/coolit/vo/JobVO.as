@@ -26,6 +26,7 @@ package edu.wisc.doit.ls.coolit.vo {
 		private var _strutCrossSectionMax:Number;
 		private var _forceLimit:Number;
 		private var _inputPower:Number;
+		private var _solved:Boolean = false;
 		
 		public function JobVO(core_p:XML) {
 			super();
@@ -62,8 +63,8 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get supportNumber():Number { return parseFloat(core.SupportNumber); };
 		public function set supportNumber(length_p:Number):void { /* nada */ };
 		
-		public function get solved():Boolean { return (core.Solved.toLowerCase() == "true") ? true : false; };
-		public function set solved(solved_p:Boolean):void { /* nada */ };
+		public function get solved():Boolean { return _solved };
+		public function set solved(solved_p:Boolean):void { _solved = solved_p; };
 		
 		public function get baseImageId():String { return core.ImageCollection.BaseURI; };
 		public function set baseImageId(url_p:String):void { /* nada */ };
