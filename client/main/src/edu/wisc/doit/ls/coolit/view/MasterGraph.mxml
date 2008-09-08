@@ -26,16 +26,22 @@
 		
 		<!-- label/chart horz -->
 		<mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+			<mx:VBox id="yIncrementHolder" styleName="noPadding" height="100%">
+				<mx:Spacer height="100%" />
+				<mx:Button label="+" fontSize="11" toolTip="Increment Y axis amount" width="35" height="18" click="{modelLocator.graphYCeiling = (modelLocator.graphYCeiling + 5);}" />
+				<mx:Button label="-" fontSize="11" toolTip="Decrement Y axis amount" width="35" height="18" click="{if(modelLocator.graphYCeiling &gt; 10) modelLocator.graphYCeiling = (modelLocator.graphYCeiling - 5);}" />
+			</mx:VBox>
+			
 			<mx:Image id="yGraphic" source="{AssetEmbedLocator.wattsText}" width="19" height="37" />
 			
 			<mx:LineChart id="lineChart" width="457" height="100%" dataTipMode="multiple" showDataTips="true"
 							dataTipFunction="{dataTipFunction}" seriesFilters="[]">
 				<mx:horizontalAxis>
-						<mx:LinearAxis id="mainHorizontalAxis" minimum="1" maximum="300" autoAdjust="false" />
+						<mx:LinearAxis id="mainHorizontalAxis" minimum="1" maximum="{modelLocator.graphXCeiling}" autoAdjust="false" />
 				</mx:horizontalAxis>
 				
 				<mx:verticalAxis>
-					<mx:LinearAxis id="mainVerticalAxis" minimum="1" maximum="{stateSnapshot.highestDataValue}"/>
+					<mx:LinearAxis id="mainVerticalAxis" minimum="1" maximum="{modelLocator.graphYCeiling}"/>
 				</mx:verticalAxis>
 				
 			</mx:LineChart>
@@ -46,7 +52,12 @@
 			<mx:Image id="xGraphic" source="{AssetEmbedLocator.tempText}" />
 		</mx:HBox>
 		
-		
+		<mx:HBox styleName="noPadding" width="100%">
+			<mx:Spacer width="{yIncrementHolder.width + yGraphic.width}" />
+			<mx:Button label="-" fontSize="11" toolTip="Decrement X axis amount" width="35" height="18" click="{if(modelLocator.graphXCeiling &gt; 10) modelLocator.graphXCeiling = (modelLocator.graphXCeiling - 5);}" />
+			<mx:Button label="+" fontSize="11" toolTip="Increment X axis amount" width="35" height="18" click="{modelLocator.graphXCeiling = (modelLocator.graphXCeiling + 5);}" />
+			<mx:Spacer width="100%" />
+		</mx:HBox>
 	</mx:VBox>
 	
 	<mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center"

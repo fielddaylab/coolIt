@@ -194,7 +194,7 @@ package edu.wisc.doit.ls.coolit.view {
 					lines.line1.dataProvider = stateSnapshot.captureData;
 					lines.line2.dataProvider = stateSnapshot.captureData;
 					
-					findHighestValue();
+					//findHighestValue();
 					
 					//update labels in dp
 					updateLabels();
@@ -316,7 +316,7 @@ package edu.wisc.doit.ls.coolit.view {
 					}
 					lineChart.series = newSeries;
 					//lineChart.validateNow();
-					updateMaxValue(highestValue);
+					//updateMaxValue(highestValue);
 					
 					//lineChart.dataProvider = _dataProvider;
 				}
@@ -340,7 +340,7 @@ package edu.wisc.doit.ls.coolit.view {
 						
 					}
 					
-					updateMaxValue(highestValue);
+					//updateMaxValue(highestValue);
 				}
 			}
 		}
