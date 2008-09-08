@@ -16,7 +16,7 @@ package edu.wisc.doit.ls.coolit.vo {
 		public var powerFactor:Number;
 		public var strutLength:Number;
 		public var crossSection:Number;
-		
+		public var curIndex:Number = 0;
 		public var captureData:ArrayCollection;
 				
 		public var highestDataValue:Number;
