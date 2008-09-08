@@ -27,7 +27,7 @@
 	
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Spacer width="100%" />
-		<mx:Label text="Length (M):" fontWeight="bold" />
+		<mx:Label text="Length (m):" fontWeight="bold" />
 		<!-- <mx:Label id="lengthDisplay" text="{lengthM.value}" /> -->
 		<mx:TextInput id="lengthDisplay" text="{lengthM.value}" restrict="[0-9.]" width="{crossSectionDisplay.width}" styleName="pickerInputBorder"
 				keyDown="{if(event.keyCode == 13) {lengthM.value = parseFloat(lengthDisplay.text); manualSliderChange();}}" />
