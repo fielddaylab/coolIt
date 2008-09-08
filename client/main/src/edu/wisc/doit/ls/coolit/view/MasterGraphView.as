@@ -195,11 +195,15 @@ package edu.wisc.doit.ls.coolit.view {
 					lines.line2.dataProvider = stateSnapshot.captureData;
 					
 					findHighestValue();
+					
+					//update labels in dp
+					updateLabels();
+					
 				} else if(kind == CollectionEventKind.ADD) {
 					var curSnapshot:StateSnapshotVO = items[0] as StateSnapshotVO;
 					var newIndex:Number = _dataProvider.length;
-					curSnapshot.label = "Snapshot " + newIndex;
-					
+					curSnapshot.label = curSnapshot.material.name + "/" + curSnapshot.cooler.name + " " + newIndex;
+					curSnapshot.curIndex = newIndex;
 					var lineSeries1:LineSeries = new LineSeries();
 					lineSeries1.id = "id1" + newIndex;
 					lineSeries1.yField = "coolingOutputWatts";
@@ -245,6 +249,20 @@ package edu.wisc.doit.ls.coolit.view {
 			}
 		}
 		
+		private function updateLabels():void {
+			if(_dataProvider) {
+				if(_dataProvider.length > 0) {
+					var dataLen:Number = _dataProvider.length;
+					for(var i:Number = 0; i<dataLen; i++) {
+						//get snapshot vo
+						var curSnapshot:StateSnapshotVO = _dataProvider.getItemAt(i) as StateSnapshotVO;
+						//curSnapshot.label = "Snapshot " + (i+1);
+						curSnapshot.label = curSnapshot.material.name + "/" + curSnapshot.cooler.name + " " + curSnapshot.curIndex;
+					}
+				}
+			}
+		}
+		
 		override protected function commitProperties():void {
 			super.commitProperties();
 			log.fatal("{0} - !! commitProperties CALLED", getQualifiedClassName(this) + ".commitProperties");
@@ -260,8 +278,9 @@ package edu.wisc.doit.ls.coolit.view {
 					for(var i:Number = 0; i<dataLen; i++) {
 						//get snapshot vo
 						var curSnapshot:StateSnapshotVO = _dataProvider.getItemAt(i) as StateSnapshotVO;
-						curSnapshot.label = "Snapshot " + (i+1);
-						
+						//curSnapshot.label = "Snapshot " + (i+1);
+						curSnapshot.label = modelLocator.materialModel.selected.name + "/" + coolerModel.selected.name + " " + (i+1);
+						curSnapshot.curIndex = (i+1);
 						if(curSnapshot.highestDataValue > highestValue) {
 							highestValue = curSnapshot.highestDataValue;
 						}

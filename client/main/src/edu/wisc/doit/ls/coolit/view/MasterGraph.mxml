@@ -52,8 +52,8 @@
 	<mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center"
 				styleName="jobBox" backgroundColor="0x000000" backgroundAlpha="0.05">
 		<!-- legend/key list -->
-		<mx:VBox width="125" height="100%">
-			<mx:DataGrid id="snapList" width="100%" height="150" dataProvider="{modelLocator.snapshotList}" selectedItem="{stateSnapshot}"
+		<mx:VBox width="200" height="100%">
+			<mx:DataGrid id="snapList" width="100%" height="125" dataProvider="{modelLocator.snapshotList}" selectedItem="{stateSnapshot}"
 						draggableColumns="false" resizableColumns="false" variableRowHeight="true" wordWrap="true">
 				<mx:columns>
 					<mx:DataGridColumn itemRenderer="edu.wisc.doit.ls.coolit.view.KeyRenderer" headerText="Key" width="100" />
