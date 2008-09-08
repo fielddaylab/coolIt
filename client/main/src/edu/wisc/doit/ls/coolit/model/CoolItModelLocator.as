@@ -13,6 +13,9 @@ package edu.wisc.doit.ls.coolit.model {
 	public class CoolItModelLocator implements ModelLocator {
 		private static var modelLocator:CoolItModelLocator;
 		
+		public var graphYCeiling:Number = 300;
+		public var graphXCeiling:Number = 300;
+		
 		public var mainMediaWidth:Number = 640;
 		public var mainMediaHeight:Number = 360;
 		
