@@ -83,7 +83,7 @@
 						<view:Meter id="tempMeter" label="Temp (k)" minimum="0" maximum="300" inRange="{jobModel.tempInRange}"
 									value="{model.temperature}" />
 						
-						<view:Meter id="strengthMeter" label="Strength (kN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
+						<view:Meter id="strengthMeter" label="Strength (MN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
 									value="{model.stressLimit}" inRange="{jobModel.strengthInRange}" />
 									
 						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 

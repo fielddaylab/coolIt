@@ -37,7 +37,7 @@
 			allowTrackClick="true" 
 			snapInterval="0.001"
             liveDragging="true"/>
-	
+	<mx:Spacer height="10" />
 	<mx:HBox width="100%" styleName="noPadding">
 		<mx:Label text="Cross Section (m^2):" fontWeight="bold" />
 		<!-- <mx:Label id="crossSectionDisplay" text="{crossSection.value.toString()}"/> -->
@@ -54,7 +54,7 @@
 	<mx:Form fontSize="9" width="100%" horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
 		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
 			<mx:Label id="stressLimit" fontWeight="none" 
-				text="{decFormatter.format(strutList.selectedItem.yieldStrength * (crossSection.value/100))}"/>
+				text="{decFormatter.format(strutList.selectedItem.yieldStrength * (crossSection.value))}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Price ($):">
