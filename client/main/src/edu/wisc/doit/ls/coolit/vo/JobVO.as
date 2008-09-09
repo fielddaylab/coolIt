@@ -93,8 +93,30 @@ package edu.wisc.doit.ls.coolit.vo {
 		public function get imageCollectionWidth():Number { return 20; /* parseInt(core.ImageCollection.PickerImageCollection.Width);*/ };
 		public function set imageCollectionWidth(length_p:Number):void { /* nada */ };
 		
+		public function get coolerUpURL():String { return formulateCalloutURL("up", "cooler"); };
+		public function set coolerUpURL(url_p:String):void { /* nada */ };
+		
+		public function get coolerOverURL():String { return formulateCalloutURL("over", "cooler"); };
+		public function set coolerOverURL(url_p:String):void { /* nada */ };
+		
+		public function get coolerDownURL():String { return formulateCalloutURL("down", "cooler"); };
+		public function set coolerDownURL(url_p:String):void { /* nada */ };
+		
+		public function get supportUpURL():String { return formulateCalloutURL("up", "support"); };
+		public function set supportUpURL(url_p:String):void { /* nada */ };
+		
+		public function get supportOverURL():String { return formulateCalloutURL("over", "support"); };
+		public function set supportOverURL(url_p:String):void { /* nada */ };
+		
+		public function get supportDownURL():String { return formulateCalloutURL("down", "support"); };
+		public function set supportDownURL(url_p:String):void { /* nada */ };
+		
 		private function formulateVideoURL(name_p:String):String {
 			return imageURLBase + baseImageId + "/" + name_p + "." + videoExtension;
+		}
+		
+		private function formulateCalloutURL(state_p:String, type_p:String):String {
+			return imageURLBase + baseImageId + "/" + type_p + "_" + state_p + ".png";
 		}
 		
 		public function get nestedImageProvider():ArrayCollection {
