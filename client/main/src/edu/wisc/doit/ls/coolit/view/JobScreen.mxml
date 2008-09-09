@@ -62,11 +62,11 @@
 										firstDimensionValue="{model.crossSection}" secondDimensionValue="{model.strutLength}" />
 							
 							<view:PNGButtonPane id="supportsButton" width="{model.mainMediaWidth}" height="100%" 
-									upImage="./ms_support_up.png" overImage="./ms_support_over.png" downImage="./ms_support_down.png"
+									upImage="{jobModel.selected.supportUpURL}" overImage="{jobModel.selected.supportOverURL}" downImage="{jobModel.selected.supportDownURL}"
 									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 									
 							<view:PNGButtonPane id="coolerButton" width="{model.mainMediaWidth}" height="100%" 
-									upImage="./ms_cooler_up.png" overImage="./ms_cooler_over.png" downImage="./ms_cooler_down.png"
+									upImage="{jobModel.selected.coolerUpURL}" overImage="{jobModel.selected.coolerOverURL}" downImage="{jobModel.selected.coolerDownURL}"
 									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
 							
 						</mx:Canvas>
