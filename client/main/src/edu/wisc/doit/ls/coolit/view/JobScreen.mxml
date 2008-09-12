@@ -63,11 +63,11 @@
 							
 							<view:PNGButtonPane id="supportsButton" width="{model.mainMediaWidth}" height="100%" 
 									upImage="{jobModel.selected.supportUpURL}" overImage="{jobModel.selected.supportOverURL}" downImage="{jobModel.selected.supportDownURL}"
-									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
+									visible="true" />
 									
 							<view:PNGButtonPane id="coolerButton" width="{model.mainMediaWidth}" height="100%" 
 									upImage="{jobModel.selected.coolerUpURL}" overImage="{jobModel.selected.coolerOverURL}" downImage="{jobModel.selected.coolerDownURL}"
-									visible="{(jobModel.selected.name != 'Space Depot (hydrogen)') ? true : false}" />
+									visible="true" />
 							
 						</mx:Canvas>
 						
