@@ -16,6 +16,7 @@ package edu.wisc.doit.ls.coolit.view {
 	import edu.wisc.doit.ls.coolit.vo.*;
 	
 	import caurina.transitions.Tweener;
+	import flash.media.SoundMixer;
 	
 	/**
 	 *  Handles capturing user action, and displaying updated data from model
@@ -175,6 +176,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		public function skipCut():void {
+			SoundMixer.stopAll();
 			removeVideo();
 			//cutScreenMovie.playheadTime = totalTime;
 			finishCut();
