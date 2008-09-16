@@ -83,10 +83,10 @@
 						<view:Meter id="tempMeter" label="Temp (k)" minimum="0" maximum="300" inRange="{jobModel.tempInRange}"
 									value="{model.temperature}" />
 						
-						<view:Meter id="strengthMeter" label="Strength (MN)" minimum="0" maximum="{Math.ceil(jobModel.selected.forceLimit*1.5)}" 
-									value="{model.stressLimit * jobModel.selected.supportNumber}" inRange="{jobModel.strengthInRange}" />
+						<view:Meter id="strengthMeter" label="Strength (MN)" minimum="0" maximum="{MathUtils.roundUpToNearest(jobModel.selected.forceLimit*1.5, 10)}" 
+									value="{model.stressLimit}" inRange="{jobModel.strengthInRange}" />
 									
-						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{4*(jobModel.selected.inputPower/1000)}" 
+						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{MathUtils.roundUpToNearest(4*(jobModel.selected.inputPower/1000), 10)}" 
 									value="{model.inputPower/1000}" inRange="{jobModel.powerInRange}" />
 						
 						<view:Cost id="currentCost" cost="{usdFormatter.format(model.cost)}" width="100%" />

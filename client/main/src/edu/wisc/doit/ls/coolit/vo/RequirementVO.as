@@ -38,7 +38,7 @@ package edu.wisc.doit.ls.coolit.vo {
 			unitTable = new Object();
 			unitTable["STRUT_LENGTH"] = "(m)";
 			unitTable["STRUT_CROSS_SECTION"] = "(m^2)";
-			unitTable["FORCE_LIMIT"] = "(kN)";
+			unitTable["FORCE_LIMIT"] = "(MN)";
 			unitTable["INPUT_POWER"] = "(W)";
 			unitTable["TEMP"] = "(K)";
 		}
