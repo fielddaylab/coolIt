@@ -15,7 +15,7 @@
 		
 		<mx:State name="login" basedOn="">
             <mx:AddChild relativeTo="{appContainer}" position="firstChild" creationPolicy="all">
-				<view:Login id="loginView" model="{model}" />
+				<view:Login id="loginView" model="{model}" loginState="{model.stateModel.loginState}" />
             </mx:AddChild>
         </mx:State>
 		
