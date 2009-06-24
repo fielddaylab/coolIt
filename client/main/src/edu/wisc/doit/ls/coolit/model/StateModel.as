@@ -17,12 +17,20 @@ package edu.wisc.doit.ls.coolit.model {
 		public static var GEOMETRY_SIM:String = "geometrySim";
 		public static var GRAPH_SIM:String = "graphSim";
 		
+		//login states
+		public static var SIGNED_OUT:String = "signedOut";
+		public static var LOGGED_IN:String = "loggedIn";
+		public static var INVALID_LOGIN:String = "invalidLogin";
+		public static var ANON_LOGIN:String = "anonymousLogin";
+		
 		public var simulationMode:String = GEOMETRY_SIM;
 		
 		public var currentState:String;
 		public var sketchState:String = POWER_FACTOR;
 		public var workAreaState:String = COMPONENT_STATE;
 		public var afterCutState:String;
+		
+		public var loginState:String = SIGNED_OUT;
 		
 		public var currentCutSource:*;
 		
