@@ -131,6 +131,26 @@ package edu.wisc.doit.ls.coolit.business {
 			var token:AsyncToken = service.GetFeedback();
 			token.addResponder(responder);
 		}
+		
+		/**
+		 * Login
+		 *
+		 * @param	email_p	Email address to login with
+		 */
+		public function login(email_p:String):void {
+			var token:AsyncToken = service.Login(email_p);
+			token.addResponder(responder);
+		}
+		
+		/**
+		 * Login new user
+		 *
+		 * @param	email_p	Email address to login with
+		 */
+		public function loginNew(email_p:String):void {
+			var token:AsyncToken = service.NewLogin(email_p);
+			token.addResponder(responder);
+		}
 	}
 	
 }
