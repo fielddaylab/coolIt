@@ -34,8 +34,10 @@ package edu.wisc.doit.ls.coolit.command {
 			var coolerModel:CoolerModel = model.coolerModel;
 			var materialModel:MaterialModel = model.materialModel;
 			var graphColorModel:GraphColorModel = model.graphColorModel;
+			var jobModel:JobModel = model.jobModel;
 			
 			if(materialModel && coolerModel.outputPowerData) {
+				var supportNumber:Number = jobModel.selected.supportNumber;
 				
 				var selectedMaterial:MaterialVO = materialModel.selected;
 				//we can loop through pre-existing output cooler data
@@ -55,7 +57,7 @@ package edu.wisc.doit.ls.coolit.command {
 					var curConductivity:Number = selectedMaterial.getConductivityForTemp(curTemp);
 					var heatLeak:Number;
 					if(curConductivity > 0) {
-						heatLeak = curConductivity * model.crossSection / model.strutLength;
+						heatLeak = (curConductivity * model.crossSection / model.strutLength) * supportNumber;
 					} else {
 						heatLeak = 0;
 					}
