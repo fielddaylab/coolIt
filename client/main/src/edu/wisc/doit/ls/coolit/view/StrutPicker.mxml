@@ -52,17 +52,17 @@
             liveDragging="true" />
 	
 	<mx:Form fontSize="9" width="100%" horizontalGap="1" paddingTop="5" paddingLeft="0" paddingRight="0">
-		<mx:FormItem fontWeight="bold" label="Stress Limit (MN):">
+		<mx:FormItem fontWeight="bold" label="Strength (MN):">
 			<mx:Label id="stressLimit" fontWeight="none" 
 				text="{decFormatter.format(strutList.selectedItem.yieldStrength * (crossSection.value)) + ((supportNumber != 1) ? ' (x' + supportNumber + ')' : '')}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Price ($):">
-			<mx:Label id="priceField" fontWeight="none" text="{usdFormatter.format((strutList.selectedItem.price * crossSection.value * lengthM.value) * supportNumber) + ((supportNumber != 1) ? ' (x' + supportNumber + ')' : '')}"/>
+			<mx:Label id="priceField" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.price * crossSection.value * lengthM.value) + ((supportNumber != 1) ? ' (x' + supportNumber + ')' : '')}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Cost/cm^3 ($):">
-			<mx:Label id="cost" fontWeight="none" text="{usdFormatter.format((strutList.selectedItem.price/1000000) * supportNumber) + ((supportNumber != 1) ? ' (x' + supportNumber + ')' : '')}"/>
+			<mx:Label id="cost" fontWeight="none" text="{usdFormatter.format(strutList.selectedItem.price/1000000)}"/>
 		</mx:FormItem>
 		
 		<mx:FormItem fontWeight="bold" label="Yield Strength MPa:">
