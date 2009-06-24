@@ -98,6 +98,8 @@ package edu.wisc.doit.ls.coolit.command {
 		
 		public function fault(event_p:Object):void {
 			//log failure here
+			model.runSimCount--;
+			model.servicesOut--;
 			log.fatal("{0} - " + event_p.toString(), getQualifiedClassName(this) + ".fault");
 		}
 		
