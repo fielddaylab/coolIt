@@ -35,7 +35,7 @@
 	
 	<!-- Use this to pull out fresh copy of ActionScript lib from Subversion -->
 	<target name="setUpAS">
-		<exec executable="/usr/local/bin/svn">
+		<exec executable="/usr/bin/svn">
 			<arg line = "export https://atsvn.doit.wisc.edu/default/ls/SharedCode/trunk/flex/lib ${flashlib.dir}"/>
 		</exec>
 	</target>
