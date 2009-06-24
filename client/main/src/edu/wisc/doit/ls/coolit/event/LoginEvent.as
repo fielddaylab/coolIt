@@ -10,6 +10,7 @@ package edu.wisc.doit.ls.coolit.event {
 		
 		public var accountId:String;
 		public var modelLocator:CoolItModelLocator;
+		public var newLogin:Boolean;
 		
 		/**
 		 * Constructor.
