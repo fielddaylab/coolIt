@@ -61,6 +61,7 @@ package edu.wisc.doit.ls.coolit.command {
 			model.servicesOut--;
 			//set the current data with the current material data
 			materialModel.currentData = material.mp;
+			materialModel.currentMinimumTemp = material.minimumTemp;
 			
 			//remove first item
 			if(materialModel.propertyCache.length > 0) {
