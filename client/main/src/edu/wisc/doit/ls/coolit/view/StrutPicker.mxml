@@ -75,6 +75,7 @@
 	<mx:TabNavigator id="dataViews" width="100%" height="100%" creationPolicy="all">
 		
 		<view:Graph id="graphView" dataProvider="{materialData}" width="100%" height="100%" label="Graph"
+					horizontalMinimum="{materialModel.currentMinimumTemp}"
 					yAxisGraphic="{AssetEmbedLocator.thermalText}" xAxisGraphic="{AssetEmbedLocator.tempText}" />
 		
 		<!-- data table -->
