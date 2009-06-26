@@ -10,6 +10,8 @@ package edu.wisc.doit.ls.coolit.vo {
 		private var itcList:ArrayCollection;
 		private var tempCondMap:Object;
 		
+		public var minimumTemp:Number = 999999999999;
+		
 		public function MaterialVO(core_p:XML) {
 			super();
 			core = core_p;
@@ -35,6 +37,9 @@ package edu.wisc.doit.ls.coolit.vo {
 				var voList:ArrayCollection = new ArrayCollection();
 				for each (var dataPoint:XML in core.MP.DataPoint) {
 					var newDataPoint:DataPointVO = new DataPointVO(dataPoint);
+					if(newDataPoint.temp < minimumTemp) {
+						minimumTemp = newDataPoint.temp;
+					}
 					voList.addItem(newDataPoint);
 				}
 					
