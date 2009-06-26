@@ -22,6 +22,7 @@ package edu.wisc.doit.ls.coolit.model {
 		
 		public var selected:MaterialVO;
 		public var currentData:ArrayCollection;
+		public var currentMinimumTemp:Number;
 		
 		public var lengthMax:Number = 0.5;
 		public var lengthMin:Number = 0.001;
