@@ -14,7 +14,7 @@
 		<mx:LineChart dataProvider="{dataProvider}" width="100%" height="100%" dataTipMode="multiple" showDataTips="true"
 					dataTipFunction="{dataTipFunction}">
 			<mx:horizontalAxis>
-					<mx:LinearAxis minimum="0" maximum="{horizontalMaximum}" />
+					<mx:LinearAxis minimum="{horizontalMinimum}" maximum="{horizontalMaximum}" />
 			</mx:horizontalAxis>
 			
 			<mx:verticalAxis>

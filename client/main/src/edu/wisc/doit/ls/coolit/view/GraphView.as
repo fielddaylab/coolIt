@@ -39,6 +39,7 @@ package edu.wisc.doit.ls.coolit.view {
 				
 		[Bindable] public var model:CoolItModelLocator;
 		[Bindable] public var horizontalMaximum:Number;
+		[Bindable] public var horizontalMinimum:Number = 0;
 		[Bindable] public var verticalMaximum:Number;
 		[Bindable] public var yAxisLabel:String = "y";
 		[Bindable] public var xAxisLabel:String = "Temp (Deg K)";
