@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="file:/C:/Users/mike/Documents/Visual Studio 2005/Projects/CoolIt/CoolIt_Service/Schema/Problems.xsd">
+	<problem>
+		<name>Minesweeper I</name>
+		<ID>1</ID>
+		<problemDescription>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting
+		magnet that must be cooled to 25 K in order to operate reliably. Power constraints on the ship limit the
+		power consumed by the cryocooler to less than 20 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs 2,500
+		kg is to be mounted on a support cylinder inside a cylindrical vessel that has maximum inside dimensions of
+		0.6 m diameter by 1.5 m length. The flexible current leads that provide electric current to the magnet add
+		a constant 50-watt heat load on the cryocooler. You may design the support system as though it were under a
+		pure stress load, but you need to incorporate a factor of 10 to account for the fact that the support actually has
+		square corners and another factor of 10 for design safety. Determine a low cost support system for the superconducting
+		magnet. The navy is offering $10,000 for a valid solution to this problem.</problemDescription>
+		<monetaryIncentive>10000</monetaryIncentive>
+		<heatLeak>50</heatLeak>
+		<supportMode>Compression</supportMode>
+		<strutNumber>1</strutNumber>
+		<images>
+			<baseURI>Minesweeper_I</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.001</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>0.5</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.16</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>2.5</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>20000</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LE</Op>
+				<Limit>25</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+    
+	<problem>
+		<name>Minesweeper II</name>
+		<ID>5</ID>
+		<problemDescription>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting
+		magnet that must be cooled to 100 K in order to operate reliably. Power constraints on the ship limit the
+		power consumed by the cryocooler to less than 100 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs
+		2,500 kg is to be mounted on a support cylinder inside a cylindrical vessel that has maximum inside dimensions
+		of 0.6 m diameter by 3 m length. You can ignore the heat load caused by the flexible current leads that
+		provide electric current to the magnet. You may design the support system as though it were under a
+		pure stress load, but you need to incorporate a factor of 10 to account for the fact that the support actually has
+		square corners and another factor of 10 for design safety. Determine a low cost support system for the superconducting magnet.
+		The navy is offering $5,000 for a valid solution to this problem.</problemDescription>
+		<monetaryIncentive>5000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
+		<supportMode>Compression</supportMode>
+		<strutNumber>1</strutNumber>
+		<images>
+			<baseURI>Minesweeper_II</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.01</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>2.0</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.16</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>2.5</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>100000</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LE</Op>
+				<Limit>100</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+	
+	<problem>
+		<name>Minesweeper III</name>
+		<ID>6</ID>
+		<problemDescription>A mine sweeper being developed by the US Navy uses a Magnesium DiBoride superconducting
+		magnet that must be cooled to 20 K in order to operate reliably. Power constraints on the ship limit the
+		power consumed by the cryocooler to less than 20 kW. The 0.5 m diameter by 1.0 m tall magnet that weighs
+		5,000 kg is to be mounted on 6 identical support posts inside a cylindrical vessel that has maximum inside
+		dimensions of 0.6 m diameter by 1.5 m length. The flexible current leads that provide electric current to
+		the magnet add a constant 50-watt heat load on the cryocooler. You may design the support system as though it were under a
+		pure stress load, but you need to incorporate a factor of 10 to account for the fact that the support actually has
+		square corners and another factor of 10 for design safety.  Determine a low cost support system for the
+		superconducting magnet. The navy is offering $15,000 for a valid soultion to this problem.</problemDescription>
+		<monetaryIncentive>15000</monetaryIncentive>
+		<heatLeak>50</heatLeak>
+		<supportMode>Compression</supportMode>
+		<strutNumber>1</strutNumber>
+		<images>
+			<baseURI>Minesweeper_III</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.01</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>0.5</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.16</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>5</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>20000</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LE</Op>
+				<Limit>20</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+	
+	 <problem>
+		<name>Space Depot (hydrogen)</name>
+		<ID>2</ID>
+		<problemDescription>NASA is developing a space cryogen depot for travel to Mars.
+		Zero boil off dewars are a critical component in NASA's plans for a space cryogen depot.
+		A zero-boil-off dewar is one for which a cryocooler intercepts the heat leak to the inner
+		vessel so that no liquid cryogen boils away. As shown on the design board, a set of 8
+		identical straps is used to support the inner vessel of the dewar inside its vacuum shell.
+		The liquid cryogen plus the inner vessel have a combined mass of 6,500kg.
+		You must allow for a 4g acceleration during lift-off and a factor of 10 for design safety.
+		Determine appropriate straps (geometry and material) so that the dewar can be used
+		to store liquid hydrogen at its normal boiling point of 20.3 K indefinitely.
+		Note that due to the
+		limitations of power generation in space, you must limit your cryocooler's input power to
+		4125 Watts.</problemDescription>
+		<monetaryIncentive>10000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
+		<supportMode>Tension</supportMode>
+		<strutNumber>8</strutNumber>
+		<images>
+			<baseURI>Depot</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.01</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>2.0</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.32</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LT</Op>
+				<Limit>20.3</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>2.60</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>4125</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+	
+	<problem>
+		<name>Space Depot (oxygen)</name>
+		<ID>3</ID>
+		<problemDescription>
+		NASA is developing a space cryogen depot for travel to Mars.
+		Zero boil off dewars are a critical component in NASA's plans for a space cryogen depot.
+		A zero-boil-off dewar is one for which a cryocooler intercepts the heat leak to the inner vessel
+		so that no liquid cryogen boils away. As shown on the design board, a set of 8 identical straps
+		is used to support the inner vessel of the dewar inside its vacuum shell.
+		The liquid cryogen plus the inner vessel have a combined mass of 2900 kg.
+		You must allow for a 4g acceleration during lift-off and a factor of 10 for design safety.
+		Determine appropriate
+		straps (geometry and material) so that the dewar can be used to store liquid oxygen at its normal
+		boiling point of 90.2 K indefinitely.
+		Note that due to the
+		limitations of power generation in space, you must limit your cryocooler's input power to
+		800 Watts.</problemDescription>
+		<monetaryIncentive>6000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
+		<supportMode>Tension</supportMode>
+		<strutNumber>8</strutNumber>
+		<images>
+			<baseURI>Depot</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.01</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>2.0</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.32</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LT</Op>
+				<Limit>90.2</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>1.16</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>800</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+    
+	<problem>
+		<name>Space Depot (methane)</name>
+		<ID>4</ID>
+		<problemDescription>
+		NASA is developing a space cryogen depot for travel to Mars.
+		Zero boil off dewars are a critical component in NASA's plans for a space cryogen depot.
+		A zero-boil-off dewar is one for which a cryocooler intercepts the heat leak to the inner vessel
+		so that no liquid cryogen boils away. As shown on the design board, a set of 8 identical straps
+		is used to support the inner vessel of the dewar inside its vacuum shell.
+		The liquid cryogen plus the inner vessel have a combined mass of 2600 kg.
+		You must allow for a 4g acceleration during lift-off and a factor of 10 for design safety.
+		Determine appropriate straps
+		(geometry and material) so that the dewar can be used to store liquid methane at its normal
+		boiling point of 112 K indefinitely.
+		Note that due to the
+		limitations of power generation in space, you must limit your cryocooler's input power to
+		500 Watts.</problemDescription>
+		<monetaryIncentive>5000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
+		<supportMode>Tension</supportMode>
+		<strutNumber>8</strutNumber>
+		<images>
+			<baseURI>Depot</baseURI>
+			<intro>Intro</intro>
+			<success>Success</success>
+			<failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+			<failTargetTempNotMet>TooHot</failTargetTempNotMet>
+			<failStrutBreaks>StrutBreaks</failStrutBreaks>
+			<pickerImageArray width="2" length="2">
+				<baseName>Strut</baseName>
+			</pickerImageArray>
+		</images>
+		<constraints>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>GE</Op>
+				<Limit>0.01</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Length</Value>
+				<Op>LE</Op>
+				<Limit>2.0</Limit>
+			</constraint>
+			<constraint>
+				<Value>Strut Cross Section</Value>
+				<Op>LE</Op>
+				<Limit>0.32</Limit>
+			</constraint>
+			<constraint>
+				<Value>Temp</Value>
+				<Op>LT</Op>
+				<Limit>112</Limit>
+			</constraint>
+			<constraint>
+				<Value>Force Limit</Value>
+				<Op>GE</Op>
+				<Limit>1.04</Limit>
+			</constraint>
+			<constraint>
+				<Value>Input Power</Value>
+				<Op>LE</Op>
+				<Limit>500</Limit>
+			</constraint>
+		</constraints>
+	</problem>
+</problems>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:doc="http://example.org.doc" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="materialType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        <doc:description xmlns:doc="http://example.org.doc">
+					This element represents a single material.
+				</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string" />
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ID" type="xs:positiveInteger" />
+      <xs:element minOccurs="0" name="descriptor" type="xs:string" />
+      <xs:element name="price">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							The price is in U.S. dollars per unit.  The unit is defined below.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+              <xs:attribute name="priceUnit" type="priceUnitType" use="required" />
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="density">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							Density in grams / cm ^ 3.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:double">
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tensileStrength">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							Tensile strength in MPa.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:double">
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="compressionStrength">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							Compression strength in MPa.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:double">
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="youngsModulus">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							Young's modulus in GPa.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:double">
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="shearStrength">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            <doc:description xmlns:doc="http://example.org.doc">
+							Shear strength in MPa.
+						</doc:description>
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:double">
+              <xs:attribute name="reference" type="xs:anyURI" use="optional" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="thermalConductivity" type="parameterizedCurveType">
+        <xs:annotation>
+          <xs:documentation>Thermal conductivity in Watts / meter Kelvin (W/mK)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="integratedThermalConductivity" type="parameterizedCurveType">
+        <xs:annotation>
+          <xs:documentation>Integrated thermal conductivity in Watts / meter (W/m).  These are all specified with respect to 300 deg K.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parameterizedCurveType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        <doc:description xmlns:doc="http://example.org.doc">
+					This element represents a mathematical curve which is described by a set of
+					parameters to an equation.  The type of the equation to be used to generate the
+					curve as well as minimum and maximum temperatures (deg K) for which this equation
+					is valid must be supplied.
+				</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="equationType" type="equationType" />
+      <xs:element name="minTemp" type="xs:nonNegativeInteger" />
+      <xs:element name="maxTemp" type="xs:nonNegativeInteger" />
+      <xs:element maxOccurs="unbounded" name="coefficient" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="priceScalingType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        <doc:description xmlns:doc="http://example.org.doc">
+					This element represents price scaling which should be applied to the entire set
+					of materials.  The scaled price equals (price + offset) * scalingFactor.
+				</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="offset" type="xs:double" />
+      <xs:element name="scalingFactor" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="priceUnitType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="kg" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="equationType">
+    <xs:annotation>
+      <xs:documentation>Equation types:
+
+type1: y = 10^(a+b(log10T) + c(log10T)^2 + d(log10T)^3 + e(log10T)^4 + f(log10T)^5 + g(log10T)^6 + h(log10T)^7 + i(log10T)^8) 
+
+polyLn: y=a+blnx+c(lnx)^2+d(lnx)^3+e(lnx)^4+f(lnx)^5+g(lnx)^6+h(lnx)^7+i(lnx)^8+j(lnx)^9+k(lnx)^(10)
+
+polyFit: y=a+bx+cx^2+dx^3+ex^4+fx^5+gx^6+hx^7+ix^8+jx^9+kx^10
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="type1" />
+      <xs:enumeration value="polyLn" />
+      <xs:enumeration value="polyFit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="materialData">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        <doc:description xmlns:doc="http://example.org.doc">
+					This schema represents the collection of materials used in the educational
+					game "CoolIt".
+				</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="priceScalingInfo" type="priceScalingType" />
+        <xs:element name="materials">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="material" type="materialType" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

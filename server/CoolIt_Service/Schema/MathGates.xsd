@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="CapabilityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CP_VS_HEAT_LEAK_GRAPH" />
+      <xs:enumeration value="ANOTHER_CAPABILITY" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ProblemType">
+    <xs:sequence>
+      <xs:element name="ProblemDescription" type="xs:string" />
+      <xs:element name="CorrectAnswer" type="xs:double" />
+      <xs:element name="Precision" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MathGateType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+      <xs:element name="ID" type="xs:positiveInteger" />
+      <xs:element maxOccurs="unbounded" name="Problem" type="ProblemType" />
+      <xs:element name="Capability" type="CapabilityType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="mathGates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="mathGate" type="MathGateType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

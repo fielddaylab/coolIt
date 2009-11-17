@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="dataPointType">
+    <xs:sequence>
+      <xs:element name="temp" type="xs:double" />
+      <xs:element name="conductivity" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="materialType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="ID" type="xs:positiveInteger" />
+      <xs:element name="yieldStrength" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Yield strength in mega Pascals (mPa).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="price" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Price in U.S. dollars cubic meter ($/m^3).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="priceUnit" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>This should always be cubic meter (m^3).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="currencyUnit" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>This should always be U.S. dollars ($).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="thermalConductivity" type="dataSetType">
+        <xs:annotation>
+          <xs:documentation>Unit is Watts / meter Kelvin (W/mK).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="integratedThermalConductivity" type="dataSetType">
+        <xs:annotation>
+          <xs:documentation>Unit is Watts / meter (W/m).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dataSetType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dataPoint" type="dataPointType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="materials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="material" type="materialType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

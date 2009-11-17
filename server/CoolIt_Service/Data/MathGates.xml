@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mathGates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="file:/C:/Users/mike/Documents/Visual Studio 2005/Projects/CoolIt/CoolIt_Service/Schema/MathGates.xsd">
+    <mathGate>
+        <Name>Level 1</Name>
+		<ID>1</ID>
+        <Problem>
+            <ProblemDescription>
+                The integral of the thermal conductivity (k_int) of structural aluminum, (6061-T6) from 20 K to 295 K is 31,322 (W/m).  If a 1.0 m long cylinder of 6061-T6 aluminum with inner and outer diameters of 0.02 m and 0.022 m respectively supports a 100 kg weight from the top cover of an evacuated vessel whose temperature is maintained at 295 K, how much cooling power is required to lower the temperature of the 100 kg weight to 20 K?
+            </ProblemDescription>
+            <CorrectAnswer>8.266 </CorrectAnswer>
+            <Precision>0.01</Precision>
+        </Problem>
+        <Problem>
+            <ProblemDescription>To what lower limit could the outer diameter be reduced before the cylinder would no longer support the weight?</ProblemDescription>
+            <CorrectAnswer>0.02005</CorrectAnswer>
+            <Precision>0.00001</Precision>
+        </Problem>
+        
+        <Capability>CP_VS_HEAT_LEAK_GRAPH</Capability>
+    </mathGate>
+</mathGates>

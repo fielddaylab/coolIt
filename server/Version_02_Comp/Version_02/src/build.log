@@ -1,0 +1,29 @@
+Compiler version: 4.7 (R2007b) 
+mcc -W 'dotnet:Version_02,Version_02,0.0,private' -d 'C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src' -T 'link:lib' -v 'class{Version_02:C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_App\MATLAB\steadystatetemperature.m}'  
+Processing C:\Program Files\MATLAB\R2007b\toolbox\matlab\mcc.enc 
+Processing include files... 
+2 item(s) added. 
+Processing directories installed with MCR... 
+The file C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\mccExcludedFiles.log contains a list of functions excluded from the CTF archive. 
+1 item(s) added. 
+Generating MATLAB path for the compiled application... 
+Created 36 path items. 
+Begin validation of MEX files: Mon Nov 26 18:52:55 2007 
+Validating 'C:\Program Files\MATLAB\R2007b\toolbox\compiler\deploy\deploywhich.mexw32'. 
+No conflicting M-file found. 
+Validating 'C:\Program Files\MATLAB\R2007b\toolbox\compiler\deploy\readline.mexw32'. 
+No conflicting M-file found. 
+End validation of MEX files: Mon Nov 26 18:52:55 2007 
+Deleting 2 temporary MEX authorization files. 
+Removing: 'C:\Users\mike\AppData\Local\Temp\mathworks_tmp_29116_6052.auth'. 
+Removing: 'C:\Users\mike\AppData\Local\Temp\mathworks_tmp_32620_6052.auth'. 
+Parsing file "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_App\MATLAB\steadystatetemperature.m" 
+	(Referenced from: "Compiler Command Line"). 
+Parsing file "C:\Program Files\MATLAB\R2007b\toolbox\compiler\deploy\deployprint.m" 
+	(Referenced from: "Compiler Command Line"). 
+Parsing file "C:\Program Files\MATLAB\R2007b\toolbox\compiler\deploy\printdlg.m" 
+	(Referenced from: "Compiler Command Line"). 
+Generating file "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02.cs". 
+Generating file "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\readme.txt". 
+Generating file "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02_mcc_component_data.cs". 
+Executing command: C:\Windows\Microsoft.NET\Framework\v2.0.50727\csc.exe /nologo /optimize /doc:"C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02.xml" /t:library /r:"C:\Program Files\MATLAB\R2007b\toolbox\dotnetbuilder\bin\win32\v2.0\MWArray.dll" /linkres:"C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02.ctf" /out:"C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02.dll" "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02.cs" "C:\Users\mike\Documents\Visual Studio 2005\Projects\CoolIt\Version_02_Comp\Version_02\src\Version_02_mcc_component_data.cs" 

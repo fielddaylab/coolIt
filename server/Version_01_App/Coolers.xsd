@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="dataPointType">
+        <xs:sequence>
+            <xs:element name="temp" type="xs:double"/>
+            <xs:element name="coolingPower" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="coolerType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="dataPoint" type="dataPointType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="coolers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cooler" type="coolerType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

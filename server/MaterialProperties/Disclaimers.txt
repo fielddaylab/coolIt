@@ -1,0 +1,11 @@
+Using data from the NIST site, some materials have a thermal conductivity data range which ends below 300K.
+All of those data ranges have been extrapolated to 300K as the simulation cannot proceed without this data.
+Affected materials are:
+
+	Aluminum 6063 T5	(295)
+	Beryllium Copper	(120)
+	Brass				(110)
+	Kevlar 49			(200)
+	Lead				(295)
+	Platinum			(295)
+	Mylar				(80)

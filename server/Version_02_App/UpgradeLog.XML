@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CoolIt">
+</Property><Property Name="Solution File" Value="C:\Users\mike\Documents\Visual Studio 2008\Projects\CoolIt\Version_02_App\CoolIt.sln">
+</Property><Property Name="Date" Value="Tuesday, November 17, 2009">
+</Property><Property Name="Time" Value="12:21 PM">
+</Property></Properties><Event ErrorLevel="0" Project="Version_02_App" Source="Version_02_App.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Version_02_App" Source="Version_02_App.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CryoLib" Source="..\CryoLib\CryoLib.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CryoLib" Source="..\CryoLib\CryoLib.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="DesktopClient" Source="..\DesktopClient\DesktopClient.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="DesktopClient" Source="..\DesktopClient\DesktopClient.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MaterialProperties" Source="..\MaterialProperties\MaterialProperties.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MaterialProperties" Source="..\MaterialProperties\MaterialProperties.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="DataVisualizer" Source="..\DataVisualizer\DataVisualizer.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="DataVisualizer" Source="..\DataVisualizer\DataVisualizer.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CoolIt_Service" Source="..\CoolIt_Service\CoolIt_Service.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CoolIt_Service" Source="..\CoolIt_Service\CoolIt_Service.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Persistence" Source="..\Persistence\Persistence.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Persistence" Source="..\Persistence\Persistence.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TestDriver" Source="..\TestDriver\TestDriver.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TestDriver" Source="..\TestDriver\TestDriver.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="CoolIt.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="CoolIt.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Version_02_App" Source="Version_02_App.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CryoLib" Source="..\CryoLib\CryoLib.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="DesktopClient" Source="..\DesktopClient\DesktopClient.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="MaterialProperties" Source="..\MaterialProperties\MaterialProperties.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="DataVisualizer" Source="..\DataVisualizer\DataVisualizer.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CoolIt_Service" Source="..\CoolIt_Service\CoolIt_Service.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Persistence" Source="..\Persistence\Persistence.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TestDriver" Source="..\TestDriver\TestDriver.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,30 @@
+Init()
+	InitUsers()
+	InitStates()
+	InitProblems()
+	InitSolutionAttempts()
+	InitCoolers()
+	InitMaterials()
+	
+InitUsers()
+	Create Users table
+	
+InitStates()
+	Create State table
+	
+InitProblems
+	Create Problems table
+	Read in all problems from XML
+	Generate optimal solutions for all problems
+	
+InitSolutionAttempts()
+	Create SolutionAttempts table
+	
+InitCoolers()
+	Create Coolers Table
+	Read in all coolers from XML
+	
+InitMaterials()
+	Create Material Table
+	Read in all materials from XML
+	

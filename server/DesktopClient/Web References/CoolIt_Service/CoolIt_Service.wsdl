@@ -1,0 +1,1533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.wisc.edu/doit/ls/coolit/" xmlns:s1="http://www.wisc.edu/doit/ls/coolit/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.wisc.edu/doit/ls/coolit/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.wisc.edu/doit/ls/coolit/">
+      <s:element name="NewLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emailAddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NewLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emailAddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HasCapability">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="requestedCapability" type="tns:CAPABILITY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="CAPABILITY">
+        <s:restriction base="s:string">
+          <s:enumeration value="CP_VS_HEAT_LEAK_GRAPH" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="HasCapabilityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HasCapabilityResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TryMathGate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="gateName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="answers" type="tns:ArrayOfDouble" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDouble">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="double" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TryMathGateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TryMathGateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebServiceVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="WebServiceVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebServiceVersionResult" type="tns:MyAssemblyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MyAssemblyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Major" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Minor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Build" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Revision" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CryolibVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="CryolibVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CryolibVersionResult" type="tns:MyAssemblyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCoolers">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCoolersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoolersResult" type="tns:ArrayOfCooler" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCooler">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cooler">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CryoObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CPM" type="tns:ArrayOfDataPoint" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CryoObject" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="price" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="priceUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="currencyUnit" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataPoint" nillable="true" type="tns:DataPoint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataPoint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="temp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="data" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMaterials">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMaterialsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMaterialsResult" type="tns:ArrayOfMaterial" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMaterial">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Material" nillable="true" type="tns:Material" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Material">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CryoObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="yieldStrength" type="s:double" />
+              <s:element minOccurs="0" maxOccurs="1" name="MP" type="tns:ArrayOfDataPoint" />
+              <s:element minOccurs="0" maxOccurs="1" name="IntegratedThermalConductivity" type="tns:ArrayOfDataPoint" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetProblems">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProblemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProblemsResult" type="tns:ArrayOfProblem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProblem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Problem" nillable="true" type="tns:Problem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Problem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HeatLeak" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupportMode" type="tns:SupportMode" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupportNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageCollection" type="tns:ProblemImageCollection" />
+          <s:element minOccurs="1" maxOccurs="1" name="Solved" type="s:boolean" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="ID" type="s:int" use="required" />
+      </s:complexType>
+      <s:simpleType name="SupportMode">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPRESSION" />
+          <s:enumeration value="TENSION" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfConstraint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Constraint" nillable="true" type="tns:Constraint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Constraint">
+        <s:attribute name="Value" type="tns:VALUE" use="required" />
+        <s:attribute name="Op" type="tns:OP" use="required" />
+        <s:attribute name="Target" type="s:double" use="required" />
+      </s:complexType>
+      <s:simpleType name="VALUE">
+        <s:restriction base="s:string">
+          <s:enumeration value="FORCE_LIMIT" />
+          <s:enumeration value="INPUT_POWER" />
+          <s:enumeration value="TEMP" />
+          <s:enumeration value="COST" />
+          <s:enumeration value="STRUT_LENGTH" />
+          <s:enumeration value="STRUT_CROSS_SECTION" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="OP">
+        <s:restriction base="s:string">
+          <s:enumeration value="LT" />
+          <s:enumeration value="LE" />
+          <s:enumeration value="EQ" />
+          <s:enumeration value="GE" />
+          <s:enumeration value="GT" />
+          <s:enumeration value="NE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ProblemImageCollection">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BaseURI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Intro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Success" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FailPowerLimit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FailTooHot" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FailStrutBreaks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PickerImageCollection" type="tns:PickerImageCollection" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PickerImageCollection">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BaseName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMathGates">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMathGatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMathGatesResult" type="tns:ArrayOfMathGate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMathGate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MathGate" nillable="true" type="tns:MathGate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MathGate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Problems" type="tns:ArrayOfMathGateProblem" />
+          <s:element minOccurs="1" maxOccurs="1" name="Capability" type="tns:CAPABILITY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMathGateProblem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MathGateProblem" nillable="true" type="tns:MathGateProblem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MathGateProblem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CorrectAnswer" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrecisionRequired" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSpecificPowerData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSpecificPowerDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSpecificPowerDataResult" type="tns:ArrayOfDataPoint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetStrut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetStrutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetCooler">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCoolerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetProblem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetProblemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetProblemResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOptimalSolutions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOptimalSolutionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOptimalSolutionsResult" type="tns:ArrayOfSolution" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSolution">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Solution" nillable="true" type="tns:Solution" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Solution">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ProblemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CoolerName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CoolerPowerFactor" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StrutCrossSection" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StrutLength" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Run">
+        <s:complexType />
+      </s:element>
+      <s:element name="RunResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunResult" type="tns:State" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="State">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="temperature" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="numStruts" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="coolerName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="inputPower" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="cost" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="stressLimit" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="problemName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isValidSolution" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFeedback">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetFeedbackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFeedbackResult" type="tns:Feedback" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Feedback">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CutScreen" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="MyAssemblyInfo" nillable="true" type="tns:MyAssemblyInfo" />
+      <s:element name="ArrayOfCooler" nillable="true" type="tns:ArrayOfCooler" />
+      <s:element name="ArrayOfMaterial" nillable="true" type="tns:ArrayOfMaterial" />
+      <s:element name="ArrayOfProblem" nillable="true" type="tns:ArrayOfProblem" />
+      <s:element name="ArrayOfMathGate" nillable="true" type="tns:ArrayOfMathGate" />
+      <s:element name="ArrayOfDataPoint" nillable="true" type="tns:ArrayOfDataPoint" />
+      <s:element name="ArrayOfSolution" nillable="true" type="tns:ArrayOfSolution" />
+      <s:element name="State" nillable="true" type="tns:State" />
+      <s:element name="Feedback" nillable="true" type="tns:Feedback" />
+    </s:schema>
+    <s:schema targetNamespace="http://www.wisc.edu/doit/ls/coolit/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NewLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:NewLogin" />
+  </wsdl:message>
+  <wsdl:message name="NewLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:NewLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilitySoapIn">
+    <wsdl:part name="parameters" element="tns:HasCapability" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilitySoapOut">
+    <wsdl:part name="parameters" element="tns:HasCapabilityResponse" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateSoapIn">
+    <wsdl:part name="parameters" element="tns:TryMathGate" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateSoapOut">
+    <wsdl:part name="parameters" element="tns:TryMathGateResponse" />
+  </wsdl:message>
+  <wsdl:message name="WebServiceVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:WebServiceVersion" />
+  </wsdl:message>
+  <wsdl:message name="WebServiceVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:WebServiceVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CryolibVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:CryolibVersion" />
+  </wsdl:message>
+  <wsdl:message name="CryolibVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:CryolibVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoolersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoolers" />
+  </wsdl:message>
+  <wsdl:message name="GetCoolersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoolersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMaterials" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMaterialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProblems" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProblemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMathGatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMathGates" />
+  </wsdl:message>
+  <wsdl:message name="GetMathGatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMathGatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecificPowerDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSpecificPowerData" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecificPowerDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSpecificPowerDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutSoapIn">
+    <wsdl:part name="parameters" element="tns:SetStrut" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutSoapOut">
+    <wsdl:part name="parameters" element="tns:SetStrutResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetCoolerSoapIn">
+    <wsdl:part name="parameters" element="tns:SetCooler" />
+  </wsdl:message>
+  <wsdl:message name="SetCoolerSoapOut">
+    <wsdl:part name="parameters" element="tns:SetCoolerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetProblemSoapIn">
+    <wsdl:part name="parameters" element="tns:SetProblem" />
+  </wsdl:message>
+  <wsdl:message name="SetProblemSoapOut">
+    <wsdl:part name="parameters" element="tns:SetProblemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOptimalSolutionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOptimalSolutions" />
+  </wsdl:message>
+  <wsdl:message name="GetOptimalSolutionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOptimalSolutionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunSoapIn">
+    <wsdl:part name="parameters" element="tns:Run" />
+  </wsdl:message>
+  <wsdl:message name="RunSoapOut">
+    <wsdl:part name="parameters" element="tns:RunResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFeedbackSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFeedback" />
+  </wsdl:message>
+  <wsdl:message name="GetFeedbackSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewLoginHttpGetIn">
+    <wsdl:part name="emailAddr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NewLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetIn">
+    <wsdl:part name="emailAddr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilityHttpGetIn">
+    <wsdl:part name="requestedCapability" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilityHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateHttpGetIn">
+    <wsdl:part name="gateName" type="s:string" />
+    <wsdl:part name="answers" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="WebServiceVersionHttpGetIn" />
+  <wsdl:message name="WebServiceVersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
+  </wsdl:message>
+  <wsdl:message name="CryolibVersionHttpGetIn" />
+  <wsdl:message name="CryolibVersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCoolersHttpGetIn" />
+  <wsdl:message name="GetCoolersHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsHttpGetIn" />
+  <wsdl:message name="GetMaterialsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMaterial" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemsHttpGetIn" />
+  <wsdl:message name="GetProblemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfProblem" />
+  </wsdl:message>
+  <wsdl:message name="GetMathGatesHttpGetIn" />
+  <wsdl:message name="GetMathGatesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMathGate" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecificPowerDataHttpGetIn" />
+  <wsdl:message name="GetSpecificPowerDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutHttpGetIn">
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="length" type="s:string" />
+    <wsdl:part name="crossSection" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutHttpGetOut" />
+  <wsdl:message name="SetCoolerHttpGetIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="powerFactor" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCoolerHttpGetOut" />
+  <wsdl:message name="SetProblemHttpGetIn">
+    <wsdl:part name="name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetProblemHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetOptimalSolutionsHttpGetIn" />
+  <wsdl:message name="GetOptimalSolutionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSolution" />
+  </wsdl:message>
+  <wsdl:message name="RunHttpGetIn" />
+  <wsdl:message name="RunHttpGetOut">
+    <wsdl:part name="Body" element="tns:State" />
+  </wsdl:message>
+  <wsdl:message name="GetFeedbackHttpGetIn" />
+  <wsdl:message name="GetFeedbackHttpGetOut">
+    <wsdl:part name="Body" element="tns:Feedback" />
+  </wsdl:message>
+  <wsdl:message name="NewLoginHttpPostIn">
+    <wsdl:part name="emailAddr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NewLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostIn">
+    <wsdl:part name="emailAddr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilityHttpPostIn">
+    <wsdl:part name="requestedCapability" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HasCapabilityHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateHttpPostIn">
+    <wsdl:part name="gateName" type="s:string" />
+    <wsdl:part name="answers" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="TryMathGateHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="WebServiceVersionHttpPostIn" />
+  <wsdl:message name="WebServiceVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
+  </wsdl:message>
+  <wsdl:message name="CryolibVersionHttpPostIn" />
+  <wsdl:message name="CryolibVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCoolersHttpPostIn" />
+  <wsdl:message name="GetCoolersHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsHttpPostIn" />
+  <wsdl:message name="GetMaterialsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMaterial" />
+  </wsdl:message>
+  <wsdl:message name="GetProblemsHttpPostIn" />
+  <wsdl:message name="GetProblemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfProblem" />
+  </wsdl:message>
+  <wsdl:message name="GetMathGatesHttpPostIn" />
+  <wsdl:message name="GetMathGatesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMathGate" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecificPowerDataHttpPostIn" />
+  <wsdl:message name="GetSpecificPowerDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutHttpPostIn">
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="length" type="s:string" />
+    <wsdl:part name="crossSection" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetStrutHttpPostOut" />
+  <wsdl:message name="SetCoolerHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="powerFactor" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCoolerHttpPostOut" />
+  <wsdl:message name="SetProblemHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetProblemHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetOptimalSolutionsHttpPostIn" />
+  <wsdl:message name="GetOptimalSolutionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSolution" />
+  </wsdl:message>
+  <wsdl:message name="RunHttpPostIn" />
+  <wsdl:message name="RunHttpPostOut">
+    <wsdl:part name="Body" element="tns:State" />
+  </wsdl:message>
+  <wsdl:message name="GetFeedbackHttpPostIn" />
+  <wsdl:message name="GetFeedbackHttpPostOut">
+    <wsdl:part name="Body" element="tns:Feedback" />
+  </wsdl:message>
+  <wsdl:portType name="CoolIt_ServiceSoap">
+    <wsdl:operation name="NewLogin">
+      <wsdl:input message="tns:NewLoginSoapIn" />
+      <wsdl:output message="tns:NewLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <wsdl:input message="tns:HasCapabilitySoapIn" />
+      <wsdl:output message="tns:HasCapabilitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <wsdl:input message="tns:TryMathGateSoapIn" />
+      <wsdl:output message="tns:TryMathGateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <wsdl:input message="tns:WebServiceVersionSoapIn" />
+      <wsdl:output message="tns:WebServiceVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <wsdl:input message="tns:CryolibVersionSoapIn" />
+      <wsdl:output message="tns:CryolibVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersSoapIn" />
+      <wsdl:output message="tns:GetCoolersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <wsdl:input message="tns:GetMaterialsSoapIn" />
+      <wsdl:output message="tns:GetMaterialsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <wsdl:input message="tns:GetProblemsSoapIn" />
+      <wsdl:output message="tns:GetProblemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <wsdl:input message="tns:GetMathGatesSoapIn" />
+      <wsdl:output message="tns:GetMathGatesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <wsdl:input message="tns:GetSpecificPowerDataSoapIn" />
+      <wsdl:output message="tns:GetSpecificPowerDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <wsdl:input message="tns:SetStrutSoapIn" />
+      <wsdl:output message="tns:SetStrutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <wsdl:input message="tns:SetCoolerSoapIn" />
+      <wsdl:output message="tns:SetCoolerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <wsdl:input message="tns:SetProblemSoapIn" />
+      <wsdl:output message="tns:SetProblemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <wsdl:input message="tns:GetOptimalSolutionsSoapIn" />
+      <wsdl:output message="tns:GetOptimalSolutionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunSoapIn" />
+      <wsdl:output message="tns:RunSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <wsdl:input message="tns:GetFeedbackSoapIn" />
+      <wsdl:output message="tns:GetFeedbackSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CoolIt_ServiceHttpGet">
+    <wsdl:operation name="NewLogin">
+      <wsdl:input message="tns:NewLoginHttpGetIn" />
+      <wsdl:output message="tns:NewLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpGetIn" />
+      <wsdl:output message="tns:LoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <wsdl:input message="tns:HasCapabilityHttpGetIn" />
+      <wsdl:output message="tns:HasCapabilityHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <wsdl:input message="tns:TryMathGateHttpGetIn" />
+      <wsdl:output message="tns:TryMathGateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <wsdl:input message="tns:WebServiceVersionHttpGetIn" />
+      <wsdl:output message="tns:WebServiceVersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <wsdl:input message="tns:CryolibVersionHttpGetIn" />
+      <wsdl:output message="tns:CryolibVersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersHttpGetIn" />
+      <wsdl:output message="tns:GetCoolersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <wsdl:input message="tns:GetMaterialsHttpGetIn" />
+      <wsdl:output message="tns:GetMaterialsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <wsdl:input message="tns:GetProblemsHttpGetIn" />
+      <wsdl:output message="tns:GetProblemsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <wsdl:input message="tns:GetMathGatesHttpGetIn" />
+      <wsdl:output message="tns:GetMathGatesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <wsdl:input message="tns:GetSpecificPowerDataHttpGetIn" />
+      <wsdl:output message="tns:GetSpecificPowerDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <wsdl:input message="tns:SetStrutHttpGetIn" />
+      <wsdl:output message="tns:SetStrutHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <wsdl:input message="tns:SetCoolerHttpGetIn" />
+      <wsdl:output message="tns:SetCoolerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <wsdl:input message="tns:SetProblemHttpGetIn" />
+      <wsdl:output message="tns:SetProblemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <wsdl:input message="tns:GetOptimalSolutionsHttpGetIn" />
+      <wsdl:output message="tns:GetOptimalSolutionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunHttpGetIn" />
+      <wsdl:output message="tns:RunHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <wsdl:input message="tns:GetFeedbackHttpGetIn" />
+      <wsdl:output message="tns:GetFeedbackHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CoolIt_ServiceHttpPost">
+    <wsdl:operation name="NewLogin">
+      <wsdl:input message="tns:NewLoginHttpPostIn" />
+      <wsdl:output message="tns:NewLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpPostIn" />
+      <wsdl:output message="tns:LoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <wsdl:input message="tns:HasCapabilityHttpPostIn" />
+      <wsdl:output message="tns:HasCapabilityHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <wsdl:input message="tns:TryMathGateHttpPostIn" />
+      <wsdl:output message="tns:TryMathGateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <wsdl:input message="tns:WebServiceVersionHttpPostIn" />
+      <wsdl:output message="tns:WebServiceVersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <wsdl:input message="tns:CryolibVersionHttpPostIn" />
+      <wsdl:output message="tns:CryolibVersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersHttpPostIn" />
+      <wsdl:output message="tns:GetCoolersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <wsdl:input message="tns:GetMaterialsHttpPostIn" />
+      <wsdl:output message="tns:GetMaterialsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <wsdl:input message="tns:GetProblemsHttpPostIn" />
+      <wsdl:output message="tns:GetProblemsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <wsdl:input message="tns:GetMathGatesHttpPostIn" />
+      <wsdl:output message="tns:GetMathGatesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <wsdl:input message="tns:GetSpecificPowerDataHttpPostIn" />
+      <wsdl:output message="tns:GetSpecificPowerDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <wsdl:input message="tns:SetStrutHttpPostIn" />
+      <wsdl:output message="tns:SetStrutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <wsdl:input message="tns:SetCoolerHttpPostIn" />
+      <wsdl:output message="tns:SetCoolerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <wsdl:input message="tns:SetProblemHttpPostIn" />
+      <wsdl:output message="tns:SetProblemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <wsdl:input message="tns:GetOptimalSolutionsHttpPostIn" />
+      <wsdl:output message="tns:GetOptimalSolutionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunHttpPostIn" />
+      <wsdl:output message="tns:RunHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <wsdl:input message="tns:GetFeedbackHttpPostIn" />
+      <wsdl:output message="tns:GetFeedbackHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CoolIt_ServiceSoap" type="tns:CoolIt_ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewLogin">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/NewLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/HasCapability" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TryMathGate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/WebServiceVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/CryolibVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMathGates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetSpecificPowerData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetStrut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetCooler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetProblem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetOptimalSolutions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Run" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetFeedback" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CoolIt_ServiceSoap12" type="tns:CoolIt_ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewLogin">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/NewLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/HasCapability" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TryMathGate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/WebServiceVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/CryolibVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterials" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMathGates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetSpecificPowerData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetStrut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetCooler" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/SetProblem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetOptimalSolutions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Run" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetFeedback" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CoolIt_ServiceHttpGet" type="tns:CoolIt_ServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="NewLogin">
+      <http:operation location="/NewLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <http:operation location="/HasCapability" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <http:operation location="/TryMathGate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <http:operation location="/WebServiceVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <http:operation location="/CryolibVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <http:operation location="/GetCoolers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <http:operation location="/GetMaterials" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <http:operation location="/GetProblems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <http:operation location="/GetMathGates" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <http:operation location="/GetSpecificPowerData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <http:operation location="/SetStrut" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <http:operation location="/SetCooler" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <http:operation location="/SetProblem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <http:operation location="/GetOptimalSolutions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <http:operation location="/Run" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <http:operation location="/GetFeedback" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CoolIt_ServiceHttpPost" type="tns:CoolIt_ServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="NewLogin">
+      <http:operation location="/NewLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasCapability">
+      <http:operation location="/HasCapability" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryMathGate">
+      <http:operation location="/TryMathGate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebServiceVersion">
+      <http:operation location="/WebServiceVersion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CryolibVersion">
+      <http:operation location="/CryolibVersion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoolers">
+      <http:operation location="/GetCoolers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <http:operation location="/GetMaterials" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProblems">
+      <http:operation location="/GetProblems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMathGates">
+      <http:operation location="/GetMathGates" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecificPowerData">
+      <http:operation location="/GetSpecificPowerData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStrut">
+      <http:operation location="/SetStrut" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetCooler">
+      <http:operation location="/SetCooler" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetProblem">
+      <http:operation location="/SetProblem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <http:operation location="/GetOptimalSolutions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <http:operation location="/Run" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <http:operation location="/GetFeedback" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CoolIt_Service">
+    <wsdl:port name="CoolIt_ServiceSoap" binding="tns:CoolIt_ServiceSoap">
+      <soap:address location="http://localhost:58801/CoolIt_Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CoolIt_ServiceSoap12" binding="tns:CoolIt_ServiceSoap12">
+      <soap12:address location="http://localhost:58801/CoolIt_Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CoolIt_ServiceHttpGet" binding="tns:CoolIt_ServiceHttpGet">
+      <http:address location="http://localhost:58801/CoolIt_Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CoolIt_ServiceHttpPost" binding="tns:CoolIt_ServiceHttpPost">
+      <http:address location="http://localhost:58801/CoolIt_Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

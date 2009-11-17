@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<coolers>
+  <cooler>
+    <name>Small</name>
+    <dataPoint>
+      <temp>50.0</temp>
+      <coolingPower>0.0</coolingPower>
+    </dataPoint>
+    <dataPoint>
+      <temp>300.0</temp>
+      <coolingPower>50.0</coolingPower>
+    </dataPoint>
+  </cooler>
+  <cooler>
+    <name>Medium</name>
+    <dataPoint>
+      <temp>25.0</temp>
+      <coolingPower>0.0</coolingPower>
+    </dataPoint>
+    <dataPoint>
+      <temp>300.0</temp>
+      <coolingPower>100.0</coolingPower>
+    </dataPoint>
+  </cooler>
+  <cooler>
+    <name>Large</name>
+    <dataPoint>
+      <temp>10.0</temp>
+      <coolingPower>0.0</coolingPower>
+    </dataPoint>
+    <dataPoint>
+      <temp>300.0</temp>
+      <coolingPower>500.0</coolingPower>
+    </dataPoint>
+  </cooler>
+</coolers>

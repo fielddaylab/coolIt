@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.engr.wisc.edu/cryo" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.engr.wisc.edu/cryo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.engr.wisc.edu/cryo">
+      <s:element name="GetCoolers">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCoolersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoolersResult" type="tns:ArrayOfCooler" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCooler">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cooler">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CryoObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CPM" type="tns:ArrayOfDataPoint" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CryoObject" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataPoint" nillable="true" type="tns:DataPoint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataPoint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="temp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="data" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMaterials">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMaterialsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMaterialsResult" type="tns:ArrayOfMaterial" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMaterial">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Material" nillable="true" type="tns:Material" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Material">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CryoObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MP" type="tns:ArrayOfDataPoint" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="Simulate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="coolerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SimulateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SimulateResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SimulatePF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="coolerName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SimulatePFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SimulatePFResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCoolersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoolers" />
+  </wsdl:message>
+  <wsdl:message name="GetCoolersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoolersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMaterials" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMaterialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SimulateSoapIn">
+    <wsdl:part name="parameters" element="tns:Simulate" />
+  </wsdl:message>
+  <wsdl:message name="SimulateSoapOut">
+    <wsdl:part name="parameters" element="tns:SimulateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SimulatePFSoapIn">
+    <wsdl:part name="parameters" element="tns:SimulatePF" />
+  </wsdl:message>
+  <wsdl:message name="SimulatePFSoapOut">
+    <wsdl:part name="parameters" element="tns:SimulatePFResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersSoapIn" />
+      <wsdl:output message="tns:GetCoolersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <wsdl:input message="tns:GetMaterialsSoapIn" />
+      <wsdl:output message="tns:GetMaterialsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Simulate">
+      <wsdl:input message="tns:SimulateSoapIn" />
+      <wsdl:output message="tns:SimulateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SimulatePF">
+      <wsdl:input message="tns:SimulatePFSoapIn" />
+      <wsdl:output message="tns:SimulatePFSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCoolers">
+      <soap:operation soapAction="http://www.engr.wisc.edu/cryo/GetCoolers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <soap:operation soapAction="http://www.engr.wisc.edu/cryo/GetMaterials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Simulate">
+      <soap:operation soapAction="http://www.engr.wisc.edu/cryo/Simulate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimulatePF">
+      <soap:operation soapAction="http://www.engr.wisc.edu/cryo/SimulatePF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCoolers">
+      <soap12:operation soapAction="http://www.engr.wisc.edu/cryo/GetCoolers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <soap12:operation soapAction="http://www.engr.wisc.edu/cryo/GetMaterials" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Simulate">
+      <soap12:operation soapAction="http://www.engr.wisc.edu/cryo/Simulate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimulatePF">
+      <soap12:operation soapAction="http://www.engr.wisc.edu/cryo/SimulatePF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://localhost:1801/CoolIt_Web_Service/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://localhost:1801/CoolIt_Web_Service/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

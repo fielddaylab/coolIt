@@ -1,0 +1,14 @@
+Parameters
+
+1. Thermal Conductivity (Matrix) pm Property Matrix (comes from material)
+	first column = temp
+	second column = conductivity at temp
+
+2. Length
+3. Cross sectional area
+
+4. Load curve CPM (Cooling Power Matrix)
+	Temp
+	Cooling power
+
+SteadyStateTemperature( a, b, c, d );
