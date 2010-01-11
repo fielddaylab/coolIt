@@ -43,6 +43,8 @@
 	<!-- :::::: compile with mxmlc.jar :::::: -->
 	<target name="compile">
 		<java jar="${mxmlc.jar}" fork="true" failonerror="true" jvmargs="-Xms512m -Xmx800m -XX:PermSize=256m -XX:MaxPermSize=384m">
+			<arg value="-show-binding-warnings=false" />
+			<arg value="-show-actionscript-warnings=false" />
 			<arg value="-debug=true" />
 			<arg value="-verbose-stacktraces=true" />
 			<arg value="-default-frame-rate=31" />
