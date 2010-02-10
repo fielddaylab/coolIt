@@ -3,12 +3,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="BoolOp">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="LT" />
-      <xs:enumeration value="LE" />
-      <xs:enumeration value="EQ" />
-      <xs:enumeration value="GE" />
-      <xs:enumeration value="GT" />
-      <xs:enumeration value="NE" />
+      <xs:enumeration value="LT"/>
+      <xs:enumeration value="LE"/>
+      <xs:enumeration value="EQ"/>
+      <xs:enumeration value="GE"/>
+      <xs:enumeration value="GT"/>
+      <xs:enumeration value="NE"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="Value">
@@ -25,69 +25,92 @@ Temp: degrees K (K)
 </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Strut Length" />
-      <xs:enumeration value="Strut Cross Section" />
-      <xs:enumeration value="Force Limit" />
-      <xs:enumeration value="Input Power" />
-      <xs:enumeration value="Cost" />
-      <xs:enumeration value="Temp" />
+      <xs:enumeration value="Strut Length"/>
+      <xs:enumeration value="Strut Cross Section"/>
+      <xs:enumeration value="Force Limit"/>
+      <xs:enumeration value="Input Power"/>
+      <xs:enumeration value="Cost"/>
+      <xs:enumeration value="Temp"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="SupportMode">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Compression" />
-      <xs:enumeration value="Tension" />
+      <xs:enumeration value="Compression"/>
+      <xs:enumeration value="Tension"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ConstraintType">
     <xs:sequence>
-      <xs:element name="Value" type="Value" />
-      <xs:element name="Op" type="BoolOp" />
-      <xs:element name="Limit" type="xs:double" />
+      <xs:element name="Value" type="Value"/>
+      <xs:element name="Op" type="BoolOp"/>
+      <xs:element name="Limit" type="xs:double"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ConstraintCollectionType">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="constraint" type="ConstraintType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="constraint" type="ConstraintType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ImageCollectionType">
     <xs:sequence>
-      <xs:element name="baseURI" type="xs:anyURI" />
-      <xs:element name="intro" type="xs:anyURI" />
-      <xs:element name="success" type="xs:anyURI" />
-      <xs:element name="failPowerLimitExceeded" type="xs:anyURI" />
-      <xs:element name="failTargetTempNotMet" type="xs:anyURI" />
-      <xs:element name="failStrutBreaks" type="xs:anyURI" />
+      <xs:element name="baseURI" type="xs:anyURI"/>
+      <xs:element name="intro" type="xs:anyURI"/>
+      <xs:element name="success" type="xs:anyURI"/>
+      <xs:element name="failPowerLimitExceeded" type="xs:anyURI"/>
+      <xs:element name="failTargetTempNotMet" type="xs:anyURI"/>
+      <xs:element name="failStrutBreaks" type="xs:anyURI"/>
       <xs:element name="pickerImageArray">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="baseName" type="xs:anyURI" />
+            <xs:element name="baseName" type="xs:anyURI"/>
           </xs:sequence>
-          <xs:attribute name="width" type="xs:nonNegativeInteger" use="required" />
-          <xs:attribute name="length" type="xs:nonNegativeInteger" use="required" />
+          <xs:attribute name="width" type="xs:nonNegativeInteger" use="required"/>
+          <xs:attribute name="length" type="xs:nonNegativeInteger" use="required"/>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProblemType">
     <xs:sequence>
-      <xs:element name="name" type="xs:string" />
-      <xs:element name="ID" type="xs:positiveInteger" />
-      <xs:element name="problemDescription" type="xs:string" />
-      <xs:element name="monetaryIncentive" type="xs:double" />
-      <xs:element name="heatLeak" type="xs:double" />
-      <xs:element name="supportMode" type="SupportMode" />
-      <xs:element name="strutNumber" type="xs:nonNegativeInteger" />
-      <xs:element name="images" type="ImageCollectionType" />
-      <xs:element name="constraints" type="ConstraintCollectionType" />
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="problemDescription" type="xs:string"/>
+      <xs:element name="monetaryIncentive" type="xs:double"/>
+      <xs:element name="images" type="ImageCollectionType"/>
+      <xs:element name="constraints" type="ConstraintCollectionType"/>
+      <xs:element name="struts" type="StrutCollectionType"/>
+      <xs:element name="coolers" type="CoolerCollectionType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="problems">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="problem" type="ProblemType" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="problem" type="ProblemType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:complexType name="StrutType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="heatLeak" type="xs:double"/>
+      <xs:element name="supportMode" type="SupportMode"/>
+      <xs:element name="constraints" type="ConstraintCollectionType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StrutCollectionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="strut" type="StrutType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CoolerType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="constraints" type="ConstraintCollectionType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CoolerCollectionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="cooler" type="CoolerType"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
