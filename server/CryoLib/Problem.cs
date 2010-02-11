@@ -14,7 +14,7 @@ namespace CryoLib {
 		private double heatLeak;
 		private SupportMode supportMode;
 		private int supportNumber;
-		private Constraint [] constraints;
+		private ConstraintCollection constraints;
 		private ProblemImageCollection problemImageCollection;
 		private bool solved;
 		const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
@@ -65,7 +65,7 @@ namespace CryoLib {
 			set { supportNumber = value; }
 		}
 
-		public Constraint [] Constraints {
+		public ConstraintCollection Constraints {
 			get { return constraints; }
 			set { constraints = value; }
 		}
@@ -89,7 +89,7 @@ namespace CryoLib {
 						SupportMode supportMode,
 						int supportNumber,
 						ProblemImageCollection imageCollection,
-						Constraint[] constraints )
+						ConstraintCollection constraints )
 		{
 			this.name = name;
 			this.id = id;
@@ -103,7 +103,6 @@ namespace CryoLib {
 		}
 
 		public Problem( XPathNavigator navigator ) {
-			List<Constraint> constraintList = new List<Constraint>();
 			List<string> imageList = new List<string>();
 
 			// Get the name
@@ -123,38 +122,30 @@ namespace CryoLib {
 			monetaryIncentive = navigator.ValueAsDouble;
 
 
-			// Get the heat leak
-			navigator.MoveToNext("heatLeak","");
-			heatLeak = navigator.ValueAsDouble;
+            //// Get the heat leak
+            //navigator.MoveToNext("heatLeak","");
+            //heatLeak = navigator.ValueAsDouble;
 
-			// Get the support mode
-			navigator.MoveToNext("supportMode","");
-			switch (navigator.Value) {
-				case "Compression":
-					SupportMode = SupportMode.COMPRESSION;
-					break;
-				case "Tension":
-					SupportMode = SupportMode.TENSION;
-					break;
-			}
+            //// Get the support mode
+            //navigator.MoveToNext("supportMode","");
+            //switch (navigator.Value) {
+            //    case "Compression":
+            //        SupportMode = SupportMode.COMPRESSION;
+            //        break;
+            //    case "Tension":
+            //        SupportMode = SupportMode.TENSION;
+            //        break;
+            //}
 
-			// Get the number of supports
-			navigator.MoveToNext( "strutNumber", "" );
-			supportNumber = navigator.ValueAsInt;
+            //// Get the number of supports
+            //navigator.MoveToNext( "strutNumber", "" );
+            //supportNumber = navigator.ValueAsInt;
 
 			navigator.MoveToNext("images","");
 			problemImageCollection = new ProblemImageCollection(navigator.Clone());
 
-
 			// Get the constraint list
-			navigator.MoveToNext( "constraints", "" );
-			navigator.MoveToFirstChild();
-			do {
-				Constraint constraint = new Constraint(navigator.Clone());
-				constraintList.Add(constraint);
-			} while (navigator.MoveToNext());
-			constraints = new Constraint[constraintList.Count];
-			constraintList.CopyTo(constraints);
+            this.constraints = new ConstraintCollection(navigator.Clone());;
 		}
 
 		/// <summary>

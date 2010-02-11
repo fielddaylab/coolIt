@@ -6,7 +6,7 @@ using System.Xml.XPath;
 using System.Xml.Serialization;
 
 namespace CryoLib {
-	public class Constraint {
+	public class Constraint : IComparable<Constraint> {
 		private VALUE value;
 		private OP op;
 		private double target;
@@ -111,9 +111,25 @@ namespace CryoLib {
 		/// No-argument (default) constructor.
 		/// </summary>
 		public Constraint() {
-		}
+        }
 
-	}
+        #region Compare
+        /**
+         * ICompare implementation so that constraints can be sorted
+         * Sort order is determined by definition order of the VALUE enum
+         */
+        public int CompareTo(Constraint other)
+        {
+			if (this.Value < other.Value) {
+				return -1;
+			} else if (this.Value > other.Value) {
+				return 1;
+			} else {
+				return 0;
+			}
+        }
+        #endregion
+    }
 
 	/// <summary>
 	/// These values are in order of priority for giving feedback - i.e. if the strut breaks, say that in

@@ -80,8 +80,8 @@ namespace CoolIt_Service {
 			string mathGateSchemaFile = Path.Combine(schemaDir, "MathGates.xsd");
 			mathGates = new MathGateCollection(mathGateDataFile, mathGateSchemaFile);
 
-			optimizer = new Optimizer(coolers, materials);
-			solutionChecker = new SolutionChecker(problems);
+            optimizer = new Optimizer(coolers, materials);
+            solutionChecker = new SolutionChecker(problems);
 
 			sim = new SteadyStateSimulator();
 			api = new API();

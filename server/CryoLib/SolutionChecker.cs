@@ -23,9 +23,8 @@ namespace CryoLib {
 			// "most important" constraint violated.  The importance is coded into the enumeration values for
 			// the constraint VALUEs.  Here we order the constraints so we can check the most important ones
 			// first.
-			Constraint[] orderedConstraints = new Constraint[problem.Constraints.Length];
-			problem.Constraints.CopyTo(orderedConstraints, 0);
-			Array.Sort(orderedConstraints, sortConstraintsByPriority);
+            List<Constraint> orderedConstraints = problem.Constraints;
+			orderedConstraints.Sort(Comparer<Constraint>.Default.Compare);
 			
 			// Since we already have the constraints in order of importance, we can just give feedback based on 
 			// the first violation we find.
@@ -76,16 +75,6 @@ namespace CryoLib {
 				answer.Text = string.Format("Congratulations, your solution is valid, but costs significantly more than necessary ({0}%).", percentDiff );
 			}
 			return answer;
-		}
-
-		private int sortConstraintsByPriority(Constraint x, Constraint y) {
-			if (x.Value < y.Value) {
-				return -1;
-			} else if (x.Value > y.Value) {
-				return 1;
-			} else {
-				return 0;
-			}
 		}
 
 		public bool CheckSolution(State state) {

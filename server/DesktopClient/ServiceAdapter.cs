@@ -244,11 +244,12 @@ namespace DesktopClient {
 			answer.HeatLeak = rawProblem.HeatLeak;
 			answer.SupportMode = convertSupportMode(rawProblem.SupportMode);
 			answer.SupportNumber = rawProblem.SupportNumber;
-			Constraint[] constraints = new Constraint[rawProblem.Constraints.Length];
+
+			ConstraintCollection constraints = new ConstraintCollection();
 			for (int j = 0; j < rawProblem.Constraints.Length; j++) {
-				constraints[j] = convertConstraint(rawProblem.Constraints[j]);
+				constraints.Add(convertConstraint(rawProblem.Constraints[j]));
 			}
-			answer.Constraints = constraints;
+            answer.Constraints = constraints;
 			answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
 			return answer;
 		}
