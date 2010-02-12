@@ -52,8 +52,8 @@
     <Compile Include="ConstraintCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cooler.cs" />
-    <Compile Include="CoolerCollection.cs" />
+    <Compile Include="CoolerType.cs" />
+    <Compile Include="CoolerTypeCollection.cs" />
     <Compile Include="CryoObject.cs" />
     <Compile Include="CryoObjectCollection.cs" />
     <Compile Include="DataPoint.cs" />

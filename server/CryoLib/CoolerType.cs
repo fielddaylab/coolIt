@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 
 namespace CryoLib {
-	public class Cooler : CryoObject {
+	public class CoolerType : CryoObject {
 
 		private List<DataPoint> coolingPowerData = new List<DataPoint>();
 		private InputPowerCalculator inputPowerCalc;
@@ -21,7 +21,7 @@ namespace CryoLib {
 		/// <summary>
 		/// No-argument (default) constructor.
 		/// </summary>
-		public Cooler() {
+		public CoolerType() {
 			this.Name = "(no such cooler)";
 		}
 
@@ -31,7 +31,7 @@ namespace CryoLib {
 		/// would generally be used by the CoolIt Web Service.
 		/// </summary>
 		/// <param name="navigator">The XPathNavigator to use</param>
-		public Cooler(XPathNavigator navigator) {
+		public CoolerType(XPathNavigator navigator) {
 			navigator.MoveToChild("name", "");
 			this.Name = navigator.Value;
 			navigator.MoveToNext("ID", "");
@@ -66,7 +66,7 @@ namespace CryoLib {
 		/// <param name="price"></param>
 		/// <param name="priceUnit"></param>
 		/// <param name="currencyUnit"></param>
-		public Cooler(string name, int id, List<DataPoint> cpm, double price, string priceUnit, string currencyUnit)
+		public CoolerType(string name, int id, List<DataPoint> cpm, double price, string priceUnit, string currencyUnit)
 			:
 			base(name, id, price, priceUnit, currencyUnit) {
 			this.coolingPowerData = cpm;

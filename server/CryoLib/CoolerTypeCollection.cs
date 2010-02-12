@@ -7,9 +7,9 @@ using System.Xml.XPath;
 using System.IO;
 
 namespace CryoLib {
-	public class CoolerCollection : CryoObjectCollection {
+	public class CoolerTypeCollection : CryoObjectCollection {
 
-		public CoolerCollection(string dataFile, string schemaFile) {
+		public CoolerTypeCollection(string dataFile, string schemaFile) {
 			XPathNavigator navigator = openDocumentForReading(dataFile, schemaFile);
 			if (!navigator.MoveToChild("coolers", "")) {
 				throw new Exception("XML Parsing error");
@@ -19,8 +19,8 @@ namespace CryoLib {
 			}
 
 			do {
-				Cooler cooler = new Cooler(navigator.Clone());
-				objectList.Add(cooler);
+				CoolerType cooler = new CoolerType(navigator.Clone());
+				this.Add(cooler);
 			} while (navigator.MoveToNext());
 
 		}
