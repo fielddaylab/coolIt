@@ -11,7 +11,6 @@ namespace CryoLib {
         private double heatLeak;
         private SupportMode supportMode;
         private string strutID;
-        private ConstraintCollection constraints;
 
         [XmlAttribute]
         public string ID
@@ -35,13 +34,13 @@ namespace CryoLib {
         }
 
         //constraints set by the problem
-        private ConstraintCollection strutConstraints;
+        private ConstraintCollection constraints;
 
         [XmlArray]
-        public ConstraintCollection StrutConstraints
+        public ConstraintCollection Constraints
         {
-            get { return strutConstraints; }
-            set { strutConstraints = value; }
+            get { return constraints; }
+            set { constraints = value; }
         }
         #endregion
 

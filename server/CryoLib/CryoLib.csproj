@@ -52,6 +52,8 @@
     <Compile Include="ConstraintCollection.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Cooler.cs" />
+    <Compile Include="CoolerCollection.cs" />
     <Compile Include="CoolerType.cs" />
     <Compile Include="CoolerTypeCollection.cs" />
     <Compile Include="CryoObject.cs" />
@@ -76,8 +78,12 @@
     <Compile Include="SpecificPowerDataManager.cs" />
     <Compile Include="State.cs" />
     <Compile Include="SteadyStateSimulator.cs" />
-    <Compile Include="Strut.cs" />
-    <Compile Include="StrutCollection.cs" />
+    <Compile Include="Strut.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StrutCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.doc" />

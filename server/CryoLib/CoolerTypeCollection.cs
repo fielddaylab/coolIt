@@ -7,6 +7,13 @@ using System.Xml.XPath;
 using System.IO;
 
 namespace CryoLib {
+    /**
+    * Class that represents a collection of the different kinds of coolers (CoolerType.cs)
+    * available for selection
+    * and the properties of each one
+    * 
+    * Loaded from the Coolers.xml definitions
+    **/
 	public class CoolerTypeCollection : CryoObjectCollection {
 
 		public CoolerTypeCollection(string dataFile, string schemaFile) {

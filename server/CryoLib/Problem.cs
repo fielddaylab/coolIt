@@ -13,6 +13,7 @@ namespace CryoLib {
 		private double monetaryIncentive;
 		private ConstraintCollection constraints;
         private StrutCollection struts;
+        private CoolerCollection coolers;
 		private ProblemImageCollection problemImageCollection;
 		private bool solved;
 		const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
@@ -56,6 +57,12 @@ namespace CryoLib {
             set { struts = value; }
         }
 
+        public CoolerCollection Coolers
+        {
+            get { return coolers; }
+            set { coolers = value; }
+        }
+
 		public ProblemImageCollection ImageCollection {
 			get { return problemImageCollection; }
 			set { problemImageCollection = value; }
@@ -73,7 +80,8 @@ namespace CryoLib {
 						double incentive,
 						ProblemImageCollection imageCollection,
 						ConstraintCollection constraints,
-                        StrutCollection struts)
+                        StrutCollection struts,
+                        CoolerCollection coolers)
 		{
 			this.name = name;
 			this.id = id;
@@ -82,6 +90,7 @@ namespace CryoLib {
 			this.problemImageCollection = imageCollection;
 			this.constraints = constraints;
             this.struts = struts;
+            this.coolers = coolers;
 		}
 
 		public Problem( XPathNavigator navigator ) {
@@ -111,6 +120,9 @@ namespace CryoLib {
 
             //Get the strut list
             this.struts = new StrutCollection(navigator.Clone());
+
+            //Get the cooler list
+            this.coolers = new CoolerCollection(navigator.Clone());
         }
 
 		/// <summary>

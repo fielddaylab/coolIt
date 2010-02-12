@@ -9,7 +9,12 @@ using System.Xml.Schema;
 using System.IO;
 using System.Xml.Serialization;
 
-
+/**
+ * Class that represents the different kinds of coolers available for selection
+ * and the properties of each one
+ * 
+ * Loaded from the Coolers.xml definitions
+ **/
 namespace CryoLib {
 	public class CoolerType : CryoObject {
 
