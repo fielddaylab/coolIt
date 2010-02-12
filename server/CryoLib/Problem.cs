@@ -11,10 +11,8 @@ namespace CryoLib {
 		private int id;
 		private string description;
 		private double monetaryIncentive;
-		private double heatLeak;
-		private SupportMode supportMode;
-		private int supportNumber;
 		private ConstraintCollection constraints;
+        private StrutCollection struts;
 		private ProblemImageCollection problemImageCollection;
 		private bool solved;
 		const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
@@ -47,28 +45,16 @@ namespace CryoLib {
 			set { monetaryIncentive = value; }
 		}
 
-		[XmlElement]
-		public double HeatLeak {
-			get { return heatLeak; }
-			set { heatLeak = value; }
-		}
-
-		[XmlElement]
-		public SupportMode SupportMode {
-			get { return supportMode; }
-			set { supportMode = value; }
-		}
-
-
-		public int SupportNumber {
-			get { return supportNumber; }
-			set { supportNumber = value; }
-		}
-
 		public ConstraintCollection Constraints {
 			get { return constraints; }
 			set { constraints = value; }
 		}
+
+        public StrutCollection Struts
+        {
+            get { return struts; }
+            set { struts = value; }
+        }
 
 		public ProblemImageCollection ImageCollection {
 			get { return problemImageCollection; }
@@ -85,21 +71,17 @@ namespace CryoLib {
 						int id,
 						string description,
 						double incentive,
-						double heatLeak,
-						SupportMode supportMode,
-						int supportNumber,
 						ProblemImageCollection imageCollection,
-						ConstraintCollection constraints )
+						ConstraintCollection constraints,
+                        StrutCollection struts)
 		{
 			this.name = name;
 			this.id = id;
 			this.description = description;
 			this.monetaryIncentive = incentive;
-			this.heatLeak = heatLeak;
-			this.supportMode = supportMode;
-			this.supportNumber = supportNumber;
 			this.problemImageCollection = imageCollection;
 			this.constraints = constraints;
+            this.struts = struts;
 		}
 
 		public Problem( XPathNavigator navigator ) {
@@ -121,36 +103,20 @@ namespace CryoLib {
 			navigator.MoveToNext("monetaryIncentive","");
 			monetaryIncentive = navigator.ValueAsDouble;
 
-
-            //// Get the heat leak
-            //navigator.MoveToNext("heatLeak","");
-            //heatLeak = navigator.ValueAsDouble;
-
-            //// Get the support mode
-            //navigator.MoveToNext("supportMode","");
-            //switch (navigator.Value) {
-            //    case "Compression":
-            //        SupportMode = SupportMode.COMPRESSION;
-            //        break;
-            //    case "Tension":
-            //        SupportMode = SupportMode.TENSION;
-            //        break;
-            //}
-
-            //// Get the number of supports
-            //navigator.MoveToNext( "strutNumber", "" );
-            //supportNumber = navigator.ValueAsInt;
-
 			navigator.MoveToNext("images","");
 			problemImageCollection = new ProblemImageCollection(navigator.Clone());
 
 			// Get the constraint list
-            this.constraints = new ConstraintCollection(navigator.Clone());;
-		}
+            this.constraints = new ConstraintCollection(navigator.Clone());
+
+            //Get the strut list
+            this.struts = new StrutCollection(navigator.Clone());
+        }
 
 		/// <summary>
 		/// Convenience property - to make life easier.
 		/// </summary>
+        //TODO:  Fix these and getConstraint method
 		public double MinStrutLength {
 			get {
 				return getConstraint(VALUE.STRUT_LENGTH, OP.GE, DEFAULT_MIN_STRUT_LENGTH);

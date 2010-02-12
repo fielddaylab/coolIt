@@ -241,9 +241,10 @@ namespace DesktopClient {
 			answer.Name = rawProblem.Name;
 			answer.Description = rawProblem.Description;
 			answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
-			answer.HeatLeak = rawProblem.HeatLeak;
-			answer.SupportMode = convertSupportMode(rawProblem.SupportMode);
-			answer.SupportNumber = rawProblem.SupportNumber;
+            //TODO:  Fix this to get these properties for each individual strut
+            //answer.HeatLeak = rawProblem.HeatLeak;
+            //answer.SupportMode = convertSupportMode(rawProblem.SupportMode);
+            //answer.SupportNumber = rawProblem.SupportNumber;
 
 			ConstraintCollection constraints = new ConstraintCollection();
 			for (int j = 0; j < rawProblem.Constraints.Length; j++) {

@@ -160,9 +160,13 @@ namespace CryoLib {
 
 				// The strut(s) must be strong enough to support the load.  Figure out what the minimum cross section
 				// is.  This is the cross section for each strut.
-				strutCrossSection = strengthRequirement / m.yieldStrength / problem.SupportNumber;
+                //TODO:  Fix this to include support number as it should now that it is moved to a strut property
+                //strutCrossSection = strengthRequirement / m.yieldStrength / problem.SupportNumber;
+                strutCrossSection = strengthRequirement / m.yieldStrength;
 				strutCrossSection *= 1.00001;	// add tiny bit to avoid precision problems when comparing later
-				double calcStrength = m.yieldStrength * strutCrossSection * problem.SupportNumber;
+                //TODO:  Fix this to include support number as it should now that it is moved to a strut property
+                //double calcStrength = m.yieldStrength * strutCrossSection * problem.SupportNumber;
+                double calcStrength = m.yieldStrength * strutCrossSection;
 				if (calcStrength < strengthRequirement) {
 					throw new Exception("We have a math precision problem here");
 				}
@@ -192,7 +196,9 @@ namespace CryoLib {
 
 				// Given the cooler, material, cross section, target temperature, and power factor, we can calculate the
 				// minimum strut length which will allow us to reach that temperature.
-				strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * problem.SupportNumber, m, c, coolerPowerFactor);
+                //TODO:  Fix this to handle support number coming from list of struts
+                //strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * problem.SupportNumber, m, c, coolerPowerFactor);
+                strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * 1, m, c, coolerPowerFactor);
 
 				// If the Matlab code cannot come up with a minimum strut length, the mateial is not feasible
 				// given the other parameters.
@@ -216,7 +222,9 @@ namespace CryoLib {
 					// It could be that we are now below the min temp for which we have data on our strut material.
 					double steadyStateTemp;
 					try {
-						steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, coolerPowerFactor );
+                        //TODO:  Fix this to use support number
+                        //steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, coolerPowerFactor );
+                        steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * 1, material, cooler, coolerPowerFactor);
 					} catch (ArgumentException) {
 						steadyStateTemp = -1;
 					}
@@ -229,7 +237,9 @@ namespace CryoLib {
 				
 				// OK, we have a feasible solution - figure out what it's going to cost.
 				feasible = true;
-				double strutVolume = strutCrossSection * strutLength * problem.SupportNumber;
+                //TODO:  Fix this to use support number
+                //double strutVolume = strutCrossSection * strutLength * problem.SupportNumber;
+                double strutVolume = strutCrossSection * strutLength * 1;
 				double strutCost = m.price * strutVolume;
 				solutionCost = c.price + strutCost;
 			}
@@ -238,7 +248,9 @@ namespace CryoLib {
 				double avg = (min + max) / 2.0;
 				double steadyStateTemp;
 				try {
-					steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, avg);
+                    //TODO:  Fix this to use support number
+                    //steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, avg);
+                    steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * 1, material, cooler, avg);
 				} catch (ArgumentException) {
 					steadyStateTemp = -1;
 				}

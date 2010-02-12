@@ -42,9 +42,12 @@ namespace DesktopClient {
 			radioButton_CheckedChanged(this, EventArgs.Empty);
 
 			showConstraints(p);
-			strutNumberTextBox.Text = p.SupportNumber.ToString();
-			heatLeakTextBox.Text = p.HeatLeak.ToString();
-			supportModeTextBox.Text = p.SupportMode.ToString();
+            //TODO:  Fix this to handle number of struts based on problem definition
+            //strutNumberTextBox.Text = p.SupportNumber.ToString();
+            //TODO:  Fix this to get heat leak from each individual strut
+            //heatLeakTextBox.Text = p.HeatLeak.ToString();
+            //TODO:  Fix this to get support mode from each individual strut
+            //supportModeTextBox.Text = p.SupportMode.ToString();
 			monetaryIncentiveLabel.Text = p.MonetaryIncentive.ToString("C");
 
 			strutPickerCollection = curProblem.ImageCollection.PickerImageCollection;
