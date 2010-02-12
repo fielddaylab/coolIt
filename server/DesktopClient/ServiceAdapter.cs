@@ -241,19 +241,52 @@ namespace DesktopClient {
 			answer.Name = rawProblem.Name;
 			answer.Description = rawProblem.Description;
 			answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
-            //TODO:  Fix this to get these properties for each individual strut
-            //answer.HeatLeak = rawProblem.HeatLeak;
-            //answer.SupportMode = convertSupportMode(rawProblem.SupportMode);
-            //answer.SupportNumber = rawProblem.SupportNumber;
-
-			ConstraintCollection constraints = new ConstraintCollection();
-			for (int j = 0; j < rawProblem.Constraints.Length; j++) {
-				constraints.Add(convertConstraint(rawProblem.Constraints[j]));
-			}
-            answer.Constraints = constraints;
+            answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
 			answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
+            answer.Struts = convertStrutCollection(rawProblem.Struts);
+            answer.Coolers = convertCoolerCollection(rawProblem.Coolers);
 			return answer;
 		}
+
+        private ConstraintCollection convertConstraintCollection(DesktopClient.CoolIt_Service.Constraint[] rawCollection)
+        {
+            ConstraintCollection constraints = new ConstraintCollection();
+            for (int j = 0; j < rawCollection.Length; j++)
+            {
+                constraints.Add(convertConstraint(rawCollection[j]));
+            }
+            return constraints;
+        }
+
+        private StrutCollection convertStrutCollection(DesktopClient.CoolIt_Service.Strut[] rawStrutCollection)
+        {
+            StrutCollection strutCol = new StrutCollection();
+            foreach (DesktopClient.CoolIt_Service.Strut strut in rawStrutCollection)
+            {
+                Strut st = new Strut();
+                st.ID = strut.ID;
+                st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
+                st.HeatLeak = strut.HeatLeak;
+                st.Constraints = convertConstraintCollection(strut.Constraints);
+
+                strutCol.Add(st);
+            }
+            return strutCol;
+        }
+
+        private CoolerCollection convertCoolerCollection(DesktopClient.CoolIt_Service.Cooler[] rawCollection)
+        {
+            CoolerCollection coolCol = new CoolerCollection();
+            foreach (DesktopClient.CoolIt_Service.Cooler cooler in rawCollection)
+            {
+                Cooler cool = new Cooler();
+                cool.ID = cooler.ID;
+                cool.Constraints = convertConstraintCollection(cooler.Constraints);
+
+                coolCol.Add(cool);
+            }
+            return coolCol;
+        }
 
 		private ProblemImageCollection convertImageCollection(DesktopClient.CoolIt_Service.ProblemImageCollection rawCollection) {
 			ProblemImageCollection answer = new ProblemImageCollection();

@@ -208,8 +208,8 @@ namespace CoolIt_Service {
 			}
 			Problem p = problems[name];
 			state.problemName = name;
-            //TODO:  Fix this to get the count from number of struts
-            //state.numStruts = p.SupportNumber;
+
+            state.numStruts = p.Struts.Count;
 			api.SetProblem((int)Session["userId"], name);
 			persistState(state);
 			return true;

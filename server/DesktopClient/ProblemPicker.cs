@@ -42,12 +42,11 @@ namespace DesktopClient {
 			radioButton_CheckedChanged(this, EventArgs.Empty);
 
 			showConstraints(p);
-            //TODO:  Fix this to handle number of struts based on problem definition
-            //strutNumberTextBox.Text = p.SupportNumber.ToString();
-            //TODO:  Fix this to get heat leak from each individual strut
-            //heatLeakTextBox.Text = p.HeatLeak.ToString();
-            //TODO:  Fix this to get support mode from each individual strut
-            //supportModeTextBox.Text = p.SupportMode.ToString();
+            showStruts(p);
+            showCoolers(p);
+
+            strutNumberTextBox.Text = p.Struts.Count.ToString();
+
 			monetaryIncentiveLabel.Text = p.MonetaryIncentive.ToString("C");
 
 			strutPickerCollection = curProblem.ImageCollection.PickerImageCollection;
@@ -58,6 +57,16 @@ namespace DesktopClient {
 			widthUpDown.Maximum = strutPickerCollection.Width - 1;
 			lengthUpDown.Maximum = strutPickerCollection.Length - 1;
 		}
+
+        private void showStruts(Problem p)
+        {
+            dgStruts.DataSource = p.Struts;
+        }
+
+        private void showCoolers(Problem p)
+        {
+            dgCoolers.DataSource = p.Coolers;
+        }
 
 		private void showConstraints(Problem p) {
 			constraintGridView.Rows.Clear();
@@ -175,7 +184,6 @@ namespace DesktopClient {
 			string img = strutPickerCollection.getImage((int)widthUpDown.Value, (int)lengthUpDown.Value);
 			loadImage(img);
 		}
-
 
 	}
 }
