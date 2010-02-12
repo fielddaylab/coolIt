@@ -14,7 +14,7 @@ namespace DesktopClient {
 		private DesktopClient.CoolIt_Service.CoolIt_Service webService;
 		private bool direct = false;
 		private Material[] materials;
-		private Cooler[] coolers;
+		private CoolerType[] coolers;
 		private Problem[] problems;
 		private MathGate[] mathGates;
 		private string dataDir;
@@ -118,7 +118,7 @@ namespace DesktopClient {
 		/// Get a list of coolers from the serivce provider
 		/// </summary>
 		/// <returns>The list of coolers</returns>
-		public Cooler[] GetCoolers() {
+		public CoolerType[] GetCoolers() {
 			return coolers;
 		}
 
@@ -348,19 +348,19 @@ namespace DesktopClient {
 			return new Constraint(value, op, rawConstraint.Target);
 		}
 
-		private Cooler[] findCoolers() {
-			Cooler[] answer;
+		private CoolerType[] findCoolers() {
+			CoolerType[] answer;
 			if (direct) {
 				string coolerFile = Path.Combine(dataDir, "Coolers.xml");
 				string coolerSchema = Path.Combine(schemaDir, "Coolers.xsd");
-				CoolerCollection coolers = new CoolerCollection(coolerFile, coolerSchema);
-				answer = new Cooler[coolers.Count];
+				CoolerTypeCollection coolers = new CoolerTypeCollection(coolerFile, coolerSchema);
+				answer = new CoolerType[coolers.Count];
 				for (int i = 0; i < coolers.Count; i++) {
-					answer[i] = (Cooler)coolers[i];
+					answer[i] = (CoolerType)coolers[i];
 				}
 			} else {
 				DesktopClient.CoolIt_Service.Cooler[] rawCoolers = webService.GetCoolers();
-				answer = new Cooler[rawCoolers.Length];
+				answer = new CoolerType[rawCoolers.Length];
 				InputPowerCalculator calc = getInputPowerCalc();
 				for (int i = 0; i < rawCoolers.Length; i++) {
 					DesktopClient.CoolIt_Service.Cooler raw = rawCoolers[i];
@@ -370,7 +370,7 @@ namespace DesktopClient {
 						DataPoint point = new DataPoint(rawPoint.temp, rawPoint.data);
 						data.Add(point);
 					}
-					answer[i] = new Cooler(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
+					answer[i] = new CoolerType(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
 					answer[i].InputPowerCalculator = calc;
 				}
 			}
@@ -443,8 +443,8 @@ namespace DesktopClient {
 			return material;
 		}
 
-		private Cooler findCooler(string coolerName) {
-			Cooler cooler = null;
+		private CoolerType findCooler(string coolerName) {
+			CoolerType cooler = null;
 			for (int i = 0; i < coolers.Length; i++) {
 				if (coolers[i].Name == coolerName) {
 					cooler = coolers[i];

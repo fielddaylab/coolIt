@@ -12,7 +12,7 @@ namespace DesktopClient {
 	public partial class HeatLeakVisualizer : Form {
 
 		private Material[] materials;
-		private Cooler[] coolers;
+		private CoolerType[] coolers;
 		private State state;
 		private SimulatorStub simulator;
 
@@ -65,7 +65,7 @@ namespace DesktopClient {
 
 		private double updateCoolingPower() {
 			state = simulator.State;
-			Cooler cooler = null;
+			CoolerType cooler = null;
 			for (int i = 0; i < coolers.Length; i++) {
 				if (coolers[i].Name == state.coolerName) {
 					cooler = coolers[i];

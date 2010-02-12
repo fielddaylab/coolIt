@@ -25,7 +25,7 @@ namespace CoolIt_Service {
 	public class CoolIt_Service : System.Web.Services.WebService {
 
 		// These objects can be shared across sessions
-		private static CoolerCollection coolers;
+		private static CoolerTypeCollection coolers;
 		private static MaterialsCollection materials;
 		private static ProblemCollection problems;
 		private static MathGateCollection mathGates;
@@ -63,8 +63,8 @@ namespace CoolIt_Service {
 
 			string coolerDataFile = Path.Combine(dataDir, "Coolers.xml");
 			string coolerSchemaFile = Path.Combine(schemaDir, "Coolers.xsd");
-			coolers = new CoolerCollection(coolerDataFile, coolerSchemaFile );
-			foreach (Cooler c in coolers) {
+			coolers = new CoolerTypeCollection(coolerDataFile, coolerSchemaFile );
+			foreach (CoolerType c in coolers) {
 				c.InputPowerCalculator = inputPowerCalc;
 			}
 
@@ -133,10 +133,10 @@ namespace CoolIt_Service {
 		}
 
 		[WebMethod]
-		public Cooler[] GetCoolers() {
-			Cooler[] answer = new Cooler[coolers.Count];
+		public CoolerType[] GetCoolers() {
+			CoolerType[] answer = new CoolerType[coolers.Count];
 			for (int i = 0; i < coolers.Count; i++) {
-				answer[i] = (Cooler)coolers[i];
+				answer[i] = (CoolerType)coolers[i];
 			}
 			return answer;
 		}
@@ -291,7 +291,7 @@ namespace CoolIt_Service {
 				//return null;
 			}
 
-			Cooler cooler = (Cooler)coolers[state.coolerName];
+			CoolerType cooler = (CoolerType)coolers[state.coolerName];
 			cooler.InputPowerCalculator = inputPowerCalc;
 			Material material = (Material)materials[state.materialName];
 			double combinedCrossSection = state.numStruts * state.crossSection;

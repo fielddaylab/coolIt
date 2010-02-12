@@ -31,7 +31,7 @@ namespace DesktopClient {
 		public void SetControllers( StrutPicker strutPicker, CoolerPicker coolerPicker ) {
 			// Set initial cooler and strut choices into the simulator
 			Strut strut = strutPicker.Strut;
-			Cooler cooler = coolerPicker.Cooler;
+			CoolerType cooler = coolerPicker.Cooler;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
 			webServiceAdapter.SetCooler(cooler.Name, coolerPicker.PowerFactor);
 
@@ -55,7 +55,7 @@ namespace DesktopClient {
 		/// Return a list of available coolers.  We get this information from the web service.
 		/// </summary>
 		/// <returns></returns>
-		public Cooler[] GetCoolers() {
+		public CoolerType[] GetCoolers() {
 			return webServiceAdapter.GetCoolers();
 		}
 
@@ -87,7 +87,7 @@ namespace DesktopClient {
 		/// <param name="sender">The CoolerPicker which generated this event</param>
 		/// <param name="e">(unused)</param>
 		void handle_CoolerChangedEvent(object sender, EventArgs e) {
-			Cooler cooler = ((CoolerPicker)sender).Cooler;
+			CoolerType cooler = ((CoolerPicker)sender).Cooler;
 			webServiceAdapter.SetCooler(cooler.Name, ((CoolerPicker)sender).PowerFactor);
 			simulate();
 		}

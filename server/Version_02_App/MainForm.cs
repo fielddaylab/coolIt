@@ -27,7 +27,7 @@ namespace Version_02_App {
 			// Read in data on the coolers
 			string coolerFileName = Path.Combine(Resources.DataDir, "Coolers.xml");
 			string coolerSchema = Path.Combine(Resources.SchemaDir, "Coolers.xsd");
-			CoolerCollection coolers = new CoolerCollection(coolerFileName, coolerSchema );
+			CoolerTypeCollection coolers = new CoolerTypeCollection(coolerFileName, coolerSchema );
 			for (int i = 0; i < coolers.Count; i++) {
 				coolersListBox.Items.Add(coolers[i]);
 			}

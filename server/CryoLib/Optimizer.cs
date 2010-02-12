@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CryoLib {
 	public class Optimizer {
-		private CoolerCollection coolers;
+		private CoolerTypeCollection coolers;
 		private MaterialsCollection materials;
 		public static SteadyStateSimulator steadyStateSim;
 
@@ -17,7 +17,7 @@ namespace CryoLib {
 		/// </summary>
 		/// <param name="coolers">The collection of available coolers</param>
 		/// <param name="materials">The collection of available materials</param>
-		public Optimizer( CoolerCollection coolers, MaterialsCollection materials ) {
+		public Optimizer( CoolerTypeCollection coolers, MaterialsCollection materials ) {
 			this.coolers = coolers;
 			this.materials = materials;
 		}
@@ -46,7 +46,7 @@ namespace CryoLib {
 			// Enumerate solutions for every combination of material and cooler
 			List<CandidateSolution> candidates = new List<CandidateSolution>();
 			foreach( Material m in materials ) {
-				foreach( Cooler c in coolers ) {
+				foreach( CoolerType c in coolers ) {
 					CandidateSolution cs = new CandidateSolution(m, c, targetTemp, strengthReq, problem);
 					if (cs.IsFeasible) {
 						candidates.Add(cs);
@@ -84,7 +84,7 @@ namespace CryoLib {
 
 		private class CandidateSolution {
 			private Material material;
-			private Cooler cooler;
+			private CoolerType cooler;
 			private bool feasible;
 			private double solutionCost;
 			private double strutLength;
@@ -96,7 +96,7 @@ namespace CryoLib {
 				get { return material; }
 			}
 
-			public Cooler Cooler {
+			public CoolerType Cooler {
 				get { return cooler; }
 			}
 
@@ -138,7 +138,7 @@ namespace CryoLib {
 				}
 			}
 
-			public CandidateSolution(Material m, Cooler c, double targetTemp, double strengthRequirement, Problem problem ) {
+			public CandidateSolution(Material m, CoolerType c, double targetTemp, double strengthRequirement, Problem problem ) {
 				material = m;
 				cooler = c;
 

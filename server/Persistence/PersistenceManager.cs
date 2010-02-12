@@ -192,7 +192,7 @@ namespace Persistence {
 				// Get the list of existing coolers from our XML data file
 			string coolersDataFile = Path.Combine(dataDir, "Coolers.xml");
 			string coolersSchemaFile = Path.Combine(schemaDir, "Coolers.xsd");
-			CoolerCollection coolers = new CoolerCollection(coolersDataFile, coolersSchemaFile);
+			CoolerTypeCollection coolers = new CoolerTypeCollection(coolersDataFile, coolersSchemaFile);
 
 				// Persist the list in the database
 			ISession session = null;
@@ -200,7 +200,7 @@ namespace Persistence {
 			try {
 				session = factory.OpenSession();
 				transaction = session.BeginTransaction();
-				foreach (Cooler c in coolers) {
+				foreach (CoolerType c in coolers) {
 					P_Cooler p_cool = new P_Cooler();
 					p_cool.Name = c.Name;
 					session.Save(p_cool);
