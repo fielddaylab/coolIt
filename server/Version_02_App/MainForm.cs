@@ -70,8 +70,8 @@ namespace Version_02_App {
 		/// Figure out what kind of cooler the user has selected and return it
 		/// </summary>
 		/// <returns>The selected cooler</returns>
-		private Cooler getCooler() {
-			return (Cooler)coolersListBox.SelectedItem;
+		private CoolerType getCooler() {
+			return (CoolerType)coolersListBox.SelectedItem;
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace Version_02_App {
 		/// </summary>
 		/// <param name="strut"></param>
 		/// <param name="cooler"></param>
-		private void simulate( Strut strut, Cooler cooler ) {
+		private void simulate( Strut strut, CoolerType cooler ) {
 			Cursor savedCursor = this.Cursor;
 			try {
 				this.Cursor = Cursors.WaitCursor;
@@ -103,7 +103,7 @@ namespace Version_02_App {
 		/// <param name="e"></param>
 		private void simulateButton_Click(object sender, EventArgs e) {
 			Strut strut;
-			Cooler cooler;
+			CoolerType cooler;
 			answerBox.Text = "";
 			try {
 				strut = getStrut();
@@ -121,7 +121,7 @@ namespace Version_02_App {
 		}
 
 		private void coolersListBox_SelectedIndexChanged(object sender, EventArgs e) {
-			coolerDataBox.Text = ((Cooler)coolersListBox.SelectedItem).Describe();
+			coolerDataBox.Text = ((CoolerType)coolersListBox.SelectedItem).Describe();
 			answerBox.Text = "";
 		}
 

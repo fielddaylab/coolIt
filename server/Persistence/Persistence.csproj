@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D8FA0DD3-9F25-4E0F-A26D-5386CB516274}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -48,11 +48,11 @@
   <ItemGroup>
     <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\NHibernate\NHibernate-2.0.1.GA-bin\bin\net-2.0\Iesi.Collections.dll</HintPath>
+      <HintPath>..\CryoLib\NHibernate\NHibernate-2.0.1.GA-bin\bin\net-2.0\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=2.0.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\NHibernate\NHibernate-2.0.1.GA-bin\bin\net-2.0\NHibernate.dll</HintPath>
+      <HintPath>..\CryoLib\NHibernate\NHibernate-2.0.1.GA-bin\bin\net-2.0\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

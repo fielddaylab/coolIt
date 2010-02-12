@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{76AC1176-5704-4A31-ACD6-2C6958829427}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="NPlot, Version=0.9.10.0, Culture=neutral, PublicKeyToken=4eda430eb4395eb1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\NPlot\nplot-0.9.10.0\nplot-0.9.10.0\bin\net\2.0\debug\NPlot.dll</HintPath>
+      <HintPath>NPlot\nplot-0.9.10.0\nplot-0.9.10.0\bin\net\2.0\debug\NPlot.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
