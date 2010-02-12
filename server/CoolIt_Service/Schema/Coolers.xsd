@@ -21,10 +21,10 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="coolers">
+  <xs:element name="coolertypes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="cooler" type="coolerType" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="coolertype" type="coolerType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

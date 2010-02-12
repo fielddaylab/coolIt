@@ -103,16 +103,16 @@
       <s:element name="GetCoolersResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCoolersResult" type="tns:ArrayOfCooler" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoolersResult" type="tns:ArrayOfCoolerType" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfCooler">
+      <s:complexType name="ArrayOfCoolerType">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CoolerType" nillable="true" type="tns:CoolerType" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="Cooler">
+      <s:complexType name="CoolerType">
         <s:complexContent mixed="false">
           <s:extension base="tns:CryoObject">
             <s:sequence>
@@ -186,22 +186,15 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="HeatLeak" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="SupportMode" type="tns:SupportMode" />
-          <s:element minOccurs="1" maxOccurs="1" name="SupportNumber" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+          <s:element minOccurs="0" maxOccurs="1" name="Struts" type="tns:ArrayOfStrut" />
+          <s:element minOccurs="0" maxOccurs="1" name="Coolers" type="tns:ArrayOfCooler" />
           <s:element minOccurs="0" maxOccurs="1" name="ImageCollection" type="tns:ProblemImageCollection" />
           <s:element minOccurs="1" maxOccurs="1" name="Solved" type="s:boolean" />
         </s:sequence>
         <s:attribute name="Name" type="s:string" />
         <s:attribute name="ID" type="s:int" use="required" />
       </s:complexType>
-      <s:simpleType name="SupportMode">
-        <s:restriction base="s:string">
-          <s:enumeration value="COMPRESSION" />
-          <s:enumeration value="TENSION" />
-        </s:restriction>
-      </s:simpleType>
       <s:complexType name="ArrayOfConstraint">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Constraint" nillable="true" type="tns:Constraint" />
@@ -232,6 +225,36 @@
           <s:enumeration value="NE" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="ArrayOfStrut">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Strut" nillable="true" type="tns:Strut" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Strut">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+        </s:sequence>
+        <s:attribute name="ID" type="s:string" />
+        <s:attribute name="SupportMode" type="tns:SupportMode" use="required" />
+        <s:attribute name="HeatLeak" type="s:double" use="required" />
+      </s:complexType>
+      <s:simpleType name="SupportMode">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPRESSION" />
+          <s:enumeration value="TENSION" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfCooler">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cooler">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+        </s:sequence>
+        <s:attribute name="ID" type="s:string" />
+      </s:complexType>
       <s:complexType name="ProblemImageCollection">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="BaseURI" type="s:string" />
@@ -326,11 +349,7 @@
         </s:complexType>
       </s:element>
       <s:element name="SetProblemResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="SetProblemResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
+        <s:complexType />
       </s:element>
       <s:element name="GetOptimalSolutions">
         <s:complexType />
@@ -358,6 +377,16 @@
           <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:double" />
         </s:sequence>
       </s:complexType>
+      <s:element name="TestDbAccess">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestDbAccessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestDbAccessResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="Run">
         <s:complexType />
       </s:element>
@@ -402,12 +431,13 @@
       </s:complexType>
       <s:element name="boolean" type="s:boolean" />
       <s:element name="MyAssemblyInfo" nillable="true" type="tns:MyAssemblyInfo" />
-      <s:element name="ArrayOfCooler" nillable="true" type="tns:ArrayOfCooler" />
+      <s:element name="ArrayOfCoolerType" nillable="true" type="tns:ArrayOfCoolerType" />
       <s:element name="ArrayOfMaterial" nillable="true" type="tns:ArrayOfMaterial" />
       <s:element name="ArrayOfProblem" nillable="true" type="tns:ArrayOfProblem" />
       <s:element name="ArrayOfMathGate" nillable="true" type="tns:ArrayOfMathGate" />
       <s:element name="ArrayOfDataPoint" nillable="true" type="tns:ArrayOfDataPoint" />
       <s:element name="ArrayOfSolution" nillable="true" type="tns:ArrayOfSolution" />
+      <s:element name="string" nillable="true" type="s:string" />
       <s:element name="State" nillable="true" type="tns:State" />
       <s:element name="Feedback" nillable="true" type="tns:Feedback" />
     </s:schema>
@@ -514,6 +544,12 @@
   <wsdl:message name="GetOptimalSolutionsSoapOut">
     <wsdl:part name="parameters" element="tns:GetOptimalSolutionsResponse" />
   </wsdl:message>
+  <wsdl:message name="TestDbAccessSoapIn">
+    <wsdl:part name="parameters" element="tns:TestDbAccess" />
+  </wsdl:message>
+  <wsdl:message name="TestDbAccessSoapOut">
+    <wsdl:part name="parameters" element="tns:TestDbAccessResponse" />
+  </wsdl:message>
   <wsdl:message name="RunSoapIn">
     <wsdl:part name="parameters" element="tns:Run" />
   </wsdl:message>
@@ -561,7 +597,7 @@
   </wsdl:message>
   <wsdl:message name="GetCoolersHttpGetIn" />
   <wsdl:message name="GetCoolersHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
+    <wsdl:part name="Body" element="tns:ArrayOfCoolerType" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsHttpGetIn" />
   <wsdl:message name="GetMaterialsHttpGetOut">
@@ -593,12 +629,14 @@
   <wsdl:message name="SetProblemHttpGetIn">
     <wsdl:part name="name" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetProblemHttpGetOut">
-    <wsdl:part name="Body" element="tns:boolean" />
-  </wsdl:message>
+  <wsdl:message name="SetProblemHttpGetOut" />
   <wsdl:message name="GetOptimalSolutionsHttpGetIn" />
   <wsdl:message name="GetOptimalSolutionsHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfSolution" />
+  </wsdl:message>
+  <wsdl:message name="TestDbAccessHttpGetIn" />
+  <wsdl:message name="TestDbAccessHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="RunHttpGetIn" />
   <wsdl:message name="RunHttpGetOut">
@@ -643,7 +681,7 @@
   </wsdl:message>
   <wsdl:message name="GetCoolersHttpPostIn" />
   <wsdl:message name="GetCoolersHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
+    <wsdl:part name="Body" element="tns:ArrayOfCoolerType" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsHttpPostIn" />
   <wsdl:message name="GetMaterialsHttpPostOut">
@@ -675,12 +713,14 @@
   <wsdl:message name="SetProblemHttpPostIn">
     <wsdl:part name="name" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetProblemHttpPostOut">
-    <wsdl:part name="Body" element="tns:boolean" />
-  </wsdl:message>
+  <wsdl:message name="SetProblemHttpPostOut" />
   <wsdl:message name="GetOptimalSolutionsHttpPostIn" />
   <wsdl:message name="GetOptimalSolutionsHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfSolution" />
+  </wsdl:message>
+  <wsdl:message name="TestDbAccessHttpPostIn" />
+  <wsdl:message name="TestDbAccessHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="RunHttpPostIn" />
   <wsdl:message name="RunHttpPostOut">
@@ -750,6 +790,10 @@
     <wsdl:operation name="GetOptimalSolutions">
       <wsdl:input message="tns:GetOptimalSolutionsSoapIn" />
       <wsdl:output message="tns:GetOptimalSolutionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDbAccess">
+      <wsdl:input message="tns:TestDbAccessSoapIn" />
+      <wsdl:output message="tns:TestDbAccessSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="Run">
       <wsdl:input message="tns:RunSoapIn" />
@@ -821,6 +865,10 @@
       <wsdl:input message="tns:GetOptimalSolutionsHttpGetIn" />
       <wsdl:output message="tns:GetOptimalSolutionsHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="TestDbAccess">
+      <wsdl:input message="tns:TestDbAccessHttpGetIn" />
+      <wsdl:output message="tns:TestDbAccessHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="Run">
       <wsdl:input message="tns:RunHttpGetIn" />
       <wsdl:output message="tns:RunHttpGetOut" />
@@ -890,6 +938,10 @@
     <wsdl:operation name="GetOptimalSolutions">
       <wsdl:input message="tns:GetOptimalSolutionsHttpPostIn" />
       <wsdl:output message="tns:GetOptimalSolutionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDbAccess">
+      <wsdl:input message="tns:TestDbAccessHttpPostIn" />
+      <wsdl:output message="tns:TestDbAccessHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="Run">
       <wsdl:input message="tns:RunHttpPostIn" />
@@ -1030,6 +1082,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetOptimalSolutions">
       <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetOptimalSolutions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDbAccess">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TestDbAccess" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1193,6 +1254,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TestDbAccess">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TestDbAccess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Run">
       <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Run" style="document" />
       <wsdl:input>
@@ -1332,12 +1402,19 @@
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <http:operation location="/GetOptimalSolutions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetOptimalSolutions">
-      <http:operation location="/GetOptimalSolutions" />
+    <wsdl:operation name="TestDbAccess">
+      <http:operation location="/TestDbAccess" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1484,12 +1561,19 @@
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptimalSolutions">
+      <http:operation location="/GetOptimalSolutions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetOptimalSolutions">
-      <http:operation location="/GetOptimalSolutions" />
+    <wsdl:operation name="TestDbAccess">
+      <http:operation location="/TestDbAccess" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

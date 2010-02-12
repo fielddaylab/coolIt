@@ -359,11 +359,11 @@ namespace DesktopClient {
 					answer[i] = (CoolerType)coolers[i];
 				}
 			} else {
-				DesktopClient.CoolIt_Service.Cooler[] rawCoolers = webService.GetCoolers();
+				DesktopClient.CoolIt_Service.CoolerType[] rawCoolers = webService.GetCoolers();
 				answer = new CoolerType[rawCoolers.Length];
 				InputPowerCalculator calc = getInputPowerCalc();
 				for (int i = 0; i < rawCoolers.Length; i++) {
-					DesktopClient.CoolIt_Service.Cooler raw = rawCoolers[i];
+					DesktopClient.CoolIt_Service.CoolerType raw = rawCoolers[i];
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.CPM.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.CPM[j];

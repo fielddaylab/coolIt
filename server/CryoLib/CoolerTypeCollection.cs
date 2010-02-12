@@ -18,10 +18,10 @@ namespace CryoLib {
 
 		public CoolerTypeCollection(string dataFile, string schemaFile) {
 			XPathNavigator navigator = openDocumentForReading(dataFile, schemaFile);
-			if (!navigator.MoveToChild("coolers", "")) {
+			if (!navigator.MoveToChild("coolertypes", "")) {
 				throw new Exception("XML Parsing error");
 			}
-			if (!navigator.MoveToChild("cooler", "")) {
+			if (!navigator.MoveToChild("coolertype", "")) {
 				throw new Exception("XML Parsing error");
 			}
 
