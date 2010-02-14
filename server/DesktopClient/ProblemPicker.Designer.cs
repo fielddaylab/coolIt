@@ -54,6 +54,16 @@ namespace DesktopClient {
             this.lblStruts = new System.Windows.Forms.Label();
             this.dgCoolers = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
+            this.dgStrutConstraint = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgCoolerConstraint = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.constraintGridView)).BeginInit();
             this.imageChooserGroupBox.SuspendLayout();
@@ -61,6 +71,8 @@ namespace DesktopClient {
             ((System.ComponentModel.ISupportInitialize)(this.widthUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgStruts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCoolers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStrutConstraint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCoolerConstraint)).BeginInit();
             this.SuspendLayout();
             // 
             // problemsListBox
@@ -94,7 +106,7 @@ namespace DesktopClient {
             this.descriptionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionTextBox.Location = new System.Drawing.Point(382, 28);
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(582, 100);
+            this.descriptionTextBox.Size = new System.Drawing.Size(729, 100);
             this.descriptionTextBox.TabIndex = 2;
             this.descriptionTextBox.TabStop = false;
             this.descriptionTextBox.Text = "";
@@ -125,7 +137,7 @@ namespace DesktopClient {
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(-161, 418);
+            this.label3.Location = new System.Drawing.Point(-14, 418);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 16);
             this.label3.TabIndex = 8;
@@ -134,9 +146,9 @@ namespace DesktopClient {
             // okButton
             // 
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.okButton.Location = new System.Drawing.Point(869, 510);
+            this.okButton.Location = new System.Drawing.Point(1008, 187);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(95, 23);
+            this.okButton.Size = new System.Drawing.Size(95, 22);
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -146,9 +158,9 @@ namespace DesktopClient {
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(869, 481);
+            this.cancelButton.Location = new System.Drawing.Point(1008, 158);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(95, 23);
+            this.cancelButton.Size = new System.Drawing.Size(95, 22);
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -173,7 +185,7 @@ namespace DesktopClient {
             this.unitsColumn});
             this.constraintGridView.Location = new System.Drawing.Point(382, 160);
             this.constraintGridView.Name = "constraintGridView";
-            this.constraintGridView.Size = new System.Drawing.Size(370, 141);
+            this.constraintGridView.Size = new System.Drawing.Size(370, 105);
             this.constraintGridView.TabIndex = 12;
             // 
             // valueColumn
@@ -213,7 +225,7 @@ namespace DesktopClient {
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(769, 330);
+            this.label5.Location = new System.Drawing.Point(769, 163);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 13);
             this.label5.TabIndex = 13;
@@ -222,7 +234,7 @@ namespace DesktopClient {
             // 
             // strutNumberTextBox
             // 
-            this.strutNumberTextBox.Location = new System.Drawing.Point(864, 327);
+            this.strutNumberTextBox.Location = new System.Drawing.Point(864, 160);
             this.strutNumberTextBox.Name = "strutNumberTextBox";
             this.strutNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.strutNumberTextBox.TabIndex = 14;
@@ -231,7 +243,7 @@ namespace DesktopClient {
             // 
             this.monetaryIncentiveLabel.AutoSize = true;
             this.monetaryIncentiveLabel.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monetaryIncentiveLabel.Location = new System.Drawing.Point(801, 418);
+            this.monetaryIncentiveLabel.Location = new System.Drawing.Point(801, 187);
             this.monetaryIncentiveLabel.Name = "monetaryIncentiveLabel";
             this.monetaryIncentiveLabel.Size = new System.Drawing.Size(163, 35);
             this.monetaryIncentiveLabel.TabIndex = 13;
@@ -347,40 +359,141 @@ namespace DesktopClient {
             this.dgStruts.AllowUserToAddRows = false;
             this.dgStruts.AllowUserToDeleteRows = false;
             this.dgStruts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgStruts.Location = new System.Drawing.Point(379, 326);
+            this.dgStruts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgStruts.Location = new System.Drawing.Point(379, 289);
             this.dgStruts.Name = "dgStruts";
-            this.dgStruts.Size = new System.Drawing.Size(373, 81);
+            this.dgStruts.ReadOnly = true;
+            this.dgStruts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgStruts.Size = new System.Drawing.Size(373, 96);
             this.dgStruts.TabIndex = 17;
+            this.dgStruts.SelectionChanged += new System.EventHandler(this.dgStruts_SelectedIndexChanged);
             // 
             // lblStruts
             // 
             this.lblStruts.AutoSize = true;
             this.lblStruts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStruts.Location = new System.Drawing.Point(376, 307);
+            this.lblStruts.Location = new System.Drawing.Point(376, 270);
             this.lblStruts.Name = "lblStruts";
-            this.lblStruts.Size = new System.Drawing.Size(41, 16);
+            this.lblStruts.Size = new System.Drawing.Size(229, 16);
             this.lblStruts.TabIndex = 16;
-            this.lblStruts.Text = "Struts";
+            this.lblStruts.Text = "Struts (select one to show constraints)";
             // 
             // dgCoolers
             // 
             this.dgCoolers.AllowUserToAddRows = false;
             this.dgCoolers.AllowUserToDeleteRows = false;
             this.dgCoolers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCoolers.Location = new System.Drawing.Point(378, 434);
+            this.dgCoolers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgCoolers.Location = new System.Drawing.Point(378, 408);
             this.dgCoolers.Name = "dgCoolers";
-            this.dgCoolers.Size = new System.Drawing.Size(374, 81);
+            this.dgCoolers.ReadOnly = true;
+            this.dgCoolers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCoolers.Size = new System.Drawing.Size(374, 107);
             this.dgCoolers.TabIndex = 19;
+            this.dgCoolers.SelectionChanged += new System.EventHandler(this.dgCooler_SelectionChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(375, 415);
+            this.label9.Location = new System.Drawing.Point(375, 389);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 16);
+            this.label9.Size = new System.Drawing.Size(243, 16);
             this.label9.TabIndex = 18;
-            this.label9.Text = "Coolers";
+            this.label9.Text = "Coolers (select one to show constraints)";
+            // 
+            // dgStrutConstraint
+            // 
+            this.dgStrutConstraint.AllowUserToAddRows = false;
+            this.dgStrutConstraint.AllowUserToDeleteRows = false;
+            this.dgStrutConstraint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgStrutConstraint.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dgStrutConstraint.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgStrutConstraint.Location = new System.Drawing.Point(758, 289);
+            this.dgStrutConstraint.Name = "dgStrutConstraint";
+            this.dgStrutConstraint.ReadOnly = true;
+            this.dgStrutConstraint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgStrutConstraint.Size = new System.Drawing.Size(370, 96);
+            this.dgStrutConstraint.TabIndex = 20;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Op";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Limit";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // dgCoolerConstraint
+            // 
+            this.dgCoolerConstraint.AllowUserToAddRows = false;
+            this.dgCoolerConstraint.AllowUserToDeleteRows = false;
+            this.dgCoolerConstraint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCoolerConstraint.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            this.dgCoolerConstraint.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgCoolerConstraint.Location = new System.Drawing.Point(758, 408);
+            this.dgCoolerConstraint.MultiSelect = false;
+            this.dgCoolerConstraint.Name = "dgCoolerConstraint";
+            this.dgCoolerConstraint.ReadOnly = true;
+            this.dgCoolerConstraint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCoolerConstraint.Size = new System.Drawing.Size(370, 107);
+            this.dgCoolerConstraint.TabIndex = 21;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Op";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Limit";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 125;
             // 
             // ChallengePicker
             // 
@@ -388,7 +501,9 @@ namespace DesktopClient {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(989, 545);
+            this.ClientSize = new System.Drawing.Size(1136, 545);
+            this.Controls.Add(this.dgCoolerConstraint);
+            this.Controls.Add(this.dgStrutConstraint);
             this.Controls.Add(this.dgCoolers);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dgStruts);
@@ -419,6 +534,8 @@ namespace DesktopClient {
             ((System.ComponentModel.ISupportInitialize)(this.widthUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgStruts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCoolers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStrutConstraint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCoolerConstraint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -457,5 +574,15 @@ namespace DesktopClient {
         private System.Windows.Forms.Label lblStruts;
         private System.Windows.Forms.DataGridView dgCoolers;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView dgStrutConstraint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridView dgCoolerConstraint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
 	}
 }

@@ -21,7 +21,7 @@ namespace DesktopClient {
 			for (int i = 0; i < problems.Length; i++) {
 				problemsListBox.Items.Add(problems[i]);
 			}
-			problemsListBox.SelectedIndex = 0;
+            problemsListBox.SelectedIndex = 0;
 		}
 
 		public Problem Problem {
@@ -69,9 +69,14 @@ namespace DesktopClient {
         }
 
 		private void showConstraints(Problem p) {
-			constraintGridView.Rows.Clear();
+            loadConstraintsInGridView(constraintGridView, p.Constraints);
+		}
+
+        private void loadConstraintsInGridView(DataGridView dg, CryoLib.ConstraintCollection cons)
+        {
+        	dg.Rows.Clear();
 			string[] rowVals = new string[4];
-			foreach (CryoLib.Constraint constraint in p.Constraints) {
+			foreach (CryoLib.Constraint constraint in cons) {
 				rowVals[0] = constraint.Value.ToString();
 				switch (constraint.Op) {
 					case OP.EQ:
@@ -120,9 +125,9 @@ namespace DesktopClient {
 						string msg = string.Format("Unexpected constraint value ({0})", constraint.Value);
 						throw new Exception(msg);
 				}
-				constraintGridView.Rows.Add( rowVals );
+				dg.Rows.Add( rowVals );
 			}
-		}
+        }
 
 		private void listBox_FocusChanged(object sender, EventArgs e) {
 			ListBox box = (ListBox)sender;
@@ -185,5 +190,28 @@ namespace DesktopClient {
 			loadImage(img);
 		}
 
+        /**
+         * Show constraints for a given strut based on what strut is selected
+         **/
+        private void dgStruts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dgStruts.SelectedRows.Count > 0)
+            {
+                Strut selectedRow = (Strut)dgStruts.SelectedRows[0].DataBoundItem;
+                loadConstraintsInGridView(this.dgStrutConstraint, selectedRow.Constraints);
+            }
+        }
+
+        /**
+         * Show constraints for a given cooler based on what cooler is selected
+         **/
+        private void dgCooler_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgCoolers.SelectedRows.Count > 0)
+            {
+                Cooler selectedRow = (Cooler)dgCoolers.SelectedRows[0].DataBoundItem;
+                loadConstraintsInGridView(this.dgCoolerConstraint, selectedRow.Constraints);
+            }
+        }
 	}
 }
