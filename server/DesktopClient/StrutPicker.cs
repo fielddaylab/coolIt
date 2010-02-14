@@ -33,9 +33,11 @@ namespace DesktopClient {
             setStrutSelector();
             
             //TODO:  Fix trackbars to handle dynmaic strut selection
+			adjustTrackbar(lengthTrackBar);
 			lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
 			lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
+			adjustTrackbar(crossSectionTrackBar);
 			crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
 			crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
@@ -58,34 +60,6 @@ namespace DesktopClient {
             }
         }
 
-		public double MinStrutLength {
-			get { return minStrutLength; }
-			set {
-				minStrutLength = value;
-			}
-		}
-
-		public double MaxStrutLength {
-			get { return maxStrutLength; }
-			set {
-				maxStrutLength = value;
-			}
-		}
-
-		public double MinStrutCrossSection {
-			get { return minCrossSection; }
-			set {
-				minCrossSection = value;
-			}
-		}
-
-		public double MaxStrutCrossSection {
-			get { return maxCrossSection; }
-			set {
-				maxCrossSection = value;
-			}
-		}
-
         /**
          * The properties of the struts that are defined in the problem
          **/
@@ -101,6 +75,12 @@ namespace DesktopClient {
                 setStrutSelector();
             }
         }
+
+		private void adjustTrackbar(TrackBar trackBar) {
+			trackBar.Minimum = 0;
+			trackBar.Maximum = TRACKBAR_RANGE;
+		}
+
 
 		void StrutPicker_FormClosing(object sender, FormClosingEventArgs e) {
 			e.Cancel = true;

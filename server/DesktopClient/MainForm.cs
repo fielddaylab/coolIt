@@ -204,11 +204,6 @@ namespace DesktopClient {
 				simulator.SetProblem(challenge.Name);
 
                 strutPicker.Struts = challengePicker.Problem.Struts;
-                //TODO:  These need to be updated to handle multiple struts
-                //strutPicker.MinStrutLength = challenge.MinStrutLength;
-                //strutPicker.MaxStrutLength = challenge.MaxStrutLength;
-                //strutPicker.MinStrutCrossSection = challenge.MinStrutCrossSection;
-                //strutPicker.MaxStrutCrossSection = challenge.MaxStrutCrossSection;
 
 			}
 		}

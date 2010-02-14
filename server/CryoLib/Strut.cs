@@ -167,7 +167,10 @@ namespace CryoLib {
             sb.AppendFormat("Strut ID: {0}\n", this.strutID);
 			sb.AppendFormat("Length: {0}\n", length);
 			sb.AppendFormat("CrossSectionalArea: {0}\n", crossSectionalArea);
-			sb.AppendFormat("Material: {0}", material.Describe());
+            if (material != null)
+            {
+                sb.AppendFormat("Material: {0}", material.Describe());
+            }
 			return sb.ToString();
 		}
 	}
