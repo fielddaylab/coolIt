@@ -31,15 +31,6 @@ namespace DesktopClient {
 
             //Load the drop down with the list of struts
             setStrutSelector();
-            
-            //TODO:  Fix trackbars to handle dynmaic strut selection
-			adjustTrackbar(lengthTrackBar);
-			lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
-			lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
-
-			adjustTrackbar(crossSectionTrackBar);
-			crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
-			crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
 			updatePrice();
 
@@ -183,8 +174,25 @@ namespace DesktopClient {
         private void cbStruts_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedStrut = (Strut)cbStruts.SelectedItem;
+
+            updateControlsByStrut();
         }
 
+        private void updateControlsByStrut()
+        {
+            //TODO:  Fix trackbars to handle dynmaic strut selection
+            minStrutLength = selectedStrut.MinStrutLength;
+            maxStrutLength = selectedStrut.MaxStrutLength;
+            adjustTrackbar(lengthTrackBar);
+            lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
+            lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
+            adjustTrackbar(crossSectionTrackBar);
+            maxCrossSection = selectedStrut.MaxStrutCrossSection;
+            minCrossSection = selectedStrut.MinStrutCrossSection;
+            crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
+            crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
+
+        }
 	}
 }
