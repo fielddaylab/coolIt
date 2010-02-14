@@ -14,10 +14,12 @@ namespace CryoLib {
 		public Feedback GetFeedback(State state, Solution optimalSolution ) {
 			Feedback answer = new Feedback();
 			Problem problem = problemCollection[state.problemName];
-			if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
-				answer.Text = "Internal Server Error";
-				answer.CutScreen = "";
-			}
+
+            //TODO:  This is going to need to be updated to handle multiple struts
+            //if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
+            //    answer.Text = "Internal Server Error";
+            //    answer.CutScreen = "";
+            //}
 
 			// If any constraint is violated, the answer is not valid.  We give feedback based on the
 			// "most important" constraint violated.  The importance is coded into the enumeration values for
@@ -79,9 +81,13 @@ namespace CryoLib {
 
 		public bool CheckSolution(State state) {
 			Problem problem = problemCollection[state.problemName];
-			if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
-				return false;
-			}
+
+            //TODO:  Update this to handle multiple struts
+            //if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
+            //    return false;
+            //}
+
+            //TODO:  Update this to handle multiple struts
 			foreach (Constraint constraint in problem.Constraints) {
 				if (!checkConstraint(constraint, state)) {
 					return false;

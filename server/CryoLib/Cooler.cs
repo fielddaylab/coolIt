@@ -30,6 +30,19 @@ namespace CryoLib {
         }
         #endregion
 
+        #region convenience properties - accessors to constraint values
+        /// <summary>
+        /// Convenience property - to make life easier.
+        /// </summary>
+        public double InputPowerLimit
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.INPUT_POWER, OP.LE, double.MaxValue);
+            }
+        }
+        #endregion
+
         /**
          * Parameterless constructor is necessary for serialization
          **/

@@ -16,11 +16,6 @@ namespace CryoLib {
         private CoolerCollection coolers;
 		private ProblemImageCollection problemImageCollection;
 		private bool solved;
-		const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
-		const double DEFAULT_MAX_STRUT_LENGTH = 10.0;
-		const double DEFAULT_MIN_STRUT_CROSS_SECTION = 0.001;
-		const double DEFAULT_MAX_STRUT_CROSS_SECTION = 0.5;
-
 
 		[XmlAttribute]
 		public string Name {
@@ -125,61 +120,18 @@ namespace CryoLib {
             this.coolers = new CoolerCollection(navigator.Clone());
         }
 
-		/// <summary>
-		/// Convenience property - to make life easier.
-		/// </summary>
-        //TODO:  Fix these and getConstraint method
-		public double MinStrutLength {
-			get {
-				return getConstraint(VALUE.STRUT_LENGTH, OP.GE, DEFAULT_MIN_STRUT_LENGTH);
-			}
-		}
 
-		/// <summary>
-		/// Convenience property - to make life easier.
-		/// </summary>
-		public double MaxStrutLength {
-			get {
-				return getConstraint(VALUE.STRUT_LENGTH, OP.LE, DEFAULT_MAX_STRUT_LENGTH);
-			}
-		}
 
-		/// <summary>
-		/// Convenience property - to make life easier.
-		/// </summary>
-		public double MinStrutCrossSection {
-			get {
-				return getConstraint(VALUE.STRUT_CROSS_SECTION, OP.GE, DEFAULT_MIN_STRUT_CROSS_SECTION);
-			}
-		}
-
-		/// <summary>
-		/// Convenience property - to make life easier.
-		/// </summary>
-		public double MaxStrutCrossSection {
-			get {
-				return getConstraint(VALUE.STRUT_CROSS_SECTION, OP.LE, DEFAULT_MAX_STRUT_CROSS_SECTION);
-			}
-		}
-
-		/// <summary>
-		/// Convenience property - to make life easier.
-		/// </summary>
-		public double InputPowerLimit {
-			get {
-				return getConstraint(VALUE.INPUT_POWER, OP.LE, double.MaxValue);
-			}
-		}
-
+        //TODO:  Determine if force limit is indeed problem level?
 		public double StrengthRequirement {
 			get {
-				return getConstraint(VALUE.FORCE_LIMIT, OP.GE, 0.0);
+				return constraints.getConstraintTarget(VALUE.FORCE_LIMIT, OP.GE, 0.0);
 			}
 		}
 
 		public double TargetTemperature {
 			get {
-				return getConstraint(VALUE.TEMP, OP.LT, double.MaxValue);
+				return constraints.getConstraintTarget(VALUE.TEMP, OP.LT, double.MaxValue);
 			}
 		}
 
@@ -193,56 +145,6 @@ namespace CryoLib {
 
 		public override string ToString() {
 			return name;
-		}
-
-		private double getConstraint( VALUE value, OP op, double defaultAnswer) {
-			Constraint c = findConstraint(value, op);
-			if (c == null) {
-				return defaultAnswer;
-			} else {
-				return c.Target;
-			}
-		}
-
-		private double getConstraint( VALUE value, OP op ) {
-			Constraint c = findConstraint(value, op);
-			if (c == null) {
-				string msg = String.Format("Can't find constraint for Value=\"{0}\" and Op=\"{1}\"",
-					value, op);
-				throw new Exception(msg);
-			} else {
-				return c.Target;
-			}
-		}
-
-		private Constraint findConstraint(VALUE value, OP op) {
-			// Problem constraints might say that Temp <= x or Temp < x, treat these the same here, same goes for
-			// other constraint boundaries, e.g. strength >= x or strength > x.
-			OP alternateOp;
-			switch (op) {
-				case OP.GE:
-					alternateOp = OP.GT;	// consider GT and GE equivalent
-					break;
-				case OP.GT:
-					alternateOp = OP.GE;	// consider GT and GE equivalent
-					break;
-				case OP.LE:
-					alternateOp = OP.LT;	// consider LT and LE equivalent
-					break;
-				case OP.LT:
-					alternateOp = OP.LE;	// consider LT and LE equivalent
-					break;
-				default:
-					alternateOp = op;		// this op has no equivalent
-					break;
-			}
-			foreach (Constraint c in constraints) {
-				if (c.Value == value && (c.Op == op || c.Op == alternateOp) ) {
-					return c;
-				}
-			}
-				
-			return null;
 		}
 
 		private string fixFormatting(string src) {

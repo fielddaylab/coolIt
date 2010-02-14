@@ -87,11 +87,13 @@ namespace DesktopClient {
 			} else {
 				inputPowerBox.Text = "(undefined)";
 			}
-			if (challenge != null && curState.inputPower <= challenge.InputPowerLimit) {
+
+            //TODO:  Update this to handle multiple coolers
+            //if (challenge != null && curState.inputPower <= challenge.InputPowerLimit) {
 				inputPowerBox.ForeColor = Color.Green;
-			} else {
-				inputPowerBox.ForeColor = Color.Red;
-			}
+            //} else {
+            //    inputPowerBox.ForeColor = Color.Red;
+            //}
 
 			if (curState.stressLimit > 0.0) {
 				stressLimitTextBox.Text = string.Format("{0:F3}", curState.stressLimit);
@@ -200,10 +202,13 @@ namespace DesktopClient {
 					incentiveTextBox.Text = challenge.MonetaryIncentive.ToString( "C" );
 				}
 				simulator.SetProblem(challenge.Name);
-				strutPicker.MinStrutLength = challenge.MinStrutLength;
-				strutPicker.MaxStrutLength = challenge.MaxStrutLength;
-				strutPicker.MinStrutCrossSection = challenge.MinStrutCrossSection;
-				strutPicker.MaxStrutCrossSection = challenge.MaxStrutCrossSection;
+
+                strutPicker.Struts = challengePicker.Problem.Struts;
+                //TODO:  These need to be updated to handle multiple struts
+                //strutPicker.MinStrutLength = challenge.MinStrutLength;
+                //strutPicker.MaxStrutLength = challenge.MaxStrutLength;
+                //strutPicker.MinStrutCrossSection = challenge.MinStrutCrossSection;
+                //strutPicker.MaxStrutCrossSection = challenge.MaxStrutCrossSection;
 
 			}
 		}

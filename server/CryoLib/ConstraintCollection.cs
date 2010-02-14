@@ -42,5 +42,59 @@ namespace CryoLib {
                 this.Add(Constraint);
             } while (navigator.MoveToNext());
         }
-	}
+
+        public double getConstraintTarget( VALUE value, OP op, double defaultAnswer) {
+			Constraint c = getConstraint(value, op);
+			if (c == null) {
+				return defaultAnswer;
+			} else {
+				return c.Target;
+			}
+		}
+
+		public double getConstraintTarget( VALUE value, OP op ) {
+			Constraint c = getConstraint(value, op);
+			if (c == null) {
+				string msg = String.Format("Can't find constraint for Value=\"{0}\" and Op=\"{1}\"",
+					value, op);
+				throw new Exception(msg);
+			} else {
+				return c.Target;
+			}
+		}
+
+        public Constraint getConstraint(VALUE value, OP op)
+        {
+            // Problem constraints might say that Temp <= x or Temp < x, treat these the same here, same goes for
+            // other constraint boundaries, e.g. strength >= x or strength > x.
+            OP alternateOp;
+            switch (op)
+            {
+                case OP.GE:
+                    alternateOp = OP.GT;	// consider GT and GE equivalent
+                    break;
+                case OP.GT:
+                    alternateOp = OP.GE;	// consider GT and GE equivalent
+                    break;
+                case OP.LE:
+                    alternateOp = OP.LT;	// consider LT and LE equivalent
+                    break;
+                case OP.LT:
+                    alternateOp = OP.LE;	// consider LT and LE equivalent
+                    break;
+                default:
+                    alternateOp = op;		// this op has no equivalent
+                    break;
+            }
+            foreach (Constraint c in this)
+            {
+                if (c.Value == value && (c.Op == op || c.Op == alternateOp))
+                {
+                    return c;
+                }
+            }
+
+            return null;
+        }
+    }
 }

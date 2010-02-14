@@ -7,6 +7,11 @@ using System.Xml.Serialization;
 
 namespace CryoLib {
 	public class Strut {
+        const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
+        const double DEFAULT_MAX_STRUT_LENGTH = 10.0;
+        const double DEFAULT_MIN_STRUT_CROSS_SECTION = 0.001;
+        const double DEFAULT_MAX_STRUT_CROSS_SECTION = 0.5;
+
         #region properties set by the problem
         private double heatLeak;
         private SupportMode supportMode;
@@ -60,6 +65,54 @@ namespace CryoLib {
 
 		public Material Material {
 			get { return material; }
+        }
+        #endregion
+
+
+        #region Convenince Properties
+        /// <summary>
+        /// Convenience property - to make life easier.
+        /// </summary>
+        //TODO:  Fix these and getConstraint method
+        public double MinStrutLength
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.STRUT_LENGTH, OP.GE, DEFAULT_MIN_STRUT_LENGTH);
+            }
+        }
+
+        /// <summary>
+        /// Convenience property - to make life easier.
+        /// </summary>
+        public double MaxStrutLength
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.STRUT_LENGTH, OP.LE, DEFAULT_MAX_STRUT_LENGTH);
+            }
+        }
+
+        /// <summary>
+        /// Convenience property - to make life easier.
+        /// </summary>
+        public double MinStrutCrossSection
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.STRUT_CROSS_SECTION, OP.GE, DEFAULT_MIN_STRUT_CROSS_SECTION);
+            }
+        }
+
+        /// <summary>
+        /// Convenience property - to make life easier.
+        /// </summary>
+        public double MaxStrutCrossSection
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.STRUT_CROSS_SECTION, OP.LE, DEFAULT_MAX_STRUT_CROSS_SECTION);
+            }
         }
         #endregion
 

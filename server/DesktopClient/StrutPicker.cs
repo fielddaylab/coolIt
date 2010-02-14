@@ -15,7 +15,9 @@ namespace DesktopClient {
 		private double minCrossSection = 0.001;
 		private double maxCrossSection = 0.1;
 		const int TRACKBAR_RANGE = 1000;
-		
+
+        private StrutCollection struts = new StrutCollection();
+        private Strut selectedStrut = null;
 
 		public StrutPicker( SimulatorStub simulator ) {
 			InitializeComponent();
@@ -27,6 +29,9 @@ namespace DesktopClient {
 			}
 			materialsListBox.SelectedIndex = 0;
 
+            setStrutSelector();
+            
+            //TODO:  Fix trackbars to handle dynmaic strut selection
 			adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
 			lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
 			lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
@@ -39,6 +44,20 @@ namespace DesktopClient {
 
 			this.FormClosing += new FormClosingEventHandler(StrutPicker_FormClosing);
 		}
+
+        private void setStrutSelector()
+        {
+            if (this.struts.Count > 0)
+            {
+                cbStruts.Enabled = true;
+                cbStruts.DataSource = this.struts;
+                cbStruts.DisplayMember = "ID";
+            }
+            else
+            {
+                cbStruts.Enabled = false;
+            }
+        }
 
 		public double MinStrutLength {
 			get { return minStrutLength; }
@@ -72,6 +91,22 @@ namespace DesktopClient {
 			}
 		}
 
+        /**
+         * The properties of the struts that are defined in the problem
+         **/
+        public StrutCollection Struts
+        {
+            get
+            {
+                return this.struts;
+            }
+            set
+            {
+                this.struts = value;
+                setStrutSelector();
+            }
+        }
+
 		private void adjustTrackbar(TrackBar trackBar, double min, double max) {
 			trackBar.Minimum = 0;
 			trackBar.Maximum = TRACKBAR_RANGE;
@@ -83,6 +118,7 @@ namespace DesktopClient {
 			Hide();
 		}
 
+        //TODO:  Need to handle this properly with the new picker
 		public Strut Strut {
 			get {
 				return new Strut(getLength(), getCrossSection(), (Material)materialsListBox.SelectedItem);
@@ -174,6 +210,11 @@ namespace DesktopClient {
 				stressLimitTextBox.Text = "(unknown)";
 			}
 		}
+
+        private void cbStruts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedStrut = (Strut)cbStruts.SelectedItem;
+        }
 
 
 	}

@@ -173,25 +173,28 @@ namespace CryoLib {
 
 				// If the material is not strong enough to support the load given the maximum cross section
 				// specified in the problem, it's not feasible
-				if (strutCrossSection > problem.MaxStrutCrossSection) {
-					feasible = false;
-					return;
-				}
+                //TODO:  Update this to handle multiple struts
+                //if (strutCrossSection > problem.MaxStrutCrossSection) {
+                //    feasible = false;
+                //    return;
+                //}
 
 				// If the material is so strong that a cross section less than the minimum specified can support the
 				// load, we have to adjust the cross section to the minimum specified.
-				if (strutCrossSection < problem.MinStrutCrossSection) {
-					strutCrossSection = problem.MinStrutCrossSection;
-				}
+                //TODO:  Update this to handle multiple struts
+                //if (strutCrossSection < problem.MinStrutCrossSection) {
+                //    strutCrossSection = problem.MinStrutCrossSection;
+                //}
 
 				// Need to determine the maximum power factor which will result in an input power that meets
 				// the problem constraints.  We will always use the maximum power factor which does not violate
 				// our input power constraint as we are only optimizing our cost to build (not operating costs).
-				coolerPowerFactor = c.maxPowerFactor(problem.InputPowerLimit, targetTemp);
-				double actualInputPower = c.InputPower(targetTemp, coolerPowerFactor);
-				if (actualInputPower > problem.InputPowerLimit) {
-					throw new Exception("Error in maxPowerFactor calculation");
-				}
+                //TODO:  Update this to handle multiple coolers
+                //coolerPowerFactor = c.maxPowerFactor(problem.InputPowerLimit, targetTemp);
+                //double actualInputPower = c.InputPower(targetTemp, coolerPowerFactor);
+                //if (actualInputPower > problem.InputPowerLimit) {
+                //    throw new Exception("Error in maxPowerFactor calculation");
+                //}
 
 
 				// Given the cooler, material, cross section, target temperature, and power factor, we can calculate the
@@ -209,15 +212,17 @@ namespace CryoLib {
 
 				// If reaching the target temperature requires a longer strut than the maximum length specified,
 				// the material is not feasible.
-				if (strutLength > problem.MaxStrutLength ) {
-					feasible = false;
-					return;
-				}
+                //TODO:  Update this to handle multiple struts
+                //if (strutLength > problem.MaxStrutLength ) {
+                //    feasible = false;
+                //    return;
+                //}
 
 				// If we can reach the target temperature with a strut shorter than the minimum, we still have to
 				// use a strut that meets the minimum length requirement.
-				if ( strutLength < problem.MinStrutLength) {
-					strutLength = problem.MinStrutLength;
+                //TODO:  Update this to handle multiple struts
+                //if ( strutLength < problem.MinStrutLength) {
+                //    strutLength = problem.MinStrutLength;
 					// Now that we have adjusted the strutLength to be longer, we'll reach a colder temperature.
 					// It could be that we are now below the min temp for which we have data on our strut material.
 					double steadyStateTemp;
@@ -233,7 +238,7 @@ namespace CryoLib {
 						// Here we reduce the power factor enough to get the temperature back in range.
 						coolerPowerFactor = MaxPowerFactor(0.0, coolerPowerFactor, minThermalData, problem);
 					}
-				}
+                //}
 				
 				// OK, we have a feasible solution - figure out what it's going to cost.
 				feasible = true;
