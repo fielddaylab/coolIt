@@ -29,14 +29,13 @@ namespace DesktopClient {
 			}
 			materialsListBox.SelectedIndex = 0;
 
+            //Load the drop down with the list of struts
             setStrutSelector();
             
             //TODO:  Fix trackbars to handle dynmaic strut selection
-			adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
 			lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
 			lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
-			adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
 			crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
 			crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
@@ -63,7 +62,6 @@ namespace DesktopClient {
 			get { return minStrutLength; }
 			set {
 				minStrutLength = value;
-				adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
 			}
 		}
 
@@ -71,7 +69,6 @@ namespace DesktopClient {
 			get { return maxStrutLength; }
 			set {
 				maxStrutLength = value;
-				adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
 			}
 		}
 
@@ -79,7 +76,6 @@ namespace DesktopClient {
 			get { return minCrossSection; }
 			set {
 				minCrossSection = value;
-				adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
 			}
 		}
 
@@ -87,7 +83,6 @@ namespace DesktopClient {
 			get { return maxCrossSection; }
 			set {
 				maxCrossSection = value;
-				adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
 			}
 		}
 
@@ -106,12 +101,6 @@ namespace DesktopClient {
                 setStrutSelector();
             }
         }
-
-		private void adjustTrackbar(TrackBar trackBar, double min, double max) {
-			trackBar.Minimum = 0;
-			trackBar.Maximum = TRACKBAR_RANGE;
-		}
-
 
 		void StrutPicker_FormClosing(object sender, FormClosingEventArgs e) {
 			e.Cancel = true;
