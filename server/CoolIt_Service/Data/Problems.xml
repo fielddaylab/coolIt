@@ -14,6 +14,7 @@
 		square corners and another factor of 10 for design safety. Determine a low cost support system for the superconducting
 		magnet. The navy is offering $10,000 for a valid solution to this problem.</problemDescription>
 		<monetaryIncentive>10000</monetaryIncentive>
+		<heatLeak>50</heatLeak>
 		<images>
 			<baseURI>Minesweeper_I</baseURI>
 			<intro>Intro</intro>
@@ -35,7 +36,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>50</heatLeak>
+				<count>1</count>
 				<supportMode>Compression</supportMode>
 				<constraints>
 					<constraint>
@@ -88,6 +89,7 @@
 		square corners and another factor of 10 for design safety. Determine a low cost support system for the superconducting magnet.
 		The navy is offering $5,000 for a valid solution to this problem.</problemDescription>
 		<monetaryIncentive>5000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
 		<images>
 			<baseURI>Minesweeper_II</baseURI>
 			<intro>Intro</intro>
@@ -109,7 +111,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>0</heatLeak>
+				<count>1</count>
 				<supportMode>Compression</supportMode>
 				<constraints>
 					<constraint>
@@ -162,6 +164,7 @@
 		square corners and another factor of 10 for design safety.  Determine a low cost support system for the
 		superconducting magnet. The navy is offering $15,000 for a valid soultion to this problem.</problemDescription>
 		<monetaryIncentive>15000</monetaryIncentive>
+		<heatLeak>50</heatLeak>
 		<images>
 			<baseURI>Minesweeper_III</baseURI>
 			<intro>Intro</intro>
@@ -183,7 +186,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>50</heatLeak>
+				<count>1</count>
 				<supportMode>Compression</supportMode>		
 				<constraints>
 					<constraint>
@@ -206,7 +209,6 @@
 						<Op>GE</Op>
 						<Limit>5</Limit>
 					</constraint>
-					
 				</constraints>
 			</strut>
 		</struts>
@@ -240,6 +242,7 @@
 		limitations of power generation in space, you must limit your cryocooler's input power to
 		4125 Watts.</problemDescription>
 		<monetaryIncentive>10000</monetaryIncentive>
+	 	<heatLeak>0</heatLeak>
 		<images>
 			<baseURI>Depot</baseURI>
 			<intro>Intro</intro>
@@ -261,7 +264,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>0</heatLeak>
+				<count>8</count>
 				<supportMode>Tension</supportMode>	
 				<constraints>
 					<constraint>
@@ -284,205 +287,8 @@
 						<Op>LE</Op>
 						<Limit>0.32</Limit>
 					</constraint>
-					
 				</constraints>
 			</strut>
-			<strut>
-				<ID>2</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>3</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>4</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>5</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>6</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>7</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>
-			<strut>
-				<ID>8</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>	
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>2.60</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					
-				</constraints>
-			</strut>		
 		</struts>
 	 	<coolers>
 	 		<cooler>
@@ -495,7 +301,6 @@
 	 				</constraint>
 	 			</constraints>
 	 		</cooler>
-	 		
 	 	</coolers>
 	 </problem>
 	
@@ -517,6 +322,7 @@
 		limitations of power generation in space, you must limit your cryocooler's input power to
 		800 Watts.</problemDescription>
 		<monetaryIncentive>6000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
 		<images>
 			<baseURI>Depot</baseURI>
 			<intro>Intro</intro>
@@ -538,196 +344,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>2</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>3</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>4</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>5</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>6</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>7</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.16</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>8</ID>
-				<heatLeak>0</heatLeak>
+				<count>8</count>
 				<supportMode>Tension</supportMode>
 				<constraints>
 					<constraint>
@@ -786,6 +403,7 @@
 		limitations of power generation in space, you must limit your cryocooler's input power to
 		500 Watts.</problemDescription>
 		<monetaryIncentive>5000</monetaryIncentive>
+		<heatLeak>0</heatLeak>
 		<images>
 			<baseURI>Depot</baseURI>
 			<intro>Intro</intro>
@@ -807,196 +425,7 @@
 		<struts>
 			<strut>
 				<ID>1</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>2</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>3</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>4</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>5</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>6</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>7</ID>
-				<heatLeak>0</heatLeak>
-				<supportMode>Tension</supportMode>
-				<constraints>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>GE</Op>
-						<Limit>0.01</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Length</Value>
-						<Op>LE</Op>
-						<Limit>2.0</Limit>
-					</constraint>
-					<constraint>
-						<Value>Strut Cross Section</Value>
-						<Op>LE</Op>
-						<Limit>0.32</Limit>
-					</constraint>
-					<constraint>
-						<Value>Force Limit</Value>
-						<Op>GE</Op>
-						<Limit>1.04</Limit>
-					</constraint>
-				</constraints>
-			</strut>
-			<strut>
-				<ID>8</ID>
-				<heatLeak>0</heatLeak>
+				<count>8</count>
 				<supportMode>Tension</supportMode>
 				<constraints>
 					<constraint>

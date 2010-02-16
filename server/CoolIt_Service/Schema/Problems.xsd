@@ -76,6 +76,7 @@ Temp: degrees K (K)
       <xs:element name="ID" type="xs:positiveInteger"/>
       <xs:element name="problemDescription" type="xs:string"/>
       <xs:element name="monetaryIncentive" type="xs:double"/>
+      <xs:element name="heatLeak" type="xs:double"/>   
       <xs:element name="images" type="ImageCollectionType"/>
       <xs:element name="constraints" type="ConstraintCollectionType"/>
       <xs:element name="struts" type="StrutCollectionType"/>
@@ -92,7 +93,7 @@ Temp: degrees K (K)
   <xs:complexType name="StrutType">
     <xs:sequence>
       <xs:element name="ID" type="xs:positiveInteger"/>
-      <xs:element name="heatLeak" type="xs:double"/>
+      <xs:element name="count" type="xs:positiveInteger"></xs:element>
       <xs:element name="supportMode" type="SupportMode"/>
       <xs:element name="constraints" type="ConstraintCollectionType"/>
     </xs:sequence>
