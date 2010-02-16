@@ -13,9 +13,17 @@ namespace CryoLib {
         const double DEFAULT_MAX_STRUT_CROSS_SECTION = 0.5;
 
         #region properties set by the problem
-        private double heatLeak;
+
         private SupportMode supportMode;
         private string strutID;
+        private int count;
+
+        [XmlAttribute]
+        public int Count
+        {
+            get { return count; }
+            set { count = value; }
+        }
 
         [XmlAttribute]
         public string ID
@@ -29,13 +37,6 @@ namespace CryoLib {
         {
             get { return supportMode; }
             set { supportMode = value; }
-        }
-
-        [XmlAttribute]
-        public double HeatLeak
-        {
-            get { return heatLeak; }
-            set { heatLeak = value; }
         }
 
         //constraints set by the problem
@@ -142,9 +143,8 @@ namespace CryoLib {
 			navigator.MoveToChild("ID", "");
 			this.ID = navigator.Value;
 
-            // Get the heat leak
-            navigator.MoveToNext("heatLeak", "");
-            heatLeak = navigator.ValueAsDouble;
+            navigator.MoveToNext("count", "");
+            this.count = navigator.ValueAsInt;
 
             // Get the support mode
             navigator.MoveToNext("supportMode", "");

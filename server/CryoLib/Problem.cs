@@ -11,6 +11,7 @@ namespace CryoLib {
 		private int id;
 		private string description;
 		private double monetaryIncentive;
+        private double heatLeak;
 		private ConstraintCollection constraints;
         private StrutCollection struts;
         private CoolerCollection coolers;
@@ -40,6 +41,13 @@ namespace CryoLib {
 			get { return monetaryIncentive; }
 			set { monetaryIncentive = value; }
 		}
+
+        [XmlAttribute]
+        public double HeatLeak
+        {
+            get { return heatLeak; }
+            set { heatLeak = value; }
+        }
 
 		public ConstraintCollection Constraints {
 			get { return constraints; }
@@ -73,6 +81,7 @@ namespace CryoLib {
 						int id,
 						string description,
 						double incentive,
+                        double heatLeak,
 						ProblemImageCollection imageCollection,
 						ConstraintCollection constraints,
                         StrutCollection struts,
@@ -82,6 +91,7 @@ namespace CryoLib {
 			this.id = id;
 			this.description = description;
 			this.monetaryIncentive = incentive;
+            this.heatLeak = heatLeak;
 			this.problemImageCollection = imageCollection;
 			this.constraints = constraints;
             this.struts = struts;
@@ -106,6 +116,10 @@ namespace CryoLib {
 			// Get the monetaryIncentive
 			navigator.MoveToNext("monetaryIncentive","");
 			monetaryIncentive = navigator.ValueAsDouble;
+
+            // Get the heat leak
+            navigator.MoveToNext("heatLeak", "");
+            heatLeak = navigator.ValueAsDouble;
 
 			navigator.MoveToNext("images","");
 			problemImageCollection = new ProblemImageCollection(navigator.Clone());

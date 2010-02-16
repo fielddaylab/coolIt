@@ -194,6 +194,7 @@
         </s:sequence>
         <s:attribute name="Name" type="s:string" />
         <s:attribute name="ID" type="s:int" use="required" />
+        <s:attribute name="HeatLeak" type="s:double" use="required" />
       </s:complexType>
       <s:complexType name="ArrayOfConstraint">
         <s:sequence>
@@ -236,7 +237,6 @@
         </s:sequence>
         <s:attribute name="ID" type="s:string" />
         <s:attribute name="SupportMode" type="tns:SupportMode" use="required" />
-        <s:attribute name="HeatLeak" type="s:double" use="required" />
       </s:complexType>
       <s:simpleType name="SupportMode">
         <s:restriction base="s:string">

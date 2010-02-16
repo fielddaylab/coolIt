@@ -1414,8 +1414,6 @@ namespace DesktopClient.CoolIt_Service {
         
         private SupportMode supportModeField;
         
-        private double heatLeakField;
-        
         /// <remarks/>
         public Constraint[] Constraints {
             get {
@@ -1445,17 +1443,6 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.supportModeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public double HeatLeak {
-            get {
-                return this.heatLeakField;
-            }
-            set {
-                this.heatLeakField = value;
             }
         }
     }
@@ -1498,6 +1485,8 @@ namespace DesktopClient.CoolIt_Service {
         private string nameField;
         
         private int idField;
+        
+        private double heatLeakField;
         
         /// <remarks/>
         public string Description {
@@ -1588,6 +1577,17 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public double HeatLeak {
+            get {
+                return this.heatLeakField;
+            }
+            set {
+                this.heatLeakField = value;
             }
         }
     }

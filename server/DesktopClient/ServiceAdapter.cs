@@ -241,6 +241,7 @@ namespace DesktopClient {
 			answer.Name = rawProblem.Name;
 			answer.Description = rawProblem.Description;
 			answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
+            answer.HeatLeak = rawProblem.HeatLeak;
             answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
 			answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
             answer.Struts = convertStrutCollection(rawProblem.Struts);
@@ -266,7 +267,6 @@ namespace DesktopClient {
                 Strut st = new Strut();
                 st.ID = strut.ID;
                 st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
-                st.HeatLeak = strut.HeatLeak;
                 st.Constraints = convertConstraintCollection(strut.Constraints);
 
                 strutCol.Add(st);
