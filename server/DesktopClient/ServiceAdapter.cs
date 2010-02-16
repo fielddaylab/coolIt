@@ -259,12 +259,12 @@ namespace DesktopClient {
             return constraints;
         }
 
-        private StrutCollection convertStrutCollection(DesktopClient.CoolIt_Service.Strut[] rawStrutCollection)
+        private StrutTypeCollection convertStrutCollection(DesktopClient.CoolIt_Service.Strut[] rawStrutCollection)
         {
-            StrutCollection strutCol = new StrutCollection();
+            StrutTypeCollection strutCol = new StrutTypeCollection();
             foreach (DesktopClient.CoolIt_Service.Strut strut in rawStrutCollection)
             {
-                Strut st = new Strut();
+                StrutType st = new StrutType();
                 st.ID = strut.ID;
                 st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
                 st.Constraints = convertConstraintCollection(strut.Constraints);

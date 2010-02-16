@@ -13,7 +13,7 @@ namespace CryoLib {
 		private double monetaryIncentive;
         private double heatLeak;
 		private ConstraintCollection constraints;
-        private StrutCollection struts;
+        private StrutTypeCollection struts;
         private CoolerCollection coolers;
 		private ProblemImageCollection problemImageCollection;
 		private bool solved;
@@ -54,7 +54,7 @@ namespace CryoLib {
 			set { constraints = value; }
 		}
 
-        public StrutCollection Struts
+        public StrutTypeCollection Struts
         {
             get { return struts; }
             set { struts = value; }
@@ -84,7 +84,7 @@ namespace CryoLib {
                         double heatLeak,
 						ProblemImageCollection imageCollection,
 						ConstraintCollection constraints,
-                        StrutCollection struts,
+                        StrutTypeCollection struts,
                         CoolerCollection coolers)
 		{
 			this.name = name;
@@ -128,7 +128,7 @@ namespace CryoLib {
             this.constraints = new ConstraintCollection(navigator.Clone());
 
             //Get the strut list
-            this.struts = new StrutCollection(navigator.Clone());
+            this.struts = new StrutTypeCollection(navigator.Clone());
 
             //Get the cooler list
             this.coolers = new CoolerCollection(navigator.Clone());

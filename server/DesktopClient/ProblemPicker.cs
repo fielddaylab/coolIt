@@ -197,7 +197,7 @@ namespace DesktopClient {
         {
             if (dgStruts.SelectedRows.Count > 0)
             {
-                Strut selectedRow = (Strut)dgStruts.SelectedRows[0].DataBoundItem;
+                StrutType selectedRow = (StrutType)dgStruts.SelectedRows[0].DataBoundItem;
                 loadConstraintsInGridView(this.dgStrutConstraint, selectedRow.Constraints);
             }
         }

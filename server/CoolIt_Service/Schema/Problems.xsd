@@ -79,7 +79,7 @@ Temp: degrees K (K)
       <xs:element name="heatLeak" type="xs:double"/>   
       <xs:element name="images" type="ImageCollectionType"/>
       <xs:element name="constraints" type="ConstraintCollectionType"/>
-      <xs:element name="struts" type="StrutCollectionType"/>
+      <xs:element name="strutTypes" type="StrutTypeCollectionType"/>
       <xs:element name="coolers" type="CoolerCollectionType"/>
     </xs:sequence>
   </xs:complexType>
@@ -98,9 +98,9 @@ Temp: degrees K (K)
       <xs:element name="constraints" type="ConstraintCollectionType"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="StrutCollectionType">
+  <xs:complexType name="StrutTypeCollectionType">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="strut" type="StrutType"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="strutType" type="StrutType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CoolerType">

@@ -6,9 +6,9 @@ using System.Xml.XPath;
 using System.Xml.Schema;
 
 namespace CryoLib {
-	public class StrutCollection : List<Strut> {
+	public class StrutTypeCollection : List<StrutType> {
 
-        public Strut this[string name] {
+        public StrutType this[string name] {
 			get {
 				for (int i = 0; i < Count; i++) {
 					if (this[i].ID == name) {
@@ -20,25 +20,25 @@ namespace CryoLib {
 			}
 		}
 
-        public StrutCollection()
+        public StrutTypeCollection()
         {
 
         }
 
-        public StrutCollection(XPathNavigator navigator)
+        public StrutTypeCollection(XPathNavigator navigator)
         {
-            if (!navigator.MoveToNext("struts", ""))
+            if (!navigator.MoveToNext("strutTypes", ""))
             {
                 throw new Exception("XML Parsing error");
             }
-            if (!navigator.MoveToChild("strut", ""))
+            if (!navigator.MoveToChild("strutType", ""))
             {
                 throw new Exception("XML Parsing error");
             }
 
             do
             {
-                Strut strut = new Strut(navigator.Clone());
+                StrutType strut = new StrutType(navigator.Clone());
                 this.Add(strut);
             } while (navigator.MoveToNext());
         }

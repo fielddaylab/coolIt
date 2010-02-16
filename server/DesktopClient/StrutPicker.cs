@@ -16,8 +16,8 @@ namespace DesktopClient {
 		private double maxCrossSection = 0.1;
 		const int TRACKBAR_RANGE = 1000;
 
-        private StrutCollection struts = new StrutCollection();
-        private Strut selectedStrut = null;
+        private StrutTypeCollection struts = new StrutTypeCollection();
+        private StrutType selectedStrut = null;
 
 		public StrutPicker( SimulatorStub simulator ) {
 			InitializeComponent();
@@ -54,7 +54,7 @@ namespace DesktopClient {
         /**
          * The properties of the struts that are defined in the problem
          **/
-        public StrutCollection Struts
+        public StrutTypeCollection Struts
         {
             get
             {
@@ -79,9 +79,9 @@ namespace DesktopClient {
 		}
 
         //TODO:  Need to handle this properly with the new picker
-		public Strut Strut {
+		public StrutType Strut {
 			get {
-				return new Strut(getLength(), getCrossSection(), (Material)materialsListBox.SelectedItem);
+				return new StrutType(getLength(), getCrossSection(), (Material)materialsListBox.SelectedItem);
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace DesktopClient {
 
         private void cbStruts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedStrut = (Strut)cbStruts.SelectedItem;
+            selectedStrut = (StrutType)cbStruts.SelectedItem;
 
             updateControlsByStrut();
         }

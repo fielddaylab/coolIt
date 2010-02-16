@@ -30,7 +30,7 @@ namespace DesktopClient {
 		/// <param name="coolerPicker"></param>
 		public void SetControllers( StrutPicker strutPicker, CoolerPicker coolerPicker ) {
 			// Set initial cooler and strut choices into the simulator
-			Strut strut = strutPicker.Strut;
+			StrutType strut = strutPicker.Strut;
 			CoolerType cooler = coolerPicker.Cooler;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
 			webServiceAdapter.SetCooler(cooler.Name, coolerPicker.PowerFactor);
@@ -98,7 +98,7 @@ namespace DesktopClient {
 		/// <param name="sender">The StrucPicker which generated this event</param>
 		/// <param name="e">(unused)</param>
 		void handle_StrutChangedEvent(object sender, EventArgs e) {
-			Strut strut = ((StrutPicker)sender).Strut;
+			StrutType strut = ((StrutPicker)sender).Strut;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
 			simulate();
 		}

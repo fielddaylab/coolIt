@@ -42,7 +42,7 @@ namespace Version_02_App {
 		/// return it.
 		/// </summary>
 		/// <returns>The selected strut</returns>
-		private Strut getStrut() {
+		private StrutType getStrut() {
 			double length, crossSection;
 
 			try {
@@ -63,7 +63,7 @@ namespace Version_02_App {
 				throw new ArgumentException("Invalid strut cross section", e);
 			}
 
-			return new Strut( length, crossSection, (Material)materialsListBox.SelectedItem );
+			return new StrutType( length, crossSection, (Material)materialsListBox.SelectedItem );
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace Version_02_App {
 		/// </summary>
 		/// <param name="strut"></param>
 		/// <param name="cooler"></param>
-		private void simulate( Strut strut, CoolerType cooler ) {
+		private void simulate( StrutType strut, CoolerType cooler ) {
 			Cursor savedCursor = this.Cursor;
 			try {
 				this.Cursor = Cursors.WaitCursor;
@@ -102,7 +102,7 @@ namespace Version_02_App {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void simulateButton_Click(object sender, EventArgs e) {
-			Strut strut;
+			StrutType strut;
 			CoolerType cooler;
 			answerBox.Text = "";
 			try {

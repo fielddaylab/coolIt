@@ -6,7 +6,7 @@ using System.Xml.XPath;
 using System.Xml.Serialization;
 
 namespace CryoLib {
-	public class Strut {
+	public class StrutType {
         const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
         const double DEFAULT_MAX_STRUT_LENGTH = 10.0;
         const double DEFAULT_MIN_STRUT_CROSS_SECTION = 0.001;
@@ -120,7 +120,7 @@ namespace CryoLib {
         /**
          * Parameterless constructor is necessary for serialization
          **/
-        public Strut()
+        public StrutType()
         {
 
         }
@@ -129,7 +129,7 @@ namespace CryoLib {
          * Constructor used within the UI to set user selected values
          * This may go away depending on UI changes?
          **/
-        public Strut(double length, double crossSectionalArea, Material material) {
+        public StrutType(double length, double crossSectionalArea, Material material) {
 			this.length = length;
 			this.crossSectionalArea = crossSectionalArea;
 			this.material = material;
@@ -138,7 +138,7 @@ namespace CryoLib {
         /**
          * Constructor used to load the strut from a problem definition
          **/
-        public Strut( XPathNavigator navigator ) {
+        public StrutType( XPathNavigator navigator ) {
 			// Get the ID
 			navigator.MoveToChild("ID", "");
 			this.ID = navigator.Value;
@@ -164,7 +164,7 @@ namespace CryoLib {
 
 		public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("Strut ID: {0}\n", this.strutID);
+            sb.AppendFormat("Strut Type ID: {0}\n", this.strutID);
 			sb.AppendFormat("Length: {0}\n", length);
 			sb.AppendFormat("CrossSectionalArea: {0}\n", crossSectionalArea);
             if (material != null)
