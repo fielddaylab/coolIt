@@ -2,13 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using log4net;
+
 namespace CryoLib {
 	public class Optimizer {
 		private CoolerTypeCollection coolers;
 		private MaterialsCollection materials;
 		public static SteadyStateSimulator steadyStateSim;
 
+        private static readonly log4net.ILog _logger
+            = log4net.LogManager.GetLogger(
+                    System.Reflection.MethodBase.GetCurrentMethod()
+                     .DeclaringType);
+
 		static Optimizer() {
+            _logger.Debug("Spinning up SteadyStateSimulator");
 			steadyStateSim = new SteadyStateSimulator();
 		}
 
@@ -18,8 +26,11 @@ namespace CryoLib {
 		/// <param name="coolers">The collection of available coolers</param>
 		/// <param name="materials">The collection of available materials</param>
 		public Optimizer( CoolerTypeCollection coolers, MaterialsCollection materials ) {
+            _logger.Debug("Intializing Optimizer");
 			this.coolers = coolers;
+            _logger.DebugFormat("{0} coolers loaded", coolers.Count);
 			this.materials = materials;
+            _logger.DebugFormat("{0} materials loaded", materials.Count);
 		}
 
 		/// <summary>

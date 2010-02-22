@@ -5,14 +5,25 @@ using MathWorks.MATLAB.NET.Utility;
 using MathWorks.MATLAB.NET.Arrays;
 using SteadyStateSim;
 
+using log4net;
+
 namespace CryoLib {
 	public class SteadyStateSimulator {
 		protected SteadyStateSim.SteadyStateSim matlabSim;
 
+        private static readonly log4net.ILog _logger
+        = log4net.LogManager.GetLogger(
+                System.Reflection.MethodBase.GetCurrentMethod()
+                 .DeclaringType);
+
 		public SteadyStateSimulator() {
 			try {
+                _logger.Debug("Loading SteadyStateSim.SteadyStateSim");
 				matlabSim = new SteadyStateSim.SteadyStateSim();
+                _logger.Debug("SteadyStateSim loading successful");
 			} catch (Exception ex) {
+                _logger.Debug("Exception thrown loading SteadyStateSim.SteadyStateSim");
+                _logger.ErrorFormat("Exception {0} Inner Exception {1}", ex.Message, ex.InnerException);
 				throw ex;
 			}
 		}

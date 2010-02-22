@@ -15,6 +15,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Text;
 
+using log4net;
+
 namespace CoolIt_Service {
 	/// <summary>
 	/// Summary description for Service1
@@ -36,10 +38,19 @@ namespace CoolIt_Service {
 		private static Optimizer optimizer;
 		private static API api;
 
+        private static readonly log4net.ILog _logger
+            = log4net.LogManager.GetLogger(
+                    System.Reflection.MethodBase.GetCurrentMethod()
+                     .DeclaringType);
+
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		public CoolIt_Service() {
+            //log4net.Config.XmlConfigurator.Configure();
+
+            _logger.Debug("Spinning up web service");
+
 			if (sim == null) {
 				init();
 			}
@@ -55,12 +66,14 @@ namespace CoolIt_Service {
 			string dataDir = request.MapPath("Data");
 			string schemaDir = request.MapPath("Schema");
 
+            _logger.Debug("Loading SpecificPower.xml");
 			string specificPowerDataFile = Path.Combine(dataDir, "SpecificPower.xml");
 			string specificPowerSchemaFile = Path.Combine(schemaDir, "SpecificPower.xsd");
 			specificPowerData = new SpecificPowerDataManager(specificPowerDataFile, specificPowerSchemaFile);
 
 			inputPowerCalc = new InputPowerCalculator(specificPowerData.Data);
 
+            _logger.Debug("Loading Coolers.xml");
 			string coolerDataFile = Path.Combine(dataDir, "Coolers.xml");
 			string coolerSchemaFile = Path.Combine(schemaDir, "Coolers.xsd");
 			coolers = new CoolerTypeCollection(coolerDataFile, coolerSchemaFile );
@@ -68,22 +81,31 @@ namespace CoolIt_Service {
 				c.InputPowerCalculator = inputPowerCalc;
 			}
 
+            _logger.Debug("Loading Materials.xml");
 			string materialsDataFile = Path.Combine(dataDir, "Materials.xml");
 			string materialsSchemaFile = Path.Combine(schemaDir, "Materials.xsd");
 			materials = new MaterialsCollection(materialsDataFile, materialsSchemaFile);
 
+            _logger.Debug("Loading Problems.xml");
 			string problemsDataFile = Path.Combine(dataDir, "Problems.xml");
 			string problemsSchemaFile = Path.Combine(schemaDir, "Problems.xsd");
 			problems = new ProblemCollection(problemsDataFile, problemsSchemaFile);
+            _logger.DebugFormat("{0} problems loaded", problems.Count);
 
+            _logger.Debug("Loading MathGates.xml");
 			string mathGateDataFile = Path.Combine(dataDir, "MathGates.xml");
 			string mathGateSchemaFile = Path.Combine(schemaDir, "MathGates.xsd");
 			mathGates = new MathGateCollection(mathGateDataFile, mathGateSchemaFile);
+            _logger.DebugFormat("{0} math gates loaded", mathGates.Count);
 
+            _logger.Debug("Initializing Optimizer");
             optimizer = new Optimizer(coolers, materials);
+            _logger.Debug("Initializaing SolutionChecker");
             solutionChecker = new SolutionChecker(problems);
 
+            _logger.Debug("Initializaing SteadyStateSimulator");
 			sim = new SteadyStateSimulator();
+            _logger.Debug("Initializing API");
 			api = new API();
 		}
 
@@ -129,6 +151,7 @@ namespace CoolIt_Service {
 
 		[WebMethod]
 		public MyAssemblyInfo CryolibVersion() {
+            _logger.Debug("In CryolibVersion");
 			return new MyAssemblyInfo();
 		}
 
