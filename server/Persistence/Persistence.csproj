@@ -68,10 +68,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="P_Cooler.cs" />
+    <Compile Include="P_CoolerState.cs" />
     <Compile Include="P_Episode.cs" />
     <Compile Include="P_Material.cs" />
     <Compile Include="P_Problem.cs" />
-    <Compile Include="P_State.cs" />
+    <Compile Include="P_ProblemState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="P_StrutState.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="P_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,7 +128,11 @@
     <EmbeddedResource Include="P_Episode.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="P_State.hbm.xml" />
+    <EmbeddedResource Include="P_ProblemState.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="P_CoolerState.hbm.xml" />
+    <EmbeddedResource Include="P_StrutState.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

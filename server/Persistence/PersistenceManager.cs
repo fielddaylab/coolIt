@@ -50,15 +50,22 @@ namespace Persistence {
 			materialList = ListAllMaterials();
 		}
 
+        public void UpdateDatabase()
+        {
+            NHibernate.Tool.hbm2ddl.SchemaUpdate schemaUpdater = new NHibernate.Tool.hbm2ddl.SchemaUpdate(cfg);
+            schemaUpdater.Execute(true, true);
+        }
+
 		private object chooseRandom(object[] list) {
 			int i = rand.Next() % list.Length;
 			return list[i];
 		}
 
-		public P_State RandomState() {
-			P_State answer = P_State.RandomState();
-			answer.Cooler = (P_Cooler)chooseRandom(coolerList);
-			answer.Material = (P_Material)chooseRandom(materialList);
+		public P_ProblemState RandomState() {
+			P_ProblemState answer = P_ProblemState.RandomState();
+            //TODO:  Add strut, cooler, material back in
+            //answer.Cooler = (P_Cooler)chooseRandom(coolerList);
+            //answer.Material = (P_Material)chooseRandom(materialList);
 			return answer;
 		}
 

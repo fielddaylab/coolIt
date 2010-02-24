@@ -145,7 +145,7 @@ namespace Persistence {
 		/// </summary>
 		/// <param name="user"></param>
 		/// <param name="state"></param>
-		public void SetState(int userId, P_State state) {
+		public void SetState(int userId, P_ProblemState state) {
 			ISession session = null;
 			ITransaction transaction = null;
 			try {
@@ -187,12 +187,18 @@ namespace Persistence {
 				criterion.Add(Expression.Eq("Name", rawState.materialName));
 				P_Material material = criterion.UniqueResult<P_Material>();
 
-				P_State state = new P_State(rawState.length, rawState.crossSection, rawState.powerFactor, rawState.inputPower, rawState.cost, rawState.stressLimit, rawState.temperature, rawState.isValidSolution);
-				state.Cooler = cooler;
-				state.Material = material;
+				P_ProblemState state = new P_ProblemState(rawState.powerFactor, rawState.cost, rawState.stressLimit, rawState.temperature, rawState.isValidSolution);
+
+                P_StrutState strutState = new P_StrutState(rawState.crossSection, rawState.length, state);
+                strutState.Material = material;
+
+                P_CoolerState coolerState = new P_CoolerState(rawState.inputPower, state);
+                coolerState.Cooler = cooler;
 
 				user.OpenEpisode.AddState(state);
 				session.Save(state);
+                session.Save(strutState);
+                session.Save(coolerState);
 
 				transaction.Commit();
 			} catch {
@@ -270,8 +276,8 @@ namespace Persistence {
 			return answer;
 		}
 
-		public P_State[] ListStates(P_Episode episode) {
-			P_State[] answer = null;
+		public P_ProblemState[] ListStates(P_Episode episode) {
+			P_ProblemState[] answer = null;
 
 			ISession session = null;
 			ITransaction transaction = null;
@@ -280,9 +286,9 @@ namespace Persistence {
 				transaction = session.BeginTransaction();
 
 				session.Lock(episode, LockMode.None);
-				answer = new P_State[episode.States.Count];
+				answer = new P_ProblemState[episode.States.Count];
 				int i = 0;
-				foreach (P_State s in episode.States) {
+				foreach (P_ProblemState s in episode.States) {
 					session.Update(s);
 					answer[i++] = s;
 				}

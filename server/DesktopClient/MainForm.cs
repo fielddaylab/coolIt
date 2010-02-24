@@ -88,12 +88,12 @@ namespace DesktopClient {
 				inputPowerBox.Text = "(undefined)";
 			}
 
-            //TODO:  Update this to handle multiple coolers
-            //if (challenge != null && curState.inputPower <= challenge.InputPowerLimit) {
+            //TODO:  Update this to handle multiple coolers - only works because current problems only have one
+            if (challenge != null && curState.inputPower <= challenge.Coolers[0].InputPowerLimit) {
 				inputPowerBox.ForeColor = Color.Green;
-            //} else {
-            //    inputPowerBox.ForeColor = Color.Red;
-            //}
+            } else {
+                inputPowerBox.ForeColor = Color.Red;
+            }
 
 			if (curState.stressLimit > 0.0) {
 				stressLimitTextBox.Text = string.Format("{0:F3}", curState.stressLimit);

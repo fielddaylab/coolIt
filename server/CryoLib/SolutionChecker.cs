@@ -15,11 +15,12 @@ namespace CryoLib {
 			Feedback answer = new Feedback();
 			Problem problem = problemCollection[state.problemName];
 
-            //TODO:  This is going to need to be updated to handle multiple struts
-            //if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
-            //    answer.Text = "Internal Server Error";
-            //    answer.CutScreen = "";
-            //}
+            //TODO:  This is going to need to be updated to handle multiple struts - current work around works because all struts are identical
+            if (state.length < problem.Struts[0].MinStrutLength || state.length > problem.Struts[0].MaxStrutLength)
+            {
+                answer.Text = "Internal Server Error";
+                answer.CutScreen = "";
+            }
 
 			// If any constraint is violated, the answer is not valid.  We give feedback based on the
 			// "most important" constraint violated.  The importance is coded into the enumeration values for
@@ -82,17 +83,30 @@ namespace CryoLib {
 		public bool CheckSolution(State state) {
 			Problem problem = problemCollection[state.problemName];
 
-            //TODO:  Update this to handle multiple struts
-            //if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
-            //    return false;
-            //}
+            //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
+            if (state.length < problem.Struts[0].MinStrutLength || state.length > problem.Struts[0].MaxStrutLength)
+            {
+                return false;
+            }
 
-            //TODO:  Update this to handle multiple struts
+            //TODO:  Update this to handle strut and cooler constraints more gracefully and in the right priority
 			foreach (Constraint constraint in problem.Constraints) {
 				if (!checkConstraint(constraint, state)) {
 					return false;
 				}
 			}
+            //TODO:  Update to handle multiple struts  - current work around works because all struts are identical
+            foreach (Constraint constraint in problem.Struts[0].Constraints)
+            {
+                if (!checkConstraint(constraint, state))
+                    return false;
+            }
+            //TODO:  Update to handle multiple coolers - works because current problems only have one
+            foreach (Constraint constraint in problem.Coolers[0].Constraints)
+            {
+                if (!checkConstraint(constraint, state))
+                    return false;
+            }
 			return true;
 		}
 

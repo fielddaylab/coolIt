@@ -16,7 +16,7 @@ namespace TestDriver {
 		private API api;
 		private P_User[] users;
 		private P_Episode[] episodes;
-		private P_State[] states;
+		private P_ProblemState[] states;
 		private int curUser;
 		private int curProblem;
 		private DataGridViewCell cell = new DataGridViewTextBoxCell();
@@ -103,7 +103,7 @@ namespace TestDriver {
 
 		private void updateStates(P_Episode episode) {
 			if (episode == null) {
-				states = new P_State[0];
+				states = new P_ProblemState[0];
 			} else {
 				states = api.ListStates(episode);
 			}
@@ -111,7 +111,15 @@ namespace TestDriver {
 		}
 
 		private void initDbButton_Click(object sender, EventArgs e) {
-			pm.InitDatabase();
+            try
+            {
+                pm.InitDatabase();
+                lblDBSuccess.Text = "Database initialization successful";
+            }
+            catch (Exception ex)
+            {
+                lblDBSuccess.Text = "Error initializing database " + ex.Message;
+            }
 			initProblemsListBox();
 			updateUsers();
 		}
@@ -163,7 +171,7 @@ namespace TestDriver {
 				MessageBox.Show("You must select a problem before you can set a state");
 				return;
 			}
-			P_State state = pm.RandomState();
+			P_ProblemState state = pm.RandomState();
 			api.SetState(curUser, state);
 			updateUsers();
 			
@@ -189,5 +197,18 @@ namespace TestDriver {
 			}
 
 		}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pm.UpdateDatabase();
+                lblDBSuccess.Text = "Database update successful";
+            }
+            catch (Exception ex)
+            {
+                lblDBSuccess.Text = "Error updating database " + ex.Message;
+            }
+        }
 	}
 }

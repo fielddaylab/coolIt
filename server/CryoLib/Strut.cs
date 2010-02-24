@@ -74,7 +74,6 @@ namespace CryoLib {
         /// <summary>
         /// Convenience property - to make life easier.
         /// </summary>
-        //TODO:  Fix these and getConstraint method
         public double MinStrutLength
         {
             get

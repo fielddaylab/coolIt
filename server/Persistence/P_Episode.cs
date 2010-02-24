@@ -36,7 +36,7 @@ namespace Persistence {
 			set { user = value; }
 		}
 
-		public virtual void AddState(P_State state) {
+		public virtual void AddState(P_ProblemState state) {
 			if (!isOpen) {
 				throw new Exception("Attempt to add new state to a closed Episode");
 			}

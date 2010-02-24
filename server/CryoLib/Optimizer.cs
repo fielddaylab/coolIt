@@ -171,48 +171,60 @@ namespace CryoLib {
 
 				// The strut(s) must be strong enough to support the load.  Figure out what the minimum cross section
 				// is.  This is the cross section for each strut.
-                //TODO:  Fix this to include support number as it should now that it is moved to a strut property
+
+                //TODO:  This will change with multiple strut types
                 //strutCrossSection = strengthRequirement / m.yieldStrength / problem.SupportNumber;
-                strutCrossSection = strengthRequirement / m.yieldStrength;
+                strutCrossSection = strengthRequirement / m.yieldStrength / problem.Struts.Count;
 				strutCrossSection *= 1.00001;	// add tiny bit to avoid precision problems when comparing later
-                //TODO:  Fix this to include support number as it should now that it is moved to a strut property
+
+                //TODO:  This will change with multiple strut types
                 //double calcStrength = m.yieldStrength * strutCrossSection * problem.SupportNumber;
-                double calcStrength = m.yieldStrength * strutCrossSection;
+                double calcStrength = m.yieldStrength * strutCrossSection * problem.Struts.Count;
 				if (calcStrength < strengthRequirement) {
 					throw new Exception("We have a math precision problem here");
 				}
 
 				// If the material is not strong enough to support the load given the maximum cross section
 				// specified in the problem, it's not feasible
-                //TODO:  Update this to handle multiple struts
+                //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
                 //if (strutCrossSection > problem.MaxStrutCrossSection) {
-                //    feasible = false;
-                //    return;
-                //}
+                if (strutCrossSection > problem.Struts[0].MaxStrutCrossSection) {
+                    feasible = false;
+                    return;
+                }
 
 				// If the material is so strong that a cross section less than the minimum specified can support the
 				// load, we have to adjust the cross section to the minimum specified.
-                //TODO:  Update this to handle multiple struts
+                //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
                 //if (strutCrossSection < problem.MinStrutCrossSection) {
                 //    strutCrossSection = problem.MinStrutCrossSection;
                 //}
+                if (strutCrossSection < problem.Struts[0].MinStrutCrossSection)
+                {
+                    strutCrossSection = problem.Struts[0].MinStrutCrossSection;
+                }
 
 				// Need to determine the maximum power factor which will result in an input power that meets
 				// the problem constraints.  We will always use the maximum power factor which does not violate
 				// our input power constraint as we are only optimizing our cost to build (not operating costs).
-                //TODO:  Update this to handle multiple coolers
+                //TODO:  Update this to handle multiple coolers - current work around works because only one cooler
                 //coolerPowerFactor = c.maxPowerFactor(problem.InputPowerLimit, targetTemp);
                 //double actualInputPower = c.InputPower(targetTemp, coolerPowerFactor);
                 //if (actualInputPower > problem.InputPowerLimit) {
                 //    throw new Exception("Error in maxPowerFactor calculation");
                 //}
+                coolerPowerFactor = c.maxPowerFactor(problem.Coolers[0].InputPowerLimit, targetTemp);
+                double actualInputPower = c.InputPower(targetTemp, coolerPowerFactor);
+                if (actualInputPower > problem.Coolers[0].InputPowerLimit) {
+                    throw new Exception("Error in maxPowerFactor calculation");
+                }
 
 
 				// Given the cooler, material, cross section, target temperature, and power factor, we can calculate the
 				// minimum strut length which will allow us to reach that temperature.
                 //TODO:  Fix this to handle support number coming from list of struts
                 //strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * problem.SupportNumber, m, c, coolerPowerFactor);
-                strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * 1, m, c, coolerPowerFactor);
+                strutLength = Optimizer.steadyStateSim.strutLength(targetTemp, strutCrossSection * problem.Struts.Count, m, c, coolerPowerFactor);
 
 				// If the Matlab code cannot come up with a minimum strut length, the mateial is not feasible
 				// given the other parameters.
@@ -223,24 +235,25 @@ namespace CryoLib {
 
 				// If reaching the target temperature requires a longer strut than the maximum length specified,
 				// the material is not feasible.
-                //TODO:  Update this to handle multiple struts
-                //if (strutLength > problem.MaxStrutLength ) {
-                //    feasible = false;
-                //    return;
-                //}
+                //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
+                if (strutLength > problem.Struts[0].MaxStrutLength)
+                {
+                    feasible = false;
+                    return;
+                }
 
 				// If we can reach the target temperature with a strut shorter than the minimum, we still have to
 				// use a strut that meets the minimum length requirement.
-                //TODO:  Update this to handle multiple struts
-                //if ( strutLength < problem.MinStrutLength) {
-                //    strutLength = problem.MinStrutLength;
+                //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
+                if ( strutLength < problem.Struts[0].MinStrutLength) {
+                    strutLength = problem.Struts[0].MinStrutLength;
 					// Now that we have adjusted the strutLength to be longer, we'll reach a colder temperature.
 					// It could be that we are now below the min temp for which we have data on our strut material.
 					double steadyStateTemp;
 					try {
                         //TODO:  Fix this to use support number
                         //steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, coolerPowerFactor );
-                        steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * 1, material, cooler, coolerPowerFactor);
+                        steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.Struts.Count, material, cooler, coolerPowerFactor);
 					} catch (ArgumentException) {
 						steadyStateTemp = -1;
 					}
@@ -249,13 +262,12 @@ namespace CryoLib {
 						// Here we reduce the power factor enough to get the temperature back in range.
 						coolerPowerFactor = MaxPowerFactor(0.0, coolerPowerFactor, minThermalData, problem);
 					}
-                //}
+                }
 				
 				// OK, we have a feasible solution - figure out what it's going to cost.
 				feasible = true;
                 //TODO:  Fix this to use support number
-                //double strutVolume = strutCrossSection * strutLength * problem.SupportNumber;
-                double strutVolume = strutCrossSection * strutLength * 1;
+                double strutVolume = strutCrossSection * strutLength * problem.Struts.Count;
 				double strutCost = m.price * strutVolume;
 				solutionCost = c.price + strutCost;
 			}
@@ -266,7 +278,7 @@ namespace CryoLib {
 				try {
                     //TODO:  Fix this to use support number
                     //steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.SupportNumber, material, cooler, avg);
-                    steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * 1, material, cooler, avg);
+                    steadyStateTemp = Optimizer.steadyStateSim.simulate(strutLength, strutCrossSection * problem.Struts.Count, material, cooler, avg);
 				} catch (ArgumentException) {
 					steadyStateTemp = -1;
 				}

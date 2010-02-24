@@ -21,7 +21,7 @@
 		/>
 		<set name="States">
 			<key column="episodeId"/>
-			<one-to-many class="Persistence.P_State, Persistence"/>
+			<one-to-many class="Persistence.P_ProblemState, Persistence"/>
 		</set>
 	</class>
 </hibernate-mapping>
