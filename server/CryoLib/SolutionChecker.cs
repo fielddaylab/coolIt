@@ -11,15 +11,19 @@ namespace CryoLib {
 			this.problemCollection = problemCollection;
 		}
 
-		public Feedback GetFeedback(State state, Solution optimalSolution ) {
+		public Feedback GetFeedback(Problem state, Solution optimalSolution ) {
 			Feedback answer = new Feedback();
-			Problem problem = problemCollection[state.problemName];
 
-            //TODO:  This is going to need to be updated to handle multiple struts - current work around works because all struts are identical
-            if (state.length < problem.Struts[0].MinStrutLength || state.length > problem.Struts[0].MaxStrutLength)
+            //TODO:  This can potentially be loaded directly from state
+			Problem problem = problemCollection[state.Name];
+
+            foreach (StrutType strut in state.Struts)
             {
-                answer.Text = "Internal Server Error";
-                answer.CutScreen = "";
+                if (strut.Length < strut.MinStrutLength || strut.Length > strut.MaxStrutLength)
+                {
+                    answer.Text = "Internal Server Error";
+                    answer.CutScreen = "";
+                }
             }
 
 			// If any constraint is violated, the answer is not valid.  We give feedback based on the
@@ -68,7 +72,7 @@ namespace CryoLib {
 			// If we get here, the answer is valid.  We need to compare the answer with the optimal to give
 			// feedback.
 			answer.CutScreen = problem.ImageCollection.Success;
-			int percentDiff = (int)Math.Round( (state.cost - optimalSolution.Cost) / optimalSolution.Cost * 100 );
+			int percentDiff = (int)Math.Round( (state.Cost - optimalSolution.Cost) / optimalSolution.Cost * 100 );
 			if (percentDiff <= 5) {
 				answer.Text = string.Format(
 					"Congratulations. Your solution is valid and costs within {0}% of the optimal solution. Great Job!", percentDiff);
@@ -80,13 +84,16 @@ namespace CryoLib {
 			return answer;
 		}
 
-		public bool CheckSolution(State state) {
-			Problem problem = problemCollection[state.problemName];
+		public bool CheckSolution(Problem state) {
+			Problem problem = problemCollection[state.Name];
 
             //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
-            if (state.length < problem.Struts[0].MinStrutLength || state.length > problem.Struts[0].MaxStrutLength)
+            foreach (StrutType strut in state.Struts)
             {
-                return false;
+                if (strut.Length < strut.MinStrutLength || strut.Length > strut.MaxStrutLength)
+                {
+                    return false;
+                }
             }
 
             //TODO:  Update this to handle strut and cooler constraints more gracefully and in the right priority
@@ -110,26 +117,28 @@ namespace CryoLib {
 			return true;
 		}
 
-		private bool checkConstraint(Constraint constraint, State state) {
+		private bool checkConstraint(Constraint constraint, Problem state) {
 			double valueToCheck;
 			switch (constraint.Value) {
 				case VALUE.COST:
-					valueToCheck = state.cost;
+					valueToCheck = state.Cost;
 					break;
 				case VALUE.FORCE_LIMIT:
-					valueToCheck = state.stressLimit;
+					valueToCheck = state.StressLimit;
 					break;
 				case VALUE.INPUT_POWER:
-					valueToCheck = state.inputPower;
+					valueToCheck = state.Coolers[0].InputPower;
 					break;
 				case VALUE.TEMP:
-					valueToCheck = state.temperature;
+					valueToCheck = state.Temperature;
 					break;
 				case VALUE.STRUT_LENGTH:
-					valueToCheck = state.length;
+                    //TODO:  Handle multiple struts -this only works becaue currently they are all the same
+					valueToCheck = state.Struts[0].Length;
 					break;
 				case VALUE.STRUT_CROSS_SECTION:
-					valueToCheck = state.crossSection;
+                    //TODO:  Handle multiple struts -this only works becaue currently they are all the same
+					valueToCheck = state.Struts[0].CrossSectionalArea;
 					break;
 				default:
 					throw new Exception("Unknown VALUE type in constraint");

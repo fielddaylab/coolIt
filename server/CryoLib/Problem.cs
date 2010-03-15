@@ -16,9 +16,16 @@ namespace CryoLib {
         private StrutTypeCollection struts;
         private CoolerCollection coolers;
 		private ProblemImageCollection problemImageCollection;
-		private bool solved;
 
-		[XmlAttribute]
+        #region State Properties
+        private bool solved;
+        public double Temperature { get; set; }
+        public double PowerFactor { get; set; }
+        public double Cost { get; set; }
+        public double StressLimit { get; set; }
+        #endregion
+
+        [XmlAttribute]
 		public string Name {
 			get { return name; }
 			set { name = value; }
@@ -154,7 +161,11 @@ namespace CryoLib {
 		/// No-argument (default) constructor.
 		/// </summary>
 		public Problem() {
-			name = "(no such problem)";
+            //name = "(no such problem)";
+            this.constraints = new ConstraintCollection();
+            this.problemImageCollection = new ProblemImageCollection();
+            this.struts = new StrutTypeCollection();
+            this.coolers = new CoolerCollection();
 		}
 
 		public override string ToString() {

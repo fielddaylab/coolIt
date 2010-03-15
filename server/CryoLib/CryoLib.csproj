@@ -36,7 +36,7 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CoolIt_Service\bin\log4net.dll</HintPath>
+      <HintPath>..\..\..\shared\nhibernate\Required_Bins\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MWArray, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -80,7 +80,6 @@
     <Compile Include="InputPowerCalculator.cs" />
     <Compile Include="SolutionChecker.cs" />
     <Compile Include="SpecificPowerDataManager.cs" />
-    <Compile Include="State.cs" />
     <Compile Include="SteadyStateSimulator.cs" />
     <Compile Include="Strut.cs">
       <SubType>Code</SubType>

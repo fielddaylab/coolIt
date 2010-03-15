@@ -231,9 +231,6 @@
     <None Include="Web References\CoolIt_Service\Solution.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\CoolIt_Service\State.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WebReferenceUrl Include="http://localhost:58801/CoolIt_Service.asmx">

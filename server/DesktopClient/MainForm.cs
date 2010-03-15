@@ -18,7 +18,7 @@ namespace DesktopClient {
 		private ServiceAdapter coolItWebService;
 		private Problem challenge;
 		private double bankBalance = 1500.0;
-		private State curState;
+		private Problem curState;
 		private MathGate[] mathGates;
 		const double ZERO = 0.0;
 
@@ -70,37 +70,40 @@ namespace DesktopClient {
 		void handle_SimulationChangedEvent(object sender, EventArgs e) {
 			curState = ((SimulatorStub)sender).State;
 
-			if (curState.temperature >= 0.0) {
-				temperatureBox.Text = curState.temperature.ToString("F2");
+			if (curState.Temperature >= 0.0) {
+				temperatureBox.Text = curState.Temperature.ToString("F2");
 			} else {
 				temperatureBox.Text = "(undefined)";
 			}
-			if (challenge != null && curState.temperature <= challenge.TargetTemperature) {
+			if (challenge != null && curState.Temperature <= challenge.TargetTemperature) {
 				temperatureBox.ForeColor = Color.Green;
 			} else {
 				temperatureBox.ForeColor = Color.Red;
 			}
 
-			costBox.Text = curState.cost.ToString("C");
-			if (curState.inputPower >= 0.0) {
-				inputPowerBox.Text = curState.inputPower.ToString("F2");
+			costBox.Text = curState.Cost.ToString("C");
+
+            //TODO:  Fix to handle multiple coolers
+			if (curState.Coolers[0].InputPower >= 0.0) {
+				inputPowerBox.Text = curState.Coolers[0].InputPower.ToString("F2");
 			} else {
 				inputPowerBox.Text = "(undefined)";
 			}
 
             //TODO:  Update this to handle multiple coolers - only works because current problems only have one
-            if (challenge != null && curState.inputPower <= challenge.Coolers[0].InputPowerLimit) {
+            if (challenge != null && curState.Coolers[0].InputPower <= challenge.Coolers[0].InputPowerLimit)
+            {
 				inputPowerBox.ForeColor = Color.Green;
             } else {
                 inputPowerBox.ForeColor = Color.Red;
             }
 
-			if (curState.stressLimit > 0.0) {
-				stressLimitTextBox.Text = string.Format("{0:F3}", curState.stressLimit);
+			if (curState.StressLimit > 0.0) {
+				stressLimitTextBox.Text = string.Format("{0:F3}", curState.StressLimit);
 			} else {
 				stressLimitTextBox.Text = "(unknown)";
 			}
-			if (challenge != null && curState.stressLimit >= challenge.StrengthRequirement) {
+			if (challenge != null && curState.StressLimit >= challenge.StrengthRequirement) {
 				stressLimitTextBox.ForeColor = Color.Green;
 			} else {
 				stressLimitTextBox.ForeColor = Color.Red;
@@ -221,7 +224,7 @@ namespace DesktopClient {
 			FeedbackViewer fv = new FeedbackViewer(ServiceAdapter.ImageBaseUrl, challenge.ImageCollection.BaseURI);
 			fv.Show(feedback);
 
-			if (curState.isValidSolution) {
+			if (curState.Solved) {
 				if (!challenge.Solved) {
 					bankBalance += challenge.MonetaryIncentive;
 					bankBalanceTextBox.Text = bankBalance.ToString("C");

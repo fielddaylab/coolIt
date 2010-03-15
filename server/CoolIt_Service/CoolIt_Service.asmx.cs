@@ -47,7 +47,7 @@ namespace CoolIt_Service {
 		/// Constructor
 		/// </summary>
 		public CoolIt_Service() {
-            //log4net.Config.XmlConfigurator.Configure();
+            log4net.Config.XmlConfigurator.Configure();
 
             _logger.Debug("Spinning up web service");
 
@@ -198,23 +198,27 @@ namespace CoolIt_Service {
 
 		[WebMethod(EnableSession=true)]
 		public void SetStrut(string materialName, double length, double crossSection) {
-			setStrut(getState(), materialName, length, crossSection);
+            //TODO:  Update this to take a strut ID and update the appropriate one in the collection
+			setStrut(getState(), "1", materialName, length, crossSection);
 		}
 
-		private void setStrut(State state, string materialName, double length, double crossSection) {
-			state.materialName = materialName;
-			state.length = length;
-			state.crossSection = crossSection;
+		private void setStrut(Problem state, string strutID, string materialName, double length, double crossSection) {
+            StrutType strut = state.Struts[strutID];
+
+            strut.Material = (Material)materials[materialName];
+            strut.Length = length;
+            strut.CrossSectionalArea = crossSection;
 		}
 
 		[WebMethod(EnableSession=true)]
 		public void SetCooler(string name, double powerFactor) {
-			setCooler(getState(), name, powerFactor);
+            //TODO:  Update this to take a cooler ID and update the appropriate one in the collection
+			setCooler(getState(), "1", name, powerFactor);
 		}
 
-		private void setCooler(State state, string name, double powerFactor) {
-			state.coolerName = name;
-			state.powerFactor = powerFactor;
+		private void setCooler(Problem state, string coolerID, string name, double powerFactor) {
+            state.Coolers[coolerID].SelectedCooler = (CoolerType) coolers[name] ;
+			state.PowerFactor = powerFactor;
 		}
 			
 
@@ -223,17 +227,25 @@ namespace CoolIt_Service {
 			setProblem(getState(), name);
 		}
 
-		private bool setProblem(State state, string name) {
+		private bool setProblem(Problem state, string name) {
 			if (!requireLogin()) {
 				// Should not happen as we have anonymous session logins in place
 				throw new Exception("Should never happen");
 				//return false;
 			}
-			Problem p = problems[name];
-			state.problemName = name;
 
-            state.numStruts = p.Struts.Count;
-			api.SetProblem((int)Session["userId"], name);
+            //Set only the state variables, do not override those loaded from the problem
+            Problem p = problems[name];
+            state.Name = p.Name;
+            state.ID = p.ID;
+            state.Description = p.Description;
+            state.MonetaryIncentive = p.MonetaryIncentive;
+            state.HeatLeak = p.HeatLeak;
+            state.Constraints = p.Constraints;
+            state.Struts = p.Struts;
+            state.Coolers = p.Coolers;
+
+            api.SetProblem((int)Session["userId"], name);
 			persistState(state);
 			return true;
 		}
@@ -278,19 +290,21 @@ namespace CoolIt_Service {
 		/// Check to see that the so-called optimal solution is at least valid
 		/// </summary>The proposed optimal solution to be checked</param>
 		private void sanityCheckOptimalSolution(Solution solution) {
-			State state = new State();
+			Problem state = new Problem();
 			setProblem(state, solution.ProblemName);
-			setCooler(state, solution.CoolerName, solution.CoolerPowerFactor);
-			setStrut(state, solution.MaterialName, solution.StrutLength, solution.StrutCrossSection);
+            //TODO:  remove hardcoded ID
+			setCooler(state, solution.CoolerName, "1", solution.CoolerPowerFactor);
+            //TODO:  remove hardcoded ID
+			setStrut(state, "1", solution.MaterialName, solution.StrutLength, solution.StrutCrossSection);
 			run(state);
-			if( !state.isValidSolution ) {
+			if( !state.Solved ) {
 				throw new Exception("Calculated optimal solution is not valid");
 			}
 		}
 
 
 		[WebMethod(EnableSession = true)]
-		public State Run() {
+		public Problem Run() {
 			return run( getState() );
 		}
 
@@ -307,42 +321,56 @@ namespace CoolIt_Service {
 			return true;
 		}
 
-		private State run( State state ) {
+		private Problem run( Problem state ) {
 			if (!requireLogin()) {
 				// Should not happen as we have anonymous session login's in place
 				throw new Exception("This should never happen");
 				//return null;
 			}
 
-			CoolerType cooler = (CoolerType)coolers[state.coolerName];
-			cooler.InputPowerCalculator = inputPowerCalc;
-			Material material = (Material)materials[state.materialName];
-			double combinedCrossSection = state.numStruts * state.crossSection;
-			state.cost = cooler.price +  state.length * combinedCrossSection * material.price;
-			state.stressLimit = material.yieldStrength * combinedCrossSection;
+            //TODO:  Handle multiple coolers
+            CoolerType cooler = state.Coolers[0].SelectedCooler;
+            //Set cooler to the first one in the list by default if no cooler is set
+            if (cooler == null) cooler = (CoolerType) coolers[0];
+            cooler.InputPowerCalculator = inputPowerCalc;
+
+            //Set material to the default if no material is set
+            //TODO:  Handle multiple struts
+            if (state.Struts[0].Material == null) state.Struts[0].Material = (CryoLib.Material) materials[0];
+	
+            //TODO:  Change to handle multiple struts
+            //TODO:  how do you handle the number of struts once they might be different?
+			double combinedCrossSection = state.Struts[0].Count * state.Struts[0].CrossSectionalArea;
+			state.Cost = cooler.price +  state.Struts[0].Length * combinedCrossSection * state.Struts[0].Material.price;
+			state.StressLimit = state.Struts[0].Material.yieldStrength * combinedCrossSection;
 
 			// If temperature goes below known range for the given material the MATLAB code will generate an
 			// ApplicationException.  In that case we set temperature and inputPower to impossible values.  UI
 			// code can detect this and generate an appropriate message for the user.
 			try {
-				state.temperature = sim.simulate(state.length, combinedCrossSection, material, cooler, state.powerFactor);
-				state.inputPower = cooler.InputPower(state.temperature, state.powerFactor);
-			} catch (ArgumentException) {
-				state.temperature = -1;
-				state.inputPower = -1;
+                //TODO:  Change to handle multiple struts
+				state.Temperature = sim.simulate(state.Struts[0].Length, combinedCrossSection, state.Struts[0].Material, cooler, state.PowerFactor);
+                //TODO:  Change to handle multiple coolers
+                state.Coolers[0].InputPower = cooler.InputPower(state.Temperature, state.PowerFactor);
+			} catch (ArgumentException ae) {
+                _logger.DebugFormat("MATLAB has thrown an exception {0} with temp {1} and power factor {2}", ae.Message, state.Temperature, state.PowerFactor);
+
+                state.Temperature = -1;
+                state.Coolers[0].InputPower = -1;
 			}
 
-			if (state.problemName != null) {
-				state.isValidSolution = solutionChecker.CheckSolution(state);
+			if (state.Name != null) {
+				state.Solved = solutionChecker.CheckSolution(state);
 				persistState(state);
 			} else {
-				state.isValidSolution = false;
+				state.Solved = false;
 			}
 			return state;
 		}
 
-		private void persistState(State state) {
-			if (state.coolerName == null || state.materialName == null ) {
+		private void persistState(Problem state) {
+            //TODO:  Should there be better error logging, or just not persist anything?
+			if (state.Coolers.Count == 0 || state.Coolers[0].SelectedCooler == null || state.Struts.Count == 0 || state.Struts[0].Material == null ) {
 				return;
 			}
 
@@ -351,21 +379,15 @@ namespace CoolIt_Service {
 
 		[WebMethod(EnableSession = true)]
 		public Feedback GetFeedback() {
-			State state = getState();
+			Problem state = getState();
 			Solution optSolution = findOptimalSolution(state);
 			Feedback answer = solutionChecker.GetFeedback(state,optSolution);
 			return answer;
 		}
 
-		private Solution findOptimalSolution(State state) {
-			foreach (Problem p in problems) {
-				if (p.Name == state.problemName) {
-					Optimizer opt = new Optimizer(coolers, materials);
-					return opt.OptimalSoultion(p);
-				}
-			}
-			string msg = string.Format("Unknown problem name ({0})", state.problemName);
-			throw new Exception(msg);
+		private Solution findOptimalSolution(Problem state) {
+			Optimizer opt = new Optimizer(coolers, materials);
+			return opt.OptimalSoultion(state);
 		}
 
 		/// <summary>
@@ -442,22 +464,31 @@ namespace CoolIt_Service {
 		/// N.B. Web Methods which call this method MUST have Session enabled.
 		/// </summary>
 		/// <returns></returns>
-		private State getState() {
+		private Problem getState() {
 			if (Session.IsNewSession || Session["State"] == null) {
 				initState();
 			}
-			State state = (State)Session["State"];
+			Problem state = (Problem)Session["State"];
 			return state;
 		}
 
 		private void initState() {
-			State state = new State();
-			state.powerFactor = 1.0;
-			state.coolerName = coolers[0].Name;
-			state.length = 0.1;
-			state.crossSection = 0.001;
-			state.materialName = materials[0].Name;
-			Session["State"] = state;
+			Problem state = new Problem();
+			state.PowerFactor = 1.0;
+
+            Cooler defaultCooler = new Cooler();
+            defaultCooler.SelectedCooler = (CoolerType) coolers[0];
+            defaultCooler.ID = "1";
+            defaultCooler.InputPower = 0;
+            state.Coolers.Add(defaultCooler);
+
+            //TODO:  Create a problem with a single strut by default?
+            StrutType defaultStrut = new StrutType(0.1, 0.001, ((Material)materials[0]));
+            defaultStrut.ID = "1";
+            defaultStrut.Count = 1;
+            state.Struts.Add(defaultStrut);
+
+            Session["State"] = state;
 		}
 	}
 }

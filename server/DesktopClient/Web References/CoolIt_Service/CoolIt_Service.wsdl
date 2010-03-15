@@ -184,10 +184,14 @@
       </s:complexType>
       <s:complexType name="Problem">
         <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Temperature" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PowerFactor" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StressLimit" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
-          <s:element minOccurs="0" maxOccurs="1" name="Struts" type="tns:ArrayOfStrut" />
+          <s:element minOccurs="0" maxOccurs="1" name="Struts" type="tns:ArrayOfStrutType" />
           <s:element minOccurs="0" maxOccurs="1" name="Coolers" type="tns:ArrayOfCooler" />
           <s:element minOccurs="0" maxOccurs="1" name="ImageCollection" type="tns:ProblemImageCollection" />
           <s:element minOccurs="1" maxOccurs="1" name="Solved" type="s:boolean" />
@@ -226,15 +230,19 @@
           <s:enumeration value="NE" />
         </s:restriction>
       </s:simpleType>
-      <s:complexType name="ArrayOfStrut">
+      <s:complexType name="ArrayOfStrutType">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Strut" nillable="true" type="tns:Strut" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StrutType" nillable="true" type="tns:StrutType" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="Strut">
+      <s:complexType name="StrutType">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CrossSectionalArea" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="tns:Material" />
         </s:sequence>
+        <s:attribute name="Count" type="s:int" use="required" />
         <s:attribute name="ID" type="s:string" />
         <s:attribute name="SupportMode" type="tns:SupportMode" use="required" />
       </s:complexType>
@@ -252,6 +260,8 @@
       <s:complexType name="Cooler">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
+          <s:element minOccurs="1" maxOccurs="1" name="InputPower" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedCooler" type="tns:CoolerType" />
         </s:sequence>
         <s:attribute name="ID" type="s:string" />
       </s:complexType>
@@ -393,26 +403,10 @@
       <s:element name="RunResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="RunResult" type="tns:State" />
+            <s:element minOccurs="0" maxOccurs="1" name="RunResult" type="tns:Problem" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="State">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="temperature" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="numStruts" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="coolerName" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="inputPower" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="cost" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="stressLimit" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="problemName" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="isValidSolution" type="s:boolean" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="GetFeedback">
         <s:complexType />
       </s:element>
@@ -438,7 +432,7 @@
       <s:element name="ArrayOfDataPoint" nillable="true" type="tns:ArrayOfDataPoint" />
       <s:element name="ArrayOfSolution" nillable="true" type="tns:ArrayOfSolution" />
       <s:element name="string" nillable="true" type="s:string" />
-      <s:element name="State" nillable="true" type="tns:State" />
+      <s:element name="Problem" nillable="true" type="tns:Problem" />
       <s:element name="Feedback" nillable="true" type="tns:Feedback" />
     </s:schema>
     <s:schema targetNamespace="http://www.wisc.edu/doit/ls/coolit/AbstractTypes">
@@ -640,7 +634,7 @@
   </wsdl:message>
   <wsdl:message name="RunHttpGetIn" />
   <wsdl:message name="RunHttpGetOut">
-    <wsdl:part name="Body" element="tns:State" />
+    <wsdl:part name="Body" element="tns:Problem" />
   </wsdl:message>
   <wsdl:message name="GetFeedbackHttpGetIn" />
   <wsdl:message name="GetFeedbackHttpGetOut">
@@ -724,7 +718,7 @@
   </wsdl:message>
   <wsdl:message name="RunHttpPostIn" />
   <wsdl:message name="RunHttpPostOut">
-    <wsdl:part name="Body" element="tns:State" />
+    <wsdl:part name="Body" element="tns:Problem" />
   </wsdl:message>
   <wsdl:message name="GetFeedbackHttpPostIn" />
   <wsdl:message name="GetFeedbackHttpPostOut">

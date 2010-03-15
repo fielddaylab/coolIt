@@ -53,6 +53,7 @@ namespace DesktopClient {
 			providers.Add(new ServiceProvider("debug", "http://localhost:58801/CoolIt_Service.asmx"));
 			providers.Add(new ServiceProvider("localhost", "http://localhost/CoolIt_Service/CoolIt_Service.asmx"));
 			providers.Add(new ServiceProvider("atswindev", "http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx"));
+            providers.Add(new ServiceProvider("atswindev 2.0", "http://atswindev.doit.wisc.edu/CoolIt_Service_2/CoolIt_Service.asmx"));
 		}
 		public static List<ServiceProvider> Providers {
 			get { return providers; }
@@ -164,25 +165,13 @@ namespace DesktopClient {
 			webService.SetStrut(materialName, length, crossSection);
 		}
 
-		public State Run() {
-			DesktopClient.CoolIt_Service.State rawState = webService.Run();
+		public Problem Run() {
+			DesktopClient.CoolIt_Service.Problem rawState = webService.Run();
 			if (rawState == null) {
 				return null;
 			}
-			State answer = new State();
-			answer.coolerName = rawState.coolerName;
-			answer.numStruts = rawState.numStruts;
-			answer.crossSection = rawState.crossSection;
-			answer.length = rawState.length;
-			answer.materialName = rawState.materialName;
-			answer.powerFactor = rawState.powerFactor;
-			answer.temperature = rawState.temperature;
-			answer.cost = rawState.cost;
-			answer.inputPower = rawState.inputPower;
-			answer.stressLimit = rawState.stressLimit;
-			answer.isValidSolution = rawState.isValidSolution;
-			answer.problemName = rawState.problemName;
-			return answer;
+
+            return convertProblem(rawState);
 		}
 
 
@@ -237,36 +226,58 @@ namespace DesktopClient {
 		/// <param name="rawProblem">Problem in format provided by web service</param>
 		/// <returns>Converted Problem object</returns>
 		private Problem convertProblem(DesktopClient.CoolIt_Service.Problem rawProblem) {
+            
 			Problem answer = new Problem();
-			answer.Name = rawProblem.Name;
-			answer.Description = rawProblem.Description;
-			answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
-            answer.HeatLeak = rawProblem.HeatLeak;
-            answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
-			answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
-            answer.Struts = convertStrutCollection(rawProblem.Struts);
-            answer.Coolers = convertCoolerCollection(rawProblem.Coolers);
+            if (rawProblem != null)
+            {
+                answer.Name = rawProblem.Name;
+                answer.Description = rawProblem.Description;
+                answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
+                answer.HeatLeak = rawProblem.HeatLeak;
+                answer.Temperature = rawProblem.Temperature;
+                //answer.Solved = rawProblem.Solved;
+                //answer.PowerFactor = rawProblem.PowerFactor;
+                //answer.Cost = rawProblem.Cost;
+                //answer.StressLimit = rawProblem.StressLimit;
+                answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
+                answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
+                answer.Struts = convertStrutCollection(rawProblem.Struts);
+                answer.Coolers = convertCoolerCollection(rawProblem.Coolers);
+            }
 			return answer;
 		}
 
         private ConstraintCollection convertConstraintCollection(DesktopClient.CoolIt_Service.Constraint[] rawCollection)
         {
             ConstraintCollection constraints = new ConstraintCollection();
-            for (int j = 0; j < rawCollection.Length; j++)
+            if (rawCollection != null)
             {
-                constraints.Add(convertConstraint(rawCollection[j]));
+                for (int j = 0; j < rawCollection.Length; j++)
+                {
+                    constraints.Add(convertConstraint(rawCollection[j]));
+                }
             }
             return constraints;
         }
 
-        private StrutTypeCollection convertStrutCollection(DesktopClient.CoolIt_Service.Strut[] rawStrutCollection)
+        private StrutTypeCollection convertStrutCollection(DesktopClient.CoolIt_Service.StrutType[] rawStrutCollection)
         {
             StrutTypeCollection strutCol = new StrutTypeCollection();
-            foreach (DesktopClient.CoolIt_Service.Strut strut in rawStrutCollection)
+            foreach (DesktopClient.CoolIt_Service.StrutType strut in rawStrutCollection)
             {
                 StrutType st = new StrutType();
                 st.ID = strut.ID;
                 st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
+                st.Length = strut.Length;
+                st.CrossSectionalArea = strut.CrossSectionalArea;
+                if (strut.Material != null && strut.Material.Name != null)
+                {
+                    st.Material = findMaterial(strut.Material.Name);
+                }
+                else
+                {
+                    st.Material = materials[0];
+                }
                 st.Constraints = convertConstraintCollection(strut.Constraints);
 
                 strutCol.Add(st);
@@ -281,6 +292,8 @@ namespace DesktopClient {
             {
                 Cooler cool = new Cooler();
                 cool.ID = cooler.ID;
+                cool.InputPower = cooler.InputPower;
+                //cool.SelectedCooler = findCooler(cooler.SelectedCooler.Name);
                 cool.Constraints = convertConstraintCollection(cooler.Constraints);
 
                 coolCol.Add(cool);
@@ -302,9 +315,12 @@ namespace DesktopClient {
 
 		private PickerImageCollection convertPickerImageCollection(DesktopClient.CoolIt_Service.PickerImageCollection rawCollection) {
 			PickerImageCollection answer = new PickerImageCollection();
-			answer.BaseName = rawCollection.BaseName;
-			answer.Length = rawCollection.Length;
-			answer.Width = rawCollection.Width;
+            if (rawCollection != null)
+            {
+                answer.BaseName = rawCollection.BaseName;
+                answer.Length = rawCollection.Length;
+                answer.Width = rawCollection.Width;
+            }
 			return answer;
 		}
 

@@ -611,9 +611,9 @@ namespace DesktopClient.CoolIt_Service {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/Run", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public State Run() {
+        public Problem Run() {
             object[] results = this.Invoke("Run", new object[0]);
-            return ((State)(results[0]));
+            return ((Problem)(results[0]));
         }
         
         /// <remarks/>
@@ -778,159 +778,6 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.cutScreenField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public partial class State {
-        
-        private double temperatureField;
-        
-        private int numStrutsField;
-        
-        private double lengthField;
-        
-        private double crossSectionField;
-        
-        private string materialNameField;
-        
-        private double powerFactorField;
-        
-        private string coolerNameField;
-        
-        private double inputPowerField;
-        
-        private double costField;
-        
-        private double stressLimitField;
-        
-        private string problemNameField;
-        
-        private bool isValidSolutionField;
-        
-        /// <remarks/>
-        public double temperature {
-            get {
-                return this.temperatureField;
-            }
-            set {
-                this.temperatureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int numStruts {
-            get {
-                return this.numStrutsField;
-            }
-            set {
-                this.numStrutsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double length {
-            get {
-                return this.lengthField;
-            }
-            set {
-                this.lengthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double crossSection {
-            get {
-                return this.crossSectionField;
-            }
-            set {
-                this.crossSectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string materialName {
-            get {
-                return this.materialNameField;
-            }
-            set {
-                this.materialNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double powerFactor {
-            get {
-                return this.powerFactorField;
-            }
-            set {
-                this.powerFactorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string coolerName {
-            get {
-                return this.coolerNameField;
-            }
-            set {
-                this.coolerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double inputPower {
-            get {
-                return this.inputPowerField;
-            }
-            set {
-                this.inputPowerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double cost {
-            get {
-                return this.costField;
-            }
-            set {
-                this.costField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double stressLimit {
-            get {
-                return this.stressLimitField;
-            }
-            set {
-                this.stressLimitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string problemName {
-            get {
-                return this.problemNameField;
-            }
-            set {
-                this.problemNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isValidSolution {
-            get {
-                return this.isValidSolutionField;
-            }
-            set {
-                this.isValidSolutionField = value;
             }
         }
     }
@@ -1278,6 +1125,10 @@ namespace DesktopClient.CoolIt_Service {
         
         private Constraint[] constraintsField;
         
+        private double inputPowerField;
+        
+        private CoolerType selectedCoolerField;
+        
         private string idField;
         
         /// <remarks/>
@@ -1287,6 +1138,26 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.constraintsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double InputPower {
+            get {
+                return this.inputPowerField;
+            }
+            set {
+                this.inputPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public CoolerType SelectedCooler {
+            get {
+                return this.selectedCoolerField;
+            }
+            set {
+                this.selectedCoolerField = value;
             }
         }
         
@@ -1406,188 +1277,17 @@ namespace DesktopClient.CoolIt_Service {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public partial class Strut {
+    public partial class CoolerType : CryoObject {
         
-        private Constraint[] constraintsField;
-        
-        private string idField;
-        
-        private SupportMode supportModeField;
+        private DataPoint[] cPMField;
         
         /// <remarks/>
-        public Constraint[] Constraints {
+        public DataPoint[] CPM {
             get {
-                return this.constraintsField;
+                return this.cPMField;
             }
             set {
-                this.constraintsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public SupportMode SupportMode {
-            get {
-                return this.supportModeField;
-            }
-            set {
-                this.supportModeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public enum SupportMode {
-        
-        /// <remarks/>
-        COMPRESSION,
-        
-        /// <remarks/>
-        TENSION,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public partial class Problem {
-        
-        private string descriptionField;
-        
-        private double monetaryIncentiveField;
-        
-        private Constraint[] constraintsField;
-        
-        private Strut[] strutsField;
-        
-        private Cooler[] coolersField;
-        
-        private ProblemImageCollection imageCollectionField;
-        
-        private bool solvedField;
-        
-        private string nameField;
-        
-        private int idField;
-        
-        private double heatLeakField;
-        
-        /// <remarks/>
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double MonetaryIncentive {
-            get {
-                return this.monetaryIncentiveField;
-            }
-            set {
-                this.monetaryIncentiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Constraint[] Constraints {
-            get {
-                return this.constraintsField;
-            }
-            set {
-                this.constraintsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Strut[] Struts {
-            get {
-                return this.strutsField;
-            }
-            set {
-                this.strutsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Cooler[] Coolers {
-            get {
-                return this.coolersField;
-            }
-            set {
-                this.coolersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ProblemImageCollection ImageCollection {
-            get {
-                return this.imageCollectionField;
-            }
-            set {
-                this.imageCollectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Solved {
-            get {
-                return this.solvedField;
-            }
-            set {
-                this.solvedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public double HeatLeak {
-            get {
-                return this.heatLeakField;
-            }
-            set {
-                this.heatLeakField = value;
+                this.cPMField = value;
             }
         }
     }
@@ -1747,17 +1447,285 @@ namespace DesktopClient.CoolIt_Service {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public partial class CoolerType : CryoObject {
+    public partial class StrutType {
         
-        private DataPoint[] cPMField;
+        private Constraint[] constraintsField;
+        
+        private double lengthField;
+        
+        private double crossSectionalAreaField;
+        
+        private Material materialField;
+        
+        private int countField;
+        
+        private string idField;
+        
+        private SupportMode supportModeField;
         
         /// <remarks/>
-        public DataPoint[] CPM {
+        public Constraint[] Constraints {
             get {
-                return this.cPMField;
+                return this.constraintsField;
             }
             set {
-                this.cPMField = value;
+                this.constraintsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Length {
+            get {
+                return this.lengthField;
+            }
+            set {
+                this.lengthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double CrossSectionalArea {
+            get {
+                return this.crossSectionalAreaField;
+            }
+            set {
+                this.crossSectionalAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Material Material {
+            get {
+                return this.materialField;
+            }
+            set {
+                this.materialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Count {
+            get {
+                return this.countField;
+            }
+            set {
+                this.countField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public SupportMode SupportMode {
+            get {
+                return this.supportModeField;
+            }
+            set {
+                this.supportModeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
+    public enum SupportMode {
+        
+        /// <remarks/>
+        COMPRESSION,
+        
+        /// <remarks/>
+        TENSION,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
+    public partial class Problem {
+        
+        private double temperatureField;
+        
+        private double powerFactorField;
+        
+        private double costField;
+        
+        private double stressLimitField;
+        
+        private string descriptionField;
+        
+        private double monetaryIncentiveField;
+        
+        private Constraint[] constraintsField;
+        
+        private StrutType[] strutsField;
+        
+        private Cooler[] coolersField;
+        
+        private ProblemImageCollection imageCollectionField;
+        
+        private bool solvedField;
+        
+        private string nameField;
+        
+        private int idField;
+        
+        private double heatLeakField;
+        
+        /// <remarks/>
+        public double Temperature {
+            get {
+                return this.temperatureField;
+            }
+            set {
+                this.temperatureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double PowerFactor {
+            get {
+                return this.powerFactorField;
+            }
+            set {
+                this.powerFactorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Cost {
+            get {
+                return this.costField;
+            }
+            set {
+                this.costField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double StressLimit {
+            get {
+                return this.stressLimitField;
+            }
+            set {
+                this.stressLimitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double MonetaryIncentive {
+            get {
+                return this.monetaryIncentiveField;
+            }
+            set {
+                this.monetaryIncentiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Constraint[] Constraints {
+            get {
+                return this.constraintsField;
+            }
+            set {
+                this.constraintsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public StrutType[] Struts {
+            get {
+                return this.strutsField;
+            }
+            set {
+                this.strutsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Cooler[] Coolers {
+            get {
+                return this.coolersField;
+            }
+            set {
+                this.coolersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ProblemImageCollection ImageCollection {
+            get {
+                return this.imageCollectionField;
+            }
+            set {
+                this.imageCollectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Solved {
+            get {
+                return this.solvedField;
+            }
+            set {
+                this.solvedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public double HeatLeak {
+            get {
+                return this.heatLeakField;
+            }
+            set {
+                this.heatLeakField = value;
             }
         }
     }
@@ -2130,10 +2098,10 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
-        public State Result {
+        public Problem Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((State)(this.results[0]));
+                return ((Problem)(this.results[0]));
             }
         }
     }

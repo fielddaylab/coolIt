@@ -30,6 +30,13 @@ namespace CryoLib {
         }
         #endregion
 
+        #region state properties
+        public double InputPower { get; set; }
+
+        [XmlElement]
+        public CoolerType SelectedCooler { get; set; }
+        #endregion
+
         #region convenience properties - accessors to constraint values
         /// <summary>
         /// Convenience property - to make life easier.

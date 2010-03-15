@@ -13,7 +13,7 @@ namespace DesktopClient {
 
 		private Material[] materials;
 		private CoolerType[] coolers;
-		private State state;
+		private Problem state;
 		private SimulatorStub simulator;
 
 		public HeatLeakVisualizer( SimulatorStub simulator ) {
@@ -65,24 +65,18 @@ namespace DesktopClient {
 
 		private double updateCoolingPower() {
 			state = simulator.State;
-			CoolerType cooler = null;
-			for (int i = 0; i < coolers.Length; i++) {
-				if (coolers[i].Name == state.coolerName) {
-					cooler = coolers[i];
-					break;
-				}
-			}
+			CoolerType cooler = state.Coolers[0].SelectedCooler;
 			if (cooler == null) {
-				string msg = string.Format("Can't find cooler \"{0}\"", state.coolerName);
-				throw new Exception(msg);
+				throw new Exception("No cooler selected");
 			}
 			double[] x = new double[2];
 			double[] y = new double[2];
+
 			double max = cooler.CPM[1].data;
-			x[0] = 300 - (300 - cooler.CPM[0].temp) * state.powerFactor;
+			x[0] = 300 - (300 - cooler.CPM[0].temp) * state.PowerFactor;
 			x[1] = 300;
 			for (int i = 0; i < 2; i++) {
-				y[i] = cooler.OutputPower(cooler.CPM[i].temp, state.powerFactor);
+				y[i] = cooler.OutputPower(cooler.CPM[i].temp, state.PowerFactor);
 			}
 
 
@@ -98,17 +92,9 @@ namespace DesktopClient {
 
 		private double updateHeatLeak() {
 			state = simulator.State;
-			Material material = null;
-			for (int i = 0; i < materials.Length; i++) {
-				if (materials[i].Name == state.materialName) {
-					material = materials[i];
-					break;
-				}
-			}
-			if (material == null) {
-				string msg = string.Format("Can't find material \"{0}\"", state.materialName);
-				throw new Exception(msg);
-			}
+
+            //TODO:  Handle multiple struts / which strut
+            Material material = state.Struts[0].Material;
 
 			List<DataPoint> materialData = material.IntegratedThermalConductivity;
 			if (materialData == null) {
@@ -122,12 +108,15 @@ namespace DesktopClient {
 			for (int i = 0; i < materialData.Count; i++) {
 				x[i] = materialData[i].temp;
 				double thermalConductivity = materialData[i].data;
-				double crossSectionalArea = state.crossSection;
+                //TODO:  Fix this to handle multiple struts
+				double crossSectionalArea = state.Struts[0].CrossSectionalArea;
 				double deltaT = 300.0 - materialData[i].temp;
-				double length = state.length;
+                //TODO:  fix this to handle multipl struts
+				double length = state.Struts[0].Length;
 				//double heatLeak = thermalConductivity * crossSectionalArea * deltaT / length;
 				double heatLeak = thermalConductivity * crossSectionalArea / length;
-				heatLeak *= state.numStruts;
+                //TODO:  Fix this to handle multiple struts
+				heatLeak *= state.Struts[0].Count;
 				y[i] = heatLeak;
 				if (y[i] > max) {
 					max = y[i];

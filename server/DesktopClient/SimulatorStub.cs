@@ -6,7 +6,7 @@ using CryoLib;
 namespace DesktopClient {
 	public class SimulatorStub {
 		protected ServiceAdapter webServiceAdapter;
-		protected State state;
+		protected Problem state;
 
 		public event EventHandler SimulationChangedEvent;
 
@@ -71,7 +71,7 @@ namespace DesktopClient {
 		/// <summary>
 		/// Return the current state of the simulation - read only.
 		/// </summary>
-		public State State {
+		public Problem State {
 			get { return state; }
 		}
 

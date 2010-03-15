@@ -51,21 +51,25 @@ namespace CryoLib {
         #endregion
 
         #region user selected properties, set in the UI
-        private double length;
+        private double length = 0.1;
         private double crossSectionalArea;
         private Material material;
 
         public double Length
         {
             get { return length; }
+            set { length = value; }
         }
 
 		public double CrossSectionalArea {
 			get { return crossSectionalArea; }
+            set { crossSectionalArea = value; }
 		}
 
+        [XmlElement]
 		public Material Material {
 			get { return material; }
+            set { material = value; }
         }
         #endregion
 
@@ -128,10 +132,19 @@ namespace CryoLib {
          * Constructor used within the UI to set user selected values
          * This may go away depending on UI changes?
          **/
-        public StrutType(double length, double crossSectionalArea, Material material) {
+        public StrutType(double length, double crossSectionalArea, Material material)
+        {
+            this.length = length;
+            this.crossSectionalArea = crossSectionalArea;
+            this.material = material;
+            this.Count = 1;
+        }
+
+        public StrutType(double length, double crossSectionalArea, Material material, int strutCount) {
 			this.length = length;
 			this.crossSectionalArea = crossSectionalArea;
 			this.material = material;
+            this.Count = strutCount;
 		}
 
         /**
