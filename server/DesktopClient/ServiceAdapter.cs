@@ -235,10 +235,10 @@ namespace DesktopClient {
                 answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
                 answer.HeatLeak = rawProblem.HeatLeak;
                 answer.Temperature = rawProblem.Temperature;
-                //answer.Solved = rawProblem.Solved;
-                //answer.PowerFactor = rawProblem.PowerFactor;
-                //answer.Cost = rawProblem.Cost;
-                //answer.StressLimit = rawProblem.StressLimit;
+                answer.Solved = rawProblem.Solved;
+                answer.PowerFactor = rawProblem.PowerFactor;
+                answer.Cost = rawProblem.Cost;
+                answer.StressLimit = rawProblem.StressLimit;
                 answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
                 answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
                 answer.Struts = convertStrutCollection(rawProblem.Struts);
