@@ -236,7 +236,7 @@ namespace CoolIt_Service {
 				//return false;
 			}
 
-            //Set only the state variables, do not override those loaded from the problem
+            //Load the problem, do not set state variables
             Problem p = problems[name];
             state.Name = p.Name;
             state.ID = p.ID;
@@ -247,7 +247,13 @@ namespace CoolIt_Service {
             state.Struts = p.Struts;
             state.Coolers = p.Coolers;
 
+            //Create an episode if one is not already creaed, and set foreign key to selected problem
             api.SetProblem((int)Session["userId"], name);
+
+            //Set the state variables to defaults
+            initState(state);
+
+            //Save problem, strut and cooler state to the database
 			persistState(state);
 			return true;
 		}
@@ -476,21 +482,55 @@ namespace CoolIt_Service {
 
 		private void initState() {
 			Problem state = new Problem();
-			state.PowerFactor = 1.0;
+            initState(state);
+		}
 
-            Cooler defaultCooler = new Cooler();
-            defaultCooler.SelectedCooler = (CoolerType) coolers[0];
-            defaultCooler.ID = "1";
-            defaultCooler.InputPower = 0;
-            state.Coolers.Add(defaultCooler);
+        /**
+         * Set defaults of the state variables into session
+         **/
+        private void initState(Problem state)
+        {
+            state.PowerFactor = 1.0;
 
-            //TODO:  Create a problem with a single strut by default?
-            StrutType defaultStrut = new StrutType(0.1, 0.001, ((Material)materials[0]));
-            defaultStrut.ID = "1";
-            defaultStrut.Count = 1;
-            state.Struts.Add(defaultStrut);
+            //If no cooler are set, add one by default
+            if (state.Coolers.Count == 0)
+            {
+                Cooler defaultCooler = new Cooler();
+                defaultCooler.SelectedCooler = (CoolerType)coolers[0];
+                defaultCooler.ID = "1";
+                defaultCooler.InputPower = 0;
+                state.Coolers.Add(defaultCooler);
+            }
+            //otherwise set default values for each cooler loaded by the problem
+            else
+            {
+                foreach (Cooler cool in state.Coolers)
+                {
+                    cool.SelectedCooler = (CoolerType)coolers[0];
+                    cool.InputPower = 0;
+                }
+            }
+
+            //If no struts are set, add one by default
+            if (state.Struts.Count == 0)
+            {
+                StrutType defaultStrut = new StrutType(0.1, 0.001, ((Material)materials[0]));
+                defaultStrut.ID = "1";
+                defaultStrut.Count = 1;
+                state.Struts.Add(defaultStrut);
+            }
+            //otherwise set default values for each strut loaded by the problem
+            else
+            {
+                foreach (StrutType strut in state.Struts)
+                {
+                    strut.Length = 0.1;
+                    strut.CrossSectionalArea = 0.001;
+                    strut.Material = (CryoLib.Material) materials[0];
+                }
+            }
 
             Session["State"] = state;
-		}
+        }
 	}
 }

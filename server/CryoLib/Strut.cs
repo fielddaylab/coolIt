@@ -52,7 +52,7 @@ namespace CryoLib {
 
         #region user selected properties, set in the UI
         private double length = 0.1;
-        private double crossSectionalArea;
+        private double crossSectionalArea = 0.001;
         private Material material;
 
         public double Length
