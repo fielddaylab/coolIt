@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Iesi.Collections;
 
 namespace Persistence {
 	public class P_ProblemState {
@@ -12,6 +13,20 @@ namespace Persistence {
 		private double temperature;
 		private bool isValidSolution;
 		private P_Episode episode;
+        private Iesi.Collections.ISet strutStates = new HashedSet();
+        private Iesi.Collections.ISet coolerStates = new HashedSet();
+
+        public virtual Iesi.Collections.ISet CoolerStates
+        {
+            get { return coolerStates; }
+            set { coolerStates = value; }
+        }
+
+        public virtual Iesi.Collections.ISet StrutStates
+        {
+            get { return strutStates; }
+            set { strutStates = value; }
+        }
 
 		public virtual int Id {
 			get { return id; }
@@ -78,6 +93,16 @@ namespace Persistence {
 			return new P_ProblemState(powerFactor, cost, stressLimit, temperature, isValidSolution);
 		}
 
+        public virtual void AddStrut(P_StrutState strut)
+        {
+            strut.ProblemState = this;
+            this.StrutStates.Add(strut);
+        }
 
+        public virtual void AddCooler(P_CoolerState cooler)
+        {
+            cooler.ProblemState = this;
+            this.CoolerStates.Add(cooler);
+        }
 	}
 }

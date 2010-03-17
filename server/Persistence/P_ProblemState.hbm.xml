@@ -17,6 +17,13 @@
 				  not-null="true"
 				  cascade="all"
 		/>
-
+    <set name="StrutStates" inverse="true" cascade="all">
+      <key column="problemId"/>
+      <one-to-many class="Persistence.P_StrutState, Persistence"/>
+    </set>
+    <set name="CoolerStates" inverse="true" cascade="all">
+      <key column="problemId"/>
+      <one-to-many class="Persistence.P_CoolerState, Persistence"/>
+    </set>
 	</class>
 </hibernate-mapping>

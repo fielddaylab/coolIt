@@ -16,6 +16,7 @@ namespace CryoLib {
                      .DeclaringType);
 
 		static Optimizer() {
+            log4net.Config.XmlConfigurator.Configure();
             _logger.Debug("Spinning up SteadyStateSimulator");
 			steadyStateSim = new SteadyStateSimulator();
 		}

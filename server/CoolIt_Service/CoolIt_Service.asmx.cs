@@ -80,11 +80,13 @@ namespace CoolIt_Service {
 			foreach (CoolerType c in coolers) {
 				c.InputPowerCalculator = inputPowerCalc;
 			}
+            _logger.DebugFormat("{0} coolers loaded", coolers.Count);
 
             _logger.Debug("Loading Materials.xml");
 			string materialsDataFile = Path.Combine(dataDir, "Materials.xml");
 			string materialsSchemaFile = Path.Combine(schemaDir, "Materials.xsd");
 			materials = new MaterialsCollection(materialsDataFile, materialsSchemaFile);
+            _logger.DebugFormat("{0} materials loaded", materials.Count);
 
             _logger.Debug("Loading Problems.xml");
 			string problemsDataFile = Path.Combine(dataDir, "Problems.xml");

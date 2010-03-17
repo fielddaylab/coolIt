@@ -183,41 +183,13 @@ namespace Persistence {
 
 				P_User user = session.Load<P_User>(userId);
 
-				P_ProblemState state = new P_ProblemState(rawState.PowerFactor, rawState.Cost, rawState.StressLimit, rawState.Temperature, rawState.Solved);
+                P_ProblemState state = LoadState(rawState, session);
 
-                P_StrutState[] strutStates = new P_StrutState[rawState.Struts.Count];
-                int i = 0;
-                foreach (StrutType strut in rawState.Struts)
-                {
-                    ICriteria criterion = session.CreateCriteria(typeof(P_Material));
-                    criterion.Add(Expression.Eq("Name", strut.Material.Name));
-                    P_Material material = criterion.UniqueResult<P_Material>();
-
-                    strutStates[i] = new P_StrutState(strut.CrossSectionalArea, strut.Length, state);
-                    strutStates[i].Material = material;
-                    i++;
-                }
-
-                P_CoolerState[] coolerStates = new P_CoolerState[rawState.Coolers.Count];
-                i = 0;
-                foreach (Cooler cool in rawState.Coolers)
-                {
-                    ICriteria criterion = session.CreateCriteria(typeof(P_Cooler));
-                    criterion.Add(Expression.Eq("Name", cool.SelectedCooler.Name));
-                    P_Cooler cooler = criterion.UniqueResult<P_Cooler>();
-
-                    coolerStates[i] = new P_CoolerState(cool.InputPower, state);
-                    coolerStates[i].Cooler = cooler;
-                    i++;
-                }
-				user.OpenEpisode.AddState(state);
-				session.Save(state);
-                session.Save(strutStates);
-                session.Save(coolerStates);
+                user.OpenEpisode.AddState(state);
+                session.Save(state);
 
 				transaction.Commit();
-			} catch (Exception ex) {
-                //_logger.ErrorFormat("Error Message: {0} Inner Exception: {3} Source: {2} Call Stack: {1}",ex.Message, ex.StackTrace, ex.Source, ex.InnerException);
+			} catch{
 				if (transaction != null) {
 					transaction.Rollback();
 					throw;
@@ -229,6 +201,34 @@ namespace Persistence {
 			}
 
 		}
+
+        private static P_ProblemState LoadState(Problem rawState, ISession session)
+        {
+            P_ProblemState state = new P_ProblemState(rawState.PowerFactor, rawState.Cost, rawState.StressLimit, rawState.Temperature, rawState.Solved);
+
+            foreach (StrutType strut in rawState.Struts)
+            {
+                ICriteria criterion = session.CreateCriteria(typeof(P_Material));
+                criterion.Add(Expression.Eq("Name", strut.Material.Name));
+                P_Material material = criterion.UniqueResult<P_Material>();
+
+                P_StrutState pstrut = new P_StrutState(strut.CrossSectionalArea, strut.Length, state);
+                pstrut.Material = material;
+                state.AddStrut(pstrut);
+            }
+
+            foreach (Cooler cool in rawState.Coolers)
+            {
+                ICriteria criterion = session.CreateCriteria(typeof(P_Cooler));
+                criterion.Add(Expression.Eq("Name", cool.SelectedCooler.Name));
+                P_Cooler cooler = criterion.UniqueResult<P_Cooler>();
+
+                P_CoolerState pcooler = new P_CoolerState(cool.InputPower, state);
+                pcooler.Cooler = cooler;
+                state.AddCooler(pcooler);
+            }
+            return state;
+        }
 
 		public P_User[] ListUsers() {
 			IList<P_User> users = null;
