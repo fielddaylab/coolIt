@@ -16,7 +16,7 @@
 	<property name="flashlib.dir" value="${lib.dir}/lsLib"/>
 	<property name="cairngorm.lib" value="${lib.dir}/lsLib/Cairngorm.swc" />
 	<property name="imagelist.lib" value="${lib.dir}/minesweeper_graphics" />
-	
+	<property name="panel.lib" value="${lib.dir}/lsLib/arc90flexlib.swc" />
 	
 	<!-- :::::: clean :::::: -->
 	<target name="clean">

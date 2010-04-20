@@ -8,7 +8,7 @@ Alert {
 }
 
 Application {
-	background-color: #FFFFFF;
+	background-color: #000000;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	padding-left: 0px;
@@ -37,6 +37,35 @@ Panel {
 	border-style: solid;
 	border-alpha: 1.0;
 	border-thickness: 1px;
+}
+
+.headerlessPanel
+{
+	paddingLeft: 3px;
+	paddingRight: 3px;
+	paddingTop: 3px;
+	paddingBottom: 3px;
+	gutterLeft: 0px;
+	gutterRight: 0px;
+	gutterTop: 0px;
+	gutterBottom: 0px;
+	borderThicknessLeft: 0; 
+	borderThicknessTop: 0; 
+	borderThicknessBottom: 0; 
+	borderThicknessRight: 0; 
+	headerHeight: 8; 
+} 
+
+.lowBorder
+{
+	paddingLeft: 3px;
+	paddingRight: 3px;
+	paddingTop: 3px;
+	paddingBottom: 3px;
+	gutterLeft: 0px;
+	gutterRight: 0px;
+	gutterTop: 0px;
+	gutterBottom: 0px;
 }
 
 .pickerInputBorder {
@@ -304,4 +333,21 @@ Panel {
 	fontSize: 30px;
 	color: red;
 	backgroundColor: #000000;
+}
+
+.meterLabelStyle
+{
+	fontWeight: bold;
+	fontSize: 9pt;
+	fontFamily: Tahoma,Arial,Helvetica,sans;
+	color: #202020;	
+}
+
+.meterRolloverStyle
+{
+	fontWeight: bold;
+	fontSize: 10pt;
+	fontFamily: Tahoma,Arial,Helvetica,sans;
+	color: #202020;
+	backgroundColor: #dfdfdf;	
 }

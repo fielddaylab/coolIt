@@ -72,7 +72,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		public function dispatchSetStrut(doRunSim_p:Boolean = false):void {
-			//send out a set cooler event with currently selected cooler
+			//send out a set strut event with currently selected strut
 			
 			if(cacheStream.length > 2) {
 				cacheStream.removeItemAt(0);

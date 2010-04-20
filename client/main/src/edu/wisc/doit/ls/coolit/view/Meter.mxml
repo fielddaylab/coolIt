@@ -11,7 +11,7 @@
 		private var invalidValue:Boolean = false;
 		private var _maximum:Number;
 		private var hasInit:Boolean = false;
-		
+
 		[Bindable] public var inRange:Boolean;
 		[Bindable] public var minimum:Number;
 		[Bindable] public function set value(value_p:Number):void {
@@ -49,6 +49,7 @@
 				meter.maximum = value_p;
 			}
 		}
+		
 		public function get maximum():Number { return _maximum; }
 		
 	]]></mx:Script>

@@ -2,6 +2,8 @@
 <view:JobScreenView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:flash="flash.filters.*" paddingLeft="0" paddingRight="0">
 	
+	<mx:GlowFilter id="effGlowFilter" color="0xffffff" strength="5" blurX="4" blurY="4" alpha="1.0"/>
+	
 	<mx:CurrencyFormatter id="usdFormatter" precision="2" 
         currencySymbol="$" decimalSeparatorFrom="."
         decimalSeparatorTo="." useNegativeSign="true" 
@@ -11,7 +13,6 @@
         decimalSeparatorFrom="."
         decimalSeparatorTo="." useNegativeSign="true" 
         useThousandsSeparator="true"/>
-	
 	
 	<mx:Canvas width="100%" height="100%" paddingLeft="0" paddingRight="0">
 		
@@ -41,6 +42,11 @@
 					<mx:Button id="checkConsultant" styleName="consultantButton" width="40" height="40" toolTip="Visit Consultant" />
 					<mx:Button id="replayButton" styleName="replayButton" width="40" height="40" toolTip="Replay Assembly Intro" />
 					<!-- <mx:Button id="helpButton" styleName="helpButton" width="40" height="40" toolTip="Help" /> -->
+
+					<mx:Spacer height="100%" />
+					<mx:Button id="supportsBtn" styleName="consultantButton" width="40" height="40" toolTip="Supports Properties" />
+					<mx:Button id="coolerBtn" styleName="consultantButton" width="40" height="40" toolTip="Cooler Properties" />
+
 					<mx:Spacer height="100%" />
 					<mx:Button id="chooseAnotherJob" styleName="switchButton" width="40" height="40" toolTip="Switch Jobs" />
 					<mx:Button id="commitJob" styleName="commitButton" width="40" height="40" toolTip="Commit Job" />
@@ -50,8 +56,9 @@
 				<mx:VBox width="{model.mainMediaWidth}" height="100%" styleName="noPadding">
 					<!-- image holder -->
 					
-					<mx:Canvas width="100%" height="100%" label="Component" backgroundColor="0xFFFFFF"
-								verticalScrollPolicy="off" horizontalScrollPolicy="off">
+					<mx:Canvas id="workCanvas" width="100%" height="100%" label="Component" backgroundColor="0xFFFFFF"
+								verticalScrollPolicy="off" horizontalScrollPolicy="off" clipContent="false"
+								dragEnter="doDragEnter(event);" dragDrop="doDragDrop(event);">
 						
 						<mx:Canvas id="mainImageHolder" width="{model.mainMediaWidth}" height="{model.mainMediaHeight}" verticalCenter="0" visible="{!masterGraphSelected}">
 							
@@ -60,33 +67,42 @@
 										firstDimensionMax="{materialModel.crossSectionMax}" firstDimensionMin="{materialModel.crossSectionMin}"
 										secondDimensionMax="{materialModel.lengthMax}" secondDimensionMin="{materialModel.lengthMin}"
 										firstDimensionValue="{model.crossSection}" secondDimensionValue="{model.strutLength}" />
-							
-							<view:PNGButtonPane id="supportsButton" width="{model.mainMediaWidth}" height="100%" 
-									upImage="{jobModel.selected.supportUpURL}" overImage="{jobModel.selected.supportOverURL}" downImage="{jobModel.selected.supportDownURL}"
-									visible="true" />
-									
-							<view:PNGButtonPane id="coolerButton" width="{model.mainMediaWidth}" height="100%" 
-									upImage="{jobModel.selected.coolerUpURL}" overImage="{jobModel.selected.coolerOverURL}" downImage="{jobModel.selected.coolerDownURL}"
-									visible="true" />
-							
+
 						</mx:Canvas>
-						
+
 						<view:MasterGraph id="masterGraph" width="100%" height="100%" backgroundColor="0xFFFFFF" stateSnapshot="{model.stateSnapshot}"
 												modelLocator="{model}" coolerModel="{coolerModel}" coolerData="{coolerModel.currentData}"
 												selected="{masterGraphSelected}" visible="{masterGraphSelected}" />
-						
+	
+						<mx:LinkButton id="bodyMeterButton" x="350" y="200" useHandCursor="true" label="Payload" filters="{[effGlowFilter]}" />
+						<mx:LinkButton id="strutMeterButton" x="300" y="300" useHandCursor="true" label="Strut" filters="{[effGlowFilter]}" />
+						<mx:LinkButton id="otherMeterButton" x="500" y="350" useHandCursor="true" label="Cooler" filters="{[effGlowFilter]}" />
+	
+					    <view:DragPanel creationComplete="onDragPanelComplete(event);" styleName="headerlessPanel" visible="false" id="meterPanel" height="58" width="140" x="10" y="10">
+							<view:MiniMeter posX="3" posY="3" inRange="{jobModel.tempInRange}" styleName="lowBorder" id="tempMeter" dispName="Temp" height="14" normalisedWidth="{normaliseMeterValue((model.temperature > -1) ? model.temperature : 0,300,draggableMeterWidthTemp)}" />						
+							<view:MiniMeter posX="3" posY="20" inRange="true" styleName="lowBorder" id="costMeter" dispName="Cost" height="14" normalisedWidth="{normaliseMeterValue((model.cost > -1) ? model.cost : 0,200000,draggableMeterWidthCost)}" />
+			    		</view:DragPanel>
+					    <view:DragPanel creationComplete="onDragPanelComplete(event);" styleName="headerlessPanel" visible="false" id="meterStrutPanel" height="34" width="140" x="160" y="10">
+							<view:MiniMeter inRange="{jobModel.strengthInRange}" id="strengthMeter" dispName="Strength" height="14" normalisedWidth="{normaliseMeterValue((model.stressLimit > -1) ? model.stressLimit : 0,500,draggableMeterWidthStr)}" />						
+			    		</view:DragPanel>
+					    <view:DragPanel creationComplete="onDragPanelComplete(event);" styleName="headerlessPanel" visible="false" id="meterOtherPanel" height="34" width="140" x="310" y="10">
+							<view:MiniMeter inRange="{jobModel.powerInRange}" id="powerMeter" dispName="Power" height="14" normalisedWidth="{normaliseMeterValue((model.inputPower/1000 > -1) ? model.inputPower : 0,10000,draggableMeterWidthPower)}" />						
+			    		</view:DragPanel>
+			    		
+			    		<mx:Label x="2" y="2" text="{model.servicesOut.toString()}" />
 					</mx:Canvas>
 					
 					<!-- details box -->
+					
 					<mx:HBox width="100%" height="90" horizontalAlign="left">
 						
-						<view:Meter id="tempMeter" label="Temp (k)" minimum="0" maximum="300" inRange="{jobModel.tempInRange}"
+						<view:Meter id="tempyMeter" label="Temp (k)" minimum="0" maximum="300" inRange="{jobModel.tempInRange}"
 									value="{model.temperature}" />
 						
-						<view:Meter id="strengthMeter" label="Strength (MN)" minimum="0" maximum="{MathUtils.roundUpToNearest(jobModel.selected.forceLimit*1.5, 10)}" 
+						<view:Meter id="strengthyMeter" label="Strength (MN)" minimum="0" maximum="{MathUtils.roundUpToNearest(jobModel.selected.forceLimit*1.5, 10)}" 
 									value="{model.stressLimit}" inRange="{jobModel.strengthInRange}" />
 									
-						<view:Meter id="powerMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{MathUtils.roundUpToNearest(4*(jobModel.selected.inputPower/1000), 10)}" 
+						<view:Meter id="poweryMeter" label="Elec. Pwr (kw)" minimum="0" maximum="{MathUtils.roundUpToNearest(4*(jobModel.selected.inputPower/1000), 10)}" 
 									value="{model.inputPower/1000}" inRange="{jobModel.powerInRange}" />
 						
 						<view:Cost id="currentCost" cost="{usdFormatter.format(model.cost)}" width="100%" />

@@ -288,6 +288,8 @@
 		2BC247070DF6DB8C0053DEF1 /* LeaveCutScreenEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = LeaveCutScreenEvent.as; sourceTree = "<group>"; };
 		2BC247080DF6DBD60053DEF1 /* LeaveCutScreenCommand.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = LeaveCutScreenCommand.as; sourceTree = "<group>"; };
 		2BC247AF0DF6F7C30053DEF1 /* Meter.mxml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mxml; path = Meter.mxml; sourceTree = "<group>"; };
+		BF4A317E10FCCE4900A82D46 /* DrawHelper.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = DrawHelper.as; sourceTree = "<group>"; };
+		BF6D9FDB10FBBFA9003F4AEF /* ComponentMeter.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.actionscript; path = ComponentMeter.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -606,6 +608,8 @@
 				2B23F4360E2D3897001D3929 /* MasterGraph.mxml */,
 				2B23F4370E2D395E001D3929 /* MasterGraphView.as */,
 				2B2983450E311BEC00A30165 /* KeyRenderer.mxml */,
+				BF6D9FDB10FBBFA9003F4AEF /* ComponentMeter.as */,
+				BF4A317E10FCCE4900A82D46 /* DrawHelper.as */,
 			);
 			path = view;
 			sourceTree = "<group>";

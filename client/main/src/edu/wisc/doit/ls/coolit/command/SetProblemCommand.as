@@ -10,7 +10,7 @@ package edu.wisc.doit.ls.coolit.command {
 	import edu.wisc.doit.ls.coolit.business.*;
 	import edu.wisc.doit.ls.coolit.vo.*;
 	import edu.wisc.doit.ls.coolit.CommonBase;
-	
+
 	/**
 	 * 
 	 */
@@ -22,7 +22,8 @@ package edu.wisc.doit.ls.coolit.command {
 			super();
 		}
 		
-		public function execute(event_p:CairngormEvent):void {
+		public function execute(event_p:CairngormEvent):void
+		 {
 			var setProblemEvent:SetProblemEvent = event_p as SetProblemEvent;
 			model = setProblemEvent.modelLocator;
 			
