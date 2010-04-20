@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:MiniMeterView xmlns:view="edu.wisc.doit.ls.coolit.view.*" xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Box id="colorBarBorder" y="{colorBarBackground.y}" x="{colorBarBackground.x}" backgroundColor="0x000000" height="12" width="{baseWidth+2}" />
+	<mx:Label id="meterLabel" styleName="meterLabelStyle" x="0" y="0" text="{dispName}:" />
+	<mx:Box y="2" id="colorBarBackground" backgroundColor="0xefefef" height="10" width="{baseWidth}" />
+	<mx:Box y="4" id="colorBar" backgroundColor="{(inRange ? 0x00ff00 : 0xff0000)}" height="6" width="{normalisedWidth}" />
+	<mx:Box y="2" id="breakpointMark" backgroundColor="0x000000" height="9" width="2" /> 
+
+</view:MiniMeterView>
