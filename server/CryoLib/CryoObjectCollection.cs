@@ -11,15 +11,23 @@ public abstract class CryoObjectCollection : List<CryoObject> {
 
 	public CryoObject this[string name] {
 		get {
-			for (int i = 0; i < Count; i++) {
-				if (this[i].Name == name) {
-					return this[i];
-				}
-			}
-			string msg = string.Format("Error: \"{0}\" not found", name );
-			throw new Exception(msg);
+			return this.Find(
+                delegate(CryoObject obj)
+                {
+                    return obj.Name == name;
+                });
 		}
 	}
+
+    public CryoObject Find(int id)
+    {
+        return this.Find(
+            delegate(CryoObject obj)
+            {
+                return obj.id == id;
+            }
+        );
+    }
 
 	protected XPathNavigator openDocumentForReading(string fileName) {
 		return openDocumentForReading(fileName, null);

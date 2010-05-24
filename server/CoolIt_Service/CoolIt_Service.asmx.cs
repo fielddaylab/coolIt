@@ -179,17 +179,7 @@ namespace CoolIt_Service {
         [WebMethod]
         public Material GetMaterial(int id)
         {
-            //TODO:  Create a proper Find method
-            for (int i = 0; i < materials.Count; i++)
-            {
-                if (materials[i].id == id)
-                {
-                    Material mat = (Material)materials[i];
-                    mat.ShowObjectDetails = true;
-                    return mat;
-                }
-            }
-            return null;
+            return (Material) materials.Find(id);
         }
 
         //[WebMethod]
