@@ -20,7 +20,7 @@ public class MaterialsCollection : CryoObjectCollection {
 
 		do {
 			Material material = new Material( navigator.Clone() );
-			if (material.IntegratedThermalConductivity != null && material.yieldStrength > 0.0) {
+			if (material.IntegratedThermalConductivity != null && material.YieldStrength > 0.0) {
 				this.Add(material);
 			}
 		} while (navigator.MoveToNext() );

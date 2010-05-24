@@ -13,7 +13,8 @@ namespace CryoLib {
 		public string priceUnit = "";
 		public string currencyUnit = "";
 
-		public CryoObject(string name, int id, double price, string priceUnit, string currencyUnit) {
+        #region Constructors
+        public CryoObject(string name, int id, double price, string priceUnit, string currencyUnit) {
 			this.Name = name;
 			this.id = id;
 			this.price = price;
@@ -22,8 +23,36 @@ namespace CryoLib {
 		}
 
 		public CryoObject() { }
+        #endregion
 
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                priceSpecified = value;
+                priceUnitSpecified = value;
+                currencyUnitSpecified = value;
+            }
+        }
 
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool priceSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool priceUnitSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool currencyUnitSpecified = false;
+        #endregion
 
 		/// <summary>
 		/// This is intended to return a longer string describing the

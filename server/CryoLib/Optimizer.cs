@@ -156,7 +156,7 @@ namespace CryoLib {
 
 				// If yieldStrength < 0, that means the value is unknown.  We cannot use materials without knowing
 				// their yieldStrength, so solutions with this material are not feasible.
-				if (m.yieldStrength < 0.0) {
+				if (m.YieldStrength < 0.0) {
 					feasible = false;
 					return;
 				}
@@ -175,12 +175,12 @@ namespace CryoLib {
 
                 //TODO:  This will change with multiple strut types
                 //strutCrossSection = strengthRequirement / m.yieldStrength / problem.SupportNumber;
-                strutCrossSection = strengthRequirement / m.yieldStrength / problem.Struts.Count;
+                strutCrossSection = strengthRequirement / m.YieldStrength / problem.Struts.Count;
 				strutCrossSection *= 1.00001;	// add tiny bit to avoid precision problems when comparing later
 
                 //TODO:  This will change with multiple strut types
                 //double calcStrength = m.yieldStrength * strutCrossSection * problem.SupportNumber;
-                double calcStrength = m.yieldStrength * strutCrossSection * problem.Struts.Count;
+                double calcStrength = m.YieldStrength * strutCrossSection * problem.Struts.Count;
 				if (calcStrength < strengthRequirement) {
 					throw new Exception("We have a math precision problem here");
 				}

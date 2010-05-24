@@ -9,35 +9,65 @@ using System.Xml.XPath;
 using System.IO;
 
 namespace CryoLib {
-	public class Material : CryoObject {
-		private List<DataPoint> thermalConductivityData;
-		private List<DataPoint> integratedThermalConductivityData;
-		public double yieldStrength = -1.0;	// Given in Mega Pascals (MPa)
+	public class Material : CryoObject
+    {
 
-		public double YieldStrength {
+        #region Properties
+        private List<DataPoint> thermalConductivityData;
+		private List<DataPoint> integratedThermalConductivityData;
+		private double yieldStrength = -1.0;	// Given in Mega Pascals (MPa)
+        #endregion
+
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                IntegratedThermalConductivitySpecified = value;
+                YieldStrengthSpecified = value;
+                MPSpecified = value;
+                base.ShowObjectDetails = value;
+            }
+        }
+
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool YieldStrengthSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool IntegratedThermalConductivitySpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool MPSpecified = false;
+        #endregion
+
+        #region Property Accessors
+        public double YieldStrength {
 			get { return yieldStrength; }
+            set { yieldStrength = value; }
 		}
 
 		public List<DataPoint> MP {
 			get { return thermalConductivityData; }
+            set { thermalConductivityData = value; }
 		}
 
 		public List<DataPoint> IntegratedThermalConductivity {
 			get { return integratedThermalConductivityData; }
-		}
+            set { integratedThermalConductivityData = value;  }
+        }
+        #endregion
 
-		public Material() {
+        #region Constructors
+        public Material() {
 			this.Name = "(no such material)";
-		}
-
-		public double Goodness(double temperature) {
-			if (yieldStrength < 0.0) {
-				return -1.0;
-			} else if (integratedThermalConductivityData == null) {
-				return -1.0;
-			} else {
-				return yieldStrength / integratedThermalConductivityData[(int)temperature].data;
-			}
 		}
 
 		/// <summary>
@@ -72,22 +102,6 @@ namespace CryoLib {
 			}
 		}
 
-		private List<DataPoint> readDataSet(XPathNavigator navigator) {
-			List<DataPoint> answer = new List<DataPoint>();
-			if( navigator.MoveToChild("dataPoint", "") ) {
-				do {
-					navigator.MoveToChild("temp", "");
-					double temp = navigator.ValueAsDouble;
-					navigator.MoveToNext("conductivity", "");
-					double conductivity = navigator.ValueAsDouble;
-					DataPoint point = new DataPoint(temp, conductivity);
-					answer.Add(point);
-					navigator.MoveToParent();
-				} while( navigator.MoveToNext("dataPoint","") );
-				navigator.MoveToParent();
-			}
-			return answer;
-		}
 
 		public Material(string name, int id, double yieldStrength, List<DataPoint> pm, List<DataPoint>integratedThermalConductivity, double price, string priceUnit, string currencyUnit)
 			:
@@ -95,7 +109,44 @@ namespace CryoLib {
 			this.yieldStrength = yieldStrength;
 			this.thermalConductivityData = pm;
 			this.integratedThermalConductivityData = integratedThermalConductivity;
-		}
+            }
+        #endregion
+
+        private List<DataPoint> readDataSet(XPathNavigator navigator)
+        {
+            List<DataPoint> answer = new List<DataPoint>();
+            if (navigator.MoveToChild("dataPoint", ""))
+            {
+                do
+                {
+                    navigator.MoveToChild("temp", "");
+                    double temp = navigator.ValueAsDouble;
+                    navigator.MoveToNext("conductivity", "");
+                    double conductivity = navigator.ValueAsDouble;
+                    DataPoint point = new DataPoint(temp, conductivity);
+                    answer.Add(point);
+                    navigator.MoveToParent();
+                } while (navigator.MoveToNext("dataPoint", ""));
+                navigator.MoveToParent();
+            }
+            return answer;
+        }
+
+        public double Goodness(double temperature)
+        {
+            if (yieldStrength < 0.0)
+            {
+                return -1.0;
+            }
+            else if (integratedThermalConductivityData == null)
+            {
+                return -1.0;
+            }
+            else
+            {
+                return yieldStrength / integratedThermalConductivityData[(int)temperature].data;
+            }
+        }
 
 		public override MWNumericArray getData(string dataType) {
 			if (dataType != "PM") {

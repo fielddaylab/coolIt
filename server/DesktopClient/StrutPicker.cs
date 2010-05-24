@@ -161,9 +161,9 @@ namespace DesktopClient {
 
 		private void updateStressLimit() {
 			Material material = (Material)materialsListBox.SelectedItem;
-			if (material.yieldStrength >= 0.0) {
-				yieldStrengthTextBox.Text = material.yieldStrength.ToString();
-				double stressLimit = material.yieldStrength * getCrossSection(); // Unit is megaNewton (MN)
+			if (material.YieldStrength >= 0.0) {
+				yieldStrengthTextBox.Text = material.YieldStrength.ToString();
+				double stressLimit = material.YieldStrength * getCrossSection(); // Unit is megaNewton (MN)
 				stressLimitTextBox.Text = stressLimit.ToString();
 			} else {
 				yieldStrengthTextBox.Text = "(unknown)";

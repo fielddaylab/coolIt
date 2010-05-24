@@ -171,9 +171,38 @@ namespace CoolIt_Service {
 			Material[] answer = new Material[materials.Count];
 			for (int i = 0; i < materials.Count; i++) {
 				answer[i] = (Material)materials[i];
+                answer[i].ShowObjectDetails = false;
 			}
 			return answer;
 		}
+
+        [WebMethod]
+        public Material GetMaterial(int id)
+        {
+            //TODO:  Create a proper Find method
+            for (int i = 0; i < materials.Count; i++)
+            {
+                if (materials[i].id == id)
+                {
+                    Material mat = (Material)materials[i];
+                    mat.ShowObjectDetails = true;
+                    return mat;
+                }
+            }
+            return null;
+        }
+
+        //[WebMethod]
+        //public Problem GetProblem(int id)
+        //{
+        //    return problems[id];
+        //}
+
+        [WebMethod]
+        public Problem GetProblem(string problemName)
+        {
+            return problems[problemName];
+        }
 
 		[WebMethod]
 		public Problem[] GetProblems() {
@@ -350,7 +379,7 @@ namespace CoolIt_Service {
             //TODO:  how do you handle the number of struts once they might be different?
 			double combinedCrossSection = state.Struts[0].Count * state.Struts[0].CrossSectionalArea;
 			state.Cost = cooler.price +  state.Struts[0].Length * combinedCrossSection * state.Struts[0].Material.price;
-			state.StressLimit = state.Struts[0].Material.yieldStrength * combinedCrossSection;
+			state.StressLimit = state.Struts[0].Material.YieldStrength * combinedCrossSection;
 
 			// If temperature goes below known range for the given material the MATLAB code will generate an
 			// ApplicationException.  In that case we set temperature and inputPower to impossible values.  UI
