@@ -6,7 +6,7 @@ using log4net;
 
 namespace CryoLib {
 	public class Optimizer {
-		private CoolerTypeCollection coolers;
+		private CoolerModelCollection coolers;
 		private MaterialsCollection materials;
 		public static SteadyStateSimulator steadyStateSim;
 
@@ -26,7 +26,7 @@ namespace CryoLib {
 		/// </summary>
 		/// <param name="coolers">The collection of available coolers</param>
 		/// <param name="materials">The collection of available materials</param>
-		public Optimizer( CoolerTypeCollection coolers, MaterialsCollection materials ) {
+		public Optimizer( CoolerModelCollection coolers, MaterialsCollection materials ) {
             _logger.Debug("Intializing Optimizer");
 			this.coolers = coolers;
             _logger.DebugFormat("{0} coolers loaded", coolers.Count);
@@ -58,7 +58,7 @@ namespace CryoLib {
 			// Enumerate solutions for every combination of material and cooler
 			List<CandidateSolution> candidates = new List<CandidateSolution>();
 			foreach( Material m in materials ) {
-				foreach( CoolerType c in coolers ) {
+				foreach( CoolerModel c in coolers ) {
 					CandidateSolution cs = new CandidateSolution(m, c, targetTemp, strengthReq, problem);
 					if (cs.IsFeasible) {
 						candidates.Add(cs);
@@ -96,7 +96,7 @@ namespace CryoLib {
 
 		private class CandidateSolution {
 			private Material material;
-			private CoolerType cooler;
+			private CoolerModel cooler;
 			private bool feasible;
 			private double solutionCost;
 			private double strutLength;
@@ -108,7 +108,7 @@ namespace CryoLib {
 				get { return material; }
 			}
 
-			public CoolerType Cooler {
+			public CoolerModel Cooler {
 				get { return cooler; }
 			}
 
@@ -150,7 +150,7 @@ namespace CryoLib {
 				}
 			}
 
-			public CandidateSolution(Material m, CoolerType c, double targetTemp, double strengthRequirement, Problem problem ) {
+			public CandidateSolution(Material m, CoolerModel c, double targetTemp, double strengthRequirement, Problem problem ) {
 				material = m;
 				cooler = c;
 

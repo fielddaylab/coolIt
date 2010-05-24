@@ -36,6 +36,16 @@ namespace CryoLib {
 
 		}
 
+        public Problem Find(int id)
+        {
+            return this.Find(
+                delegate(Problem obj)
+                {
+                    return obj.ID == id;
+                }
+            );
+        }
+
 		protected XPathNavigator openDocumentForReading(string fileName) {
 			return openDocumentForReading(fileName, null);
 		}

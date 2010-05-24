@@ -27,7 +27,7 @@ namespace CoolIt_Service {
 	public class CoolIt_Service : System.Web.Services.WebService {
 
 		// These objects can be shared across sessions
-		private static CoolerTypeCollection coolers;
+		private static CoolerModelCollection coolers;
 		private static MaterialsCollection materials;
 		private static ProblemCollection problems;
 		private static MathGateCollection mathGates;
@@ -76,8 +76,8 @@ namespace CoolIt_Service {
             _logger.Debug("Loading Coolers.xml");
 			string coolerDataFile = Path.Combine(dataDir, "Coolers.xml");
 			string coolerSchemaFile = Path.Combine(schemaDir, "Coolers.xsd");
-			coolers = new CoolerTypeCollection(coolerDataFile, coolerSchemaFile );
-			foreach (CoolerType c in coolers) {
+			coolers = new CoolerModelCollection(coolerDataFile, coolerSchemaFile );
+			foreach (CoolerModel c in coolers) {
 				c.InputPowerCalculator = inputPowerCalc;
 			}
             _logger.DebugFormat("{0} coolers loaded", coolers.Count);
@@ -158,13 +158,21 @@ namespace CoolIt_Service {
 		}
 
 		[WebMethod]
-		public CoolerType[] GetCoolers() {
-			CoolerType[] answer = new CoolerType[coolers.Count];
+		public CoolerModel[] GetCoolerModels() {
+			CoolerModel[] answer = new CoolerModel[coolers.Count];
 			for (int i = 0; i < coolers.Count; i++) {
-				answer[i] = (CoolerType)coolers[i];
+				answer[i] = (CoolerModel)coolers[i];
 			}
 			return answer;
 		}
+
+        [WebMethod]
+        public CoolerModel GetCoolerModel(int id)
+        {
+            CoolerModel cool = (CoolerModel)coolers.Find(id);
+            cool.ShowObjectDetails = true;
+            return cool;
+        }
 
 		[WebMethod]
 		public Material[] GetMaterials() {
@@ -179,19 +187,25 @@ namespace CoolIt_Service {
         [WebMethod]
         public Material GetMaterial(int id)
         {
-            return (Material) materials.Find(id);
+            Material mat = (Material)materials.Find(id);
+            mat.ShowObjectDetails = true;
+            return mat;
         }
 
-        //[WebMethod]
-        //public Problem GetProblem(int id)
-        //{
-        //    return problems[id];
-        //}
+        [WebMethod]
+        public Problem GetProblemByName(string problemName)
+        {
+            Problem prob = problems[problemName];
+            prob.ShowObjectDetails = true;
+            return prob;
+        }
 
         [WebMethod]
-        public Problem GetProblem(string problemName)
+        public Problem GetProblem(int id)
         {
-            return problems[problemName];
+            Problem prob = (Problem) problems.Find(id);
+            prob.ShowObjectDetails = true;
+            return prob;
         }
 
 		[WebMethod]
@@ -238,7 +252,7 @@ namespace CoolIt_Service {
 		}
 
 		private void setCooler(Problem state, string coolerID, string name, double powerFactor) {
-            state.Coolers[coolerID].SelectedCooler = (CoolerType) coolers[name] ;
+            state.Coolers[coolerID].SelectedCooler = (CoolerModel) coolers[name] ;
 			state.PowerFactor = powerFactor;
 		}
 			
@@ -356,9 +370,9 @@ namespace CoolIt_Service {
 			}
 
             //TODO:  Handle multiple coolers
-            CoolerType cooler = state.Coolers[0].SelectedCooler;
+            CoolerModel cooler = state.Coolers[0].SelectedCooler;
             //Set cooler to the first one in the list by default if no cooler is set
-            if (cooler == null) cooler = (CoolerType) coolers[0];
+            if (cooler == null) cooler = (CoolerModel) coolers[0];
             cooler.InputPowerCalculator = inputPowerCalc;
 
             //Set material to the default if no material is set
@@ -515,7 +529,7 @@ namespace CoolIt_Service {
             if (state.Coolers.Count == 0)
             {
                 Cooler defaultCooler = new Cooler();
-                defaultCooler.SelectedCooler = (CoolerType)coolers[0];
+                defaultCooler.SelectedCooler = (CoolerModel)coolers[0];
                 defaultCooler.ID = "1";
                 defaultCooler.InputPower = 0;
                 state.Coolers.Add(defaultCooler);
@@ -525,7 +539,7 @@ namespace CoolIt_Service {
             {
                 foreach (Cooler cool in state.Coolers)
                 {
-                    cool.SelectedCooler = (CoolerType)coolers[0];
+                    cool.SelectedCooler = (CoolerModel)coolers[0];
                     cool.InputPower = 0;
                 }
             }

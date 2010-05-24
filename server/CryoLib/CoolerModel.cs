@@ -16,7 +16,7 @@ using System.Xml.Serialization;
  * Loaded from the Coolers.xml definitions
  **/
 namespace CryoLib {
-	public class CoolerType : CryoObject {
+	public class CoolerModel : CryoObject {
 
 		private List<DataPoint> coolingPowerData = new List<DataPoint>();
 		private InputPowerCalculator inputPowerCalc;
@@ -26,7 +26,7 @@ namespace CryoLib {
 		/// <summary>
 		/// No-argument (default) constructor.
 		/// </summary>
-		public CoolerType() {
+		public CoolerModel() {
 			this.Name = "(no such cooler)";
 		}
 
@@ -36,7 +36,7 @@ namespace CryoLib {
 		/// would generally be used by the CoolIt Web Service.
 		/// </summary>
 		/// <param name="navigator">The XPathNavigator to use</param>
-		public CoolerType(XPathNavigator navigator) {
+		public CoolerModel(XPathNavigator navigator) {
 			navigator.MoveToChild("name", "");
 			this.Name = navigator.Value;
 			navigator.MoveToNext("ID", "");
@@ -71,12 +71,34 @@ namespace CryoLib {
 		/// <param name="price"></param>
 		/// <param name="priceUnit"></param>
 		/// <param name="currencyUnit"></param>
-		public CoolerType(string name, int id, List<DataPoint> cpm, double price, string priceUnit, string currencyUnit)
+		public CoolerModel(string name, int id, List<DataPoint> cpm, double price, string priceUnit, string currencyUnit)
 			:
 			base(name, id, price, priceUnit, currencyUnit) {
 			this.coolingPowerData = cpm;
 			maxOutputPower = coolingPowerData[1].data;
 		}
+
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                CPMSpecified = value;
+                base.ShowObjectDetails = value;
+            }
+        }
+
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool CPMSpecified = false;
+        #endregion
 
 		/// <summary>
 		/// Return the Cooling Power Matrix

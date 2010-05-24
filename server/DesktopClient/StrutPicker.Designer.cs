@@ -92,7 +92,6 @@ namespace DesktopClient {
             // crossSectionTextBox
             // 
             this.crossSectionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.crossSectionTextBox.Enabled = false;
             this.crossSectionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crossSectionTextBox.Location = new System.Drawing.Point(370, 156);
             this.crossSectionTextBox.Name = "crossSectionTextBox";
@@ -104,7 +103,6 @@ namespace DesktopClient {
             // lengthTextBox
             // 
             this.lengthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lengthTextBox.Enabled = false;
             this.lengthTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lengthTextBox.Location = new System.Drawing.Point(370, 120);
             this.lengthTextBox.Name = "lengthTextBox";

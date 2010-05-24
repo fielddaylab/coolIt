@@ -28,7 +28,7 @@ namespace CryoLib {
 			}
 		}
 
-		public double strutLength( double targetTemp, double crossSection, Material material, CoolerType cooler ) {
+		public double strutLength( double targetTemp, double crossSection, Material material, CoolerModel cooler ) {
 			MWNumericArray targetTempData = new MWNumericArray( targetTemp );
 			MWNumericArray crossSectionData = new MWNumericArray( crossSection );
 			MWNumericArray materialData = material.getData("PM");
@@ -38,7 +38,7 @@ namespace CryoLib {
 			return strutLength.ToScalarDouble();
 		}
 
-		public double strutLength(double targetTemp, double crossSection, Material material, CoolerType cooler, double powerFactor) {
+		public double strutLength(double targetTemp, double crossSection, Material material, CoolerModel cooler, double powerFactor) {
 			double[,] data = cooler.getDataNative("CPM");
 			for (int i = 0; i < data.GetLength(0); i++) {
 				data[i, 0] = 300.0 - (300.0 - data[i, 0]) * powerFactor;
@@ -55,7 +55,7 @@ namespace CryoLib {
 
 		}
 
-		public double simulate(double length, double crossSection, Material material, CoolerType cooler) {
+		public double simulate(double length, double crossSection, Material material, CoolerModel cooler) {
 			try {
 				MWNumericArray lengthData = new MWNumericArray(length);
 				MWNumericArray crossSectionData = new MWNumericArray(crossSection);
@@ -69,7 +69,7 @@ namespace CryoLib {
 			}
 		}
 
-		public double simulate(double length, double crossSection, Material material, CoolerType cooler, double powerFactor) {
+		public double simulate(double length, double crossSection, Material material, CoolerModel cooler, double powerFactor) {
 			double[,] data = cooler.getDataNative("CPM");
 			for (int i = 0; i < data.GetLength(0); i++) {
 				data[i, 0] = 300.0 - (300.0 - data[i, 0]) * powerFactor;

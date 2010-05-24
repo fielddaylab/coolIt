@@ -14,7 +14,7 @@ namespace DesktopClient {
 		private DesktopClient.CoolIt_Service.CoolIt_Service webService;
 		private bool direct = false;
 		private Material[] materials;
-		private CoolerType[] coolers;
+		private CoolerModel[] coolers;
 		private Problem[] problems;
 		private MathGate[] mathGates;
 		private string dataDir;
@@ -119,7 +119,7 @@ namespace DesktopClient {
 		/// Get a list of coolers from the serivce provider
 		/// </summary>
 		/// <returns>The list of coolers</returns>
-		public CoolerType[] GetCoolers() {
+		public CoolerModel[] GetCoolers() {
 			return coolers;
 		}
 
@@ -397,29 +397,29 @@ namespace DesktopClient {
 			return new Constraint(value, op, rawConstraint.Target);
 		}
 
-		private CoolerType[] findCoolers() {
-			CoolerType[] answer;
+		private CoolerModel[] findCoolers() {
+			CoolerModel[] answer;
 			if (direct) {
 				string coolerFile = Path.Combine(dataDir, "Coolers.xml");
 				string coolerSchema = Path.Combine(schemaDir, "Coolers.xsd");
-				CoolerTypeCollection coolers = new CoolerTypeCollection(coolerFile, coolerSchema);
-				answer = new CoolerType[coolers.Count];
+				CoolerModelCollection coolers = new CoolerModelCollection(coolerFile, coolerSchema);
+				answer = new CoolerModel[coolers.Count];
 				for (int i = 0; i < coolers.Count; i++) {
-					answer[i] = (CoolerType)coolers[i];
+					answer[i] = (CoolerModel)coolers[i];
 				}
 			} else {
-				DesktopClient.CoolIt_Service.CoolerType[] rawCoolers = webService.GetCoolers();
-				answer = new CoolerType[rawCoolers.Length];
+				DesktopClient.CoolIt_Service.CoolerModel[] rawCoolers = webService.GetCoolerModels();
+				answer = new CoolerModel[rawCoolers.Length];
 				InputPowerCalculator calc = getInputPowerCalc();
 				for (int i = 0; i < rawCoolers.Length; i++) {
-					DesktopClient.CoolIt_Service.CoolerType raw = rawCoolers[i];
+					DesktopClient.CoolIt_Service.CoolerModel raw = rawCoolers[i];
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.CPM.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.CPM[j];
 						DataPoint point = new DataPoint(rawPoint.temp, rawPoint.data);
 						data.Add(point);
 					}
-					answer[i] = new CoolerType(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
+					answer[i] = new CoolerModel(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
 					answer[i].InputPowerCalculator = calc;
 				}
 			}
@@ -462,7 +462,7 @@ namespace DesktopClient {
 						data.Add(point);
 					}
 					if (raw.IntegratedThermalConductivity == null) {
-						answer[i] = new Material(raw.Name, raw.id, raw.yieldStrength, data, null, raw.price, raw.priceUnit, raw.currencyUnit);
+						answer[i] = new Material(raw.Name, raw.id, raw.YieldStrength, data, null, raw.price, raw.priceUnit, raw.currencyUnit);
 					} else {
 						List<DataPoint> integratedThermalConductivity = new List<DataPoint>();
 						for (int j = 0; j < raw.IntegratedThermalConductivity.Length; j++) {
@@ -470,7 +470,7 @@ namespace DesktopClient {
 							DataPoint point = new DataPoint(rawPoint.temp, rawPoint.data);
 							integratedThermalConductivity.Add(point);
 						}
-						answer[i] = new Material(raw.Name, raw.id, raw.yieldStrength, data, integratedThermalConductivity, raw.price, raw.priceUnit, raw.currencyUnit);
+						answer[i] = new Material(raw.Name, raw.id, raw.YieldStrength, data, integratedThermalConductivity, raw.price, raw.priceUnit, raw.currencyUnit);
 					}
 				
 				}
@@ -492,8 +492,8 @@ namespace DesktopClient {
 			return material;
 		}
 
-		private CoolerType findCooler(string coolerName) {
-			CoolerType cooler = null;
+		private CoolerModel findCooler(string coolerName) {
+			CoolerModel cooler = null;
 			for (int i = 0; i < coolers.Length; i++) {
 				if (coolers[i].Name == coolerName) {
 					cooler = coolers[i];

@@ -42,9 +42,17 @@ namespace DesktopClient.CoolIt_Service {
         
         private System.Threading.SendOrPostCallback CryolibVersionOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetCoolersOperationCompleted;
+        private System.Threading.SendOrPostCallback GetCoolerModelsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetCoolerModelOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetMaterialsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetMaterialOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetProblemByNameOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetProblemOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetProblemsOperationCompleted;
         
@@ -123,10 +131,22 @@ namespace DesktopClient.CoolIt_Service {
         public event CryolibVersionCompletedEventHandler CryolibVersionCompleted;
         
         /// <remarks/>
-        public event GetCoolersCompletedEventHandler GetCoolersCompleted;
+        public event GetCoolerModelsCompletedEventHandler GetCoolerModelsCompleted;
+        
+        /// <remarks/>
+        public event GetCoolerModelCompletedEventHandler GetCoolerModelCompleted;
         
         /// <remarks/>
         public event GetMaterialsCompletedEventHandler GetMaterialsCompleted;
+        
+        /// <remarks/>
+        public event GetMaterialCompletedEventHandler GetMaterialCompleted;
+        
+        /// <remarks/>
+        public event GetProblemByNameCompletedEventHandler GetProblemByNameCompleted;
+        
+        /// <remarks/>
+        public event GetProblemCompletedEventHandler GetProblemCompleted;
         
         /// <remarks/>
         public event GetProblemsCompletedEventHandler GetProblemsCompleted;
@@ -331,29 +351,58 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetCoolers", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public CoolerType[] GetCoolers() {
-            object[] results = this.Invoke("GetCoolers", new object[0]);
-            return ((CoolerType[])(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetCoolerModels", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public CoolerModel[] GetCoolerModels() {
+            object[] results = this.Invoke("GetCoolerModels", new object[0]);
+            return ((CoolerModel[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetCoolersAsync() {
-            this.GetCoolersAsync(null);
+        public void GetCoolerModelsAsync() {
+            this.GetCoolerModelsAsync(null);
         }
         
         /// <remarks/>
-        public void GetCoolersAsync(object userState) {
-            if ((this.GetCoolersOperationCompleted == null)) {
-                this.GetCoolersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCoolersOperationCompleted);
+        public void GetCoolerModelsAsync(object userState) {
+            if ((this.GetCoolerModelsOperationCompleted == null)) {
+                this.GetCoolerModelsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCoolerModelsOperationCompleted);
             }
-            this.InvokeAsync("GetCoolers", new object[0], this.GetCoolersOperationCompleted, userState);
+            this.InvokeAsync("GetCoolerModels", new object[0], this.GetCoolerModelsOperationCompleted, userState);
         }
         
-        private void OnGetCoolersOperationCompleted(object arg) {
-            if ((this.GetCoolersCompleted != null)) {
+        private void OnGetCoolerModelsOperationCompleted(object arg) {
+            if ((this.GetCoolerModelsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetCoolersCompleted(this, new GetCoolersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetCoolerModelsCompleted(this, new GetCoolerModelsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetCoolerModel", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public CoolerModel GetCoolerModel(int id) {
+            object[] results = this.Invoke("GetCoolerModel", new object[] {
+                        id});
+            return ((CoolerModel)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetCoolerModelAsync(int id) {
+            this.GetCoolerModelAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void GetCoolerModelAsync(int id, object userState) {
+            if ((this.GetCoolerModelOperationCompleted == null)) {
+                this.GetCoolerModelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCoolerModelOperationCompleted);
+            }
+            this.InvokeAsync("GetCoolerModel", new object[] {
+                        id}, this.GetCoolerModelOperationCompleted, userState);
+        }
+        
+        private void OnGetCoolerModelOperationCompleted(object arg) {
+            if ((this.GetCoolerModelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCoolerModelCompleted(this, new GetCoolerModelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -381,6 +430,93 @@ namespace DesktopClient.CoolIt_Service {
             if ((this.GetMaterialsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetMaterialsCompleted(this, new GetMaterialsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetMaterial", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Material GetMaterial(int id) {
+            object[] results = this.Invoke("GetMaterial", new object[] {
+                        id});
+            return ((Material)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetMaterialAsync(int id) {
+            this.GetMaterialAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void GetMaterialAsync(int id, object userState) {
+            if ((this.GetMaterialOperationCompleted == null)) {
+                this.GetMaterialOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMaterialOperationCompleted);
+            }
+            this.InvokeAsync("GetMaterial", new object[] {
+                        id}, this.GetMaterialOperationCompleted, userState);
+        }
+        
+        private void OnGetMaterialOperationCompleted(object arg) {
+            if ((this.GetMaterialCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetMaterialCompleted(this, new GetMaterialCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetProblemByName", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Problem GetProblemByName(string problemName) {
+            object[] results = this.Invoke("GetProblemByName", new object[] {
+                        problemName});
+            return ((Problem)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetProblemByNameAsync(string problemName) {
+            this.GetProblemByNameAsync(problemName, null);
+        }
+        
+        /// <remarks/>
+        public void GetProblemByNameAsync(string problemName, object userState) {
+            if ((this.GetProblemByNameOperationCompleted == null)) {
+                this.GetProblemByNameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetProblemByNameOperationCompleted);
+            }
+            this.InvokeAsync("GetProblemByName", new object[] {
+                        problemName}, this.GetProblemByNameOperationCompleted, userState);
+        }
+        
+        private void OnGetProblemByNameOperationCompleted(object arg) {
+            if ((this.GetProblemByNameCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetProblemByNameCompleted(this, new GetProblemByNameCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/GetProblem", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Problem GetProblem(int id) {
+            object[] results = this.Invoke("GetProblem", new object[] {
+                        id});
+            return ((Problem)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetProblemAsync(int id) {
+            this.GetProblemAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void GetProblemAsync(int id, object userState) {
+            if ((this.GetProblemOperationCompleted == null)) {
+                this.GetProblemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetProblemOperationCompleted);
+            }
+            this.InvokeAsync("GetProblem", new object[] {
+                        id}, this.GetProblemOperationCompleted, userState);
+        }
+        
+        private void OnGetProblemOperationCompleted(object arg) {
+            if ((this.GetProblemCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetProblemCompleted(this, new GetProblemCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1127,7 +1263,7 @@ namespace DesktopClient.CoolIt_Service {
         
         private double inputPowerField;
         
-        private CoolerType selectedCoolerField;
+        private CoolerModel selectedCoolerField;
         
         private string idField;
         
@@ -1152,7 +1288,7 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
-        public CoolerType SelectedCooler {
+        public CoolerModel SelectedCooler {
             get {
                 return this.selectedCoolerField;
             }
@@ -1277,7 +1413,7 @@ namespace DesktopClient.CoolIt_Service {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
-    public partial class CoolerType : CryoObject {
+    public partial class CoolerModel : CryoObject {
         
         private DataPoint[] cPMField;
         
@@ -1327,7 +1463,7 @@ namespace DesktopClient.CoolIt_Service {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Material))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CoolerType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CoolerModel))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.3082")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1340,6 +1476,8 @@ namespace DesktopClient.CoolIt_Service {
         private int idField;
         
         private double priceField;
+        
+        private bool priceFieldSpecified;
         
         private string priceUnitField;
         
@@ -1376,6 +1514,17 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool priceSpecified {
+            get {
+                return this.priceFieldSpecified;
+            }
+            set {
+                this.priceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public string priceUnit {
             get {
                 return this.priceUnitField;
@@ -1406,17 +1555,30 @@ namespace DesktopClient.CoolIt_Service {
         
         private double yieldStrengthField;
         
+        private bool yieldStrengthFieldSpecified;
+        
         private DataPoint[] mpField;
         
         private DataPoint[] integratedThermalConductivityField;
         
         /// <remarks/>
-        public double yieldStrength {
+        public double YieldStrength {
             get {
                 return this.yieldStrengthField;
             }
             set {
                 this.yieldStrengthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool YieldStrengthSpecified {
+            get {
+                return this.yieldStrengthFieldSpecified;
+            }
+            set {
+                this.yieldStrengthFieldSpecified = value;
             }
         }
         
@@ -1570,6 +1732,12 @@ namespace DesktopClient.CoolIt_Service {
         
         private double monetaryIncentiveField;
         
+        private bool monetaryIncentiveFieldSpecified;
+        
+        private double heatLeakField;
+        
+        private bool heatLeakFieldSpecified;
+        
         private Constraint[] constraintsField;
         
         private StrutType[] strutsField;
@@ -1583,8 +1751,6 @@ namespace DesktopClient.CoolIt_Service {
         private string nameField;
         
         private int idField;
-        
-        private double heatLeakField;
         
         /// <remarks/>
         public double Temperature {
@@ -1643,6 +1809,38 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.monetaryIncentiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MonetaryIncentiveSpecified {
+            get {
+                return this.monetaryIncentiveFieldSpecified;
+            }
+            set {
+                this.monetaryIncentiveFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double HeatLeak {
+            get {
+                return this.heatLeakField;
+            }
+            set {
+                this.heatLeakField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool HeatLeakSpecified {
+            get {
+                return this.heatLeakFieldSpecified;
+            }
+            set {
+                this.heatLeakFieldSpecified = value;
             }
         }
         
@@ -1715,17 +1913,6 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public double HeatLeak {
-            get {
-                return this.heatLeakField;
-            }
-            set {
-                this.heatLeakField = value;
             }
         }
     }
@@ -1888,26 +2075,52 @@ namespace DesktopClient.CoolIt_Service {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void GetCoolersCompletedEventHandler(object sender, GetCoolersCompletedEventArgs e);
+    public delegate void GetCoolerModelsCompletedEventHandler(object sender, GetCoolerModelsCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetCoolersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetCoolerModelsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetCoolersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetCoolerModelsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public CoolerType[] Result {
+        public CoolerModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((CoolerType[])(this.results[0]));
+                return ((CoolerModel[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void GetCoolerModelCompletedEventHandler(object sender, GetCoolerModelCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCoolerModelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetCoolerModelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CoolerModel Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CoolerModel)(this.results[0]));
             }
         }
     }
@@ -1934,6 +2147,84 @@ namespace DesktopClient.CoolIt_Service {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Material[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void GetMaterialCompletedEventHandler(object sender, GetMaterialCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetMaterialCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetMaterialCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Material Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Material)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void GetProblemByNameCompletedEventHandler(object sender, GetProblemByNameCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetProblemByNameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetProblemByNameCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Problem Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Problem)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void GetProblemCompletedEventHandler(object sender, GetProblemCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetProblemCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetProblemCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Problem Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Problem)(this.results[0]));
             }
         }
     }

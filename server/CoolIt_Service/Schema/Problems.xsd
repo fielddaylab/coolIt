@@ -103,7 +103,7 @@ Temp: degrees K (K)
       <xs:element minOccurs="0" maxOccurs="unbounded" name="strutType" type="StrutType"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="CoolerType">
+  <xs:complexType name="coolerModel">
     <xs:sequence>
       <xs:element name="ID" type="xs:positiveInteger"/>
       <xs:element name="constraints" type="ConstraintCollectionType"/>
@@ -111,7 +111,7 @@ Temp: degrees K (K)
   </xs:complexType>
   <xs:complexType name="CoolerCollectionType">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="cooler" type="CoolerType"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="cooler" type="coolerModel"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

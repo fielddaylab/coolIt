@@ -18,7 +18,7 @@ namespace DesktopClient {
 		public CoolerPicker( SimulatorStub simulator ) {
 			InitializeComponent();
 
-			CoolerType[] coolers = simulator.GetCoolers();
+			CoolerModel[] coolers = simulator.GetCoolers();
 			coolersListBox.Items.Clear();
 			for (int i = 0; i < coolers.Length; i++) {
 				coolersListBox.Items.Add(coolers[i]);
@@ -38,8 +38,8 @@ namespace DesktopClient {
 			Hide();
 		}
 
-		public CoolerType Cooler {
-			get { return (CoolerType)coolersListBox.SelectedItem; }
+		public CoolerModel Cooler {
+			get { return (CoolerModel)coolersListBox.SelectedItem; }
 		}
 
 		public double PowerFactor {
@@ -48,7 +48,7 @@ namespace DesktopClient {
 
 		public double Price {
 			get {
-				CoolerType cooler = (CoolerType)coolersListBox.SelectedItem;
+				CoolerModel cooler = (CoolerModel)coolersListBox.SelectedItem;
 				return (double)cooler.price;
 			}
 		}
@@ -107,7 +107,7 @@ namespace DesktopClient {
 		//}
 
 		private void plotOutputPower() {
-			CoolerType cooler = (CoolerType)coolersListBox.SelectedItem;
+			CoolerModel cooler = (CoolerModel)coolersListBox.SelectedItem;
 			if (cooler == null) {
 				return;
 			}
@@ -140,7 +140,7 @@ namespace DesktopClient {
 		}
 
 		private void plotInputPower() {
-			CoolerType cooler = (CoolerType)coolersListBox.SelectedItem;
+			CoolerModel cooler = (CoolerModel)coolersListBox.SelectedItem;
 			if (cooler == null) {
 				return;
 			}

@@ -27,7 +27,7 @@ namespace Version_02_App {
 			// Read in data on the coolers
 			string coolerFileName = Path.Combine(Resources.DataDir, "Coolers.xml");
 			string coolerSchema = Path.Combine(Resources.SchemaDir, "Coolers.xsd");
-			CoolerTypeCollection coolers = new CoolerTypeCollection(coolerFileName, coolerSchema );
+			CoolerModelCollection coolers = new CoolerModelCollection(coolerFileName, coolerSchema );
 			for (int i = 0; i < coolers.Count; i++) {
 				coolersListBox.Items.Add(coolers[i]);
 			}
@@ -70,8 +70,8 @@ namespace Version_02_App {
 		/// Figure out what kind of cooler the user has selected and return it
 		/// </summary>
 		/// <returns>The selected cooler</returns>
-		private CoolerType getCooler() {
-			return (CoolerType)coolersListBox.SelectedItem;
+		private CoolerModel getCooler() {
+			return (CoolerModel)coolersListBox.SelectedItem;
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace Version_02_App {
 		/// </summary>
 		/// <param name="strut"></param>
 		/// <param name="cooler"></param>
-		private void simulate( StrutType strut, CoolerType cooler ) {
+		private void simulate( StrutType strut, CoolerModel cooler ) {
 			Cursor savedCursor = this.Cursor;
 			try {
 				this.Cursor = Cursors.WaitCursor;
@@ -103,7 +103,7 @@ namespace Version_02_App {
 		/// <param name="e"></param>
 		private void simulateButton_Click(object sender, EventArgs e) {
 			StrutType strut;
-			CoolerType cooler;
+			CoolerModel cooler;
 			answerBox.Text = "";
 			try {
 				strut = getStrut();
@@ -121,7 +121,7 @@ namespace Version_02_App {
 		}
 
 		private void coolersListBox_SelectedIndexChanged(object sender, EventArgs e) {
-			coolerDataBox.Text = ((CoolerType)coolersListBox.SelectedItem).Describe();
+			coolerDataBox.Text = ((CoolerModel)coolersListBox.SelectedItem).Describe();
 			answerBox.Text = "";
 		}
 

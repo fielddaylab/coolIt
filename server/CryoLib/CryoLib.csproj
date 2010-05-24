@@ -58,8 +58,8 @@
     </Compile>
     <Compile Include="Cooler.cs" />
     <Compile Include="CoolerCollection.cs" />
-    <Compile Include="CoolerType.cs" />
-    <Compile Include="CoolerTypeCollection.cs" />
+    <Compile Include="CoolerModel.cs" />
+    <Compile Include="CoolerModelCollection.cs" />
     <Compile Include="CryoObject.cs" />
     <Compile Include="CryoObjectCollection.cs" />
     <Compile Include="DataPoint.cs" />

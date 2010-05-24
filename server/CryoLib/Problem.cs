@@ -25,6 +25,75 @@ namespace CryoLib {
         public double StressLimit { get; set; }
         #endregion
 
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                DescriptionSpecified = value;
+                MonetaryIncentiveSpecified = value;
+                HeatLeakSpecified = value;
+                ConstraintsSpecified = value;
+                StrutsSpecified = value;
+                CoolersSpecified = value;
+                ImageCollectionSpecified = value;
+                PowerFactorSpecified = false;
+            }
+        }
+
+        public bool ShowOutputs
+        {
+            set
+            {
+                TemperatureSpecified = false;
+                CostSpecified = false;
+                SolvedSpecified = false;
+            }
+        }
+
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool DescriptionSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool MonetaryIncentiveSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool HeatLeakSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool ConstraintsSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool StrutsSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool CoolersSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool ImageCollectionSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool TemperatureSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool PowerFactorSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool CostSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool SolvedSpecified = false;
+        #endregion
+
+        #region Property Accessors
         [XmlAttribute]
 		public string Name {
 			get { return name; }
@@ -37,19 +106,16 @@ namespace CryoLib {
 			set { id = value; }
 		}
 
-		[XmlElement]
 		public string Description {
 			get { return description; }
 			set { description = value; }
 		}
 
-		[XmlElement]
 		public double MonetaryIncentive {
 			get { return monetaryIncentive; }
 			set { monetaryIncentive = value; }
 		}
 
-        [XmlAttribute]
         public double HeatLeak
         {
             get { return heatLeak; }
@@ -81,9 +147,11 @@ namespace CryoLib {
 		public bool Solved {
 			get { return solved; }
 			set { solved = value; }
-		}
+        }
+        #endregion
 
-		public Problem(
+        #region Constructors
+        public Problem(
 						string name,
 						int id,
 						string description,
@@ -141,6 +209,18 @@ namespace CryoLib {
             this.coolers = new CoolerCollection(navigator.Clone());
         }
 
+        /// <summary>
+        /// No-argument (default) constructor.
+        /// </summary>
+        public Problem()
+        {
+            //name = "(no such problem)";
+            this.constraints = new ConstraintCollection();
+            this.problemImageCollection = new ProblemImageCollection();
+            this.struts = new StrutTypeCollection();
+            this.coolers = new CoolerCollection();
+        }
+        #endregion
 
 
         //TODO:  Determine if force limit is indeed problem level?
@@ -154,18 +234,6 @@ namespace CryoLib {
 			get {
 				return constraints.getConstraintTarget(VALUE.TEMP, OP.LT, double.MaxValue);
 			}
-		}
-
-
-		/// <summary>
-		/// No-argument (default) constructor.
-		/// </summary>
-		public Problem() {
-            //name = "(no such problem)";
-            this.constraints = new ConstraintCollection();
-            this.problemImageCollection = new ProblemImageCollection();
-            this.struts = new StrutTypeCollection();
-            this.coolers = new CoolerCollection();
 		}
 
 		public override string ToString() {

@@ -34,7 +34,7 @@ namespace CryoLib {
         public double InputPower { get; set; }
 
         [XmlElement]
-        public CoolerType SelectedCooler { get; set; }
+        public CoolerModel SelectedCooler { get; set; }
         #endregion
 
         #region convenience properties - accessors to constraint values
