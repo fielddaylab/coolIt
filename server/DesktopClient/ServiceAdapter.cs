@@ -238,7 +238,6 @@ namespace DesktopClient {
                 answer.HeatLeak = rawProblem.HeatLeak;
                 answer.Temperature = rawProblem.Temperature;
                 answer.Solved = rawProblem.Solved;
-                answer.PowerFactor = rawProblem.PowerFactor;
                 answer.Cost = rawProblem.Cost;
                 answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
                 answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
@@ -295,6 +294,7 @@ namespace DesktopClient {
                 Cooler cool = new Cooler();
                 cool.ID = cooler.ID;
                 cool.InputPower = cooler.InputPower;
+                cool.PowerFactor = cooler.PowerFactor;
                 //cool.SelectedCooler = findCooler(cooler.SelectedCooler.Name);
                 cool.Constraints = convertConstraintCollection(cooler.Constraints);
 

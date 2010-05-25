@@ -204,7 +204,7 @@ namespace Persistence {
 
         private static P_ProblemState LoadState(Problem rawState, ISession session)
         {
-            P_ProblemState state = new P_ProblemState(rawState.PowerFactor, rawState.Cost, rawState.Temperature, rawState.Solved);
+            P_ProblemState state = new P_ProblemState(rawState.Cost, rawState.Temperature, rawState.Solved);
 
             foreach (StrutType strut in rawState.Struts)
             {
@@ -223,7 +223,7 @@ namespace Persistence {
                 criterion.Add(Expression.Eq("Name", cool.SelectedCooler.Name));
                 P_Cooler cooler = criterion.UniqueResult<P_Cooler>();
 
-                P_CoolerState pcooler = new P_CoolerState(cool.InputPower, state);
+                P_CoolerState pcooler = new P_CoolerState(cool.InputPower, cool.PowerFactor, state);
                 pcooler.Cooler = cooler;
                 state.AddCooler(pcooler);
             }

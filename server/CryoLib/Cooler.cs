@@ -37,6 +37,48 @@ namespace CryoLib {
         public CoolerModel SelectedCooler { get; set; }
         #endregion
 
+        #region state properties - outputs
+        public double PowerFactor { get; set; }
+        #endregion
+
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                PowerFactorSpecified = value;
+                SelectedCoolerSpecified = value;
+            }
+        }
+
+        public bool ShowOutputs
+        {
+            set
+            {
+                InputPowerSpecified = value;
+            }
+        }
+
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool InputPowerSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool SelectedCoolerSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool PowerFactorSpecified = false;
+        #endregion
+
+
+
         #region convenience properties - accessors to constraint values
         /// <summary>
         /// Convenience property - to make life easier.
@@ -50,6 +92,7 @@ namespace CryoLib {
         }
         #endregion
 
+        #region Constructors
         /**
          * Parameterless constructor is necessary for serialization
          **/
@@ -67,9 +110,10 @@ namespace CryoLib {
 			this.ID = navigator.Value;
 			// Get the constraint list
             this.constraints = new ConstraintCollection(navigator.Clone());;
-		}
+        }
+        #endregion
 
-		public override string ToString() {
+        public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("Cooler ID: {0}\n", this.coolerID);
 			return sb.ToString();

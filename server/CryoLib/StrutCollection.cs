@@ -18,8 +18,19 @@ namespace CryoLib {
 				string msg = string.Format("Error: \"{0}\" not found", name);
 				throw new Exception(msg);
 			}
-		}
+        }
 
+        public bool ShowOutputs
+        {
+            set
+            {
+                foreach (StrutType st in this)
+                {
+                    st.ShowOutputs = value;
+                }
+            }
+        }
+        #region Constructors
         public StrutTypeCollection()
         {
 
@@ -42,5 +53,6 @@ namespace CryoLib {
                 this.Add(strut);
             } while (navigator.MoveToNext());
         }
-	}
+        #endregion
+    }
 }

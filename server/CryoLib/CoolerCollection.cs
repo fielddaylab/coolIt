@@ -20,6 +20,18 @@ namespace CryoLib {
 			}
 		}
 
+
+        public bool ShowOutputs
+        {
+            set
+            {
+                foreach (Cooler st in this)
+                {
+                    st.ShowOutputs = value;
+                }
+            }
+        }
+
         public CoolerCollection()
         {
 

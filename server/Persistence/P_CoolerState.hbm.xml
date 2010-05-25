@@ -5,6 +5,7 @@
 			<generator class="identity" />
 		</id>
 		<property name="InputPower" column="inputPower" />
+    <property name="PowerFactor" column="powerFactor" />
 		<many-to-one
 				  name="Cooler"
 				  column="coolerId"

@@ -73,10 +73,10 @@ namespace DesktopClient {
 			double[] y = new double[2];
 
 			double max = cooler.CPM[1].data;
-			x[0] = 300 - (300 - cooler.CPM[0].temp) * state.PowerFactor;
+			x[0] = 300 - (300 - cooler.CPM[0].temp) * state.Coolers[0].PowerFactor;
 			x[1] = 300;
 			for (int i = 0; i < 2; i++) {
-				y[i] = cooler.OutputPower(cooler.CPM[i].temp, state.PowerFactor);
+				y[i] = cooler.OutputPower(cooler.CPM[i].temp, state.Coolers[0].PowerFactor);
 			}
 
 

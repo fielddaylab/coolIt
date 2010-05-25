@@ -27,7 +27,8 @@ namespace DesktopClient {
 		void handle_SimulationChangedEvent(object sender, EventArgs e) {
 			Problem state = ((SimulatorStub)sender).State;
 			if (powerFactorRadioButton.Checked) {
-				addPoint(state.PowerFactor, state.Temperature);
+                //TODO:  Fix this to handle multiple coolers
+				addPoint(state.Coolers[0].PowerFactor, state.Temperature);
 			} else if (strutLengthRadioButton.Checked) {
                 //TODO:  Fix this to handle multiple struts
 				addPoint(state.Struts[0].Length, state.Temperature);

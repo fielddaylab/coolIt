@@ -6,6 +6,7 @@ namespace Persistence {
 	public class P_CoolerState {
 		private int id;
         public virtual double InputPower {get; set; }
+        public virtual double PowerFactor { get; set; }
         public virtual P_Cooler Cooler {get; set;}
         public virtual P_ProblemState ProblemState { get; set; }
 
@@ -18,10 +19,11 @@ namespace Persistence {
         {
 		}
 
-		public P_CoolerState(double inputPower,
+		public P_CoolerState(double inputPower, double powerFactor,
 			P_ProblemState state)
 			: this() {
 			this.InputPower = inputPower;
+            this.PowerFactor = powerFactor;
 			this.ProblemState = state;
 		}
 
@@ -29,7 +31,8 @@ namespace Persistence {
 			Random rand = new Random();
 
 			double inputPower = rand.NextDouble();
-            return new P_CoolerState(inputPower, problemState);
+            double powerFactor = rand.NextDouble();
+            return new P_CoolerState(inputPower, powerFactor, problemState);
 		}
 
 

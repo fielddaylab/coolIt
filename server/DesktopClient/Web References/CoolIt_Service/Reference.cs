@@ -1265,6 +1265,8 @@ namespace DesktopClient.CoolIt_Service {
         
         private CoolerModel selectedCoolerField;
         
+        private double powerFactorField;
+        
         private string idField;
         
         /// <remarks/>
@@ -1294,6 +1296,16 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.selectedCoolerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double PowerFactor {
+            get {
+                return this.powerFactorField;
+            }
+            set {
+                this.powerFactorField = value;
             }
         }
         
@@ -1613,13 +1625,21 @@ namespace DesktopClient.CoolIt_Service {
         
         private SupportMode supportModeField;
         
-        private double strengthField;
+        private bool supportModeFieldSpecified;
         
         private Constraint[] constraintsField;
         
+        private double strengthField;
+        
+        private bool strengthFieldSpecified;
+        
         private double lengthField;
         
+        private bool lengthFieldSpecified;
+        
         private double crossSectionalAreaField;
+        
+        private bool crossSectionalAreaFieldSpecified;
         
         private Material materialField;
         
@@ -1638,12 +1658,13 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
-        public double Strength {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SupportModeSpecified {
             get {
-                return this.strengthField;
+                return this.supportModeFieldSpecified;
             }
             set {
-                this.strengthField = value;
+                this.supportModeFieldSpecified = value;
             }
         }
         
@@ -1658,6 +1679,27 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
+        public double Strength {
+            get {
+                return this.strengthField;
+            }
+            set {
+                this.strengthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StrengthSpecified {
+            get {
+                return this.strengthFieldSpecified;
+            }
+            set {
+                this.strengthFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public double Length {
             get {
                 return this.lengthField;
@@ -1668,12 +1710,34 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LengthSpecified {
+            get {
+                return this.lengthFieldSpecified;
+            }
+            set {
+                this.lengthFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public double CrossSectionalArea {
             get {
                 return this.crossSectionalAreaField;
             }
             set {
                 this.crossSectionalAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CrossSectionalAreaSpecified {
+            get {
+                return this.crossSectionalAreaFieldSpecified;
+            }
+            set {
+                this.crossSectionalAreaFieldSpecified = value;
             }
         }
         
@@ -1735,10 +1799,6 @@ namespace DesktopClient.CoolIt_Service {
         
         private bool temperatureFieldSpecified;
         
-        private double powerFactorField;
-        
-        private bool powerFactorFieldSpecified;
-        
         private double costField;
         
         private bool costFieldSpecified;
@@ -1787,27 +1847,6 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.temperatureFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double PowerFactor {
-            get {
-                return this.powerFactorField;
-            }
-            set {
-                this.powerFactorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PowerFactorSpecified {
-            get {
-                return this.powerFactorFieldSpecified;
-            }
-            set {
-                this.powerFactorFieldSpecified = value;
             }
         }
         

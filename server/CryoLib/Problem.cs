@@ -17,10 +17,9 @@ namespace CryoLib {
         private CoolerCollection coolers;
 		private ProblemImageCollection problemImageCollection;
 
-        #region State Properties
+        #region State Properties - Outputs
         private bool solved;
         public double Temperature { get; set; }
-        public double PowerFactor { get; set; }
         public double Cost { get; set; }
         #endregion
 
@@ -41,7 +40,6 @@ namespace CryoLib {
                 HeatLeakSpecified = value;
                 ConstraintsSpecified = value;
                 ImageCollectionSpecified = value;
-                PowerFactorSpecified = value;
                 StrutsSpecified = value;
                 CoolersSpecified = value;
             }
@@ -55,7 +53,9 @@ namespace CryoLib {
                 CostSpecified = value;
                 SolvedSpecified = value;
                 StrutsSpecified = value;
+                Struts.ShowOutputs = value;
                 CoolersSpecified = value;
+                Coolers.ShowOutputs = value;
             }
         }
 
@@ -83,9 +83,6 @@ namespace CryoLib {
 
         [System.Xml.Serialization.XmlIgnore]
         public bool TemperatureSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool PowerFactorSpecified = false;
 
         [System.Xml.Serialization.XmlIgnore]
         public bool CostSpecified = false;

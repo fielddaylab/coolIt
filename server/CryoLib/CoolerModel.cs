@@ -23,7 +23,8 @@ namespace CryoLib {
 		private double maxInputPower;
 		private double maxOutputPower;
 
-		/// <summary>
+        #region Constructors
+        /// <summary>
 		/// No-argument (default) constructor.
 		/// </summary>
 		public CoolerModel() {
@@ -76,7 +77,8 @@ namespace CryoLib {
 			base(name, id, price, priceUnit, currencyUnit) {
 			this.coolingPowerData = cpm;
 			maxOutputPower = coolingPowerData[1].data;
-		}
+            }
+        #endregion 
 
         #region Serialzation Properties
         /**
@@ -107,14 +109,9 @@ namespace CryoLib {
 			get { return coolingPowerData; }
 		}
 
-		public InputPowerCalculator InputPowerCalculator {
-			set {
-				inputPowerCalc = value;
-				maxInputPower = calcMaxInputPower();
-			}
-		}
 
-		public double maxPowerFactor(double inputPowerLimit, double targetTemp) {
+        #region Conveneince Methods for Power Factors
+        public double maxPowerFactor(double inputPowerLimit, double targetTemp) {
 			Range range = new Range(0.0, 1.0);
 			for (int i = 0; i < 10; i++) {
 				range = iterate(range, inputPowerLimit, targetTemp);
@@ -180,11 +177,22 @@ namespace CryoLib {
 
 		public double MaxOutputPower {
 			get { return maxOutputPower; }
-		}
+        }
+        #endregion
 
-		public double MaxInputPower {
+        #region convenience properties for input power
+        public double MaxInputPower {
 			get { return maxInputPower; }
 		}
+
+        public InputPowerCalculator InputPowerCalculator
+        {
+            set
+            {
+                inputPowerCalc = value;
+                maxInputPower = calcMaxInputPower();
+            }
+        }
 
 		public double InputPower(double temperature, double powerFactor) {
 			if (inputPowerCalc == null) {
@@ -211,10 +219,10 @@ namespace CryoLib {
 				data[i, 1] = coolingPowerData[i].data;
 			}
 			return data;
-		}
+        }
+        #endregion
 
-
-		public override string Describe() {
+        public override string Describe() {
 			StringBuilder sb = new StringBuilder();
 			sb.AppendFormat("\"{0}\"\n", Name);
 			sb.Append("Temp\tCooling Power\n");

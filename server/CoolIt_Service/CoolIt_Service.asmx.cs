@@ -253,7 +253,7 @@ namespace CoolIt_Service {
 
 		private void setCooler(Problem state, string coolerID, string name, double powerFactor) {
             state.Coolers[coolerID].SelectedCooler = (CoolerModel) coolers[name] ;
-			state.PowerFactor = powerFactor;
+			state.Coolers[coolerID].PowerFactor = powerFactor;
 		}
 			
 
@@ -390,11 +390,11 @@ namespace CoolIt_Service {
 			// code can detect this and generate an appropriate message for the user.
 			try {
                 //TODO:  Change to handle multiple struts
-				state.Temperature = sim.simulate(state.Struts[0].Length, combinedCrossSection, state.Struts[0].Material, cooler, state.PowerFactor);
+				state.Temperature = sim.simulate(state.Struts[0].Length, combinedCrossSection, state.Struts[0].Material, cooler, state.Coolers[0].PowerFactor);
                 //TODO:  Change to handle multiple coolers
-                state.Coolers[0].InputPower = cooler.InputPower(state.Temperature, state.PowerFactor);
+                state.Coolers[0].InputPower = cooler.InputPower(state.Temperature, state.Coolers[0].PowerFactor);
 			} catch (ArgumentException ae) {
-                _logger.DebugFormat("MATLAB has thrown an exception {0} with temp {1} and power factor {2}", ae.Message, state.Temperature, state.PowerFactor);
+                _logger.DebugFormat("MATLAB has thrown an exception {0} with temp {1} and power factor {2}", ae.Message, state.Temperature, state.Coolers[0].PowerFactor);
 
                 state.Temperature = -1;
                 state.Coolers[0].InputPower = -1;
@@ -525,8 +525,6 @@ namespace CoolIt_Service {
          **/
         private void initState(Problem state)
         {
-            state.PowerFactor = 1.0;
-
             //If no cooler are set, add one by default
             if (state.Coolers.Count == 0)
             {
@@ -534,6 +532,7 @@ namespace CoolIt_Service {
                 defaultCooler.SelectedCooler = (CoolerModel)coolers[0];
                 defaultCooler.ID = "1";
                 defaultCooler.InputPower = 0;
+                defaultCooler.PowerFactor = 1.0;
                 state.Coolers.Add(defaultCooler);
             }
             //otherwise set default values for each cooler loaded by the problem
@@ -543,6 +542,7 @@ namespace CoolIt_Service {
                 {
                     cool.SelectedCooler = (CoolerModel)coolers[0];
                     cool.InputPower = 0;
+                    cool.PowerFactor = 1.0;
                 }
             }
 

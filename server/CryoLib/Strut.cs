@@ -38,8 +38,6 @@ namespace CryoLib {
             set { supportMode = value; }
         }
 
-        public double Strength { get; set; }
-
         //constraints set by the problem
         private ConstraintCollection constraints;
 
@@ -49,6 +47,10 @@ namespace CryoLib {
             get { return constraints; }
             set { constraints = value; }
         }
+        #endregion
+
+        #region Outputs
+        public double Strength { get; set; }
         #endregion
 
         #region user selected properties, set in the UI
@@ -72,6 +74,54 @@ namespace CryoLib {
 			get { return material; }
             set { material = value; }
         }
+        #endregion
+
+        #region Serialzation Properties
+        /**
+         * Method that controls whether or not all the object properties
+         * should be serialized when returned in XML by the
+         * webservice.  There is a specific pattern that can be utilized 
+         * to control this, which is what all the "Specified" properties are for
+         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
+         **/
+        public bool ShowObjectDetails
+        {
+            set
+            {
+                PowerFactorSpecified = value;
+                MaterialSpecified = value;
+                CrossSectionalAreaSpecified = value;
+                LengthSpecified = value;
+                SupportModeSpecified = value;
+            }
+        }
+
+        public bool ShowOutputs
+        {
+            set
+            {
+                StrengthSpecified = value;
+            }
+        }
+
+        //Serialzation properties
+        [System.Xml.Serialization.XmlIgnore]
+        public bool PowerFactorSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool MaterialSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool CrossSectionalAreaSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool LengthSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool SupportModeSpecified = false;
+
+        [System.Xml.Serialization.XmlIgnore]
+        public bool StrengthSpecified = false;
         #endregion
 
 
@@ -129,6 +179,7 @@ namespace CryoLib {
         }
         #endregion
 
+        #region Constructors
         /**
          * Parameterless constructor is necessary for serialization
          **/
@@ -181,9 +232,10 @@ namespace CryoLib {
 
 			// Get the constraint list
             this.constraints = new ConstraintCollection(navigator.Clone());;
-		}
+        }
+        #endregion
 
-		public override string ToString() {
+        public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("Strut Type ID: {0}\n", this.strutID);
 			sb.AppendFormat("Length: {0}\n", length);
