@@ -7,7 +7,6 @@
 		<property name="Timestamp" column="timestamp" type="DateTime" />
 		<property name="PowerFactor" column="powerFactor" />
 		<property name="Cost" column="cost" />
-		<property name="StressLimit" column="stressLimit" />
 		<property name="Temperature" column="temperature" />
 		<property name="IsValidSolution" column="isValidSolution" />
 		<many-to-one

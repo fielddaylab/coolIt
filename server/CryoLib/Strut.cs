@@ -32,12 +32,13 @@ namespace CryoLib {
             set { strutID = value; }
         }
 
-        [XmlAttribute]
         public SupportMode SupportMode
         {
             get { return supportMode; }
             set { supportMode = value; }
         }
+
+        public double Strength { get; set; }
 
         //constraints set by the problem
         private ConstraintCollection constraints;
@@ -116,6 +117,14 @@ namespace CryoLib {
             get
             {
                 return constraints.getConstraintTarget(VALUE.STRUT_CROSS_SECTION, OP.LE, DEFAULT_MAX_STRUT_CROSS_SECTION);
+            }
+        }
+
+        public double StrengthRequirement
+        {
+            get
+            {
+                return constraints.getConstraintTarget(VALUE.STRENGTH, OP.GE, 0.0);
             }
         }
         #endregion

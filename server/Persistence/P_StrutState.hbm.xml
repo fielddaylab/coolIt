@@ -6,6 +6,7 @@
 		</id>
 		<property name="Length" column="length" />
 		<property name="CrossSection" column="crossSection" />
+    <property name="Strength" column="strength" />
 		<many-to-one
 				  name="Material"
 				  column="materialId"

@@ -22,7 +22,6 @@ namespace CryoLib {
         public double Temperature { get; set; }
         public double PowerFactor { get; set; }
         public double Cost { get; set; }
-        public double StressLimit { get; set; }
         #endregion
 
         #region Serialzation Properties
@@ -41,10 +40,10 @@ namespace CryoLib {
                 MonetaryIncentiveSpecified = value;
                 HeatLeakSpecified = value;
                 ConstraintsSpecified = value;
+                ImageCollectionSpecified = value;
+                PowerFactorSpecified = value;
                 StrutsSpecified = value;
                 CoolersSpecified = value;
-                ImageCollectionSpecified = value;
-                PowerFactorSpecified = false;
             }
         }
 
@@ -52,9 +51,11 @@ namespace CryoLib {
         {
             set
             {
-                TemperatureSpecified = false;
-                CostSpecified = false;
-                SolvedSpecified = false;
+                TemperatureSpecified = value;
+                CostSpecified = value;
+                SolvedSpecified = value;
+                StrutsSpecified = value;
+                CoolersSpecified = value;
             }
         }
 
@@ -221,14 +222,6 @@ namespace CryoLib {
             this.coolers = new CoolerCollection();
         }
         #endregion
-
-
-        //TODO:  Determine if force limit is indeed problem level?
-		public double StrengthRequirement {
-			get {
-				return constraints.getConstraintTarget(VALUE.FORCE_LIMIT, OP.GE, 0.0);
-			}
-		}
 
 		public double TargetTemperature {
 			get {

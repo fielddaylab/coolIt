@@ -211,10 +211,9 @@
       </s:element>
       <s:complexType name="Problem">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Temperature" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="PowerFactor" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:double" />
-          <s:element minOccurs="1" maxOccurs="1" name="StressLimit" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Temperature" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PowerFactor" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cost" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="HeatLeak" type="s:double" />
@@ -222,7 +221,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Struts" type="tns:ArrayOfStrutType" />
           <s:element minOccurs="0" maxOccurs="1" name="Coolers" type="tns:ArrayOfCooler" />
           <s:element minOccurs="0" maxOccurs="1" name="ImageCollection" type="tns:ProblemImageCollection" />
-          <s:element minOccurs="1" maxOccurs="1" name="Solved" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Solved" type="s:boolean" />
         </s:sequence>
         <s:attribute name="Name" type="s:string" />
         <s:attribute name="ID" type="s:int" use="required" />
@@ -239,7 +238,7 @@
       </s:complexType>
       <s:simpleType name="VALUE">
         <s:restriction base="s:string">
-          <s:enumeration value="FORCE_LIMIT" />
+          <s:enumeration value="STRENGTH" />
           <s:enumeration value="INPUT_POWER" />
           <s:enumeration value="TEMP" />
           <s:enumeration value="COST" />
@@ -264,6 +263,8 @@
       </s:complexType>
       <s:complexType name="StrutType">
         <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SupportMode" type="tns:SupportMode" />
+          <s:element minOccurs="1" maxOccurs="1" name="Strength" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
           <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:double" />
           <s:element minOccurs="1" maxOccurs="1" name="CrossSectionalArea" type="s:double" />
@@ -271,7 +272,6 @@
         </s:sequence>
         <s:attribute name="Count" type="s:int" use="required" />
         <s:attribute name="ID" type="s:string" />
-        <s:attribute name="SupportMode" type="tns:SupportMode" use="required" />
       </s:complexType>
       <s:simpleType name="SupportMode">
         <s:restriction base="s:string">

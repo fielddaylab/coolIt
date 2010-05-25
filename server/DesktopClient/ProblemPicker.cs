@@ -106,7 +106,7 @@ namespace DesktopClient {
 					case VALUE.COST:
 						rowVals[3] = "Dollars ($)";
 						break;
-					case VALUE.FORCE_LIMIT:
+					case VALUE.STRENGTH:
 						rowVals[3] = "megaNewtons (MN)";
 						break;
 					case VALUE.INPUT_POWER:

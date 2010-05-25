@@ -7,6 +7,7 @@ namespace Persistence {
 		private int id;
         public virtual double CrossSection {get; set; }
         public virtual double Length {get; set;}
+        public virtual double Strength { get; set; }
         public virtual P_Material Material {get; set;}
         public virtual P_ProblemState ProblemState { get; set; }
 
@@ -19,11 +20,12 @@ namespace Persistence {
         {
 		}
 
-		public P_StrutState(double crossSection, double length,
+		public P_StrutState(double crossSection, double length, double strength,
 			P_ProblemState state)
 			: this() {
 			this.CrossSection = crossSection;
 			this.Length = length;
+            this.Strength = strength;
 			this.ProblemState = state;
 		}
 
@@ -32,7 +34,8 @@ namespace Persistence {
 
 			double crossSection = rand.NextDouble();
 			double length = rand.NextDouble();
-			return new P_StrutState(crossSection, length, problemState);
+            double strength = rand.NextDouble();
+			return new P_StrutState(crossSection, length, strength, problemState);
 		}
 
 

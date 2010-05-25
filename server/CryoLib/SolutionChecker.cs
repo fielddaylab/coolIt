@@ -38,7 +38,7 @@ namespace CryoLib {
 			foreach (Constraint constraint in orderedConstraints) {
 				if (!checkConstraint(constraint, state)) {
 					switch (constraint.Value) {
-						case VALUE.FORCE_LIMIT:
+						case VALUE.STRENGTH:
 							answer.Text = "The strut is not strong enough and breaks.";
 							answer.CutScreen = problem.ImageCollection.FailStrutBreaks;
 							return answer;
@@ -123,8 +123,8 @@ namespace CryoLib {
 				case VALUE.COST:
 					valueToCheck = state.Cost;
 					break;
-				case VALUE.FORCE_LIMIT:
-					valueToCheck = state.StressLimit;
+				case VALUE.STRENGTH:
+					valueToCheck = state.Struts[0].Strength;
 					break;
 				case VALUE.INPUT_POWER:
 					valueToCheck = state.Coolers[0].InputPower;

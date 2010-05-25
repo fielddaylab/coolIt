@@ -98,12 +98,12 @@ namespace DesktopClient {
                 inputPowerBox.ForeColor = Color.Red;
             }
 
-			if (curState.StressLimit > 0.0) {
-				stressLimitTextBox.Text = string.Format("{0:F3}", curState.StressLimit);
+			if (curState.Struts[0].Strength > 0.0) {
+				stressLimitTextBox.Text = string.Format("{0:F3}", curState.Struts[0].Strength);
 			} else {
 				stressLimitTextBox.Text = "(unknown)";
 			}
-			if (challenge != null && curState.StressLimit >= challenge.StrengthRequirement) {
+			if (challenge != null && curState.Struts[0].Strength >= challenge.Struts[0].StrengthRequirement) {
 				stressLimitTextBox.ForeColor = Color.Green;
 			} else {
 				stressLimitTextBox.ForeColor = Color.Red;

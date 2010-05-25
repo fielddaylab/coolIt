@@ -215,7 +215,9 @@ namespace DesktopClient {
 			DesktopClient.CoolIt_Service.Problem[] rawProblems = webService.GetProblems();
 			Problem [] answer = new Problem[rawProblems.Length];
 			for (int i = 0; i < rawProblems.Length; i++) {
-				answer[i] = convertProblem( rawProblems[i] );
+                int id = rawProblems[i].ID;
+                DesktopClient.CoolIt_Service.Problem prob = webService.GetProblem(id);
+				answer[i] = convertProblem(prob);
 			}
 			return answer;
 		}
@@ -238,7 +240,6 @@ namespace DesktopClient {
                 answer.Solved = rawProblem.Solved;
                 answer.PowerFactor = rawProblem.PowerFactor;
                 answer.Cost = rawProblem.Cost;
-                answer.StressLimit = rawProblem.StressLimit;
                 answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
                 answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
                 answer.Struts = convertStrutCollection(rawProblem.Struts);
@@ -270,6 +271,7 @@ namespace DesktopClient {
                 st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
                 st.Length = strut.Length;
                 st.CrossSectionalArea = strut.CrossSectionalArea;
+                st.Strength = strut.Strength;
                 if (strut.Material != null && strut.Material.Name != null)
                 {
                     st.Material = findMaterial(strut.Material.Name);
@@ -302,14 +304,18 @@ namespace DesktopClient {
         }
 
 		private ProblemImageCollection convertImageCollection(DesktopClient.CoolIt_Service.ProblemImageCollection rawCollection) {
-			ProblemImageCollection answer = new ProblemImageCollection();
-			answer.BaseURI = rawCollection.BaseURI;
-			answer.Intro = rawCollection.Intro;
-			answer.Success = rawCollection.Success;
-			answer.FailPowerLimit = rawCollection.FailPowerLimit;
-			answer.FailStrutBreaks = rawCollection.FailStrutBreaks;
-			answer.FailTooHot = rawCollection.FailTooHot;
-			answer.PickerImageCollection = convertPickerImageCollection( rawCollection.PickerImageCollection );
+            ProblemImageCollection answer = new ProblemImageCollection();
+            if (rawCollection != null)
+            {
+
+                answer.BaseURI = rawCollection.BaseURI;
+                answer.Intro = rawCollection.Intro;
+                answer.Success = rawCollection.Success;
+                answer.FailPowerLimit = rawCollection.FailPowerLimit;
+                answer.FailStrutBreaks = rawCollection.FailStrutBreaks;
+                answer.FailTooHot = rawCollection.FailTooHot;
+                answer.PickerImageCollection = convertPickerImageCollection(rawCollection.PickerImageCollection);
+            }
 			return answer;
 		}
 
@@ -353,8 +359,8 @@ namespace DesktopClient {
 				case DesktopClient.CoolIt_Service.VALUE.COST:
 					value = VALUE.COST;
 					break;
-				case DesktopClient.CoolIt_Service.VALUE.FORCE_LIMIT:
-					value = VALUE.FORCE_LIMIT;
+				case DesktopClient.CoolIt_Service.VALUE.STRENGTH:
+					value = VALUE.STRENGTH;
 					break;
 				case DesktopClient.CoolIt_Service.VALUE.INPUT_POWER:
 					value = VALUE.INPUT_POWER;
@@ -412,7 +418,8 @@ namespace DesktopClient {
 				answer = new CoolerModel[rawCoolers.Length];
 				InputPowerCalculator calc = getInputPowerCalc();
 				for (int i = 0; i < rawCoolers.Length; i++) {
-					DesktopClient.CoolIt_Service.CoolerModel raw = rawCoolers[i];
+                    //This is a bit of a hack in the Desktop Client because we have stripped down what we bring back from the web service
+					DesktopClient.CoolIt_Service.CoolerModel raw = webService.GetCoolerModel(rawCoolers[i].id);
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.CPM.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.CPM[j];
@@ -454,7 +461,8 @@ namespace DesktopClient {
 				DesktopClient.CoolIt_Service.Material[] rawMaterials = webService.GetMaterials();
 				answer = new Material[rawMaterials.Length];
 				for (int i = 0; i < rawMaterials.Length; i++) {
-					DesktopClient.CoolIt_Service.Material raw = rawMaterials[i];
+                    //This is a bit of a hack because we have stripped down the data that the web service returns to the list
+					DesktopClient.CoolIt_Service.Material raw = webService.GetMaterial(rawMaterials[i].id);
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.MP.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.MP[j];

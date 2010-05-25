@@ -383,7 +383,7 @@ namespace CoolIt_Service {
             //TODO:  how do you handle the number of struts once they might be different?
 			double combinedCrossSection = state.Struts[0].Count * state.Struts[0].CrossSectionalArea;
 			state.Cost = cooler.price +  state.Struts[0].Length * combinedCrossSection * state.Struts[0].Material.price;
-			state.StressLimit = state.Struts[0].Material.YieldStrength * combinedCrossSection;
+			state.Struts[0].Strength = state.Struts[0].Material.YieldStrength * combinedCrossSection;
 
 			// If temperature goes below known range for the given material the MATLAB code will generate an
 			// ApplicationException.  In that case we set temperature and inputPower to impossible values.  UI
@@ -406,6 +406,8 @@ namespace CoolIt_Service {
 			} else {
 				state.Solved = false;
 			}
+
+            state.ShowOutputs = true;
 			return state;
 		}
 

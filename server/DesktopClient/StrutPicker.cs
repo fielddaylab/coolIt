@@ -137,14 +137,14 @@ namespace DesktopClient {
 
 		private void crossSectionTextBox_TextChanged(object sender, EventArgs e) {
 			updatePrice();
-			updateStressLimit();
+			updateStrength();
 			OnRaiseStrutChangedEvent(new EventArgs());
 		}
 
 		private void materialsListBox_SelectedIndexChanged(object sender, EventArgs e) {
 			OnRaiseStrutChangedEvent(new EventArgs());
 			plotMaterial();
-			updateStressLimit();
+			updateStrength();
 			updatePrice();
 		}
 
@@ -159,12 +159,12 @@ namespace DesktopClient {
 			priceTextBox.Text = strutPrice.ToString("C");
 		}
 
-		private void updateStressLimit() {
+		private void updateStrength() {
 			Material material = (Material)materialsListBox.SelectedItem;
 			if (material.YieldStrength >= 0.0) {
 				yieldStrengthTextBox.Text = material.YieldStrength.ToString();
-				double stressLimit = material.YieldStrength * getCrossSection(); // Unit is megaNewton (MN)
-				stressLimitTextBox.Text = stressLimit.ToString();
+				double Strength = material.YieldStrength * getCrossSection(); // Unit is megaNewton (MN)
+				stressLimitTextBox.Text = Strength.ToString();
 			} else {
 				yieldStrengthTextBox.Text = "(unknown)";
 				stressLimitTextBox.Text = "(unknown)";

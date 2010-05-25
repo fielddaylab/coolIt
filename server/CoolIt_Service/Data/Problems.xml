@@ -55,7 +55,7 @@
 						<Limit>0.16</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>2.5</Limit>
 					</constraint>
@@ -130,7 +130,7 @@
 						<Limit>0.16</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>2.5</Limit>
 					</constraint>
@@ -205,7 +205,7 @@
 						<Limit>0.16</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>5</Limit>
 					</constraint>
@@ -278,7 +278,7 @@
 						<Limit>2.0</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>2.60</Limit>
 					</constraint>
@@ -363,7 +363,7 @@
 						<Limit>0.32</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>1.16</Limit>
 					</constraint>
@@ -444,7 +444,7 @@
 						<Limit>0.32</Limit>
 					</constraint>
 					<constraint>
-						<Value>Force Limit</Value>
+						<Value>Strength</Value>
 						<Op>GE</Op>
 						<Limit>1.04</Limit>
 					</constraint>

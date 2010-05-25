@@ -44,8 +44,8 @@ namespace CryoLib {
 				case "Strut Cross Section":		// unit is squareMeter (m^2)
 					value = VALUE.STRUT_CROSS_SECTION;
 					break;
-				case "Force Limit":				// unit is megaNewton (MN)
-					value = VALUE.FORCE_LIMIT;
+				case "Strength":				// unit is megaNewton (MN)
+					value = VALUE.STRENGTH;
 					break;
 				case "Input Power":				// unit is Watt (W)
 					value = VALUE.INPUT_POWER;
@@ -135,7 +135,7 @@ namespace CryoLib {
 	/// These values are in order of priority for giving feedback - i.e. if the strut breaks, say that in
 	/// feedback and ignore other problems like too much power.
 	/// </summary>
-	public enum VALUE { FORCE_LIMIT, INPUT_POWER, TEMP, COST, STRUT_LENGTH, STRUT_CROSS_SECTION };
+	public enum VALUE { STRENGTH, INPUT_POWER, TEMP, COST, STRUT_LENGTH, STRUT_CROSS_SECTION };
 
 	public enum OP { LT, LE, EQ, GE, GT, NE };
 

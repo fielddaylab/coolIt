@@ -204,7 +204,7 @@ namespace Persistence {
 
         private static P_ProblemState LoadState(Problem rawState, ISession session)
         {
-            P_ProblemState state = new P_ProblemState(rawState.PowerFactor, rawState.Cost, rawState.StressLimit, rawState.Temperature, rawState.Solved);
+            P_ProblemState state = new P_ProblemState(rawState.PowerFactor, rawState.Cost, rawState.Temperature, rawState.Solved);
 
             foreach (StrutType strut in rawState.Struts)
             {
@@ -212,7 +212,7 @@ namespace Persistence {
                 criterion.Add(Expression.Eq("Name", strut.Material.Name));
                 P_Material material = criterion.UniqueResult<P_Material>();
 
-                P_StrutState pstrut = new P_StrutState(strut.CrossSectionalArea, strut.Length, state);
+                P_StrutState pstrut = new P_StrutState(strut.CrossSectionalArea, strut.Length, strut.Strength, state);
                 pstrut.Material = material;
                 state.AddStrut(pstrut);
             }

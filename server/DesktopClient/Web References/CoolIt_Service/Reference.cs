@@ -1364,7 +1364,7 @@ namespace DesktopClient.CoolIt_Service {
     public enum VALUE {
         
         /// <remarks/>
-        FORCE_LIMIT,
+        STRENGTH,
         
         /// <remarks/>
         INPUT_POWER,
@@ -1611,6 +1611,10 @@ namespace DesktopClient.CoolIt_Service {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.wisc.edu/doit/ls/coolit/")]
     public partial class StrutType {
         
+        private SupportMode supportModeField;
+        
+        private double strengthField;
+        
         private Constraint[] constraintsField;
         
         private double lengthField;
@@ -1623,7 +1627,25 @@ namespace DesktopClient.CoolIt_Service {
         
         private string idField;
         
-        private SupportMode supportModeField;
+        /// <remarks/>
+        public SupportMode SupportMode {
+            get {
+                return this.supportModeField;
+            }
+            set {
+                this.supportModeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Strength {
+            get {
+                return this.strengthField;
+            }
+            set {
+                this.strengthField = value;
+            }
+        }
         
         /// <remarks/>
         public Constraint[] Constraints {
@@ -1686,17 +1708,6 @@ namespace DesktopClient.CoolIt_Service {
                 this.idField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public SupportMode SupportMode {
-            get {
-                return this.supportModeField;
-            }
-            set {
-                this.supportModeField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1722,11 +1733,15 @@ namespace DesktopClient.CoolIt_Service {
         
         private double temperatureField;
         
+        private bool temperatureFieldSpecified;
+        
         private double powerFactorField;
+        
+        private bool powerFactorFieldSpecified;
         
         private double costField;
         
-        private double stressLimitField;
+        private bool costFieldSpecified;
         
         private string descriptionField;
         
@@ -1748,6 +1763,8 @@ namespace DesktopClient.CoolIt_Service {
         
         private bool solvedField;
         
+        private bool solvedFieldSpecified;
+        
         private string nameField;
         
         private int idField;
@@ -1763,12 +1780,34 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TemperatureSpecified {
+            get {
+                return this.temperatureFieldSpecified;
+            }
+            set {
+                this.temperatureFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public double PowerFactor {
             get {
                 return this.powerFactorField;
             }
             set {
                 this.powerFactorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PowerFactorSpecified {
+            get {
+                return this.powerFactorFieldSpecified;
+            }
+            set {
+                this.powerFactorFieldSpecified = value;
             }
         }
         
@@ -1783,12 +1822,13 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
-        public double StressLimit {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CostSpecified {
             get {
-                return this.stressLimitField;
+                return this.costFieldSpecified;
             }
             set {
-                this.stressLimitField = value;
+                this.costFieldSpecified = value;
             }
         }
         
@@ -1891,6 +1931,17 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.solvedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SolvedSpecified {
+            get {
+                return this.solvedFieldSpecified;
+            }
+            set {
+                this.solvedFieldSpecified = value;
             }
         }
         

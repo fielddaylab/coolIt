@@ -49,7 +49,7 @@ namespace CryoLib {
 					case VALUE.TEMP:
 						targetTemp = constraint.Target;
 						break;
-					case VALUE.FORCE_LIMIT:
+					case VALUE.STRENGTH:
 						strengthReq = constraint.Target;
 						break;
 				}

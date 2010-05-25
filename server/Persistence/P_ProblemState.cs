@@ -9,7 +9,6 @@ namespace Persistence {
 		private DateTime timestamp;
 		private double powerFactor;
 		private double cost;
-		private double stressLimit;
 		private double temperature;
 		private bool isValidSolution;
 		private P_Episode episode;
@@ -48,11 +47,6 @@ namespace Persistence {
 			set { cost = value; }
 		}
 
-		public virtual double StressLimit {
-			get { return stressLimit; }
-			set { stressLimit = value; }
-		}
-
 		public virtual double Temperature {
 			get { return temperature; }
 			set { temperature = value; }
@@ -73,11 +67,10 @@ namespace Persistence {
 		}
 
 		public P_ProblemState(double powerFactor, double cost,
-			double stressLimit, double temperature, bool isValidSolution)
+			double temperature, bool isValidSolution)
 			: this() {
 			this.powerFactor = powerFactor;
 			this.cost = cost;
-			this.stressLimit = stressLimit;
 			this.temperature = temperature;
 			this.isValidSolution = isValidSolution;
 		}
@@ -87,10 +80,9 @@ namespace Persistence {
 
 			double powerFactor = rand.NextDouble();
 			double cost = rand.NextDouble();
-			double stressLimit = rand.NextDouble();
 			double temperature = rand.NextDouble();
 			bool isValidSolution = rand.Next() % 5 == 0;
-			return new P_ProblemState(powerFactor, cost, stressLimit, temperature, isValidSolution);
+			return new P_ProblemState(powerFactor, cost, temperature, isValidSolution);
 		}
 
         public virtual void AddStrut(P_StrutState strut)

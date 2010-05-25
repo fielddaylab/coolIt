@@ -18,7 +18,7 @@ Units:
 
 Strut Length: meters (m)
 Strut Cross Section: square meters (m^2)
-Force Limit: mega Pascals (mPa)
+Strength: mega Pascals (mPa)
 Input Power: Watts (W)
 Cost: U. S. Dollars ($)
 Temp: degrees K (K)
@@ -27,7 +27,7 @@ Temp: degrees K (K)
     <xs:restriction base="xs:string">
       <xs:enumeration value="Strut Length"/>
       <xs:enumeration value="Strut Cross Section"/>
-      <xs:enumeration value="Force Limit"/>
+      <xs:enumeration value="Strength"/>
       <xs:enumeration value="Input Power"/>
       <xs:enumeration value="Cost"/>
       <xs:enumeration value="Temp"/>
