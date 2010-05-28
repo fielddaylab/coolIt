@@ -18,6 +18,7 @@
 			<mx:VBox verticalCenter="0" horizontalCenter="0" visible="{(model.servicesOut &gt; 0) ? false : true}">
 				<mx:Label id="messageField" height="0" fontSize="12"
 					text="Are you new? Mistype your email? Either way, click 'Login' when ready." />
+				<mx:Label id="encouragement" fontSize="10" text="Please use the same email address each time you play Cool-It" />
 				<mx:TextInput id="emailField" width="100%" styleName="jumboButton" color="0xADB6AE" text="{emailPrompt}"/>
 				<mx:HBox width="100%">
 					<mx:Spacer width="100%" />
