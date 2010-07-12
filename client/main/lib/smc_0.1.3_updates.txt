@@ -1,0 +1,13 @@
+client/main/build.xml
+client/main/skin/style.css
+client/main/src/edu/wisc/doit/ls/coolit/command/SetCoolerCommand.as
+client/main/src/edu/wisc/doit/ls/coolit/command/RunSimulationCommand.as
+client/main/src/edu/wisc/doit/ls/coolit/command/SetProblemCommand.as
+client/main/src/edu/wisc/doit/ls/coolit/model/CoolItModelLocator.as
+client/main/src/edu/wisc/doit/ls/coolit/view/JobScreen.mxml
+client/main/src/edu/wisc/doit/ls/coolit/view/JobScreenView.as
+client/main/src/edu/wisc/doit/ls/coolit/view/StrutPickerView.as
+client/main/src/edu/wisc/doit/ls/coolit/view/CutScreenView.as
+client/main/src/edu/wisc/doit/ls/coolit/view/Meter.mxml
+client/main/src/edu/wisc/doit/ls/coolit/vo/JobVO.as
+client/main/src/AssetEmbedLocator.as
