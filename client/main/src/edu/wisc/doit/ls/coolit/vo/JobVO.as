@@ -1,11 +1,9 @@
-package edu.wisc.doit.ls.coolit.vo
-{
+package edu.wisc.doit.ls.coolit.vo {
 	import com.adobe.cairngorm.vo.IValueObject;
-	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
 	
-	public class JobVO implements IValueObject
-	{
+	import mx.collections.ArrayCollection;
+	
+	public class JobVO implements IValueObject {
 		public static var STRUT_LENGTH:String = "STRUT_LENGTH";
 		public static var STRUT_CROSS_SECTION:String = "STRUT_CROSS_SECTION";
 		public static var FORCE_LIMIT:String = "FORCE_LIMIT";
@@ -156,35 +154,15 @@ package edu.wisc.doit.ls.coolit.vo
 			return requirementList;
 			
 		}
-
-		public function getRequirementByLabel(labelText:String):RequirementVO
-		{
-			for each (var tempReq:RequirementVO in requirements)
-			{
-//Alert.show(":" + tempReq.label.toUpperCase() + ": <=> :" + labelText.toUpperCase() + ":");
-				if (tempReq.label.toUpperCase() == labelText.toUpperCase())
-				{
-//Alert.show("returning requirementVO");
-					return tempReq;
-				}
-			}
-
-			return new RequirementVO(new XML());
-		}
-		
 		public function set requirements(reqs_p:ArrayCollection):void { /* nada */ };
 		
-		public function get strutLengthMin():Number
-		{ 
-			if(!_strutLengthMin)
-			{
-				for each (var dataPoint:XML in core.Constraints.Constraint)
-				{
+		public function get strutLengthMin():Number { 
+			if(!_strutLengthMin) {
+				for each (var dataPoint:XML in core.Constraints.Constraint) {
 					var curValue:String = dataPoint.@Value.toString();
 					var curOp:String = dataPoint.@Op.toString();
 					var curTarget:Number = parseFloat(dataPoint.@Target);
-					if (curValue == STRUT_LENGTH && curOp == GREATER_THAN_OR_EQUAL)
-					{
+					if(curValue == STRUT_LENGTH && curOp == GREATER_THAN_OR_EQUAL) {
 						_strutLengthMin = curTarget;
 						break;
 					}
@@ -192,8 +170,8 @@ package edu.wisc.doit.ls.coolit.vo
 			}
 			
 			return _strutLengthMin;
+			
 		}
-		
 		public function set strutLengthMin(value_p:Number):void { /* nada */ };
 		
 		public function get strutLengthMax():Number { 
@@ -259,7 +237,7 @@ package edu.wisc.doit.ls.coolit.vo
 						break;
 					}
 				}
-					}
+			}
 			
 			return _inputPower;
 			

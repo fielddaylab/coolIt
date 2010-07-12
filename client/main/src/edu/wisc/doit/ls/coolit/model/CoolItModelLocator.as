@@ -6,7 +6,6 @@ package edu.wisc.doit.ls.coolit.model {
 	import edu.wisc.doit.ls.coolit.vo.*;
 	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
 	
 	import flash.utils.*;
 	
@@ -110,8 +109,7 @@ package edu.wisc.doit.ls.coolit.model {
 			}
 		}
 		
-		public function removeNamespaces(data_p:*):XML
-		{
+		public function removeNamespaces(data_p:*):XML {
 			var serializedXML:String;
 			var responseData:Object;
 			var cleanedString:String;
@@ -128,7 +126,7 @@ package edu.wisc.doit.ls.coolit.model {
 			
 			cleanedString = serializedXML.replace(namespaceRegExp, "");
 			cleanedXML = new XML(cleanedString);
-
+			
 			return cleanedXML;
 		}
 		

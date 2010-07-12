@@ -40,8 +40,7 @@ package edu.wisc.doit.ls.coolit.command {
 			delegate.setCooler(cooler.name, setCoolerEvent.powerFactor);
 		}
 		
-		public function result(event_p:Object):void
-		{		
+		public function result(event_p:Object):void {		
 			//var cleanedXML:XML = model.removeNamespaces(event_p.result);			
 			//model.materialModel = new MaterialModel(cleanedXML);
 			coolerModel.selected = cooler;

@@ -72,7 +72,7 @@ package edu.wisc.doit.ls.coolit.view {
 		}
 		
 		public function dispatchSetStrut(doRunSim_p:Boolean = false):void {
-			//send out a set strut event with currently selected strut
+			//send out a set cooler event with currently selected cooler
 			
 			if(cacheStream.length > 2) {
 				cacheStream.removeItemAt(0);
@@ -88,14 +88,14 @@ package edu.wisc.doit.ls.coolit.view {
 			cacheStream.addItem(newCache);
 			
 			/*
-			var setStrutEvent:SetStrutEvent = new SetStrutEvent();
-			setStrutEvent.modelLocator = modelLocator;
-			setStrutEvent.material = strutList.selectedItem as MaterialVO;
-			setStrutEvent.length = lengthM.value;
-			setStrutEvent.crossSection = crossSection.value;
-			setStrutEvent.doRunSim = doRunSim_p;
-			CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
-			*/
+			 var setStrutEvent:SetStrutEvent = new SetStrutEvent();
+			 setStrutEvent.modelLocator = modelLocator;
+			 setStrutEvent.material = strutList.selectedItem as MaterialVO;
+			 setStrutEvent.length = lengthM.value;
+			 setStrutEvent.crossSection = crossSection.value;
+			 setStrutEvent.doRunSim = doRunSim_p;
+			 CairngormEventDispatcher.getInstance().dispatchEvent(setStrutEvent);
+			 */
 		}
 		
 		[Bindable] public function get selected():Boolean {

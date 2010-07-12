@@ -23,8 +23,7 @@ package edu.wisc.doit.ls.coolit.view {
 	 *
 	 *  @author Ben Longoria
 	 */
-	public class CutScreenView extends VBox
-	{
+	public class CutScreenView extends VBox {
 		public static var CUT_LOADED:String = "edu.wisc.doit.ls.coolit.view.curLoaded";
 		public static var CUT_DONE:String = "edu.wisc.doit.ls.coolit.view.cutDone";
 		public static var CUT_WAITING:String = "edu.wisc.doit.ls.coolit.view.cutWaiting";

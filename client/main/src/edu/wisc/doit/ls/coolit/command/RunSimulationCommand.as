@@ -1,5 +1,4 @@
-package edu.wisc.doit.ls.coolit.command
-{
+package edu.wisc.doit.ls.coolit.command {
 	import flash.utils.*;
 	import mx.rpc.IResponder;
 	
