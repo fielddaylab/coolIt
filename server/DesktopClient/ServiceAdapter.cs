@@ -14,7 +14,7 @@ namespace DesktopClient {
 		private DesktopClient.CoolIt_Service.CoolIt_Service webService;
 		private bool direct = false;
 		private Material[] materials;
-		private CoolerModel[] coolers;
+		private Cooler[] coolers;
 		private Problem[] problems;
 		private MathGate[] mathGates;
 		private string dataDir;
@@ -53,7 +53,6 @@ namespace DesktopClient {
 			providers.Add(new ServiceProvider("debug", "http://localhost:58801/CoolIt_Service.asmx"));
 			providers.Add(new ServiceProvider("localhost", "http://localhost/CoolIt_Service/CoolIt_Service.asmx"));
 			providers.Add(new ServiceProvider("atswindev", "http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx"));
-            providers.Add(new ServiceProvider("atswindev 2.0", "http://atswindev.doit.wisc.edu/CoolIt_Service_2/CoolIt_Service.asmx"));
 		}
 		public static List<ServiceProvider> Providers {
 			get { return providers; }
@@ -119,7 +118,7 @@ namespace DesktopClient {
 		/// Get a list of coolers from the serivce provider
 		/// </summary>
 		/// <returns>The list of coolers</returns>
-		public CoolerModel[] GetCoolers() {
+		public Cooler[] GetCoolers() {
 			return coolers;
 		}
 
@@ -161,23 +160,34 @@ namespace DesktopClient {
 			return webService.TryMathGate(name, proposedAnswers);
 		}
 
-		public Problem SetStrut(string materialName, double length, double crossSection) {
-            DesktopClient.CoolIt_Service.Problem prob = webService.SetStrut(1, materialName, length, crossSection);
-			return convertProblem(prob);
+		public void SetStrut(string materialName, double length, double crossSection) {
+			webService.SetStrut(materialName, length, crossSection);
 		}
 
-        //public Problem Run() {
-        //    DesktopClient.CoolIt_Service.Problem rawState = webService.Run();
-        //    if (rawState == null) {
-        //        return null;
-        //    }
+		public State Run() {
+			DesktopClient.CoolIt_Service.State rawState = webService.Run();
+			if (rawState == null) {
+				return null;
+			}
+			State answer = new State();
+			answer.coolerName = rawState.coolerName;
+			answer.numStruts = rawState.numStruts;
+			answer.crossSection = rawState.crossSection;
+			answer.length = rawState.length;
+			answer.materialName = rawState.materialName;
+			answer.powerFactor = rawState.powerFactor;
+			answer.temperature = rawState.temperature;
+			answer.cost = rawState.cost;
+			answer.inputPower = rawState.inputPower;
+			answer.stressLimit = rawState.stressLimit;
+			answer.isValidSolution = rawState.isValidSolution;
+			answer.problemName = rawState.problemName;
+			return answer;
+		}
 
-        //    return convertProblem(rawState);
-        //}
 
-
-		public Problem SetCooler(string coolerName, double powerFactor) {
-			return convertProblem(webService.SetCooler(1, coolerName, powerFactor));
+		public void SetCooler(string coolerName, double powerFactor) {
+			webService.SetCooler(coolerName, powerFactor);
 		}
 
 		public void SetProblem(string problemName) {
@@ -216,9 +226,7 @@ namespace DesktopClient {
 			DesktopClient.CoolIt_Service.Problem[] rawProblems = webService.GetProblems();
 			Problem [] answer = new Problem[rawProblems.Length];
 			for (int i = 0; i < rawProblems.Length; i++) {
-                int id = rawProblems[i].ID;
-                DesktopClient.CoolIt_Service.Problem prob = webService.GetProblem(id);
-				answer[i] = convertProblem(prob);
+				answer[i] = convertProblem( rawProblems[i] );
 			}
 			return answer;
 		}
@@ -229,105 +237,39 @@ namespace DesktopClient {
 		/// <param name="rawProblem">Problem in format provided by web service</param>
 		/// <returns>Converted Problem object</returns>
 		private Problem convertProblem(DesktopClient.CoolIt_Service.Problem rawProblem) {
-            
 			Problem answer = new Problem();
-            if (rawProblem != null)
-            {
-                answer.Name = rawProblem.Name;
-                answer.Description = rawProblem.Description;
-                answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
-                answer.HeatLeak = rawProblem.HeatLeak;
-                answer.Temperature = rawProblem.Temperature;
-                answer.Solved = rawProblem.Solved;
-                answer.Cost = rawProblem.Cost;
-                answer.Constraints = convertConstraintCollection(rawProblem.Constraints);
-                answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
-                answer.Struts = convertStrutCollection(rawProblem.Struts);
-                answer.Coolers = convertCoolerCollection(rawProblem.Coolers);
-            }
+			answer.Name = rawProblem.Name;
+			answer.Description = rawProblem.Description;
+			answer.MonetaryIncentive = rawProblem.MonetaryIncentive;
+			answer.HeatLeak = rawProblem.HeatLeak;
+			answer.SupportMode = convertSupportMode(rawProblem.SupportMode);
+			answer.SupportNumber = rawProblem.SupportNumber;
+			Constraint[] constraints = new Constraint[rawProblem.Constraints.Length];
+			for (int j = 0; j < rawProblem.Constraints.Length; j++) {
+				constraints[j] = convertConstraint(rawProblem.Constraints[j]);
+			}
+			answer.Constraints = constraints;
+			answer.ImageCollection = convertImageCollection(rawProblem.ImageCollection);
 			return answer;
 		}
 
-        private ConstraintCollection convertConstraintCollection(DesktopClient.CoolIt_Service.Constraint[] rawCollection)
-        {
-            ConstraintCollection constraints = new ConstraintCollection();
-            if (rawCollection != null)
-            {
-                for (int j = 0; j < rawCollection.Length; j++)
-                {
-                    constraints.Add(convertConstraint(rawCollection[j]));
-                }
-            }
-            return constraints;
-        }
-
-        private StrutTypeCollection convertStrutCollection(DesktopClient.CoolIt_Service.StrutType[] rawStrutCollection)
-        {
-            StrutTypeCollection strutCol = new StrutTypeCollection();
-            foreach (DesktopClient.CoolIt_Service.StrutType strut in rawStrutCollection)
-            {
-                StrutType st = new StrutType();
-                st.ID = strut.ID;
-                st.SupportMode = (CryoLib.SupportMode) strut.SupportMode;
-                st.Length = strut.Length;
-                st.CrossSectionalArea = strut.CrossSectionalArea;
-                st.Strength = strut.Strength;
-                if (strut.Material != null && strut.Material.Name != null)
-                {
-                    st.Material = findMaterial(strut.Material.Name);
-                }
-                else
-                {
-                    st.Material = materials[0];
-                }
-                st.Constraints = convertConstraintCollection(strut.Constraints);
-
-                strutCol.Add(st);
-            }
-            return strutCol;
-        }
-
-        private CoolerCollection convertCoolerCollection(DesktopClient.CoolIt_Service.Cooler[] rawCollection)
-        {
-            CoolerCollection coolCol = new CoolerCollection();
-            foreach (DesktopClient.CoolIt_Service.Cooler cooler in rawCollection)
-            {
-                Cooler cool = new Cooler();
-                cool.ID = cooler.ID;
-                cool.InputPower = cooler.InputPower;
-                cool.PowerFactor = cooler.PowerFactor;
-                //cool.SelectedCooler = findCooler(cooler.SelectedCooler.Name);
-                cool.Constraints = convertConstraintCollection(cooler.Constraints);
-
-                coolCol.Add(cool);
-            }
-            return coolCol;
-        }
-
 		private ProblemImageCollection convertImageCollection(DesktopClient.CoolIt_Service.ProblemImageCollection rawCollection) {
-            ProblemImageCollection answer = new ProblemImageCollection();
-            if (rawCollection != null)
-            {
-
-                answer.BaseURI = rawCollection.BaseURI;
-                answer.Intro = rawCollection.Intro;
-                answer.Success = rawCollection.Success;
-                answer.FailPowerLimit = rawCollection.FailPowerLimit;
-                answer.FailStrutBreaks = rawCollection.FailStrutBreaks;
-                answer.FailTooHot = rawCollection.FailTooHot;
-                answer.PickerImageCollection = convertPickerImageCollection(rawCollection.PickerImageCollection);
-            }
+			ProblemImageCollection answer = new ProblemImageCollection();
+			answer.BaseURI = rawCollection.BaseURI;
+			answer.Intro = rawCollection.Intro;
+			answer.Success = rawCollection.Success;
+			answer.FailPowerLimit = rawCollection.FailPowerLimit;
+			answer.FailStrutBreaks = rawCollection.FailStrutBreaks;
+			answer.FailTooHot = rawCollection.FailTooHot;
+			answer.PickerImageCollection = convertPickerImageCollection( rawCollection.PickerImageCollection );
 			return answer;
 		}
 
 		private PickerImageCollection convertPickerImageCollection(DesktopClient.CoolIt_Service.PickerImageCollection rawCollection) {
 			PickerImageCollection answer = new PickerImageCollection();
-            if (rawCollection != null)
-            {
-                answer.BaseName = rawCollection.BaseName;
-                answer.Length = rawCollection.Length;
-                answer.Width = rawCollection.Width;
-            }
+			answer.BaseName = rawCollection.BaseName;
+			answer.Length = rawCollection.Length;
+			answer.Width = rawCollection.Width;
 			return answer;
 		}
 
@@ -360,8 +302,8 @@ namespace DesktopClient {
 				case DesktopClient.CoolIt_Service.VALUE.COST:
 					value = VALUE.COST;
 					break;
-				case DesktopClient.CoolIt_Service.VALUE.STRENGTH:
-					value = VALUE.STRENGTH;
+				case DesktopClient.CoolIt_Service.VALUE.FORCE_LIMIT:
+					value = VALUE.FORCE_LIMIT;
 					break;
 				case DesktopClient.CoolIt_Service.VALUE.INPUT_POWER:
 					value = VALUE.INPUT_POWER;
@@ -404,30 +346,29 @@ namespace DesktopClient {
 			return new Constraint(value, op, rawConstraint.Target);
 		}
 
-		private CoolerModel[] findCoolers() {
-			CoolerModel[] answer;
+		private Cooler[] findCoolers() {
+			Cooler[] answer;
 			if (direct) {
 				string coolerFile = Path.Combine(dataDir, "Coolers.xml");
 				string coolerSchema = Path.Combine(schemaDir, "Coolers.xsd");
-				CoolerModelCollection coolers = new CoolerModelCollection(coolerFile, coolerSchema);
-				answer = new CoolerModel[coolers.Count];
+				CoolerCollection coolers = new CoolerCollection(coolerFile, coolerSchema);
+				answer = new Cooler[coolers.Count];
 				for (int i = 0; i < coolers.Count; i++) {
-					answer[i] = (CoolerModel)coolers[i];
+					answer[i] = (Cooler)coolers[i];
 				}
 			} else {
-				DesktopClient.CoolIt_Service.CoolerModel[] rawCoolers = webService.GetCoolerModels();
-				answer = new CoolerModel[rawCoolers.Length];
+				DesktopClient.CoolIt_Service.Cooler[] rawCoolers = webService.GetCoolers();
+				answer = new Cooler[rawCoolers.Length];
 				InputPowerCalculator calc = getInputPowerCalc();
 				for (int i = 0; i < rawCoolers.Length; i++) {
-                    //This is a bit of a hack in the Desktop Client because we have stripped down what we bring back from the web service
-					DesktopClient.CoolIt_Service.CoolerModel raw = webService.GetCoolerModel(rawCoolers[i].id);
+					DesktopClient.CoolIt_Service.Cooler raw = rawCoolers[i];
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.CPM.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.CPM[j];
 						DataPoint point = new DataPoint(rawPoint.temp, rawPoint.data);
 						data.Add(point);
 					}
-					answer[i] = new CoolerModel(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
+					answer[i] = new Cooler(raw.Name, raw.id, data, raw.price, raw.priceUnit, raw.currencyUnit);
 					answer[i].InputPowerCalculator = calc;
 				}
 			}
@@ -462,8 +403,7 @@ namespace DesktopClient {
 				DesktopClient.CoolIt_Service.Material[] rawMaterials = webService.GetMaterials();
 				answer = new Material[rawMaterials.Length];
 				for (int i = 0; i < rawMaterials.Length; i++) {
-                    //This is a bit of a hack because we have stripped down the data that the web service returns to the list
-					DesktopClient.CoolIt_Service.Material raw = webService.GetMaterial(rawMaterials[i].id);
+					DesktopClient.CoolIt_Service.Material raw = rawMaterials[i];
 					List<DataPoint> data = new List<DataPoint>();
 					for (int j = 0; j < raw.MP.Length; j++) {
 						DesktopClient.CoolIt_Service.DataPoint rawPoint = raw.MP[j];
@@ -471,7 +411,7 @@ namespace DesktopClient {
 						data.Add(point);
 					}
 					if (raw.IntegratedThermalConductivity == null) {
-						answer[i] = new Material(raw.Name, raw.id, raw.YieldStrength, data, null, raw.price, raw.priceUnit, raw.currencyUnit);
+						answer[i] = new Material(raw.Name, raw.id, raw.yieldStrength, data, null, raw.price, raw.priceUnit, raw.currencyUnit);
 					} else {
 						List<DataPoint> integratedThermalConductivity = new List<DataPoint>();
 						for (int j = 0; j < raw.IntegratedThermalConductivity.Length; j++) {
@@ -479,7 +419,7 @@ namespace DesktopClient {
 							DataPoint point = new DataPoint(rawPoint.temp, rawPoint.data);
 							integratedThermalConductivity.Add(point);
 						}
-						answer[i] = new Material(raw.Name, raw.id, raw.YieldStrength, data, integratedThermalConductivity, raw.price, raw.priceUnit, raw.currencyUnit);
+						answer[i] = new Material(raw.Name, raw.id, raw.yieldStrength, data, integratedThermalConductivity, raw.price, raw.priceUnit, raw.currencyUnit);
 					}
 				
 				}
@@ -501,8 +441,8 @@ namespace DesktopClient {
 			return material;
 		}
 
-		private CoolerModel findCooler(string coolerName) {
-			CoolerModel cooler = null;
+		private Cooler findCooler(string coolerName) {
+			Cooler cooler = null;
 			for (int i = 0; i < coolers.Length; i++) {
 				if (coolers[i].Name == coolerName) {
 					cooler = coolers[i];

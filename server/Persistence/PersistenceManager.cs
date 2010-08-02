@@ -50,22 +50,15 @@ namespace Persistence {
 			materialList = ListAllMaterials();
 		}
 
-        public void UpdateDatabase()
-        {
-            NHibernate.Tool.hbm2ddl.SchemaUpdate schemaUpdater = new NHibernate.Tool.hbm2ddl.SchemaUpdate(cfg);
-            schemaUpdater.Execute(true, true);
-        }
-
 		private object chooseRandom(object[] list) {
 			int i = rand.Next() % list.Length;
 			return list[i];
 		}
 
-		public P_ProblemState RandomState() {
-			P_ProblemState answer = P_ProblemState.RandomState();
-            //TODO:  Add strut, cooler, material back in
-            //answer.Cooler = (P_Cooler)chooseRandom(coolerList);
-            //answer.Material = (P_Material)chooseRandom(materialList);
+		public P_State RandomState() {
+			P_State answer = P_State.RandomState();
+			answer.Cooler = (P_Cooler)chooseRandom(coolerList);
+			answer.Material = (P_Material)chooseRandom(materialList);
 			return answer;
 		}
 
@@ -199,7 +192,7 @@ namespace Persistence {
 				// Get the list of existing coolers from our XML data file
 			string coolersDataFile = Path.Combine(dataDir, "Coolers.xml");
 			string coolersSchemaFile = Path.Combine(schemaDir, "Coolers.xsd");
-			CoolerModelCollection coolers = new CoolerModelCollection(coolersDataFile, coolersSchemaFile);
+			CoolerCollection coolers = new CoolerCollection(coolersDataFile, coolersSchemaFile);
 
 				// Persist the list in the database
 			ISession session = null;
@@ -207,7 +200,7 @@ namespace Persistence {
 			try {
 				session = factory.OpenSession();
 				transaction = session.BeginTransaction();
-				foreach (CoolerModel c in coolers) {
+				foreach (Cooler c in coolers) {
 					P_Cooler p_cool = new P_Cooler();
 					p_cool.Name = c.Name;
 					session.Save(p_cool);

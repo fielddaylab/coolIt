@@ -7,7 +7,7 @@
       <xs:element name="coolingPower" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="coolerModel">
+  <xs:complexType name="coolerType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" />
       <xs:element name="ID" type="xs:positiveInteger" />
@@ -21,10 +21,10 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="coolerModels">
+  <xs:element name="coolers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="coolerModel" type="coolerModel" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="cooler" type="coolerType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

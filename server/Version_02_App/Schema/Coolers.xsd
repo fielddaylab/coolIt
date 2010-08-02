@@ -7,7 +7,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="coolerModel">
+    <xs:complexType name="coolerType">
         <xs:sequence>
             <xs:element name="name" type="xs:string" />
             <xs:element name="price" type="xs:nonNegativeInteger" />
@@ -20,7 +20,7 @@
     <xs:element name="coolers">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="cooler" type="coolerModel" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="cooler" type="coolerType" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>

@@ -15,9 +15,7 @@ namespace DesktopClient {
 		private double minCrossSection = 0.001;
 		private double maxCrossSection = 0.1;
 		const int TRACKBAR_RANGE = 1000;
-
-        private StrutTypeCollection struts = new StrutTypeCollection();
-        private StrutType selectedStrut = null;
+		
 
 		public StrutPicker( SimulatorStub simulator ) {
 			InitializeComponent();
@@ -29,45 +27,52 @@ namespace DesktopClient {
 			}
 			materialsListBox.SelectedIndex = 0;
 
-            //Load the drop down with the list of struts
-            setStrutSelector();
+			adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
+			lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
+			lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
+
+			adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
+			crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
+			crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
 
 			updatePrice();
 
 			this.FormClosing += new FormClosingEventHandler(StrutPicker_FormClosing);
 		}
 
-        private void setStrutSelector()
-        {
-            if (this.struts.Count > 0)
-            {
-                cbStruts.Enabled = true;
-                cbStruts.DataSource = this.struts;
-                cbStruts.DisplayMember = "ID";
-            }
-            else
-            {
-                cbStruts.Enabled = false;
-            }
-        }
+		public double MinStrutLength {
+			get { return minStrutLength; }
+			set {
+				minStrutLength = value;
+				adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
+			}
+		}
 
-        /**
-         * The properties of the struts that are defined in the problem
-         **/
-        public StrutTypeCollection Struts
-        {
-            get
-            {
-                return this.struts;
-            }
-            set
-            {
-                this.struts = value;
-                setStrutSelector();
-            }
-        }
+		public double MaxStrutLength {
+			get { return maxStrutLength; }
+			set {
+				maxStrutLength = value;
+				adjustTrackbar(lengthTrackBar, minStrutLength, maxStrutLength);
+			}
+		}
 
-		private void adjustTrackbar(TrackBar trackBar) {
+		public double MinStrutCrossSection {
+			get { return minCrossSection; }
+			set {
+				minCrossSection = value;
+				adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
+			}
+		}
+
+		public double MaxStrutCrossSection {
+			get { return maxCrossSection; }
+			set {
+				maxCrossSection = value;
+				adjustTrackbar(crossSectionTrackBar, minCrossSection, maxCrossSection);
+			}
+		}
+
+		private void adjustTrackbar(TrackBar trackBar, double min, double max) {
 			trackBar.Minimum = 0;
 			trackBar.Maximum = TRACKBAR_RANGE;
 		}
@@ -78,10 +83,9 @@ namespace DesktopClient {
 			Hide();
 		}
 
-        //TODO:  Need to handle this properly with the new picker
-		public StrutType Strut {
+		public Strut Strut {
 			get {
-				return new StrutType(getLength(), getCrossSection(), (Material)materialsListBox.SelectedItem);
+				return new Strut(getLength(), getCrossSection(), (Material)materialsListBox.SelectedItem);
 			}
 		}
 
@@ -137,14 +141,14 @@ namespace DesktopClient {
 
 		private void crossSectionTextBox_TextChanged(object sender, EventArgs e) {
 			updatePrice();
-			updateStrength();
+			updateStressLimit();
 			OnRaiseStrutChangedEvent(new EventArgs());
 		}
 
 		private void materialsListBox_SelectedIndexChanged(object sender, EventArgs e) {
 			OnRaiseStrutChangedEvent(new EventArgs());
 			plotMaterial();
-			updateStrength();
+			updateStressLimit();
 			updatePrice();
 		}
 
@@ -159,40 +163,18 @@ namespace DesktopClient {
 			priceTextBox.Text = strutPrice.ToString("C");
 		}
 
-		private void updateStrength() {
+		private void updateStressLimit() {
 			Material material = (Material)materialsListBox.SelectedItem;
-			if (material.YieldStrength >= 0.0) {
-				yieldStrengthTextBox.Text = material.YieldStrength.ToString();
-				double Strength = material.YieldStrength * getCrossSection(); // Unit is megaNewton (MN)
-				stressLimitTextBox.Text = Strength.ToString();
+			if (material.yieldStrength >= 0.0) {
+				yieldStrengthTextBox.Text = material.yieldStrength.ToString();
+				double stressLimit = material.yieldStrength * getCrossSection(); // Unit is megaNewton (MN)
+				stressLimitTextBox.Text = stressLimit.ToString();
 			} else {
 				yieldStrengthTextBox.Text = "(unknown)";
 				stressLimitTextBox.Text = "(unknown)";
 			}
 		}
 
-        private void cbStruts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedStrut = (StrutType)cbStruts.SelectedItem;
 
-            updateControlsByStrut();
-        }
-
-        private void updateControlsByStrut()
-        {
-            //TODO:  Fix trackbars to handle dynmaic strut selection
-            minStrutLength = selectedStrut.MinStrutLength;
-            maxStrutLength = selectedStrut.MaxStrutLength;
-            adjustTrackbar(lengthTrackBar);
-            lengthTrackBar.Value = (int)((maxStrutLength - minStrutLength) / 2 * TRACKBAR_RANGE);
-            lengthTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
-
-            adjustTrackbar(crossSectionTrackBar);
-            maxCrossSection = selectedStrut.MaxStrutCrossSection;
-            minCrossSection = selectedStrut.MinStrutCrossSection;
-            crossSectionTrackBar.Value = (int)((maxCrossSection - minCrossSection) / 2 * TRACKBAR_RANGE);
-            crossSectionTrackBar.TickFrequency = TRACKBAR_RANGE / 10;
-
-        }
 	}
 }

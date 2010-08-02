@@ -27,7 +27,7 @@ namespace Version_02_App {
 			// Read in data on the coolers
 			string coolerFileName = Path.Combine(Resources.DataDir, "Coolers.xml");
 			string coolerSchema = Path.Combine(Resources.SchemaDir, "Coolers.xsd");
-			CoolerModelCollection coolers = new CoolerModelCollection(coolerFileName, coolerSchema );
+			CoolerCollection coolers = new CoolerCollection(coolerFileName, coolerSchema );
 			for (int i = 0; i < coolers.Count; i++) {
 				coolersListBox.Items.Add(coolers[i]);
 			}
@@ -42,7 +42,7 @@ namespace Version_02_App {
 		/// return it.
 		/// </summary>
 		/// <returns>The selected strut</returns>
-		private StrutType getStrut() {
+		private Strut getStrut() {
 			double length, crossSection;
 
 			try {
@@ -63,15 +63,15 @@ namespace Version_02_App {
 				throw new ArgumentException("Invalid strut cross section", e);
 			}
 
-			return new StrutType( length, crossSection, (Material)materialsListBox.SelectedItem );
+			return new Strut( length, crossSection, (Material)materialsListBox.SelectedItem );
 		}
 
 		/// <summary>
 		/// Figure out what kind of cooler the user has selected and return it
 		/// </summary>
 		/// <returns>The selected cooler</returns>
-		private CoolerModel getCooler() {
-			return (CoolerModel)coolersListBox.SelectedItem;
+		private Cooler getCooler() {
+			return (Cooler)coolersListBox.SelectedItem;
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace Version_02_App {
 		/// </summary>
 		/// <param name="strut"></param>
 		/// <param name="cooler"></param>
-		private void simulate( StrutType strut, CoolerModel cooler ) {
+		private void simulate( Strut strut, Cooler cooler ) {
 			Cursor savedCursor = this.Cursor;
 			try {
 				this.Cursor = Cursors.WaitCursor;
@@ -102,8 +102,8 @@ namespace Version_02_App {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void simulateButton_Click(object sender, EventArgs e) {
-			StrutType strut;
-			CoolerModel cooler;
+			Strut strut;
+			Cooler cooler;
 			answerBox.Text = "";
 			try {
 				strut = getStrut();
@@ -121,7 +121,7 @@ namespace Version_02_App {
 		}
 
 		private void coolersListBox_SelectedIndexChanged(object sender, EventArgs e) {
-			coolerDataBox.Text = ((CoolerModel)coolersListBox.SelectedItem).Describe();
+			coolerDataBox.Text = ((Cooler)coolersListBox.SelectedItem).Describe();
 			answerBox.Text = "";
 		}
 

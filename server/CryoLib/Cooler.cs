@@ -1,118 +1,206 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MathWorks.MATLAB.NET.Utility;
+using MathWorks.MATLAB.NET.Arrays;
 using System.Xml;
 using System.Xml.XPath;
+using System.Xml.Schema;
+using System.IO;
 using System.Xml.Serialization;
 
+
 namespace CryoLib {
-    /**
-     * Class that represents the coolers included in a problem definition
-     * Primarily a placeholder for constraints on the coolers
-     **/
-	public class Cooler {
-        #region properties set by the problem
-        private string coolerID;
-        private ConstraintCollection constraints;
+	public class Cooler : CryoObject {
 
-        [XmlAttribute]
-        public int ID{ get;  set; }
+		private List<DataPoint> coolingPowerData = new List<DataPoint>();
+		private InputPowerCalculator inputPowerCalc;
+		private double maxInputPower;
+		private double maxOutputPower;
 
-        [XmlArray]
-        public ConstraintCollection Constraints
-        {
-            get { return constraints; }
-            set { constraints = value; }
-        }
-        #endregion
+		/// <summary>
+		/// No-argument (default) constructor.
+		/// </summary>
+		public Cooler() {
+			this.Name = "(no such cooler)";
+		}
 
-        #region state properties
-        public double InputPower { get; set; }
+		/// <summary>
+		/// Constructor - create a cooler given an XPathNavigator positioned
+		/// at a node in an XPathDocument which describes this cooler.  This constructor
+		/// would generally be used by the CoolIt Web Service.
+		/// </summary>
+		/// <param name="navigator">The XPathNavigator to use</param>
+		public Cooler(XPathNavigator navigator) {
+			navigator.MoveToChild("name", "");
+			this.Name = navigator.Value;
+			navigator.MoveToNext("ID", "");
+			this.id = navigator.ValueAsInt;
+			navigator.MoveToNext("price","");
+			price = navigator.ValueAsInt;
+			navigator.MoveToNext("priceUnit","");
+			priceUnit = navigator.Value;
+			navigator.MoveToNext("currencyUnit","");
+			currencyUnit = navigator.Value;
+			navigator.MoveToNext("dataPoint","");
+			do {
+				XPathNavigator clone = navigator.Clone();
+				clone.MoveToChild("temp","");
+				double temp = clone.ValueAsDouble;
+				clone.MoveToNext("coolingPower","");
+				double coolingPower = clone.ValueAsDouble;
+				DataPoint point = new DataPoint(temp, coolingPower);
+				coolingPowerData.Add(point);
+			} while (navigator.MoveToNext("dataPoint",""));
+			maxOutputPower = coolingPowerData[1].data;
 
-        [XmlElement]
-        public CoolerModel SelectedCooler { get; set; }
-        #endregion
+		}
 
-        #region state properties - outputs
-        public double PowerFactor { get; set; }
-        #endregion
+		/// <summary>
+		/// Constructor - create a cooler given data describing the cooler.  This constructor
+		/// would normally be used by a client of the CoolIt Web Service.  The web service would
+		/// supply the data.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="cpm"></param>
+		/// <param name="price"></param>
+		/// <param name="priceUnit"></param>
+		/// <param name="currencyUnit"></param>
+		public Cooler(string name, int id, List<DataPoint> cpm, double price, string priceUnit, string currencyUnit)
+			:
+			base(name, id, price, priceUnit, currencyUnit) {
+			this.coolingPowerData = cpm;
+			maxOutputPower = coolingPowerData[1].data;
+		}
 
-        #region Serialzation Properties
-        /**
-         * Method that controls whether or not all the object properties
-         * should be serialized when returned in XML by the
-         * webservice.  There is a specific pattern that can be utilized 
-         * to control this, which is what all the "Specified" properties are for
-         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
-         **/
-        public bool ShowObjectDetails
-        {
-            set
-            {
-                PowerFactorSpecified = value;
-                SelectedCoolerSpecified = value;
-            }
-        }
+		/// <summary>
+		/// Return the Cooling Power Matrix
+		/// </summary>
+		public List<DataPoint> CPM {
+			get { return coolingPowerData; }
+		}
 
-        public bool ShowOutputs
-        {
-            set
-            {
-                InputPowerSpecified = value;
-            }
-        }
+		public InputPowerCalculator InputPowerCalculator {
+			set {
+				inputPowerCalc = value;
+				maxInputPower = calcMaxInputPower();
+			}
+		}
 
-        //Serialzation properties
-        [System.Xml.Serialization.XmlIgnore]
-        public bool InputPowerSpecified = false;
+		public double maxPowerFactor(double inputPowerLimit, double targetTemp) {
+			Range range = new Range(0.0, 1.0);
+			for (int i = 0; i < 10; i++) {
+				range = iterate(range, inputPowerLimit, targetTemp);
+			}
+			if (InputPower(targetTemp, range.high) <= inputPowerLimit) {
+				return range.high;
+			} else if (InputPower(targetTemp, range.Average) <= inputPowerLimit) {
+				return range.Average;
+			} else {
+				return range.low;
+			}
+		}
 
-        [System.Xml.Serialization.XmlIgnore]
-        public bool SelectedCoolerSpecified = false;
+		private Range iterate(Range range, double inputPowerLimit, double targetTemp) {
+			double middle = range.Average;
+			double inputPower = InputPower(targetTemp, middle);
+			if (inputPower < inputPowerLimit) {
+				return new Range(middle, range.high);
+			} else {
+				return new Range(range.low, middle);
+			}
+		}
 
-        [System.Xml.Serialization.XmlIgnore]
-        public bool PowerFactorSpecified = false;
-        #endregion
+		private struct Range {
+			public double low;
+			public double high;
+
+			public Range(double low, double high) {
+				this.low = low;
+				this.high = high;
+			}
+
+			public double Average {
+				get { return (low + high) / 2.0; }
+			}
+		}
+
+		private double calcMaxInputPower() {
+			double maxPower = 0.0;
+			for (double i = 0.0; i < 301.0; i++) {
+				double pwr = InputPower(i, 1.0);
+				if (pwr > maxPower) {
+					maxPower = pwr;
+				}
+			}
+			return maxPower;
+		}
+
+		public double OutputPower(double temperature, double powerFactor) {
+			double x1 = coolingPowerData[0].temp;
+			double y1 = coolingPowerData[0].data;
+			double x2 = coolingPowerData[1].temp;
+			double y2 = coolingPowerData[1].data;
+			double x = temperature;
+			double y = y1 + ((x - x1)*(y2 - y1) / (x2 - x1));
+			double powerFactoredY = y - (coolingPowerData[1].data * (1 - powerFactor));
+			if( powerFactoredY < 0 ) {
+				return 0;
+			} else {
+				return powerFactoredY;
+			}
+		}
+
+		public double MaxOutputPower {
+			get { return maxOutputPower; }
+		}
+
+		public double MaxInputPower {
+			get { return maxInputPower; }
+		}
+
+		public double InputPower(double temperature, double powerFactor) {
+			if (inputPowerCalc == null) {
+				throw new Exception("Specific Power Calculator must be set before calling InputPower() function");
+			}
+			double outputPower = OutputPower(temperature, powerFactor);
+			double answer = inputPowerCalc.InputPower(temperature, outputPower);
+			return answer;
+		}
 
 
+		public override MWNumericArray getData(string dataType) {
+			return (MWNumericArray)getDataNative(dataType);
+		}
 
-        #region convenience properties - accessors to constraint values
-        /// <summary>
-        /// Convenience property - to make life easier.
-        /// </summary>
-        public double InputPowerLimit
-        {
-            get
-            {
-                return constraints.getConstraintTarget(VALUE.INPUT_POWER, OP.LE, double.MaxValue);
-            }
-        }
-        #endregion
+		public double[,] getDataNative(string dataType) {
+			if (dataType != "CPM") {
+				string msg = string.Format("Data type \"{0}\" is not defined for Coolers", dataType);
+				throw new Exception(msg);
+			}
+			double[,] data = new double[coolingPowerData.Count, 2];
+			for (int i = 0; i < coolingPowerData.Count; i++) {
+				data[i, 0] = coolingPowerData[i].temp;
+				data[i, 1] = coolingPowerData[i].data;
+			}
+			return data;
+		}
 
-        #region Constructors
-        /**
-         * Parameterless constructor is necessary for serialization
-         **/
-        public Cooler()
-        {
 
-        }
-
-        /**
-         * Constructor used to load the strut from a problem definition
-         **/
-        public Cooler( XPathNavigator navigator ) {
-			// Get the ID
-			navigator.MoveToChild("ID", "");
-			this.ID = navigator.ValueAsInt;
-			// Get the constraint list
-            this.constraints = new ConstraintCollection(navigator.Clone());;
-        }
-        #endregion
-
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("Cooler ID: {0}\n", this.coolerID);
+		public override string Describe() {
+			StringBuilder sb = new StringBuilder();
+			sb.AppendFormat("\"{0}\"\n", Name);
+			sb.Append("Temp\tCooling Power\n");
+			for (int i = 0; i < coolingPowerData.Count; i++) {
+				sb.AppendFormat("{0}\t{1}\n", coolingPowerData[i].temp, coolingPowerData[i].data);
+			}
 			return sb.ToString();
 		}
+
+		public override string ToString() {
+			return string.Format("{0} ({1:C0})", Name, price);
+		}
+
+
 	}
 }

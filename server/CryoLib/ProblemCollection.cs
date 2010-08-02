@@ -6,7 +6,17 @@ using System.Xml.XPath;
 using System.Xml.Schema;
 
 namespace CryoLib {
-	public class ProblemCollection : List<Problem> {
+	public class ProblemCollection {
+
+		protected List<Problem> objectList = new List<Problem>();
+
+		public List<Problem>.Enumerator GetEnumerator() {
+			return objectList.GetEnumerator();
+		}
+
+		public Problem this[int index] {
+			get { return objectList[index]; }
+		}
 
 		public Problem  this[string name] {
 			get {
@@ -20,6 +30,10 @@ namespace CryoLib {
 			}
 		}
 
+		public int Count {
+			get { return objectList.Count; }
+		}
+
 		public ProblemCollection(string dataFile, string schemaFile) {
 			XPathNavigator navigator = openDocumentForReading(dataFile, schemaFile);
 			if (!navigator.MoveToChild("problems", "")) {
@@ -31,20 +45,10 @@ namespace CryoLib {
 
 			do {
 				Problem problem = new Problem(navigator.Clone());
-				this.Add(problem);
+				objectList.Add(problem);
 			} while (navigator.MoveToNext());
 
 		}
-
-        public Problem Find(int id)
-        {
-            return this.Find(
-                delegate(Problem obj)
-                {
-                    return obj.ID == id;
-                }
-            );
-        }
 
 		protected XPathNavigator openDocumentForReading(string fileName) {
 			return openDocumentForReading(fileName, null);

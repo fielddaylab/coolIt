@@ -7,27 +7,32 @@ using System.Xml.XPath;
 using System.IO;
 
 namespace CryoLib {
-public abstract class CryoObjectCollection : List<CryoObject> {
+public abstract class CryoObjectCollection {
+	protected List<CryoObject> objectList = new List<CryoObject>();
+
+	public List<CryoObject>.Enumerator GetEnumerator() {
+		return objectList.GetEnumerator();
+	}
+
+	public CryoObject this[int index] {
+		get { return objectList[index]; }
+	}
 
 	public CryoObject this[string name] {
 		get {
-			return this.Find(
-                delegate(CryoObject obj)
-                {
-                    return obj.Name == name;
-                });
+			for (int i = 0; i < Count; i++) {
+				if (this[i].Name == name) {
+					return this[i];
+				}
+			}
+			string msg = string.Format("Error: \"{0}\" not found", name );
+			throw new Exception(msg);
 		}
 	}
 
-    public CryoObject Find(int id)
-    {
-        return this.Find(
-            delegate(CryoObject obj)
-            {
-                return obj.id == id;
-            }
-        );
-    }
+	public int Count {
+		get { return objectList.Count; }
+	}
 
 	protected XPathNavigator openDocumentForReading(string fileName) {
 		return openDocumentForReading(fileName, null);

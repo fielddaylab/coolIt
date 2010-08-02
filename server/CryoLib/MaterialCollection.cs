@@ -20,8 +20,8 @@ public class MaterialsCollection : CryoObjectCollection {
 
 		do {
 			Material material = new Material( navigator.Clone() );
-			if (material.IntegratedThermalConductivity != null && material.YieldStrength > 0.0) {
-				this.Add(material);
+			if (material.IntegratedThermalConductivity != null && material.yieldStrength > 0.0) {
+				objectList.Add(material);
 			}
 		} while (navigator.MoveToNext() );
 
@@ -29,8 +29,8 @@ public class MaterialsCollection : CryoObjectCollection {
 
 	public Material[] SortedByGoodness(double temperature) {
 		SortedList< double, Material > data = new SortedList<double,Material>();
-		for (int i = 0; i < this.Count; i++) {
-			Material m = (Material)this[i];
+		for (int i = 0; i < objectList.Count; i++) {
+			Material m = (Material)objectList[i];
 			double g = m.Goodness( temperature );
 			if( g > 0.0 ) {
 				data.Add( g, m );

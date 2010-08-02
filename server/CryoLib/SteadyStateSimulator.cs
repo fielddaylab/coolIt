@@ -5,30 +5,19 @@ using MathWorks.MATLAB.NET.Utility;
 using MathWorks.MATLAB.NET.Arrays;
 using SteadyStateSim;
 
-using log4net;
-
 namespace CryoLib {
 	public class SteadyStateSimulator {
 		protected SteadyStateSim.SteadyStateSim matlabSim;
 
-        private static readonly log4net.ILog _logger
-        = log4net.LogManager.GetLogger(
-                System.Reflection.MethodBase.GetCurrentMethod()
-                 .DeclaringType);
-
 		public SteadyStateSimulator() {
 			try {
-                _logger.Debug("Loading SteadyStateSim.SteadyStateSim");
 				matlabSim = new SteadyStateSim.SteadyStateSim();
-                _logger.Debug("SteadyStateSim loading successful");
 			} catch (Exception ex) {
-                _logger.Debug("Exception thrown loading SteadyStateSim.SteadyStateSim");
-                _logger.ErrorFormat("Exception {0} Inner Exception {1}", ex.Message, ex.InnerException);
 				throw ex;
 			}
 		}
 
-		public double strutLength( double targetTemp, double crossSection, Material material, CoolerModel cooler ) {
+		public double strutLength( double targetTemp, double crossSection, Material material, Cooler cooler ) {
 			MWNumericArray targetTempData = new MWNumericArray( targetTemp );
 			MWNumericArray crossSectionData = new MWNumericArray( crossSection );
 			MWNumericArray materialData = material.getData("PM");
@@ -38,7 +27,7 @@ namespace CryoLib {
 			return strutLength.ToScalarDouble();
 		}
 
-		public double strutLength(double targetTemp, double crossSection, Material material, CoolerModel cooler, double powerFactor) {
+		public double strutLength(double targetTemp, double crossSection, Material material, Cooler cooler, double powerFactor) {
 			double[,] data = cooler.getDataNative("CPM");
 			for (int i = 0; i < data.GetLength(0); i++) {
 				data[i, 0] = 300.0 - (300.0 - data[i, 0]) * powerFactor;
@@ -55,7 +44,7 @@ namespace CryoLib {
 
 		}
 
-		public double simulate(double length, double crossSection, Material material, CoolerModel cooler) {
+		public double simulate(double length, double crossSection, Material material, Cooler cooler) {
 			try {
 				MWNumericArray lengthData = new MWNumericArray(length);
 				MWNumericArray crossSectionData = new MWNumericArray(crossSection);
@@ -69,7 +58,7 @@ namespace CryoLib {
 			}
 		}
 
-		public double simulate(double length, double crossSection, Material material, CoolerModel cooler, double powerFactor) {
+		public double simulate(double length, double crossSection, Material material, Cooler cooler, double powerFactor) {
 			double[,] data = cooler.getDataNative("CPM");
 			for (int i = 0; i < data.GetLength(0); i++) {
 				data[i, 0] = 300.0 - (300.0 - data[i, 0]) * powerFactor;

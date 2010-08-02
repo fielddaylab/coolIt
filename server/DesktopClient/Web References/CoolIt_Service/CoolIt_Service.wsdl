@@ -97,22 +97,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetCoolerModels">
+      <s:element name="GetCoolers">
         <s:complexType />
       </s:element>
-      <s:element name="GetCoolerModelsResponse">
+      <s:element name="GetCoolersResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCoolerModelsResult" type="tns:ArrayOfCoolerModel" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoolersResult" type="tns:ArrayOfCooler" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfCoolerModel">
+      <s:complexType name="ArrayOfCooler">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CoolerModel" nillable="true" type="tns:CoolerModel" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="CoolerModel">
+      <s:complexType name="Cooler">
         <s:complexContent mixed="false">
           <s:extension base="tns:CryoObject">
             <s:sequence>
@@ -125,7 +125,7 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="price" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="price" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="priceUnit" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="currencyUnit" type="s:string" />
         </s:sequence>
@@ -141,20 +141,6 @@
           <s:element minOccurs="1" maxOccurs="1" name="data" type="s:double" />
         </s:sequence>
       </s:complexType>
-      <s:element name="GetCoolerModel">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetCoolerModelResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCoolerModelResult" type="tns:CoolerModel" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="GetMaterials">
         <s:complexType />
       </s:element>
@@ -174,57 +160,48 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:CryoObject">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="YieldStrength" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="yieldStrength" type="s:double" />
               <s:element minOccurs="0" maxOccurs="1" name="MP" type="tns:ArrayOfDataPoint" />
               <s:element minOccurs="0" maxOccurs="1" name="IntegratedThermalConductivity" type="tns:ArrayOfDataPoint" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:element name="GetMaterial">
+      <s:element name="GetProblems">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProblemsResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetProblemsResult" type="tns:ArrayOfProblem" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetMaterialResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMaterialResult" type="tns:Material" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetProblemByName">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="problemName" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetProblemByNameResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetProblemByNameResult" type="tns:Problem" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
+      <s:complexType name="ArrayOfProblem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Problem" nillable="true" type="tns:Problem" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="Problem">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Temperature" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="Cost" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="HeatLeak" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MonetaryIncentive" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HeatLeak" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupportMode" type="tns:SupportMode" />
+          <s:element minOccurs="1" maxOccurs="1" name="SupportNumber" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
-          <s:element minOccurs="0" maxOccurs="1" name="Struts" type="tns:ArrayOfStrutType" />
-          <s:element minOccurs="0" maxOccurs="1" name="Coolers" type="tns:ArrayOfCooler" />
           <s:element minOccurs="0" maxOccurs="1" name="ImageCollection" type="tns:ProblemImageCollection" />
-          <s:element minOccurs="0" maxOccurs="1" name="Solved" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Solved" type="s:boolean" />
         </s:sequence>
         <s:attribute name="Name" type="s:string" />
         <s:attribute name="ID" type="s:int" use="required" />
       </s:complexType>
+      <s:simpleType name="SupportMode">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPRESSION" />
+          <s:enumeration value="TENSION" />
+        </s:restriction>
+      </s:simpleType>
       <s:complexType name="ArrayOfConstraint">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Constraint" nillable="true" type="tns:Constraint" />
@@ -237,7 +214,7 @@
       </s:complexType>
       <s:simpleType name="VALUE">
         <s:restriction base="s:string">
-          <s:enumeration value="STRENGTH" />
+          <s:enumeration value="FORCE_LIMIT" />
           <s:enumeration value="INPUT_POWER" />
           <s:enumeration value="TEMP" />
           <s:enumeration value="COST" />
@@ -255,43 +232,6 @@
           <s:enumeration value="NE" />
         </s:restriction>
       </s:simpleType>
-      <s:complexType name="ArrayOfStrutType">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="StrutType" nillable="true" type="tns:StrutType" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="StrutType">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="SupportMode" type="tns:SupportMode" />
-          <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
-          <s:element minOccurs="0" maxOccurs="1" name="Strength" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="Length" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="CrossSectionalArea" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="Material" type="tns:Material" />
-        </s:sequence>
-        <s:attribute name="Count" type="s:int" use="required" />
-        <s:attribute name="ID" type="s:int" use="required" />
-      </s:complexType>
-      <s:simpleType name="SupportMode">
-        <s:restriction base="s:string">
-          <s:enumeration value="COMPRESSION" />
-          <s:enumeration value="TENSION" />
-        </s:restriction>
-      </s:simpleType>
-      <s:complexType name="ArrayOfCooler">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Cooler" nillable="true" type="tns:Cooler" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Cooler">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Constraints" type="tns:ArrayOfConstraint" />
-          <s:element minOccurs="0" maxOccurs="1" name="InputPower" type="s:double" />
-          <s:element minOccurs="0" maxOccurs="1" name="SelectedCooler" type="tns:CoolerModel" />
-          <s:element minOccurs="0" maxOccurs="1" name="PowerFactor" type="s:double" />
-        </s:sequence>
-        <s:attribute name="ID" type="s:int" use="required" />
-      </s:complexType>
       <s:complexType name="ProblemImageCollection">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="BaseURI" type="s:string" />
@@ -308,35 +248,6 @@
           <s:element minOccurs="0" maxOccurs="1" name="BaseName" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:int" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="GetProblem">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetProblemResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetProblemResult" type="tns:Problem" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetProblems">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetProblemsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetProblemsResult" type="tns:ArrayOfProblem" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfProblem">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Problem" nillable="true" type="tns:Problem" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetMathGates">
@@ -387,7 +298,6 @@
       <s:element name="SetStrut">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
             <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
@@ -395,27 +305,18 @@
         </s:complexType>
       </s:element>
       <s:element name="SetStrutResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SetStrutResult" type="tns:Problem" />
-          </s:sequence>
-        </s:complexType>
+        <s:complexType />
       </s:element>
       <s:element name="SetCooler">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="coolerID" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="modelName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="SetCoolerResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SetCoolerResult" type="tns:Problem" />
-          </s:sequence>
-        </s:complexType>
+        <s:complexType />
       </s:element>
       <s:element name="SetProblem">
         <s:complexType>
@@ -425,7 +326,11 @@
         </s:complexType>
       </s:element>
       <s:element name="SetProblemResponse">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetProblemResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="GetOptimalSolutions">
         <s:complexType />
@@ -453,16 +358,32 @@
           <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:double" />
         </s:sequence>
       </s:complexType>
-      <s:element name="TestDbAccess">
+      <s:element name="Run">
         <s:complexType />
       </s:element>
-      <s:element name="TestDbAccessResponse">
+      <s:element name="RunResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="TestDbAccessResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RunResult" type="tns:State" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="State">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="temperature" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="numStruts" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="length" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="crossSection" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="powerFactor" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="coolerName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="inputPower" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="cost" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="stressLimit" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="problemName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isValidSolution" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetFeedback">
         <s:complexType />
       </s:element>
@@ -481,16 +402,13 @@
       </s:complexType>
       <s:element name="boolean" type="s:boolean" />
       <s:element name="MyAssemblyInfo" nillable="true" type="tns:MyAssemblyInfo" />
-      <s:element name="ArrayOfCoolerModel" nillable="true" type="tns:ArrayOfCoolerModel" />
-      <s:element name="CoolerModel" nillable="true" type="tns:CoolerModel" />
+      <s:element name="ArrayOfCooler" nillable="true" type="tns:ArrayOfCooler" />
       <s:element name="ArrayOfMaterial" nillable="true" type="tns:ArrayOfMaterial" />
-      <s:element name="Material" nillable="true" type="tns:Material" />
-      <s:element name="Problem" nillable="true" type="tns:Problem" />
       <s:element name="ArrayOfProblem" nillable="true" type="tns:ArrayOfProblem" />
       <s:element name="ArrayOfMathGate" nillable="true" type="tns:ArrayOfMathGate" />
       <s:element name="ArrayOfDataPoint" nillable="true" type="tns:ArrayOfDataPoint" />
       <s:element name="ArrayOfSolution" nillable="true" type="tns:ArrayOfSolution" />
-      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="State" nillable="true" type="tns:State" />
       <s:element name="Feedback" nillable="true" type="tns:Feedback" />
     </s:schema>
     <s:schema targetNamespace="http://www.wisc.edu/doit/ls/coolit/AbstractTypes">
@@ -542,41 +460,17 @@
   <wsdl:message name="CryolibVersionSoapOut">
     <wsdl:part name="parameters" element="tns:CryolibVersionResponse" />
   </wsdl:message>
-  <wsdl:message name="GetCoolerModelsSoapIn">
-    <wsdl:part name="parameters" element="tns:GetCoolerModels" />
+  <wsdl:message name="GetCoolersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoolers" />
   </wsdl:message>
-  <wsdl:message name="GetCoolerModelsSoapOut">
-    <wsdl:part name="parameters" element="tns:GetCoolerModelsResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelSoapIn">
-    <wsdl:part name="parameters" element="tns:GetCoolerModel" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelSoapOut">
-    <wsdl:part name="parameters" element="tns:GetCoolerModelResponse" />
+  <wsdl:message name="GetCoolersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoolersResponse" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsSoapIn">
     <wsdl:part name="parameters" element="tns:GetMaterials" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsSoapOut">
     <wsdl:part name="parameters" element="tns:GetMaterialsResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialSoapIn">
-    <wsdl:part name="parameters" element="tns:GetMaterial" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialSoapOut">
-    <wsdl:part name="parameters" element="tns:GetMaterialResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameSoapIn">
-    <wsdl:part name="parameters" element="tns:GetProblemByName" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameSoapOut">
-    <wsdl:part name="parameters" element="tns:GetProblemByNameResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemSoapIn">
-    <wsdl:part name="parameters" element="tns:GetProblem" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemSoapOut">
-    <wsdl:part name="parameters" element="tns:GetProblemResponse" />
   </wsdl:message>
   <wsdl:message name="GetProblemsSoapIn">
     <wsdl:part name="parameters" element="tns:GetProblems" />
@@ -620,11 +514,11 @@
   <wsdl:message name="GetOptimalSolutionsSoapOut">
     <wsdl:part name="parameters" element="tns:GetOptimalSolutionsResponse" />
   </wsdl:message>
-  <wsdl:message name="TestDbAccessSoapIn">
-    <wsdl:part name="parameters" element="tns:TestDbAccess" />
+  <wsdl:message name="RunSoapIn">
+    <wsdl:part name="parameters" element="tns:Run" />
   </wsdl:message>
-  <wsdl:message name="TestDbAccessSoapOut">
-    <wsdl:part name="parameters" element="tns:TestDbAccessResponse" />
+  <wsdl:message name="RunSoapOut">
+    <wsdl:part name="parameters" element="tns:RunResponse" />
   </wsdl:message>
   <wsdl:message name="GetFeedbackSoapIn">
     <wsdl:part name="parameters" element="tns:GetFeedback" />
@@ -665,37 +559,13 @@
   <wsdl:message name="CryolibVersionHttpGetOut">
     <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
   </wsdl:message>
-  <wsdl:message name="GetCoolerModelsHttpGetIn" />
-  <wsdl:message name="GetCoolerModelsHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfCoolerModel" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelHttpGetIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelHttpGetOut">
-    <wsdl:part name="Body" element="tns:CoolerModel" />
+  <wsdl:message name="GetCoolersHttpGetIn" />
+  <wsdl:message name="GetCoolersHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsHttpGetIn" />
   <wsdl:message name="GetMaterialsHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfMaterial" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialHttpGetIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialHttpGetOut">
-    <wsdl:part name="Body" element="tns:Material" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameHttpGetIn">
-    <wsdl:part name="problemName" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameHttpGetOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemHttpGetIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemHttpGetOut">
-    <wsdl:part name="Body" element="tns:Problem" />
   </wsdl:message>
   <wsdl:message name="GetProblemsHttpGetIn" />
   <wsdl:message name="GetProblemsHttpGetOut">
@@ -710,33 +580,29 @@
     <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
   </wsdl:message>
   <wsdl:message name="SetStrutHttpGetIn">
-    <wsdl:part name="ID" type="s:string" />
     <wsdl:part name="materialName" type="s:string" />
     <wsdl:part name="length" type="s:string" />
     <wsdl:part name="crossSection" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetStrutHttpGetOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
+  <wsdl:message name="SetStrutHttpGetOut" />
   <wsdl:message name="SetCoolerHttpGetIn">
-    <wsdl:part name="coolerID" type="s:string" />
-    <wsdl:part name="modelName" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
     <wsdl:part name="powerFactor" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetCoolerHttpGetOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
+  <wsdl:message name="SetCoolerHttpGetOut" />
   <wsdl:message name="SetProblemHttpGetIn">
     <wsdl:part name="name" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetProblemHttpGetOut" />
+  <wsdl:message name="SetProblemHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
   <wsdl:message name="GetOptimalSolutionsHttpGetIn" />
   <wsdl:message name="GetOptimalSolutionsHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfSolution" />
   </wsdl:message>
-  <wsdl:message name="TestDbAccessHttpGetIn" />
-  <wsdl:message name="TestDbAccessHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
+  <wsdl:message name="RunHttpGetIn" />
+  <wsdl:message name="RunHttpGetOut">
+    <wsdl:part name="Body" element="tns:State" />
   </wsdl:message>
   <wsdl:message name="GetFeedbackHttpGetIn" />
   <wsdl:message name="GetFeedbackHttpGetOut">
@@ -775,37 +641,13 @@
   <wsdl:message name="CryolibVersionHttpPostOut">
     <wsdl:part name="Body" element="tns:MyAssemblyInfo" />
   </wsdl:message>
-  <wsdl:message name="GetCoolerModelsHttpPostIn" />
-  <wsdl:message name="GetCoolerModelsHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfCoolerModel" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelHttpPostIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetCoolerModelHttpPostOut">
-    <wsdl:part name="Body" element="tns:CoolerModel" />
+  <wsdl:message name="GetCoolersHttpPostIn" />
+  <wsdl:message name="GetCoolersHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCooler" />
   </wsdl:message>
   <wsdl:message name="GetMaterialsHttpPostIn" />
   <wsdl:message name="GetMaterialsHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfMaterial" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialHttpPostIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetMaterialHttpPostOut">
-    <wsdl:part name="Body" element="tns:Material" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameHttpPostIn">
-    <wsdl:part name="problemName" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemByNameHttpPostOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemHttpPostIn">
-    <wsdl:part name="id" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="GetProblemHttpPostOut">
-    <wsdl:part name="Body" element="tns:Problem" />
   </wsdl:message>
   <wsdl:message name="GetProblemsHttpPostIn" />
   <wsdl:message name="GetProblemsHttpPostOut">
@@ -820,33 +662,29 @@
     <wsdl:part name="Body" element="tns:ArrayOfDataPoint" />
   </wsdl:message>
   <wsdl:message name="SetStrutHttpPostIn">
-    <wsdl:part name="ID" type="s:string" />
     <wsdl:part name="materialName" type="s:string" />
     <wsdl:part name="length" type="s:string" />
     <wsdl:part name="crossSection" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetStrutHttpPostOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
+  <wsdl:message name="SetStrutHttpPostOut" />
   <wsdl:message name="SetCoolerHttpPostIn">
-    <wsdl:part name="coolerID" type="s:string" />
-    <wsdl:part name="modelName" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
     <wsdl:part name="powerFactor" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetCoolerHttpPostOut">
-    <wsdl:part name="Body" element="tns:Problem" />
-  </wsdl:message>
+  <wsdl:message name="SetCoolerHttpPostOut" />
   <wsdl:message name="SetProblemHttpPostIn">
     <wsdl:part name="name" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="SetProblemHttpPostOut" />
+  <wsdl:message name="SetProblemHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
   <wsdl:message name="GetOptimalSolutionsHttpPostIn" />
   <wsdl:message name="GetOptimalSolutionsHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfSolution" />
   </wsdl:message>
-  <wsdl:message name="TestDbAccessHttpPostIn" />
-  <wsdl:message name="TestDbAccessHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
+  <wsdl:message name="RunHttpPostIn" />
+  <wsdl:message name="RunHttpPostOut">
+    <wsdl:part name="Body" element="tns:State" />
   </wsdl:message>
   <wsdl:message name="GetFeedbackHttpPostIn" />
   <wsdl:message name="GetFeedbackHttpPostOut">
@@ -877,29 +715,13 @@
       <wsdl:input message="tns:CryolibVersionSoapIn" />
       <wsdl:output message="tns:CryolibVersionSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <wsdl:input message="tns:GetCoolerModelsSoapIn" />
-      <wsdl:output message="tns:GetCoolerModelsSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <wsdl:input message="tns:GetCoolerModelSoapIn" />
-      <wsdl:output message="tns:GetCoolerModelSoapOut" />
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersSoapIn" />
+      <wsdl:output message="tns:GetCoolersSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <wsdl:input message="tns:GetMaterialsSoapIn" />
       <wsdl:output message="tns:GetMaterialsSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <wsdl:input message="tns:GetMaterialSoapIn" />
-      <wsdl:output message="tns:GetMaterialSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <wsdl:input message="tns:GetProblemByNameSoapIn" />
-      <wsdl:output message="tns:GetProblemByNameSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <wsdl:input message="tns:GetProblemSoapIn" />
-      <wsdl:output message="tns:GetProblemSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProblems">
       <wsdl:input message="tns:GetProblemsSoapIn" />
@@ -929,9 +751,9 @@
       <wsdl:input message="tns:GetOptimalSolutionsSoapIn" />
       <wsdl:output message="tns:GetOptimalSolutionsSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <wsdl:input message="tns:TestDbAccessSoapIn" />
-      <wsdl:output message="tns:TestDbAccessSoapOut" />
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunSoapIn" />
+      <wsdl:output message="tns:RunSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetFeedback">
       <wsdl:input message="tns:GetFeedbackSoapIn" />
@@ -963,29 +785,13 @@
       <wsdl:input message="tns:CryolibVersionHttpGetIn" />
       <wsdl:output message="tns:CryolibVersionHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <wsdl:input message="tns:GetCoolerModelsHttpGetIn" />
-      <wsdl:output message="tns:GetCoolerModelsHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <wsdl:input message="tns:GetCoolerModelHttpGetIn" />
-      <wsdl:output message="tns:GetCoolerModelHttpGetOut" />
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersHttpGetIn" />
+      <wsdl:output message="tns:GetCoolersHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <wsdl:input message="tns:GetMaterialsHttpGetIn" />
       <wsdl:output message="tns:GetMaterialsHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <wsdl:input message="tns:GetMaterialHttpGetIn" />
-      <wsdl:output message="tns:GetMaterialHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <wsdl:input message="tns:GetProblemByNameHttpGetIn" />
-      <wsdl:output message="tns:GetProblemByNameHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <wsdl:input message="tns:GetProblemHttpGetIn" />
-      <wsdl:output message="tns:GetProblemHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProblems">
       <wsdl:input message="tns:GetProblemsHttpGetIn" />
@@ -1015,9 +821,9 @@
       <wsdl:input message="tns:GetOptimalSolutionsHttpGetIn" />
       <wsdl:output message="tns:GetOptimalSolutionsHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <wsdl:input message="tns:TestDbAccessHttpGetIn" />
-      <wsdl:output message="tns:TestDbAccessHttpGetOut" />
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunHttpGetIn" />
+      <wsdl:output message="tns:RunHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetFeedback">
       <wsdl:input message="tns:GetFeedbackHttpGetIn" />
@@ -1049,29 +855,13 @@
       <wsdl:input message="tns:CryolibVersionHttpPostIn" />
       <wsdl:output message="tns:CryolibVersionHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <wsdl:input message="tns:GetCoolerModelsHttpPostIn" />
-      <wsdl:output message="tns:GetCoolerModelsHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <wsdl:input message="tns:GetCoolerModelHttpPostIn" />
-      <wsdl:output message="tns:GetCoolerModelHttpPostOut" />
+    <wsdl:operation name="GetCoolers">
+      <wsdl:input message="tns:GetCoolersHttpPostIn" />
+      <wsdl:output message="tns:GetCoolersHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <wsdl:input message="tns:GetMaterialsHttpPostIn" />
       <wsdl:output message="tns:GetMaterialsHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <wsdl:input message="tns:GetMaterialHttpPostIn" />
-      <wsdl:output message="tns:GetMaterialHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <wsdl:input message="tns:GetProblemByNameHttpPostIn" />
-      <wsdl:output message="tns:GetProblemByNameHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <wsdl:input message="tns:GetProblemHttpPostIn" />
-      <wsdl:output message="tns:GetProblemHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProblems">
       <wsdl:input message="tns:GetProblemsHttpPostIn" />
@@ -1101,9 +891,9 @@
       <wsdl:input message="tns:GetOptimalSolutionsHttpPostIn" />
       <wsdl:output message="tns:GetOptimalSolutionsHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <wsdl:input message="tns:TestDbAccessHttpPostIn" />
-      <wsdl:output message="tns:TestDbAccessHttpPostOut" />
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunHttpPostIn" />
+      <wsdl:output message="tns:RunHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetFeedback">
       <wsdl:input message="tns:GetFeedbackHttpPostIn" />
@@ -1166,17 +956,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolerModels" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolerModel" style="document" />
+    <wsdl:operation name="GetCoolers">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1186,33 +967,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterials" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterial" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblemByName" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblem" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1283,8 +1037,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TestDbAccess" style="document" />
+    <wsdl:operation name="Run">
+      <soap:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Run" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1358,17 +1112,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolerModels" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolerModel" style="document" />
+    <wsdl:operation name="GetCoolers">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetCoolers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1378,33 +1123,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterials" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetMaterial" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblemByName" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/GetProblem" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1475,8 +1193,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/TestDbAccess" style="document" />
+    <wsdl:operation name="Run">
+      <soap12:operation soapAction="http://www.wisc.edu/doit/ls/coolit/Run" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1550,17 +1268,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <http:operation location="/GetCoolerModels" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <http:operation location="/GetCoolerModel" />
+    <wsdl:operation name="GetCoolers">
+      <http:operation location="/GetCoolers" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1570,33 +1279,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <http:operation location="/GetMaterials" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <http:operation location="/GetMaterial" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <http:operation location="/GetProblemByName" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <http:operation location="/GetProblem" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1636,25 +1318,23 @@
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
+      <wsdl:output />
     </wsdl:operation>
     <wsdl:operation name="SetCooler">
       <http:operation location="/SetCooler" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
+      <wsdl:output />
     </wsdl:operation>
     <wsdl:operation name="SetProblem">
       <http:operation location="/SetProblem" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOptimalSolutions">
       <http:operation location="/GetOptimalSolutions" />
@@ -1665,8 +1345,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <http:operation location="/TestDbAccess" />
+    <wsdl:operation name="Run">
+      <http:operation location="/Run" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1740,17 +1420,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCoolerModels">
-      <http:operation location="/GetCoolerModels" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCoolerModel">
-      <http:operation location="/GetCoolerModel" />
+    <wsdl:operation name="GetCoolers">
+      <http:operation location="/GetCoolers" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -1760,33 +1431,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetMaterials">
       <http:operation location="/GetMaterials" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMaterial">
-      <http:operation location="/GetMaterial" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblemByName">
-      <http:operation location="/GetProblemByName" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetProblem">
-      <http:operation location="/GetProblem" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -1826,25 +1470,23 @@
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
+      <wsdl:output />
     </wsdl:operation>
     <wsdl:operation name="SetCooler">
       <http:operation location="/SetCooler" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
+      <wsdl:output />
     </wsdl:operation>
     <wsdl:operation name="SetProblem">
       <http:operation location="/SetProblem" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
-      <wsdl:output />
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOptimalSolutions">
       <http:operation location="/GetOptimalSolutions" />
@@ -1855,8 +1497,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TestDbAccess">
-      <http:operation location="/TestDbAccess" />
+    <wsdl:operation name="Run">
+      <http:operation location="/Run" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

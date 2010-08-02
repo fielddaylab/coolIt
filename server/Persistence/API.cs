@@ -5,17 +5,13 @@ using CryoLib;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Criterion;
-using log4net;
+
 
 namespace Persistence {
 	public class API {
 		Configuration cfg;
 		ISessionFactory factory;
 
-        //private static readonly log4net.ILog _logger
-        //    = log4net.LogManager.GetLogger(
-        //            System.Reflection.MethodBase.GetCurrentMethod()
-        //             .DeclaringType);
 		public API() {
 			cfg = new Configuration();
 			cfg.AddAssembly("Persistence");
@@ -149,7 +145,7 @@ namespace Persistence {
 		/// </summary>
 		/// <param name="user"></param>
 		/// <param name="state"></param>
-		public void SetState(int userId, P_ProblemState state) {
+		public void SetState(int userId, P_State state) {
 			ISession session = null;
 			ITransaction transaction = null;
 			try {
@@ -174,7 +170,7 @@ namespace Persistence {
 			}
 		}
 
-		public void SetState(int userId, Problem rawState) {
+		public void SetState(int userId, State rawState) {
 			ISession session = null;
 			ITransaction transaction = null;
 			try {
@@ -183,13 +179,23 @@ namespace Persistence {
 
 				P_User user = session.Load<P_User>(userId);
 
-                P_ProblemState state = LoadState(rawState, session);
+				ICriteria criterion = session.CreateCriteria(typeof(P_Cooler));
+				criterion.Add(Expression.Eq("Name", rawState.coolerName));
+				P_Cooler cooler = criterion.UniqueResult<P_Cooler>();
 
-                user.OpenEpisode.AddState(state);
-                session.Save(state);
+				criterion = session.CreateCriteria(typeof(P_Material));
+				criterion.Add(Expression.Eq("Name", rawState.materialName));
+				P_Material material = criterion.UniqueResult<P_Material>();
+
+				P_State state = new P_State(rawState.length, rawState.crossSection, rawState.powerFactor, rawState.inputPower, rawState.cost, rawState.stressLimit, rawState.temperature, rawState.isValidSolution);
+				state.Cooler = cooler;
+				state.Material = material;
+
+				user.OpenEpisode.AddState(state);
+				session.Save(state);
 
 				transaction.Commit();
-			} catch{
+			} catch {
 				if (transaction != null) {
 					transaction.Rollback();
 					throw;
@@ -201,34 +207,6 @@ namespace Persistence {
 			}
 
 		}
-
-        private static P_ProblemState LoadState(Problem rawState, ISession session)
-        {
-            P_ProblemState state = new P_ProblemState(rawState.Cost, rawState.Temperature, rawState.Solved);
-
-            foreach (StrutType strut in rawState.Struts)
-            {
-                ICriteria criterion = session.CreateCriteria(typeof(P_Material));
-                criterion.Add(Expression.Eq("Name", strut.Material.Name));
-                P_Material material = criterion.UniqueResult<P_Material>();
-
-                P_StrutState pstrut = new P_StrutState(strut.CrossSectionalArea, strut.Length, strut.Strength, state);
-                pstrut.Material = material;
-                state.AddStrut(pstrut);
-            }
-
-            foreach (Cooler cool in rawState.Coolers)
-            {
-                ICriteria criterion = session.CreateCriteria(typeof(P_Cooler));
-                criterion.Add(Expression.Eq("Name", cool.SelectedCooler.Name));
-                P_Cooler cooler = criterion.UniqueResult<P_Cooler>();
-
-                P_CoolerState pcooler = new P_CoolerState(cool.InputPower, cool.PowerFactor, state);
-                pcooler.Cooler = cooler;
-                state.AddCooler(pcooler);
-            }
-            return state;
-        }
 
 		public P_User[] ListUsers() {
 			IList<P_User> users = null;
@@ -292,8 +270,8 @@ namespace Persistence {
 			return answer;
 		}
 
-		public P_ProblemState[] ListStates(P_Episode episode) {
-			P_ProblemState[] answer = null;
+		public P_State[] ListStates(P_Episode episode) {
+			P_State[] answer = null;
 
 			ISession session = null;
 			ITransaction transaction = null;
@@ -302,9 +280,9 @@ namespace Persistence {
 				transaction = session.BeginTransaction();
 
 				session.Lock(episode, LockMode.None);
-				answer = new P_ProblemState[episode.States.Count];
+				answer = new P_State[episode.States.Count];
 				int i = 0;
-				foreach (P_ProblemState s in episode.States) {
+				foreach (P_State s in episode.States) {
 					session.Update(s);
 					answer[i++] = s;
 				}

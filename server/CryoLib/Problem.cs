@@ -11,88 +11,19 @@ namespace CryoLib {
 		private int id;
 		private string description;
 		private double monetaryIncentive;
-        private double heatLeak;
-		private ConstraintCollection constraints;
-        private StrutTypeCollection struts;
-        private CoolerCollection coolers;
+		private double heatLeak;
+		private SupportMode supportMode;
+		private int supportNumber;
+		private Constraint [] constraints;
 		private ProblemImageCollection problemImageCollection;
+		private bool solved;
+		const double DEFAULT_MIN_STRUT_LENGTH = 0.01;
+		const double DEFAULT_MAX_STRUT_LENGTH = 10.0;
+		const double DEFAULT_MIN_STRUT_CROSS_SECTION = 0.001;
+		const double DEFAULT_MAX_STRUT_CROSS_SECTION = 0.5;
 
-        #region State Properties - Outputs
-        private bool solved;
-        public double Temperature { get; set; }
-        public double Cost { get; set; }
-        #endregion
 
-        #region Serialzation Properties
-        /**
-         * Method that controls whether or not all the object properties
-         * should be serialized when returned in XML by the
-         * webservice.  There is a specific pattern that can be utilized 
-         * to control this, which is what all the "Specified" properties are for
-         * http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.aspx
-         **/
-        public bool ShowObjectDetails
-        {
-            set
-            {
-                DescriptionSpecified = value;
-                MonetaryIncentiveSpecified = value;
-                HeatLeakSpecified = value;
-                ConstraintsSpecified = value;
-                ImageCollectionSpecified = value;
-                StrutsSpecified = value;
-                CoolersSpecified = value;
-            }
-        }
-
-        public bool ShowOutputs
-        {
-            set
-            {
-                TemperatureSpecified = value;
-                CostSpecified = value;
-                SolvedSpecified = value;
-                StrutsSpecified = value;
-                Struts.ShowOutputs = value;
-                CoolersSpecified = value;
-                Coolers.ShowOutputs = value;
-            }
-        }
-
-        //Serialzation properties
-        [System.Xml.Serialization.XmlIgnore]
-        public bool DescriptionSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool MonetaryIncentiveSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool HeatLeakSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool ConstraintsSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool StrutsSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool CoolersSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool ImageCollectionSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool TemperatureSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool CostSpecified = false;
-
-        [System.Xml.Serialization.XmlIgnore]
-        public bool SolvedSpecified = false;
-        #endregion
-
-        #region Property Accessors
-        [XmlAttribute]
+		[XmlAttribute]
 		public string Name {
 			get { return name; }
 			set { name = value; }
@@ -104,38 +35,40 @@ namespace CryoLib {
 			set { id = value; }
 		}
 
+		[XmlElement]
 		public string Description {
 			get { return description; }
 			set { description = value; }
 		}
 
+		[XmlElement]
 		public double MonetaryIncentive {
 			get { return monetaryIncentive; }
 			set { monetaryIncentive = value; }
 		}
 
-        public double HeatLeak
-        {
-            get { return heatLeak; }
-            set { heatLeak = value; }
-        }
+		[XmlElement]
+		public double HeatLeak {
+			get { return heatLeak; }
+			set { heatLeak = value; }
+		}
 
-		public ConstraintCollection Constraints {
+		[XmlElement]
+		public SupportMode SupportMode {
+			get { return supportMode; }
+			set { supportMode = value; }
+		}
+
+
+		public int SupportNumber {
+			get { return supportNumber; }
+			set { supportNumber = value; }
+		}
+
+		public Constraint [] Constraints {
 			get { return constraints; }
 			set { constraints = value; }
 		}
-
-        public StrutTypeCollection Struts
-        {
-            get { return struts; }
-            set { struts = value; }
-        }
-
-        public CoolerCollection Coolers
-        {
-            get { return coolers; }
-            set { coolers = value; }
-        }
 
 		public ProblemImageCollection ImageCollection {
 			get { return problemImageCollection; }
@@ -145,33 +78,32 @@ namespace CryoLib {
 		public bool Solved {
 			get { return solved; }
 			set { solved = value; }
-        }
-        #endregion
+		}
 
-        #region Constructors
-        public Problem(
+		public Problem(
 						string name,
 						int id,
 						string description,
 						double incentive,
-                        double heatLeak,
+						double heatLeak,
+						SupportMode supportMode,
+						int supportNumber,
 						ProblemImageCollection imageCollection,
-						ConstraintCollection constraints,
-                        StrutTypeCollection struts,
-                        CoolerCollection coolers)
+						Constraint[] constraints )
 		{
 			this.name = name;
 			this.id = id;
 			this.description = description;
 			this.monetaryIncentive = incentive;
-            this.heatLeak = heatLeak;
+			this.heatLeak = heatLeak;
+			this.supportMode = supportMode;
+			this.supportNumber = supportNumber;
 			this.problemImageCollection = imageCollection;
 			this.constraints = constraints;
-            this.struts = struts;
-            this.coolers = coolers;
 		}
 
 		public Problem( XPathNavigator navigator ) {
+			List<Constraint> constraintList = new List<Constraint>();
 			List<string> imageList = new List<string>();
 
 			// Get the name
@@ -190,44 +122,158 @@ namespace CryoLib {
 			navigator.MoveToNext("monetaryIncentive","");
 			monetaryIncentive = navigator.ValueAsDouble;
 
-            // Get the heat leak
-            navigator.MoveToNext("heatLeak", "");
-            heatLeak = navigator.ValueAsDouble;
+
+			// Get the heat leak
+			navigator.MoveToNext("heatLeak","");
+			heatLeak = navigator.ValueAsDouble;
+
+			// Get the support mode
+			navigator.MoveToNext("supportMode","");
+			switch (navigator.Value) {
+				case "Compression":
+					SupportMode = SupportMode.COMPRESSION;
+					break;
+				case "Tension":
+					SupportMode = SupportMode.TENSION;
+					break;
+			}
+
+			// Get the number of supports
+			navigator.MoveToNext( "strutNumber", "" );
+			supportNumber = navigator.ValueAsInt;
 
 			navigator.MoveToNext("images","");
 			problemImageCollection = new ProblemImageCollection(navigator.Clone());
 
+
 			// Get the constraint list
-            this.constraints = new ConstraintCollection(navigator.Clone());
+			navigator.MoveToNext( "constraints", "" );
+			navigator.MoveToFirstChild();
+			do {
+				Constraint constraint = new Constraint(navigator.Clone());
+				constraintList.Add(constraint);
+			} while (navigator.MoveToNext());
+			constraints = new Constraint[constraintList.Count];
+			constraintList.CopyTo(constraints);
+		}
 
-            //Get the strut list
-            this.struts = new StrutTypeCollection(navigator.Clone());
+		/// <summary>
+		/// Convenience property - to make life easier.
+		/// </summary>
+		public double MinStrutLength {
+			get {
+				return getConstraint(VALUE.STRUT_LENGTH, OP.GE, DEFAULT_MIN_STRUT_LENGTH);
+			}
+		}
 
-            //Get the cooler list
-            this.coolers = new CoolerCollection(navigator.Clone());
-        }
+		/// <summary>
+		/// Convenience property - to make life easier.
+		/// </summary>
+		public double MaxStrutLength {
+			get {
+				return getConstraint(VALUE.STRUT_LENGTH, OP.LE, DEFAULT_MAX_STRUT_LENGTH);
+			}
+		}
 
-        /// <summary>
-        /// No-argument (default) constructor.
-        /// </summary>
-        public Problem()
-        {
-            //name = "(no such problem)";
-            this.constraints = new ConstraintCollection();
-            this.problemImageCollection = new ProblemImageCollection();
-            this.struts = new StrutTypeCollection();
-            this.coolers = new CoolerCollection();
-        }
-        #endregion
+		/// <summary>
+		/// Convenience property - to make life easier.
+		/// </summary>
+		public double MinStrutCrossSection {
+			get {
+				return getConstraint(VALUE.STRUT_CROSS_SECTION, OP.GE, DEFAULT_MIN_STRUT_CROSS_SECTION);
+			}
+		}
+
+		/// <summary>
+		/// Convenience property - to make life easier.
+		/// </summary>
+		public double MaxStrutCrossSection {
+			get {
+				return getConstraint(VALUE.STRUT_CROSS_SECTION, OP.LE, DEFAULT_MAX_STRUT_CROSS_SECTION);
+			}
+		}
+
+		/// <summary>
+		/// Convenience property - to make life easier.
+		/// </summary>
+		public double InputPowerLimit {
+			get {
+				return getConstraint(VALUE.INPUT_POWER, OP.LE, double.MaxValue);
+			}
+		}
+
+		public double StrengthRequirement {
+			get {
+				return getConstraint(VALUE.FORCE_LIMIT, OP.GE, 0.0);
+			}
+		}
 
 		public double TargetTemperature {
 			get {
-				return constraints.getConstraintTarget(VALUE.TEMP, OP.LT, double.MaxValue);
+				return getConstraint(VALUE.TEMP, OP.LT, double.MaxValue);
 			}
+		}
+
+
+		/// <summary>
+		/// No-argument (default) constructor.
+		/// </summary>
+		public Problem() {
+			name = "(no such problem)";
 		}
 
 		public override string ToString() {
 			return name;
+		}
+
+		private double getConstraint( VALUE value, OP op, double defaultAnswer) {
+			Constraint c = findConstraint(value, op);
+			if (c == null) {
+				return defaultAnswer;
+			} else {
+				return c.Target;
+			}
+		}
+
+		private double getConstraint( VALUE value, OP op ) {
+			Constraint c = findConstraint(value, op);
+			if (c == null) {
+				string msg = String.Format("Can't find constraint for Value=\"{0}\" and Op=\"{1}\"",
+					value, op);
+				throw new Exception(msg);
+			} else {
+				return c.Target;
+			}
+		}
+
+		private Constraint findConstraint(VALUE value, OP op) {
+			// Problem constraints might say that Temp <= x or Temp < x, treat these the same here, same goes for
+			// other constraint boundaries, e.g. strength >= x or strength > x.
+			OP alternateOp;
+			switch (op) {
+				case OP.GE:
+					alternateOp = OP.GT;	// consider GT and GE equivalent
+					break;
+				case OP.GT:
+					alternateOp = OP.GE;	// consider GT and GE equivalent
+					break;
+				case OP.LE:
+					alternateOp = OP.LT;	// consider LT and LE equivalent
+					break;
+				case OP.LT:
+					alternateOp = OP.LE;	// consider LT and LE equivalent
+					break;
+				default:
+					alternateOp = op;		// this op has no equivalent
+					break;
+			}
+			foreach (Constraint c in constraints) {
+				if (c.Value == value && (c.Op == op || c.Op == alternateOp) ) {
+					return c;
+				}
+			}
+				
+			return null;
 		}
 
 		private string fixFormatting(string src) {

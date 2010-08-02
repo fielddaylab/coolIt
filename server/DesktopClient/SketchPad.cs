@@ -25,16 +25,13 @@ namespace DesktopClient {
 		}
 
 		void handle_SimulationChangedEvent(object sender, EventArgs e) {
-			Problem state = ((SimulatorStub)sender).State;
+			State state = ((SimulatorStub)sender).State;
 			if (powerFactorRadioButton.Checked) {
-                //TODO:  Fix this to handle multiple coolers
-				addPoint(state.Coolers[0].PowerFactor, state.Temperature);
+				addPoint(state.powerFactor, state.temperature);
 			} else if (strutLengthRadioButton.Checked) {
-                //TODO:  Fix this to handle multiple struts
-				addPoint(state.Struts[0].Length, state.Temperature);
+				addPoint(state.length, state.temperature);
 			} else {
-                //TODO:  Fix this to handle multiple struts
-				addPoint(state.Struts[0].CrossSectionalArea, state.Temperature);
+				addPoint(state.crossSection, state.temperature);
 			}
 		}
 

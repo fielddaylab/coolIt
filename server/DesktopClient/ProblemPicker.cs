@@ -21,7 +21,7 @@ namespace DesktopClient {
 			for (int i = 0; i < problems.Length; i++) {
 				problemsListBox.Items.Add(problems[i]);
 			}
-            problemsListBox.SelectedIndex = 0;
+			problemsListBox.SelectedIndex = 0;
 		}
 
 		public Problem Problem {
@@ -42,11 +42,9 @@ namespace DesktopClient {
 			radioButton_CheckedChanged(this, EventArgs.Empty);
 
 			showConstraints(p);
-            showStruts(p);
-            showCoolers(p);
-
-            strutNumberTextBox.Text = p.Struts.Count.ToString();
-
+			strutNumberTextBox.Text = p.SupportNumber.ToString();
+			heatLeakTextBox.Text = p.HeatLeak.ToString();
+			supportModeTextBox.Text = p.SupportMode.ToString();
 			monetaryIncentiveLabel.Text = p.MonetaryIncentive.ToString("C");
 
 			strutPickerCollection = curProblem.ImageCollection.PickerImageCollection;
@@ -58,25 +56,10 @@ namespace DesktopClient {
 			lengthUpDown.Maximum = strutPickerCollection.Length - 1;
 		}
 
-        private void showStruts(Problem p)
-        {
-            dgStruts.DataSource = p.Struts;
-        }
-
-        private void showCoolers(Problem p)
-        {
-            dgCoolers.DataSource = p.Coolers;
-        }
-
 		private void showConstraints(Problem p) {
-            loadConstraintsInGridView(constraintGridView, p.Constraints);
-		}
-
-        private void loadConstraintsInGridView(DataGridView dg, CryoLib.ConstraintCollection cons)
-        {
-        	dg.Rows.Clear();
+			constraintGridView.Rows.Clear();
 			string[] rowVals = new string[4];
-			foreach (CryoLib.Constraint constraint in cons) {
+			foreach (CryoLib.Constraint constraint in p.Constraints) {
 				rowVals[0] = constraint.Value.ToString();
 				switch (constraint.Op) {
 					case OP.EQ:
@@ -106,7 +89,7 @@ namespace DesktopClient {
 					case VALUE.COST:
 						rowVals[3] = "Dollars ($)";
 						break;
-					case VALUE.STRENGTH:
+					case VALUE.FORCE_LIMIT:
 						rowVals[3] = "megaNewtons (MN)";
 						break;
 					case VALUE.INPUT_POWER:
@@ -125,9 +108,9 @@ namespace DesktopClient {
 						string msg = string.Format("Unexpected constraint value ({0})", constraint.Value);
 						throw new Exception(msg);
 				}
-				dg.Rows.Add( rowVals );
+				constraintGridView.Rows.Add( rowVals );
 			}
-        }
+		}
 
 		private void listBox_FocusChanged(object sender, EventArgs e) {
 			ListBox box = (ListBox)sender;
@@ -190,28 +173,6 @@ namespace DesktopClient {
 			loadImage(img);
 		}
 
-        /**
-         * Show constraints for a given strut based on what strut is selected
-         **/
-        private void dgStruts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (dgStruts.SelectedRows.Count > 0)
-            {
-                StrutType selectedRow = (StrutType)dgStruts.SelectedRows[0].DataBoundItem;
-                loadConstraintsInGridView(this.dgStrutConstraint, selectedRow.Constraints);
-            }
-        }
 
-        /**
-         * Show constraints for a given cooler based on what cooler is selected
-         **/
-        private void dgCooler_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgCoolers.SelectedRows.Count > 0)
-            {
-                Cooler selectedRow = (Cooler)dgCoolers.SelectedRows[0].DataBoundItem;
-                loadConstraintsInGridView(this.dgCoolerConstraint, selectedRow.Constraints);
-            }
-        }
 	}
 }

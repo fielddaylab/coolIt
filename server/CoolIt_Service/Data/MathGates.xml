@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mathGates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="file:/C:/Users/mike/Documents/Visual Studio 2005/Projects/CoolIt/CoolIt_Service/Schema/MathGates.xsd">
+    xsi:noNamespaceSchemaLocation="file:/C:/Projects/CoolIt/server/CoolIt_Service/Schema/MathGates.xsd">
     <mathGate>
         <Name>Level 1</Name>
 		<ID>1</ID>

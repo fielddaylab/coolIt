@@ -11,34 +11,28 @@ namespace CryoLib {
 			this.problemCollection = problemCollection;
 		}
 
-		public Feedback GetFeedback(Problem state, Solution optimalSolution ) {
+		public Feedback GetFeedback(State state, Solution optimalSolution ) {
 			Feedback answer = new Feedback();
-
-            //TODO:  This can potentially be loaded directly from state
-			Problem problem = problemCollection[state.Name];
-
-            foreach (StrutType strut in state.Struts)
-            {
-                if (strut.Length < strut.MinStrutLength || strut.Length > strut.MaxStrutLength)
-                {
-                    answer.Text = "Internal Server Error";
-                    answer.CutScreen = "";
-                }
-            }
+			Problem problem = problemCollection[state.problemName];
+			if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
+				answer.Text = "Internal Server Error";
+				answer.CutScreen = "";
+			}
 
 			// If any constraint is violated, the answer is not valid.  We give feedback based on the
 			// "most important" constraint violated.  The importance is coded into the enumeration values for
 			// the constraint VALUEs.  Here we order the constraints so we can check the most important ones
 			// first.
-            List<Constraint> orderedConstraints = problem.Constraints;
-			orderedConstraints.Sort(Comparer<Constraint>.Default.Compare);
+			Constraint[] orderedConstraints = new Constraint[problem.Constraints.Length];
+			problem.Constraints.CopyTo(orderedConstraints, 0);
+			Array.Sort(orderedConstraints, sortConstraintsByPriority);
 			
 			// Since we already have the constraints in order of importance, we can just give feedback based on 
 			// the first violation we find.
 			foreach (Constraint constraint in orderedConstraints) {
 				if (!checkConstraint(constraint, state)) {
 					switch (constraint.Value) {
-						case VALUE.STRENGTH:
+						case VALUE.FORCE_LIMIT:
 							answer.Text = "The strut is not strong enough and breaks.";
 							answer.CutScreen = problem.ImageCollection.FailStrutBreaks;
 							return answer;
@@ -72,7 +66,7 @@ namespace CryoLib {
 			// If we get here, the answer is valid.  We need to compare the answer with the optimal to give
 			// feedback.
 			answer.CutScreen = problem.ImageCollection.Success;
-			int percentDiff = (int)Math.Round( (state.Cost - optimalSolution.Cost) / optimalSolution.Cost * 100 );
+			int percentDiff = (int)Math.Round( (state.cost - optimalSolution.Cost) / optimalSolution.Cost * 100 );
 			if (percentDiff <= 5) {
 				answer.Text = string.Format(
 					"Congratulations. Your solution is valid and costs within {0}% of the optimal solution. Great Job!", percentDiff);
@@ -84,61 +78,49 @@ namespace CryoLib {
 			return answer;
 		}
 
-		public bool CheckSolution(Problem state) {
-			Problem problem = problemCollection[state.Name];
+		private int sortConstraintsByPriority(Constraint x, Constraint y) {
+			if (x.Value < y.Value) {
+				return -1;
+			} else if (x.Value > y.Value) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 
-            //TODO:  Update this to handle multiple struts - current work around works because all struts are identical
-            foreach (StrutType strut in state.Struts)
-            {
-                if (strut.Length < strut.MinStrutLength || strut.Length > strut.MaxStrutLength)
-                {
-                    return false;
-                }
-            }
-
-            //TODO:  Update this to handle strut and cooler constraints more gracefully and in the right priority
+		public bool CheckSolution(State state) {
+			Problem problem = problemCollection[state.problemName];
+			if (state.length < problem.MinStrutLength || state.length > problem.MaxStrutLength) {
+				return false;
+			}
 			foreach (Constraint constraint in problem.Constraints) {
 				if (!checkConstraint(constraint, state)) {
 					return false;
 				}
 			}
-            //TODO:  Update to handle multiple struts  - current work around works because all struts are identical
-            foreach (Constraint constraint in problem.Struts[0].Constraints)
-            {
-                if (!checkConstraint(constraint, state))
-                    return false;
-            }
-            //TODO:  Update to handle multiple coolers - works because current problems only have one
-            foreach (Constraint constraint in problem.Coolers[0].Constraints)
-            {
-                if (!checkConstraint(constraint, state))
-                    return false;
-            }
 			return true;
 		}
 
-		private bool checkConstraint(Constraint constraint, Problem state) {
+		private bool checkConstraint(Constraint constraint, State state) {
 			double valueToCheck;
 			switch (constraint.Value) {
 				case VALUE.COST:
-					valueToCheck = state.Cost;
+					valueToCheck = state.cost;
 					break;
-				case VALUE.STRENGTH:
-					valueToCheck = state.Struts[0].Strength;
+				case VALUE.FORCE_LIMIT:
+					valueToCheck = state.stressLimit;
 					break;
 				case VALUE.INPUT_POWER:
-					valueToCheck = state.Coolers[0].InputPower;
+					valueToCheck = state.inputPower;
 					break;
 				case VALUE.TEMP:
-					valueToCheck = state.Temperature;
+					valueToCheck = state.temperature;
 					break;
 				case VALUE.STRUT_LENGTH:
-                    //TODO:  Handle multiple struts -this only works becaue currently they are all the same
-					valueToCheck = state.Struts[0].Length;
+					valueToCheck = state.length;
 					break;
 				case VALUE.STRUT_CROSS_SECTION:
-                    //TODO:  Handle multiple struts -this only works becaue currently they are all the same
-					valueToCheck = state.Struts[0].CrossSectionalArea;
+					valueToCheck = state.crossSection;
 					break;
 				default:
 					throw new Exception("Unknown VALUE type in constraint");

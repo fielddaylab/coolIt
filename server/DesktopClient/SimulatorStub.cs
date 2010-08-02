@@ -6,7 +6,7 @@ using CryoLib;
 namespace DesktopClient {
 	public class SimulatorStub {
 		protected ServiceAdapter webServiceAdapter;
-		protected Problem state;
+		protected State state;
 
 		public event EventHandler SimulationChangedEvent;
 
@@ -30,13 +30,13 @@ namespace DesktopClient {
 		/// <param name="coolerPicker"></param>
 		public void SetControllers( StrutPicker strutPicker, CoolerPicker coolerPicker ) {
 			// Set initial cooler and strut choices into the simulator
-			StrutType strut = strutPicker.Strut;
-			CoolerModel cooler = coolerPicker.Cooler;
+			Strut strut = strutPicker.Strut;
+			Cooler cooler = coolerPicker.Cooler;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
 			webServiceAdapter.SetCooler(cooler.Name, coolerPicker.PowerFactor);
 
 			// Run the simulator for the first time
-            //simulate();
+			simulate();
 
 			// Set up to handle change events from the controllers
 			strutPicker.RaiseStrutChangedEvent += new EventHandler(handle_StrutChangedEvent);
@@ -55,7 +55,7 @@ namespace DesktopClient {
 		/// Return a list of available coolers.  We get this information from the web service.
 		/// </summary>
 		/// <returns></returns>
-		public CoolerModel[] GetCoolers() {
+		public Cooler[] GetCoolers() {
 			return webServiceAdapter.GetCoolers();
 		}
 
@@ -71,13 +71,13 @@ namespace DesktopClient {
 		/// <summary>
 		/// Return the current state of the simulation - read only.
 		/// </summary>
-		public Problem State {
+		public State State {
 			get { return state; }
 		}
 
 		public void SetProblem(string problemName) {
 			webServiceAdapter.SetProblem(problemName);
-            OnSimulationChangedEvent(new EventArgs());
+			simulate();
 		}
 
 
@@ -87,9 +87,9 @@ namespace DesktopClient {
 		/// <param name="sender">The CoolerPicker which generated this event</param>
 		/// <param name="e">(unused)</param>
 		void handle_CoolerChangedEvent(object sender, EventArgs e) {
-			CoolerModel cooler = ((CoolerPicker)sender).Cooler;
+			Cooler cooler = ((CoolerPicker)sender).Cooler;
 			webServiceAdapter.SetCooler(cooler.Name, ((CoolerPicker)sender).PowerFactor);
-            OnSimulationChangedEvent(new EventArgs());
+			simulate();
 		}
 
 		/// <summary>
@@ -98,24 +98,24 @@ namespace DesktopClient {
 		/// <param name="sender">The StrucPicker which generated this event</param>
 		/// <param name="e">(unused)</param>
 		void handle_StrutChangedEvent(object sender, EventArgs e) {
-			StrutType strut = ((StrutPicker)sender).Strut;
+			Strut strut = ((StrutPicker)sender).Strut;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
-            OnSimulationChangedEvent(new EventArgs());
+			simulate();
 		}
 
 		/// <summary>
 		/// Run the simulator with current conditions
 		/// </summary>
-        //protected void simulate() {
-        //    // run the simulator
-        //    state = webServiceAdapter.Run();
-        //    if (state == null) {
-        //        return;
-        //    }
+		protected void simulate() {
+			// run the simulator
+			state = webServiceAdapter.Run();
+			if (state == null) {
+				return;
+			}
 
-        //    // let our subscribers know that things have changed
-        //    OnSimulationChangedEvent(new EventArgs());
-        //}
+			// let our subscribers know that things have changed
+			OnSimulationChangedEvent(new EventArgs());
+		}
 
 		/// <summary>
 		/// Notify all subscribers of a change
