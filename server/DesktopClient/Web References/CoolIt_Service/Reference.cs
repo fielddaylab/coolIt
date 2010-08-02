@@ -70,8 +70,6 @@ namespace DesktopClient.CoolIt_Service {
         
         private System.Threading.SendOrPostCallback TestDbAccessOperationCompleted;
         
-        private System.Threading.SendOrPostCallback RunOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GetFeedbackOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -171,9 +169,6 @@ namespace DesktopClient.CoolIt_Service {
         
         /// <remarks/>
         public event TestDbAccessCompletedEventHandler TestDbAccessCompleted;
-        
-        /// <remarks/>
-        public event RunCompletedEventHandler RunCompleted;
         
         /// <remarks/>
         public event GetFeedbackCompletedEventHandler GetFeedbackCompleted;
@@ -603,24 +598,27 @@ namespace DesktopClient.CoolIt_Service {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/SetStrut", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetStrut(string materialName, double length, double crossSection) {
-            this.Invoke("SetStrut", new object[] {
+        public Problem SetStrut(int ID, string materialName, double length, double crossSection) {
+            object[] results = this.Invoke("SetStrut", new object[] {
+                        ID,
                         materialName,
                         length,
                         crossSection});
+            return ((Problem)(results[0]));
         }
         
         /// <remarks/>
-        public void SetStrutAsync(string materialName, double length, double crossSection) {
-            this.SetStrutAsync(materialName, length, crossSection, null);
+        public void SetStrutAsync(int ID, string materialName, double length, double crossSection) {
+            this.SetStrutAsync(ID, materialName, length, crossSection, null);
         }
         
         /// <remarks/>
-        public void SetStrutAsync(string materialName, double length, double crossSection, object userState) {
+        public void SetStrutAsync(int ID, string materialName, double length, double crossSection, object userState) {
             if ((this.SetStrutOperationCompleted == null)) {
                 this.SetStrutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetStrutOperationCompleted);
             }
             this.InvokeAsync("SetStrut", new object[] {
+                        ID,
                         materialName,
                         length,
                         crossSection}, this.SetStrutOperationCompleted, userState);
@@ -629,37 +627,40 @@ namespace DesktopClient.CoolIt_Service {
         private void OnSetStrutOperationCompleted(object arg) {
             if ((this.SetStrutCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SetStrutCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.SetStrutCompleted(this, new SetStrutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/SetCooler", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetCooler(string name, double powerFactor) {
-            this.Invoke("SetCooler", new object[] {
-                        name,
+        public Problem SetCooler(int coolerID, string modelName, double powerFactor) {
+            object[] results = this.Invoke("SetCooler", new object[] {
+                        coolerID,
+                        modelName,
                         powerFactor});
+            return ((Problem)(results[0]));
         }
         
         /// <remarks/>
-        public void SetCoolerAsync(string name, double powerFactor) {
-            this.SetCoolerAsync(name, powerFactor, null);
+        public void SetCoolerAsync(int coolerID, string modelName, double powerFactor) {
+            this.SetCoolerAsync(coolerID, modelName, powerFactor, null);
         }
         
         /// <remarks/>
-        public void SetCoolerAsync(string name, double powerFactor, object userState) {
+        public void SetCoolerAsync(int coolerID, string modelName, double powerFactor, object userState) {
             if ((this.SetCoolerOperationCompleted == null)) {
                 this.SetCoolerOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetCoolerOperationCompleted);
             }
             this.InvokeAsync("SetCooler", new object[] {
-                        name,
+                        coolerID,
+                        modelName,
                         powerFactor}, this.SetCoolerOperationCompleted, userState);
         }
         
         private void OnSetCoolerOperationCompleted(object arg) {
             if ((this.SetCoolerCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SetCoolerCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.SetCoolerCompleted(this, new SetCoolerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -742,33 +743,6 @@ namespace DesktopClient.CoolIt_Service {
             if ((this.TestDbAccessCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TestDbAccessCompleted(this, new TestDbAccessCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.wisc.edu/doit/ls/coolit/Run", RequestNamespace="http://www.wisc.edu/doit/ls/coolit/", ResponseNamespace="http://www.wisc.edu/doit/ls/coolit/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Problem Run() {
-            object[] results = this.Invoke("Run", new object[0]);
-            return ((Problem)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void RunAsync() {
-            this.RunAsync(null);
-        }
-        
-        /// <remarks/>
-        public void RunAsync(object userState) {
-            if ((this.RunOperationCompleted == null)) {
-                this.RunOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunOperationCompleted);
-            }
-            this.InvokeAsync("Run", new object[0], this.RunOperationCompleted, userState);
-        }
-        
-        private void OnRunOperationCompleted(object arg) {
-            if ((this.RunCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RunCompleted(this, new RunCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1263,11 +1237,15 @@ namespace DesktopClient.CoolIt_Service {
         
         private double inputPowerField;
         
+        private bool inputPowerFieldSpecified;
+        
         private CoolerModel selectedCoolerField;
         
         private double powerFactorField;
         
-        private string idField;
+        private bool powerFactorFieldSpecified;
+        
+        private int idField;
         
         /// <remarks/>
         public Constraint[] Constraints {
@@ -1286,6 +1264,17 @@ namespace DesktopClient.CoolIt_Service {
             }
             set {
                 this.inputPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool InputPowerSpecified {
+            get {
+                return this.inputPowerFieldSpecified;
+            }
+            set {
+                this.inputPowerFieldSpecified = value;
             }
         }
         
@@ -1310,8 +1299,19 @@ namespace DesktopClient.CoolIt_Service {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PowerFactorSpecified {
+            get {
+                return this.powerFactorFieldSpecified;
+            }
+            set {
+                this.powerFactorFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ID {
+        public int ID {
             get {
                 return this.idField;
             }
@@ -1645,7 +1645,7 @@ namespace DesktopClient.CoolIt_Service {
         
         private int countField;
         
-        private string idField;
+        private int idField;
         
         /// <remarks/>
         public SupportMode SupportMode {
@@ -1764,7 +1764,7 @@ namespace DesktopClient.CoolIt_Service {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ID {
+        public int ID {
             get {
                 return this.idField;
             }
@@ -2399,11 +2399,55 @@ namespace DesktopClient.CoolIt_Service {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void SetStrutCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void SetStrutCompletedEventHandler(object sender, SetStrutCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void SetCoolerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SetStrutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SetStrutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Problem Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Problem)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    public delegate void SetCoolerCompletedEventHandler(object sender, SetCoolerCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SetCoolerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SetCoolerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Problem Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Problem)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
@@ -2457,32 +2501,6 @@ namespace DesktopClient.CoolIt_Service {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    public delegate void RunCompletedEventHandler(object sender, RunCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class RunCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal RunCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Problem Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Problem)(this.results[0]));
             }
         }
     }

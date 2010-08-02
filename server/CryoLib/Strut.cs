@@ -15,7 +15,7 @@ namespace CryoLib {
         #region properties set by the problem
 
         private SupportMode supportMode;
-        private string strutID;
+        private int strutID;
         private int count;
 
         [XmlAttribute]
@@ -26,7 +26,7 @@ namespace CryoLib {
         }
 
         [XmlAttribute]
-        public string ID
+        public int ID
         {
             get { return strutID; }
             set { strutID = value; }
@@ -213,7 +213,7 @@ namespace CryoLib {
         public StrutType( XPathNavigator navigator ) {
 			// Get the ID
 			navigator.MoveToChild("ID", "");
-			this.ID = navigator.Value;
+			this.ID = navigator.ValueAsInt;
 
             navigator.MoveToNext("count", "");
             this.count = navigator.ValueAsInt;

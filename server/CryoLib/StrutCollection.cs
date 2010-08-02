@@ -8,18 +8,6 @@ using System.Xml.Schema;
 namespace CryoLib {
 	public class StrutTypeCollection : List<StrutType> {
 
-        public StrutType this[string name] {
-			get {
-				for (int i = 0; i < Count; i++) {
-					if (this[i].ID == name) {
-						return this[i];
-					}
-				}
-				string msg = string.Format("Error: \"{0}\" not found", name);
-				throw new Exception(msg);
-			}
-        }
-
         public bool ShowOutputs
         {
             set
@@ -30,6 +18,20 @@ namespace CryoLib {
                 }
             }
         }
+
+        /***
+         * Override the Find method with a custom deligate
+         **/
+        public StrutType Find(int id)
+        {
+            return this.Find(
+                delegate(StrutType obj)
+                {
+                    return obj.ID == id;
+                }
+            );
+        }
+
         #region Constructors
         public StrutTypeCollection()
         {

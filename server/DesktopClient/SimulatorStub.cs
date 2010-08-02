@@ -36,7 +36,7 @@ namespace DesktopClient {
 			webServiceAdapter.SetCooler(cooler.Name, coolerPicker.PowerFactor);
 
 			// Run the simulator for the first time
-			simulate();
+            //simulate();
 
 			// Set up to handle change events from the controllers
 			strutPicker.RaiseStrutChangedEvent += new EventHandler(handle_StrutChangedEvent);
@@ -77,7 +77,7 @@ namespace DesktopClient {
 
 		public void SetProblem(string problemName) {
 			webServiceAdapter.SetProblem(problemName);
-			simulate();
+            OnSimulationChangedEvent(new EventArgs());
 		}
 
 
@@ -89,7 +89,7 @@ namespace DesktopClient {
 		void handle_CoolerChangedEvent(object sender, EventArgs e) {
 			CoolerModel cooler = ((CoolerPicker)sender).Cooler;
 			webServiceAdapter.SetCooler(cooler.Name, ((CoolerPicker)sender).PowerFactor);
-			simulate();
+            OnSimulationChangedEvent(new EventArgs());
 		}
 
 		/// <summary>
@@ -100,22 +100,22 @@ namespace DesktopClient {
 		void handle_StrutChangedEvent(object sender, EventArgs e) {
 			StrutType strut = ((StrutPicker)sender).Strut;
 			webServiceAdapter.SetStrut(strut.Material.Name, strut.Length, strut.CrossSectionalArea);
-			simulate();
+            OnSimulationChangedEvent(new EventArgs());
 		}
 
 		/// <summary>
 		/// Run the simulator with current conditions
 		/// </summary>
-		protected void simulate() {
-			// run the simulator
-			state = webServiceAdapter.Run();
-			if (state == null) {
-				return;
-			}
+        //protected void simulate() {
+        //    // run the simulator
+        //    state = webServiceAdapter.Run();
+        //    if (state == null) {
+        //        return;
+        //    }
 
-			// let our subscribers know that things have changed
-			OnSimulationChangedEvent(new EventArgs());
-		}
+        //    // let our subscribers know that things have changed
+        //    OnSimulationChangedEvent(new EventArgs());
+        //}
 
 		/// <summary>
 		/// Notify all subscribers of a change

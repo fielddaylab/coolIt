@@ -161,22 +161,23 @@ namespace DesktopClient {
 			return webService.TryMathGate(name, proposedAnswers);
 		}
 
-		public void SetStrut(string materialName, double length, double crossSection) {
-			webService.SetStrut(materialName, length, crossSection);
+		public Problem SetStrut(string materialName, double length, double crossSection) {
+            DesktopClient.CoolIt_Service.Problem prob = webService.SetStrut(1, materialName, length, crossSection);
+			return convertProblem(prob);
 		}
 
-		public Problem Run() {
-			DesktopClient.CoolIt_Service.Problem rawState = webService.Run();
-			if (rawState == null) {
-				return null;
-			}
+        //public Problem Run() {
+        //    DesktopClient.CoolIt_Service.Problem rawState = webService.Run();
+        //    if (rawState == null) {
+        //        return null;
+        //    }
 
-            return convertProblem(rawState);
-		}
+        //    return convertProblem(rawState);
+        //}
 
 
-		public void SetCooler(string coolerName, double powerFactor) {
-			webService.SetCooler(coolerName, powerFactor);
+		public Problem SetCooler(string coolerName, double powerFactor) {
+			return convertProblem(webService.SetCooler(1, coolerName, powerFactor));
 		}
 
 		public void SetProblem(string problemName) {

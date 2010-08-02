@@ -8,19 +8,22 @@ using System.Xml.Schema;
 namespace CryoLib {
 	public class CoolerCollection : List<Cooler> {
 
-        public Cooler this[string name] {
-			get {
-				for (int i = 0; i < Count; i++) {
-					if (this[i].ID == name) {
-						return this[i];
-					}
-				}
-				string msg = string.Format("Error: \"{0}\" not found", name);
-				throw new Exception(msg);
-			}
-		}
+        /***
+         * Override the Find method with a custom deligate
+         **/
+        public Cooler Find(int id)
+        {
+            return this.Find(
+                delegate(Cooler obj)
+                {
+                    return obj.ID == id;
+                }
+            );
+        }
 
-
+        /**
+         * Apply serialization settings to each object in the collection
+         **/
         public bool ShowOutputs
         {
             set

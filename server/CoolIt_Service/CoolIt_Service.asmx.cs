@@ -116,7 +116,7 @@ namespace CoolIt_Service {
 		/// Note: successful completion has the effect of logging in the user.  There is no need
 		/// to subesquently call Login().
 		/// </summary>
-		/// <param name="emailAddr">The email address to associate with the account.</param>
+		/// <param modelName="emailAddr">The email address to associate with the account.</param>
 		/// <returns>True if the account could be created and false otherwise.</returns>
 		[WebMethod(EnableSession = true)]
 		public bool NewLogin(string emailAddr) {
@@ -126,7 +126,7 @@ namespace CoolIt_Service {
 		/// <summary>
 		/// Login the user who is associated with the given email address.
 		/// </summary>
-		/// <param name="emailAddr">The email address whose associated user we wish to log in</param>
+		/// <param modelName="emailAddr">The email address whose associated user we wish to log in</param>
 		/// <returns>True if the user can be logged in and false otherwise.</returns>
 		[WebMethod(EnableSession = true)]
 		public bool Login(string emailAddr) {
@@ -231,29 +231,47 @@ namespace CoolIt_Service {
 			return specificPowerData.Data;
 		}
 
-		[WebMethod(EnableSession=true)]
-		public void SetStrut(string materialName, double length, double crossSection) {
-            //TODO:  Update this to take a strut ID and update the appropriate one in the collection
-			setStrut(getState(), "1", materialName, length, crossSection);
-		}
+        //[WebMethod(EnableSession=true)]
+        //public void SetStrut(string materialName, double length, double crossSection) {
+        //    //TODO:  Update this to take a strut ID and update the appropriate one in the collection
+        //    setStrut(getState(), 1, materialName, length, crossSection);
+        //}
 
-		private void setStrut(Problem state, string strutID, string materialName, double length, double crossSection) {
-            StrutType strut = state.Struts[strutID];
+        [WebMethod(EnableSession = true)]
+        public Problem SetStrut(int ID, string materialName, double length, double crossSection)
+        {
+            //TODO:  Update this to take a strut ID and update the appropriate one in the collection
+            return setStrut(getState(), ID, materialName, length, crossSection);
+        }
+
+		private Problem setStrut(Problem state, int strutID, string materialName, double length, double crossSection) {
+            StrutType strut = state.Struts.Find(strutID);
 
             strut.Material = (Material)materials[materialName];
             strut.Length = length;
             strut.CrossSectionalArea = crossSection;
+
+            return Run();
 		}
 
-		[WebMethod(EnableSession=true)]
-		public void SetCooler(string name, double powerFactor) {
-            //TODO:  Update this to take a cooler ID and update the appropriate one in the collection
-			setCooler(getState(), "1", name, powerFactor);
-		}
+        //[WebMethod(EnableSession=true)]
+        //public void SetCooler(string modelName, double powerFactor) {
+        //    //TODO:  Depricate this method once we are always calling by ID
+        //    setCooler(getState(), 1, modelName, powerFactor);
+        //}
 
-		private void setCooler(Problem state, string coolerID, string name, double powerFactor) {
-            state.Coolers[coolerID].SelectedCooler = (CoolerModel) coolers[name] ;
-			state.Coolers[coolerID].PowerFactor = powerFactor;
+        [WebMethod(EnableSession = true)]
+        public Problem SetCooler(int coolerID, string modelName, double powerFactor)
+        {
+            return setCooler(getState(), coolerID, modelName, powerFactor);
+        }
+
+		private Problem setCooler(Problem state, int coolerID, string name, double powerFactor) {
+            Cooler cool = state.Coolers.Find(coolerID);
+            cool.SelectedCooler = (CoolerModel)coolers[name];
+            cool.PowerFactor = powerFactor;
+
+            return Run();
 		}
 			
 
@@ -262,7 +280,7 @@ namespace CoolIt_Service {
 			setProblem(getState(), name);
 		}
 
-		private bool setProblem(Problem state, string name) {
+		private Problem setProblem(Problem state, string name) {
 			if (!requireLogin()) {
 				// Should not happen as we have anonymous session logins in place
 				throw new Exception("Should never happen");
@@ -287,8 +305,9 @@ namespace CoolIt_Service {
             initState(state);
 
             //Save problem, strut and cooler state to the database
-			persistState(state);
-			return true;
+            //persistState(state);
+
+			return run(state);
 		}
 
 		[WebMethod(EnableSession = true)]
@@ -334,20 +353,19 @@ namespace CoolIt_Service {
 			Problem state = new Problem();
 			setProblem(state, solution.ProblemName);
             //TODO:  remove hardcoded ID
-			setCooler(state, solution.CoolerName, "1", solution.CoolerPowerFactor);
+			setCooler(state, 1, solution.CoolerName, solution.CoolerPowerFactor);
             //TODO:  remove hardcoded ID
-			setStrut(state, "1", solution.MaterialName, solution.StrutLength, solution.StrutCrossSection);
+			setStrut(state, 1, solution.MaterialName, solution.StrutLength, solution.StrutCrossSection);
 			run(state);
 			if( !state.Solved ) {
 				throw new Exception("Calculated optimal solution is not valid");
 			}
 		}
 
-
-		[WebMethod(EnableSession = true)]
-		public Problem Run() {
-			return run( getState() );
-		}
+        private Problem Run()
+        {
+            return run(getState());
+        }
 
 		private bool requireLogin() {
 			// We'd like to require a login, but the current Flash client does not handle
@@ -408,6 +426,9 @@ namespace CoolIt_Service {
 			}
 
             state.ShowOutputs = true;
+
+            persistState(state);
+
 			return state;
 		}
 
@@ -471,7 +492,7 @@ namespace CoolIt_Service {
 		/// 
 		/// N.B. Web Methods which call this method MUST have Session enabled.
 		/// </summary>
-		/// <param name="email">The email address to associate with the new account</param>
+		/// <param modelName="email">The email address to associate with the new account</param>
 		/// <returns>True if the account could be created and false otherwise.</returns>
 		private bool newLogin( string email ) {
 			int userId = api.NewLogin(email);
@@ -488,7 +509,7 @@ namespace CoolIt_Service {
 		/// 
 		/// N.B. Web Methods which call this method MUST have Session enabled.
 		/// </summary>
-		/// <param name="email">The email address associated with the user who wants to log in</param>
+		/// <param modelName="email">The email address associated with the user who wants to log in</param>
 		/// <returns>True if the user could be logged in and false otherwise.</returns>
 		private bool login(string email) {
 			int userId = api.Login(email);
@@ -530,7 +551,7 @@ namespace CoolIt_Service {
             {
                 Cooler defaultCooler = new Cooler();
                 defaultCooler.SelectedCooler = (CoolerModel)coolers[0];
-                defaultCooler.ID = "1";
+                defaultCooler.ID = 1;
                 defaultCooler.InputPower = 0;
                 defaultCooler.PowerFactor = 1.0;
                 state.Coolers.Add(defaultCooler);
@@ -550,7 +571,7 @@ namespace CoolIt_Service {
             if (state.Struts.Count == 0)
             {
                 StrutType defaultStrut = new StrutType(0.1, 0.001, ((Material)materials[0]));
-                defaultStrut.ID = "1";
+                defaultStrut.ID = 1;
                 defaultStrut.Count = 1;
                 state.Struts.Add(defaultStrut);
             }

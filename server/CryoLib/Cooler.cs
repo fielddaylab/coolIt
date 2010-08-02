@@ -16,11 +16,7 @@ namespace CryoLib {
         private ConstraintCollection constraints;
 
         [XmlAttribute]
-        public string ID
-        {
-            get { return coolerID; }
-            set { coolerID = value; }
-        }
+        public int ID{ get;  set; }
 
         [XmlArray]
         public ConstraintCollection Constraints
@@ -107,7 +103,7 @@ namespace CryoLib {
         public Cooler( XPathNavigator navigator ) {
 			// Get the ID
 			navigator.MoveToChild("ID", "");
-			this.ID = navigator.Value;
+			this.ID = navigator.ValueAsInt;
 			// Get the constraint list
             this.constraints = new ConstraintCollection(navigator.Clone());;
         }
