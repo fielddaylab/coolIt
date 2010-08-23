@@ -379,4 +379,68 @@
 			</constraint>
 		</constraints>
 	</problem>
+  <problem>
+    <name>MRI</name>
+    <ID>7</ID>
+    <problemDescription>
+      This is the MRI Problem.  We still need to write an intro for it.  It uses the Minesweeper I Art for Now.
+    </problemDescription>
+    <monetaryIncentive>10000</monetaryIncentive>
+    <heatLeak>0</heatLeak>
+    <supportMode>Tension</supportMode>
+    <strutNumber>6</strutNumber>
+    <images>
+      <baseURI>Minesweeper_I</baseURI>
+      <intro>Intro</intro>
+      <success>Success</success>
+      <failPowerLimitExceeded>PowerLimitExceeded</failPowerLimitExceeded>
+      <failTargetTempNotMet>TooHot</failTargetTempNotMet>
+      <failStrutBreaks>StrutBreaks</failStrutBreaks>
+      <pickerImageArray width="2" length="2">
+        <baseName>Strut</baseName>
+      </pickerImageArray>
+    </images>
+    <constraints>
+      <constraint>
+        <Value>Strut Length</Value>
+        <Op>GE</Op>
+        <Limit>0.499</Limit>
+      </constraint>
+      <constraint>
+        <Value>Strut Length</Value>
+        <Op>LE</Op>
+        <Limit>0.5</Limit>
+      </constraint>
+      <constraint>
+        <Value>Strut Cross Section</Value>
+        <Op>LE</Op>
+        <Limit>0.04</Limit>
+      </constraint>
+      <constraint>
+        <Value>Force Limit</Value>
+        <Op>GE</Op>
+        <Limit>2.5</Limit>
+      </constraint>
+      <constraint>
+        <Value>Input Power</Value>
+        <Op>LE</Op>
+        <Limit>10000</Limit>
+      </constraint>
+      <constraint>
+        <Value>Temp</Value>
+        <Op>LE</Op>
+        <Limit>4.2</Limit>
+      </constraint>
+      <constraint>
+        <Value>Displacement</Value>
+        <Op>LE</Op>
+        <Limit>0.00055</Limit>
+      </constraint>
+      <constraint>
+        <Value>Displacement</Value>
+        <Op>GE</Op>
+        <Limit>0.00045</Limit>
+      </constraint>
+    </constraints>
+  </problem>
 </problems>

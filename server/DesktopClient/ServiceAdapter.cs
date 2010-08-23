@@ -52,7 +52,8 @@ namespace DesktopClient {
 			//providers.Add(new ServiceProvider("direct", ""));
 			providers.Add(new ServiceProvider("debug", "http://localhost:58801/CoolIt_Service.asmx"));
 			providers.Add(new ServiceProvider("localhost", "http://localhost/CoolIt_Service/CoolIt_Service.asmx"));
-			providers.Add(new ServiceProvider("atswindev", "http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx"));
+			providers.Add(new ServiceProvider("Production", "http://atswindev.doit.wisc.edu/CoolIt_Service/CoolIt_Service.asmx"));
+            providers.Add(new ServiceProvider("Stagomg", "http://atswindev.doit.wisc.edu/CoolIt_Service_Staging/CoolIt_Service.asmx"));
 		}
 		public static List<ServiceProvider> Providers {
 			get { return providers; }
@@ -317,6 +318,9 @@ namespace DesktopClient {
 				case DesktopClient.CoolIt_Service.VALUE.STRUT_LENGTH:
 					value = VALUE.STRUT_LENGTH;
 					break;
+                case DesktopClient.CoolIt_Service.VALUE.DISPLACEMENT:
+                    value = VALUE.DISPLACEMENT;
+                    break;
 				default:
 					string msg = String.Format("Unexpected constraint value ({0})", rawConstraint.Value);
 					throw new Exception(msg);

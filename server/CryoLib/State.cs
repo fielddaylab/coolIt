@@ -14,6 +14,7 @@ namespace CryoLib {
 		public double inputPower;		// Watts (W)
 		public double cost;				// U.S. Dollars
 		public double stressLimit;		// meganewtons (MN)
+        public double cooledLength;     // meters (m)
 		public string problemName;
 		public bool isValidSolution;
 	}

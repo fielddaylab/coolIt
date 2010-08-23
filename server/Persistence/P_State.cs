@@ -15,6 +15,13 @@ namespace Persistence {
 		private double cost;
 		private double stressLimit;
 		private double temperature;
+        private double cooledLength;
+
+        public virtual double CooledLength
+        {
+            get { return cooledLength; }
+            set { cooledLength = value; }
+        }
 		private bool isValidSolution;
 		private P_Episode episode;
 
@@ -88,7 +95,7 @@ namespace Persistence {
 		}
 
 		public P_State(double length, double crossSection, double powerFactor, double inputPower, double cost,
-			double stressLimit, double temperature, bool isValidSolution)
+			double stressLimit, double temperature, double cooledLength, bool isValidSolution)
 			: this() {
 			this.length = length;
 			this.crossSection = crossSection;
@@ -97,6 +104,7 @@ namespace Persistence {
 			this.cost = cost;
 			this.stressLimit = stressLimit;
 			this.temperature = temperature;
+            this.cooledLength = cooledLength;
 			this.isValidSolution = isValidSolution;
 		}
 
@@ -110,8 +118,9 @@ namespace Persistence {
 			double cost = rand.NextDouble();
 			double stressLimit = rand.NextDouble();
 			double temperature = rand.NextDouble();
+            double cooledLength = length;
 			bool isValidSolution = rand.Next() % 5 == 0;
-			return new P_State(length, crossSection, powerFactor, inputPower, cost, stressLimit, temperature, isValidSolution);
+			return new P_State(length, crossSection, powerFactor, inputPower, cost, stressLimit, temperature, cooledLength, isValidSolution);
 		}
 
 

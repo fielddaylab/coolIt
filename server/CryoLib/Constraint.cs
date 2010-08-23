@@ -56,6 +56,9 @@ namespace CryoLib {
 				case "Cost":					// unit is U.S. dollar ($)
 					value = VALUE.COST;			
 					break;
+                case "Displacement":					// unit IS METERS
+                    value = VALUE.DISPLACEMENT;
+                    break;
 				default:
 					string msg = String.Format("Unexpected constraint value type ({0})", navigator.Value);
 					throw new Exception(msg);
@@ -119,7 +122,7 @@ namespace CryoLib {
 	/// These values are in order of priority for giving feedback - i.e. if the strut breaks, say that in
 	/// feedback and ignore other problems like too much power.
 	/// </summary>
-	public enum VALUE { FORCE_LIMIT, INPUT_POWER, TEMP, COST, STRUT_LENGTH, STRUT_CROSS_SECTION };
+	public enum VALUE { FORCE_LIMIT, INPUT_POWER, TEMP, COST, STRUT_LENGTH, STRUT_CROSS_SECTION, DISPLACEMENT };
 
 	public enum OP { LT, LE, EQ, GE, GT, NE };
 

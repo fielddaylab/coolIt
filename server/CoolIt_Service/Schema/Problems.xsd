@@ -31,6 +31,7 @@ Temp: degrees K (K)
       <xs:enumeration value="Input Power" />
       <xs:enumeration value="Cost" />
       <xs:enumeration value="Temp" />
+      <xs:enumeration value="Displacement" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="SupportMode">

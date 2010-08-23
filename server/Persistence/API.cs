@@ -187,7 +187,7 @@ namespace Persistence {
 				criterion.Add(Expression.Eq("Name", rawState.materialName));
 				P_Material material = criterion.UniqueResult<P_Material>();
 
-				P_State state = new P_State(rawState.length, rawState.crossSection, rawState.powerFactor, rawState.inputPower, rawState.cost, rawState.stressLimit, rawState.temperature, rawState.isValidSolution);
+				P_State state = new P_State(rawState.length, rawState.crossSection, rawState.powerFactor, rawState.inputPower, rawState.cost, rawState.stressLimit, rawState.temperature, rawState.cooledLength, rawState.isValidSolution);
 				state.Cooler = cooler;
 				state.Material = material;
 

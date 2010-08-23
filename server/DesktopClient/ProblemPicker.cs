@@ -99,6 +99,7 @@ namespace DesktopClient {
 						rowVals[3] = "meters squared (m^2)";
 						break;
 					case VALUE.STRUT_LENGTH:
+                    case VALUE.DISPLACEMENT:
 						rowVals[3] = "meters (m)";
 						break;
 					case VALUE.TEMP:
