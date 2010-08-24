@@ -3,6 +3,7 @@
 	<!-- global properties -->
 	<property name="project.root" value="${basedir}"/>
 	<property name="flexSDK" value="/Applications/Adobe Flex Builder 3/sdks/3.0.0" />
+	<property name="FLEX_HOME" location="${flexSDK}"/>
 	<property name="mxmlc" value="${flexSDK}/bin/mxmlc" />
 	<property name="mxmlc.jar" value="${flexSDK}/lib/mxmlc.jar" />
 	<property name="asdoc" value="${flexSDK}/bin/asdoc" />
@@ -17,6 +18,9 @@
 	<property name="cairngorm.lib" value="${lib.dir}/lsLib/Cairngorm.swc" />
 	<property name="imagelist.lib" value="${lib.dir}/minesweeper_graphics" />
 	
+	
+	<!-- flex SDK ant tasks -->
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	
 	<!-- :::::: clean :::::: -->
 	<target name="clean">
@@ -42,20 +46,19 @@
 	
 	<!-- :::::: compile with mxmlc.jar :::::: -->
 	<target name="compile">
-		<java jar="${mxmlc.jar}" fork="true" failonerror="true" jvmargs="-Xms512m -Xmx800m -XX:PermSize=256m -XX:MaxPermSize=384m">
-			<arg value="-show-binding-warnings=false" />
-			<arg value="-show-actionscript-warnings=false" />
-			<arg value="-debug=true" />
-			<arg value="-verbose-stacktraces=true" />
-			<arg value="-default-frame-rate=31" />
-			<arg value="-source-path+=${src.dir}" />
-			<arg value="-source-path+=${flashlib.dir}" />
-			<arg value="-library-path+=${flashlib.dir}" />
-			<arg value="-output=${dist.dir}/coolit.swf" />
-			<arg value="-load-config=${flexSDK}/frameworks/flex-config.xml" />
-			<arg value="${src.dir}/Main.mxml" />
-			<jvmarg value="-Dapplication.home=${flexSDK}"/>
-		</java>
+		<mxmlc file="${src.dir}/Main.mxml"
+				debug="true" verbose-stacktraces="true"
+				optimize="true" output="${dist.dir}/coolit.swf" target-player="10"
+				show-binding-warnings="false"
+				show-actionscript-warnings="false"
+				fork="true" maxmemory="512m"
+				default-frame-rate="31">
+			<source-path path-element="${src.dir}"/>
+			<source-path path-element="${flashlib.dir}"/>
+			<compiler.include-libraries dir="${flashlib.dir}">
+				<include name="Cairngorm.swc" />
+            </compiler.include-libraries>
+		</mxmlc>
 	</target>
 	
 	<!-- :::::: documentation :::::: -->
