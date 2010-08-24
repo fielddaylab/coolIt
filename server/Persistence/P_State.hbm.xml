@@ -12,6 +12,7 @@
 		<property name="Cost" column="cost" />
 		<property name="StressLimit" column="stressLimit" />
 		<property name="Temperature" column="temperature" />
+    <property name="CooledLength" column="cooledLength" />
 		<property name="IsValidSolution" column="isValidSolution" />
 		<many-to-one
 				  name="Episode"
