@@ -1,3 +1,9 @@
+--Creates a temp table with state records where all input values are the same
+--but there is at least one different output value
+--(does not excludes first record of any episode unlike CoolItRegressionProblemSummaryCombosAndCounts.sql) 
+--and excludes records before code has stabelized
+--includes select statement to query the temp table grouped by combinations to get counts
+
 drop table #MultipleOuputs
 GO
 create table #MultipleOuputs(

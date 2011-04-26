@@ -1,3 +1,5 @@
+--Creates a temp table with state records where all input values are the same
+--but there is at least one different output value
 drop table #MultipleOuputs
 GO
 create table #MultipleOuputs(

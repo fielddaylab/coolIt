@@ -1,3 +1,5 @@
+--look at a single state record with a specific ID and compare it to all the 
+--state records in the same episode
 declare @id as int
 set @id = 82396
 

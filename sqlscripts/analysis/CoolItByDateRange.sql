@@ -1,3 +1,4 @@
+--Number of Episodes by UserID an Email
 select count(e.id) as EpisodeCount, userId, email
 from Episodes e
 inner join Users u
@@ -17,12 +18,13 @@ timestamp > '3/21/2010') and email not like 'Anonymous%')
 group by userId, email
 order by EpisodeCount desc, email
 
-
+--Check range of game play within a specific date range
 select min(timestamp), max(timestamp)
 from States
 where timestamp > '3/20/2010'
 and timestamp < '5/1/2010'
 
+--See detail of sim play within a specific date range
 select s.id, c.name as CoolerName, m.Name as MaterialName,
 s.length * 100 as LengthMeters, s.crossSection * 10000 as CrossSectionSquareMeters, 
 s.powerFactor, s.inputPower,

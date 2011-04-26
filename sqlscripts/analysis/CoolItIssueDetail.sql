@@ -10,6 +10,7 @@ and crossSection = 0.001
 and powerFactor = 1
 order by s1.id
 
+--review records with a specific episode number
 select *
 from States
 where EpisodeId in (628)

@@ -1,3 +1,7 @@
+--Creates a temp table with state records where all input values are the same
+--but there is at least one different output value
+--also excludes first record of any episode and excludes records before code has stabelized
+--includes select statement to query the temp table
 drop table #MultipleOuputs
 GO
 create table #MultipleOuputs(
