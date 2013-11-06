@@ -1,0 +1,7 @@
+<config>
+	<serviceWSDL>http://atswindev.doit.wisc.edu/CoolIt_Service_Staging/CoolIt_Service.asmx?WSDL</serviceWSDL>
+	<mediaBase>http://atdev.doit.wisc.edu/coolit_media/</mediaBase>
+	<imageMatrixExtension>jpg</imageMatrixExtension>
+	<videoExtension>flv</videoExtension>
+	<introText>You are a thermal engineer with special training for low temperature, that is - cryogenic, applications. As a hired consultant you will tackle real-life problems faced by the industries involved in space exploration, industrial gases, superconductivity, and cryo-medical devices. Use your skills and unique understanding of thermodynamics, heat transfer, material properties and fluids at low temperatures to address the crucial challenges posed by the following high-tech developments:</introText>
+</config>
